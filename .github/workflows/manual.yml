@@ -15,8 +15,8 @@ jobs:
           # Check if the "In Progress" label is present
           if [[ $labels =~ "In Progress" ]]; then
             # If it is, remove the "In Progress" label and add the "Review" label
-            curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels/In%20Progress"
-            curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -d '{"labels": ["Review"]}' "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels"
+            curl -X DELETE -H "Authorization: token ${{ secrets.TOKEN_ISSUE_STATUS }}" "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels/In%20Progress"
+            curl -X POST -H "Authorization: token ${{ secrets.TOKEN_ISSUE_STATUS }}" -d '{"labels": ["Review"]}' "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels"
           fi
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOKEN_ISSUE_STATUS: ${{ secrets.TOKEN_ISSUE_STATUS }}
