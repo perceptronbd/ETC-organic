@@ -10,8 +10,8 @@ const errorHandler = require("./middleware/errorMiddleware")
 const app = express()
 //middleware
 
-app.use(express.json)
-app.use(express.urlencoded({extended:false}))
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 //error handler 
 app.use(errorHandler)
