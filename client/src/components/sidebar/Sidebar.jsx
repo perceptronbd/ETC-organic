@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 
 export const Sidebar = () => {
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(true);
 
   const navLinks = [
     {
