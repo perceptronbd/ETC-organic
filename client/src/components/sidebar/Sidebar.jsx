@@ -71,7 +71,7 @@ export const Sidebar = () => {
                             ? "pending"
                             : isActive
                             ? "flex items-center font-semibold text-lg pl-2 text-accent-primary group-hover:text-foreground transition-all ease-in-out duration-300 "
-                            : "flex items-center font-semibold text-lg text-textColor opacity-70 transition-all ease-in-out duration-300 group-hover:text-foreground"
+                            : "flex items-center font-semibold text-lg text-textColor opacity-70 transition-all ease-in-out duration-300 group-hover:text-foreground group-hover:opacity-100"
                         }
                         to="/overview"
                       >
@@ -99,7 +99,7 @@ export const Sidebar = () => {
                                 ? "pending"
                                 : isActive
                                 ? "flex items-center font-semibold text-lg pl-2 text-accent-primary group-hover:text-foreground transition-all ease-in-out duration-300 "
-                                : "flex items-center font-semibold text-lg text-textColor opacity-70  text transition-all ease-in-out duration-300 group-hover:text-foreground"
+                                : "flex items-center font-semibold text-lg text-textColor opacity-70  text transition-all ease-in-out duration-300 group-hover:text-foreground group-hover:opacity-100"
                             }
                             to={link.path}
                           >
