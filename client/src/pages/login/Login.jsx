@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, FormInput } from "../../components";
+import { Button, FormInput, Text } from "../../components";
 
 export const Login = () => {
   const [values, setValues] = useState({
@@ -38,20 +38,21 @@ export const Login = () => {
 
   return (
     <div className="w-full h-screen flex justify-center items-center">
-      <div className="bg-foreground w-[40%] h-[70%] p-8 rounded-xl flex justify-center items-center">
+      <div className="bg-foreground w-[752px] h-[630px] p-8 rounded-[40px] flex justify-center items-center">
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col w-full h-full justify-between items-center"
+          className="flex flex-col w-full h-full items-center"
         >
-          <div className="w-32 h-32 bg-accent-secondary rounded-md flex justify-center items-center">
+          <div className="w-32 h-32 m-16 bg-accent-secondary rounded-md flex justify-center items-center">
             LOGO
           </div>
           <div className="flex flex-col ">
-            <div className="font-semibold text-lg">Login</div>
+            <Text h3>Login</Text>
             {inputs.map((input) => (
               <FormInput {...input} key={input.id} onChange={onChange} />
             ))}
           </div>
+          <hr className="py-4 " />
           <Button type="submit" className={"mb-6"}>
             Login
           </Button>

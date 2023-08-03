@@ -6,7 +6,8 @@ export const Button = ({ props, children, className }) => {
     <button
       {...props}
       className={cw(
-        `bg-accent-primary w-44 h-8 rounded-md font-semibold text-white ${className}`
+        `bg-accent-primary w-52 h-12 rounded-lg font-semibold text-white hover:bg-opacity-80 transition-all ease-in-out duration-300`,
+        className
       )}
     >
       {children}

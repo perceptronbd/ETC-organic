@@ -48,7 +48,7 @@ export const Sidebar = () => {
     <>
       <div
         className={` bg-foreground p-2 rounded-r-lg text-borderColor h-full z-40 ease-in-out duration-300 ${
-          showSidebar ? "w-1/5 translate-x-0" : "w-[5vw] -translate-x-full"
+          showSidebar ? "w-72 translate-x-0" : "w-[5vw] -translate-x-full"
         }`}
       >
         {showSidebar ? (
@@ -61,7 +61,7 @@ export const Sidebar = () => {
                 <BsLayoutSidebar />
               </button>
 
-              <div className="mt-4  pl-8">
+              <div className="mt-4 pl-8">
                 <nav className="h-full w-full">
                   <ul>
                     <li className="group h-10 rounded-md w-[90%] hover:bg-accent-primary p-2 flex items-center transition-all ease-in-out duration-300 hover:text-foreground">
@@ -71,7 +71,7 @@ export const Sidebar = () => {
                             ? "pending"
                             : isActive
                             ? "flex items-center font-semibold text-lg pl-2 text-accent-primary group-hover:text-foreground transition-all ease-in-out duration-300 "
-                            : "flex items-center font-semibold text-lg text-textColor transition-all ease-in-out duration-300 group-hover:text-foreground"
+                            : "flex items-center font-semibold text-lg text-textColor opacity-70 transition-all ease-in-out duration-300 group-hover:text-foreground"
                         }
                         to="/overview"
                       >
@@ -99,7 +99,7 @@ export const Sidebar = () => {
                                 ? "pending"
                                 : isActive
                                 ? "flex items-center font-semibold text-lg pl-2 text-accent-primary group-hover:text-foreground transition-all ease-in-out duration-300 "
-                                : "flex items-center font-semibold text-lg  text-textColor transition-all ease-in-out duration-300 group-hover:text-foreground"
+                                : "flex items-center font-semibold text-lg text-textColor opacity-70  text transition-all ease-in-out duration-300 group-hover:text-foreground"
                             }
                             to={link.path}
                           >
