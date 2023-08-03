@@ -29,14 +29,9 @@ const userSchema = mongoose.Schema(
       default: "https://i.ibb.co/4pDNDk1/avatar.png",
     },
     phone: {
-      type: String,
-      default: "+234",
+      type: String
     },
-    bio: {
-      type: String,
-      maxLength: [250, "Bio must not be more than 250 characters"],
-      default: "bio",
-    },
+
   },
   {
     timestamps: true,

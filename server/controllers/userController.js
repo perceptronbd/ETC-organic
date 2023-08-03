@@ -15,10 +15,10 @@ const generateToken = (id) => {
 
 // Register User
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, phone } = req.body;
   
     // Validation
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !phone) {
       res.status(400);
       throw new Error("Please fill in all required fields");
     }
@@ -40,6 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
       name,
       email,
       password,
+      phone,
     });
   
     //   Generate Token
@@ -62,7 +63,6 @@ const registerUser = asyncHandler(async (req, res) => {
         email,
         photo,
         phone,
-        bio,
         token,
       });
     } else {
