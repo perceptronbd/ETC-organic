@@ -55,7 +55,7 @@ export const Sidebar = () => {
           <>
             <div className="w-full h-full ">
               <button
-                className="flex  p-2 text-2xl text-accent-primary bg-background rounded-md items-center cursor-pointer left-[80%] top-2 z-50"
+                className="flex ml-2 p-2 text-2xl text-accent-primary bg-background rounded-md items-center cursor-pointer left-[80%] top-2 z-50"
                 onClick={() => setShowSidebar(!showSidebar)}
               >
                 <BsLayoutSidebar />
