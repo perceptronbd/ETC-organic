@@ -56,7 +56,7 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   
     if (user) {
-      const { _id, name, email, photo, phone, bio } = user;
+      const { _id, name, email, photo, phone} = user;
       res.status(201).json({
         _id,
         name,
@@ -71,7 +71,60 @@ const registerUser = asyncHandler(async (req, res) => {
     }
   });
 
+  //login user
+
+  const loginUser = asyncHandler(async(req,res) =>{
+     const {phone,password} = req.body;
+
+     //validate request
+     if(!phone || !password){
+      res.status(400);
+      throw new Error("please add phone and password")
+
+     }
+     //check user exists
+
+     const user = await User.findOne({phone})
+
+     if(!user){
+      res.status("400")
+      throw new Error("User not found")
+    
+
+     }
+     //check password
+    const passwordIsCorrect = await bcrypt.compare(password, user.password)
+
+     //generate token 
+     const token = generateToken(user._id);
+     if(passwordIsCorrect){
+      // Send HTTP-only cookie
+     res.cookie("token", token, {
+       path: "/",
+       httpOnly: true,
+       expires: new Date(Date.now() + 1000 * 86400), // 1 day
+       sameSite: "none",
+       secure: true,
+     });
+   }
+     if (user && passwordIsCorrect) {
+       const { _id, name, email, photo, phone, } = user;
+       res.status(200).json({
+         _id,
+         name,
+         email,
+         photo,
+         phone,
+         token,
+       });
+     } else {
+       res.status(400);
+       throw new Error("Invalid email or password");
+     }
+  })
+
 
   module.exports = {
     registerUser,
+    loginUser
    };
