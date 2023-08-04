@@ -209,7 +209,7 @@ export const ProductList = () => {
 
   return (
     <Container className="w-full m-4 3xl:mx-28">
-      <div className="flex justify-between">
+      <div className="flex justify-between mb-10">
         <Text h1>Product List</Text>
         <LinkButton to={"add-product"} className={`h-8`}>
           Add Product
