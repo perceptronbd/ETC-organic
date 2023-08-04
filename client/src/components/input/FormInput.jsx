@@ -2,11 +2,13 @@ import React from "react";
 import { cw } from "../../utils/cw";
 
 export const FormInput = (props) => {
-  const { id, onChange, className, errorMessage, ...inputProps } = props;
+  const { id, onChange, className, errorMessage, label, ...inputProps } = props;
 
   return (
     <div className="flex flex-col my-2">
+      {label && <label htmlFor={id}>{label}</label>}
       <input
+        id={id}
         {...inputProps}
         onChange={onChange}
         className={cw(
