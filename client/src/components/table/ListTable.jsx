@@ -18,25 +18,30 @@ export const ListTable = ({ data }) => {
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr key={index} className={`border-b-2 font-semibold `}>
-              <td className="p-4 text-textColor-light">{item.sn}</td>
-              <td className="p-4">{item.name}</td>
-              <td className="p-4">{item.imgUrl}</td>
-              <td className="p-4 text-accent-secondary font-bold text-center">
+            <tr
+              key={index}
+              className={`border-b-8 border-background font-semibold `}
+            >
+              <td className="p-4 text-textColor-light bg-foreground rounded-l-2xl">
+                {item.sn}
+              </td>
+              <td className="p-4 bg-foreground ">{item.name}</td>
+              <td className="p-4 bg-foreground ">{item.imgUrl}</td>
+              <td className="p-4 bg-foreground  text-accent-secondary font-bold text-center">
                 {item.sales_price}
               </td>
-              <td className="p-4 text-accent-primary text-center">
+              <td className="p-4 bg-foreground  text-accent-primary text-center">
                 {item.csb}
               </td>
-              <td className="p-4 text-white text-center">
+              <td className="p-4 bg-foreground  text-white text-center">
                 <span className="border-2 border-accent-primary bg-accent-primary bg-opacity-60 px-4 py-1 rounded-full">
                   {item.points}
                 </span>
               </td>
-              <td className="p-4 text-textColor-light text-justify">
+              <td className="p-4 bg-foreground  text-textColor-light text-justify">
                 {item.description}
               </td>
-              <td className="p-4">Edit</td>
+              <td className="p-4 bg-foreground rounded-r-2xl">Edit</td>
             </tr>
           ))}
         </tbody>
