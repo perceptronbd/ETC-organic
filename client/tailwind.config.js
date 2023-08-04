@@ -9,7 +9,7 @@ module.exports = {
       colors: {
         background: "#F8F8F8",
         foreground: "#FFFFFF",
-        textColor: "#303030",
+        textColor: { DEFAULT: "#303030", light: "#9a9a9a" },
         accent: {
           primary: "#A259FF",
           secondary: "#0C904D",
