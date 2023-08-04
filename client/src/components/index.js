@@ -5,6 +5,7 @@ export { FormInput } from "./input/FormInput";
 //Button
 export { Button } from "./button/Button";
 export { LinkButton } from "./button/LinkButton";
+export { TextInput } from "./input/TextInput";
 //Text
 export { Text } from "./text/Text";
 //Table
