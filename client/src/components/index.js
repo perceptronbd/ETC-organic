@@ -2,6 +2,7 @@ export { Sidebar } from "./sidebar/Sidebar";
 //Input
 export { Input } from "./input/Input";
 export { FormInput } from "./input/FormInput";
+export { SelectInput } from "./input/SelectInput";
 //Button
 export { Button } from "./button/Button";
 export { LinkButton } from "./button/LinkButton";
