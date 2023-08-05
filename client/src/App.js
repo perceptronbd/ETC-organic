@@ -1,6 +1,13 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { AddProduct, Home, Login, Overview, ProductList } from "./pages";
+import {
+  AddProduct,
+  EditProduct,
+  Home,
+  Login,
+  Overview,
+  ProductList,
+} from "./pages";
 
 export default function App() {
   return (
@@ -10,6 +17,7 @@ export default function App() {
         <Route path="overview" element={<Overview />} />
         <Route path="product-list" element={<ProductList />} />
         <Route path="product-list/add-product" element={<AddProduct />} />
+        <Route path="product-list/edit-product" element={<EditProduct />} />
       </Route>
     </Routes>
   );
