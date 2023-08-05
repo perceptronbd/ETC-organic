@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 
 export const Sidebar = () => {
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(true);
 
   const navLinks = [
     {
@@ -47,31 +47,31 @@ export const Sidebar = () => {
   return (
     <>
       <div
-        className={` bg-foreground p-2 rounded-r-lg text-borderColor h-full z-40 ease-in-out duration-300 ${
-          showSidebar ? "w-1/5 translate-x-0" : "w-[5vw] -translate-x-full"
+        className={` bg-foreground p-2 rounded-r-lg text-borderColor h-full z-40 ease-in-out duration-100 ${
+          showSidebar ? "w-80 translate-x-0" : "w-[5vw] -translate-x-full"
         }`}
       >
         {showSidebar ? (
           <>
             <div className="w-full h-full ">
               <button
-                className="flex  p-2 text-2xl text-accent-primary bg-background rounded-md items-center cursor-pointer left-[80%] top-2 z-50"
+                className="flex ml-2 p-2 text-2xl text-accent-primary bg-background rounded-md items-center cursor-pointer left-[80%] top-2 z-50"
                 onClick={() => setShowSidebar(!showSidebar)}
               >
                 <BsLayoutSidebar />
               </button>
 
-              <div className="mt-4  pl-8">
+              <div className="mt-4 pl-8">
                 <nav className="h-full w-full">
                   <ul>
-                    <li className="group h-10 rounded-md w-[90%] hover:bg-accent-primary p-2 flex items-center transition-all ease-in-out duration-300 hover:text-foreground">
+                    <li className="group h-10 rounded-md w-[90%] hover:bg-accent-primary p-2 flex items-center transition-all ease-in-out duration-500 hover:text-foreground">
                       <NavLink
                         className={({ isActive, isPending }) =>
                           isPending
                             ? "pending"
                             : isActive
-                            ? "flex items-center font-semibold text-lg text-accent-primary group-hover:text-foreground transition-all ease-in-out duration-300 "
-                            : "flex items-center font-semibold text-lg pl-4 text-textColor transition-all ease-in-out duration-300 group-hover:text-foreground"
+                            ? "flex items-center font-semibold text-lg pl-2 text-accent-primary group-hover:text-foreground transition-all ease-in-out duration-300 "
+                            : "flex items-center font-semibold text-lg text-textColor opacity-70 transition-all ease-in-out duration-500 group-hover:text-foreground group-hover:opacity-100"
                         }
                         to="/overview"
                       >
@@ -90,7 +90,7 @@ export const Sidebar = () => {
                     <ul>
                       {section.links.map((link, linkIndex) => (
                         <li
-                          className="group h-10 rounded-md w-[90%] hover:bg-accent-primary p-2 flex items-center transition-all ease-in-out duration-300 hover:text-foreground"
+                          className="group h-10 rounded-md w-[90%] hover:bg-accent-primary p-2 flex items-center transition-all ease-in-out duration-500 hover:text-foreground"
                           key={linkIndex}
                         >
                           <NavLink
@@ -98,8 +98,8 @@ export const Sidebar = () => {
                               isPending
                                 ? "pending"
                                 : isActive
-                                ? "flex items-center font-semibold text-lg text-accent-primary group-hover:text-foreground transition-all ease-in-out duration-300 "
-                                : "flex items-center font-semibold text-lg pl-4 text-textColor transition-all ease-in-out duration-300 group-hover:text-foreground"
+                                ? "flex items-center font-semibold text-lg pl-2 text-accent-primary group-hover:text-foreground transition-all ease-in-out duration-500 "
+                                : "flex items-center font-semibold text-lg text-textColor opacity-70  text transition-all ease-in-out duration-300 group-hover:text-foreground group-hover:opacity-100"
                             }
                             to={link.path}
                           >
