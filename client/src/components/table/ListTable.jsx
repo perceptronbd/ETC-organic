@@ -1,4 +1,5 @@
 import React from "react";
+import { LinkButton } from "../button/LinkButton";
 
 export const ListTable = ({ data }) => {
   return (
@@ -20,7 +21,7 @@ export const ListTable = ({ data }) => {
           {data.map((item, index) => (
             <tr
               key={index}
-              className={`border-b-8 border-background font-semibold `}
+              className={`border-b-8 border-background font-semibold`}
             >
               <td className="p-4 text-textColor-light bg-foreground rounded-l-2xl">
                 {item.sn}
@@ -33,15 +34,24 @@ export const ListTable = ({ data }) => {
               <td className="p-4 bg-foreground  text-accent-primary text-center">
                 {item.csb}
               </td>
-              <td className="p-4 bg-foreground  text-white text-center">
-                <span className="border-2 border-accent-primary bg-accent-primary bg-opacity-60 px-4 py-1 rounded-full">
+              <td className="p-4 bg-foreground  text-accent-primary text-center">
+                <span className="border-2 border-accent-primary  bg-opacity-60 px-4 py-1 rounded-full">
                   {item.points}
                 </span>
               </td>
-              <td className="p-4 bg-foreground  text-textColor-light text-justify">
-                {item.description}
+              <td className="p-4 bg-foreground  text-textColor-light">
+                <div className="max-h-12 text-ellipsis overflow-hidden">
+                  {item.description}
+                </div>
               </td>
-              <td className="p-4 bg-foreground rounded-r-2xl">Edit</td>
+              <td className="p-4 bg-foreground rounded-r-2xl">
+                <LinkButton
+                  className={`w-14 m-0 h-8 bg-accent-secondary`}
+                  to={"edit-product"}
+                >
+                  Edit
+                </LinkButton>
+              </td>
             </tr>
           ))}
         </tbody>
