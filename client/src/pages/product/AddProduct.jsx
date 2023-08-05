@@ -47,7 +47,7 @@ export const AddProduct = () => {
           Back
         </LinkButton>
       </div>
-      <form action="submit" onSubmit={onSubmit}>
+      <form action="submit" onSubmit={onSubmit} className="pb-4">
         <FormInput
           className={"w-full "}
           label={"Product Name"}
