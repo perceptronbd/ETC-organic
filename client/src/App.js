@@ -7,6 +7,7 @@ import {
   Login,
   Overview,
   ProductList,
+  Purchase,
 } from "./pages";
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="product-list" element={<ProductList />} />
         <Route path="product-list/add-product" element={<AddProduct />} />
         <Route path="product-list/edit-product" element={<EditProduct />} />
+        <Route path="purchase" element={<Purchase />} />
       </Route>
     </Routes>
   );

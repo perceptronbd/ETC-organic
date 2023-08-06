@@ -5,3 +5,5 @@ export { Overview } from "./overview/Overview";
 export { ProductList } from "./product/ProductList";
 export { AddProduct } from "./product/AddProduct";
 export { EditProduct } from "./product/EditProduct";
+//Purchase
+export { Purchase } from "./purchase/Purchase";
