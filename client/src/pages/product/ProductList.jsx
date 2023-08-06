@@ -1,6 +1,7 @@
 import React from "react";
-import { LinkButton, ListTable, Text } from "../../components";
+import { LinkButton, Text } from "../../components";
 import { Container } from "../../components/container/Container";
+import { Table } from "./Table";
 
 export const ProductList = () => {
   const data = [
@@ -215,7 +216,7 @@ export const ProductList = () => {
           Add Product
         </LinkButton>
       </div>
-      <ListTable data={data} />
+      <Table data={data} />
     </Container>
   );
 };
