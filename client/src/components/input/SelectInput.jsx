@@ -13,7 +13,7 @@ export const SelectInput = (props) => {
   } = props;
 
   return (
-    <div className="flex flex-col my-2">
+    <div className="flex flex-col">
       {label && (
         <label htmlFor={id} className="font-semibold mb-2">
           {label}
@@ -25,7 +25,7 @@ export const SelectInput = (props) => {
         {...inputProps}
         onChange={onChange}
         className={cw(
-          `border rounded-xl w-72 p-2 m-2 focus:outline-none focus:ring-1 focus:border-accent-secondary `
+          `border rounded-xl w-72 p-2 focus:outline-none focus:ring-1 focus:border-accent-secondary `
         )}
       >
         <optgroup label="Select" className="font-semibold text-sm">

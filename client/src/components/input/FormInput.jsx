@@ -5,7 +5,7 @@ export const FormInput = (props) => {
   const { id, onChange, className, errorMessage, label, ...inputProps } = props;
 
   return (
-    <div className="flex flex-col my-2">
+    <div className="flex flex-col my-2 mb-8">
       {label && (
         <label htmlFor={id} className="font-semibold mb-2">
           {label}
