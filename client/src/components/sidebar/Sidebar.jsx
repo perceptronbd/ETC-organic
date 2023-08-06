@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { BiLogOut } from "react-icons/bi";
+import { BiLogOut, BiSolidPurchaseTagAlt } from "react-icons/bi";
 import { BsLayoutSidebarInset, BsLayoutSidebar } from "react-icons/bs";
 import {
   FaChartLine,
@@ -23,13 +23,18 @@ export const Sidebar = () => {
           path: "/product-list",
           icon: <FaBoxes />,
         },
+        {
+          title: "Purchase",
+          path: "/purchase",
+          icon: <BiSolidPurchaseTagAlt />,
+        },
         { title: "Sales", path: "/sales", icon: <FaCashRegister /> },
       ],
     },
     {
       title: "Reports",
       links: [
-        { title: "Sales", path: "/sales-report", icon: <FaChartBar /> },
+        { title: "Sales Report", path: "/sales-report", icon: <FaChartBar /> },
         {
           title: "Purchase",
           path: "/purchase-report",
