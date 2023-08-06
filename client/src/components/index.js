@@ -11,3 +11,5 @@ export { TextInput } from "./input/TextInput";
 export { Text } from "./text/Text";
 //Table
 export { ListTable } from "./table/ListTable";
+//Container
+export { Container } from "./container/Container";

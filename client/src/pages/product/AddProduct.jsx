@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
-import { Container } from "../../components/container/Container";
 import {
   Button,
   FormInput,
@@ -8,6 +7,7 @@ import {
   SelectInput,
   Text,
   TextInput,
+  Container,
 } from "../../components";
 
 const categories = [
