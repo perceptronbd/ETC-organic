@@ -1,7 +1,5 @@
-import { useState } from "react";
-
 export const IncDecButton = (props) => {
-  const { value, onChange } = props;
+  const { name, value, onChange } = props;
 
   let incNum = () => {
     if (value < 10) {
@@ -15,7 +13,12 @@ export const IncDecButton = (props) => {
   };
 
   return (
-    <>
+    <div>
+      {props.label ? (
+        <label className="font-semibold mb-2">{props.label}</label>
+      ) : (
+        ""
+      )}
       <div className="flex items-center">
         <button
           className="bg-background flex items-center justify-center w-6 h-6 rounded-md border-textColor-light border hover:bg-accent-primary hover:bg-opacity-40 hover:text-white transition-all ease-in-out duration-300"
@@ -25,6 +28,7 @@ export const IncDecButton = (props) => {
           -
         </button>
         <input
+          name={name}
           type="text"
           className="w-10 bg-background rounded-md m-2 p-1"
           value={value}
@@ -39,6 +43,6 @@ export const IncDecButton = (props) => {
           +
         </button>
       </div>
-    </>
+    </div>
   );
 };
