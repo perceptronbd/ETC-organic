@@ -7,7 +7,6 @@ export const LinkButton = (props) => {
   return (
     <Link to={props.to}>
       <button
-        {...props}
         className={cw(
           `bg-accent-primary w-52 h-12 px-4 rounded-lg font-semibold text-white hover:bg-opacity-80 transition-all ease-in-out duration-300 `,
           className
