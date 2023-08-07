@@ -9,3 +9,10 @@ export { EditProduct } from "./product/EditProduct";
 export { Purchase } from "./purchase/Purchase";
 //Sales
 export { Sales } from "./sales/Sales";
+//Reports
+export { SalesReport } from "./reports/SalesReport";
+export { PurchaseReport } from "./reports/PurchaseReport";
+//Orders
+export { Orders } from "./orders/Orders";
+//Empolyees
+export { Employees } from "./employees/Employees";

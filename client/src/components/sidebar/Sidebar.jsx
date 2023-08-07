@@ -9,6 +9,7 @@ import {
   FaChartBar,
   FaFileInvoice,
   FaUsers,
+  FaShoppingBag,
 } from "react-icons/fa";
 
 export const Sidebar = () => {
@@ -43,8 +44,11 @@ export const Sidebar = () => {
       ],
     },
     {
-      title: "Employees",
-      links: [{ title: "Employees", path: "/employees", icon: <FaUsers /> }],
+      title: "Others",
+      links: [
+        { title: "Orders", path: "/orders", icon: <FaShoppingBag /> },
+        { title: "Employees", path: "/employees", icon: <FaUsers /> },
+      ],
     },
   ];
 
