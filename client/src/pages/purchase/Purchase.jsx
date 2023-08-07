@@ -21,7 +21,9 @@ export const Purchase = () => {
 
   const changeQuantity = (newQuantity) => {
     setQuantity(newQuantity);
+    setFormValues({ ...formValues, quantity: newQuantity.toString() });
   };
+
   const [formValues, setFormValues] = useState({
     productName: "",
     quantity: "",
