@@ -9,10 +9,11 @@ import {
 } from "../../components";
 
 const branch = [
-  {
-    value: 1,
-    label: "branch 1",
-  },
+  { value: "1", label: "Category 1" },
+  { value: "2", label: "Category 2" },
+  { value: "3", label: "Category 3" },
+  { value: "4", label: "Category 4" },
+  { value: "5", label: "Category 5" },
 ];
 
 export const Purchase = () => {
@@ -48,41 +49,59 @@ export const Purchase = () => {
           <div className="bg-foreground rounded-xl w-full p-4">
             <FormInput
               label={"Product Name"}
+              placeholder={"Product Name"}
               name={"productName"}
+              pattern={"[A-Za-z ]+"}
+              errorMessage={"Please enter a valid name"}
               className={"bg-background"}
               onChange={onChange}
+              required
             />
             <IncDecButton
               name={"quantity"}
               value={quantity}
               onChange={changeQuantity}
               label={"Quantity"}
+              required
             />
             <FormInput
               label={"Total Purchasing Price"}
+              placeholder={"Total Price"}
+              pattern={"[0-9]+"}
               name={"totalPurchasingPrice"}
+              errorMessage={"Please enter a valid price"}
               className={"bg-background"}
               onChange={onChange}
+              required
             />
             <FormInput
               label={"Transportation Cost"}
+              placeholder={"Total Price"}
+              pattern={"[0-9]+"}
               name={"transportatoinCost"}
+              errorMessage={"Please enter a valid price"}
               className={"bg-background"}
               onChange={onChange}
+              required
             />
           </div>
           <div className="bg-foreground rounded-xl w-full p-4">
             <FormInput
               label={"Supplier Name"}
+              placeholder={"Supplier Name"}
+              pattern={"[A-Za-z ]+"}
               name={"supplierName"}
               className={"bg-background"}
+              errorMessage={"Please enter a name"}
               onChange={onChange}
+              required
             />
             <FormInput
               label={"Supplier Number"}
               name={"supplierNumber"}
               className={"bg-background"}
-              pattern={"[0-9]{3}-[0-9]{2}-[0-9]{3}"}
+              placeholder={"01xxxxxxxxxx"}
+              pattern={"[0-9]{11}"}
               errorMessage={"Please enter a valid phone number"}
               type={"tel"}
               onChange={onChange}
