@@ -18,7 +18,9 @@ const tabs = [
 export const Sales = () => {
   return (
     <Container>
-      <Text h1>Sales</Text>
+      <Text h1 className={"mb-2"}>
+        Sales
+      </Text>
       <Tabs tabs={tabs} />
     </Container>
   );

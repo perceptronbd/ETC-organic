@@ -8,7 +8,7 @@ import {
   FaCashRegister,
   FaChartBar,
   FaFileInvoice,
-  FaReceipt,
+  FaUsers,
 } from "react-icons/fa";
 
 export const Sidebar = () => {
@@ -40,12 +40,11 @@ export const Sidebar = () => {
           path: "/purchase-report",
           icon: <FaFileInvoice />,
         },
-        {
-          title: "All Expenses",
-          path: "/expenses-report",
-          icon: <FaReceipt />,
-        },
       ],
+    },
+    {
+      title: "Employees",
+      links: [{ title: "Employees", path: "/employees", icon: <FaUsers /> }],
     },
   ];
 
