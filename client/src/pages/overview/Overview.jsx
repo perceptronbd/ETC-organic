@@ -1,5 +1,6 @@
 import React from "react";
+import { Container } from "../../components";
 
 export const Overview = () => {
-  return <div>Overview</div>;
+  return <Container>Overview</Container>;
 };
