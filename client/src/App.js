@@ -8,6 +8,7 @@ import {
   Overview,
   ProductList,
   Purchase,
+  Sales,
 } from "./pages";
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="product-list/add-product" element={<AddProduct />} />
         <Route path="product-list/edit-product" element={<EditProduct />} />
         <Route path="purchase" element={<Purchase />} />
+        <Route path="sales" element={<Sales />} />
       </Route>
     </Routes>
   );

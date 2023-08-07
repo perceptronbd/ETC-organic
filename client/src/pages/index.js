@@ -7,3 +7,5 @@ export { AddProduct } from "./product/AddProduct";
 export { EditProduct } from "./product/EditProduct";
 //Purchase
 export { Purchase } from "./purchase/Purchase";
+//Sales
+export { Sales } from "./sales/Sales";
