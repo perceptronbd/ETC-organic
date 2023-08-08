@@ -4,12 +4,11 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        "3xl": "1920px",
+        "3xl": { min: "1366px" },
       },
       colors: {
         background: "#F8F8F8",
         foreground: "#FFFFFF",
-        neutralground: "#bfbfbf",
         textColor: { DEFAULT: "#303030", light: "#9a9a9a" },
         accent: {
           primary: "#A259FF",

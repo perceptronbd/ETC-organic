@@ -46,7 +46,7 @@ export const Retail = () => {
   };
 
   return (
-    <Container className={"h-auto p-0 m-0"}>
+    <Container className={"h-auto p-0 m-0 3xl:m-0"}>
       <form
         action="submit"
         onSubmit={onSubmit}
