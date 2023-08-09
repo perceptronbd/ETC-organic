@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text } from "../text/Text";
 import { Button } from "../button/Button";
 
 export const ListCard = (props) => {
-  const { data } = props;
+  const { data, onClick, status } = props;
+
+  const [isDone, setIsDone] = useState(() =>
+    status ? "deactive" : "secondary"
+  );
 
   return (
     <div className="flex w-[550px] 3xl:w-[740px] h-32 bg-foreground rounded-xl my-2 p-6 border-2 border-neutral-300">
@@ -27,9 +31,17 @@ export const ListCard = (props) => {
         </div>
       </div>
       <div className="w-[40%] 3xl:w-[50%] flex flex-col 3xl:flex-row justify-end items-end">
-        <Button className={"h-8 w-44 mb-4 3xl:mr-4 3xl:mb-0"}>Details</Button>
-        <Button className={"h-8 w-44 "} secondary>
-          Mark As Complete
+        <Button className={"h-8 w-44 mb-4 3xl:mr-4 3xl:mb-0"} onClick={onClick}>
+          Details
+        </Button>
+        <Button
+          className={"h-8 w-44 "}
+          variant={isDone}
+          onClick={() => {
+            setIsDone(isDone === "deactive" ? "secondary" : "deactive");
+          }}
+        >
+          {isDone === "deactive" ? "Done" : "Mark As Done"}
         </Button>
       </div>
     </div>
