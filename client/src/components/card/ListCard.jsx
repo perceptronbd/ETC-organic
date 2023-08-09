@@ -6,7 +6,7 @@ export const ListCard = (props) => {
   const { data, onClick, status } = props;
 
   const [isDone, setIsDone] = useState(() =>
-    status ? "deactive" : "secondary"
+    status === "complete" ? "deactive" : "secondary"
   );
 
   return (
@@ -31,18 +31,20 @@ export const ListCard = (props) => {
         </div>
       </div>
       <div className="w-[40%] 3xl:w-[50%] flex flex-col 3xl:flex-row justify-end items-end">
-        <Button className={"h-8 w-44 mb-4 3xl:mr-4 3xl:mb-0"} onClick={onClick}>
+        <Button className={"h-8 w-44 mb-4  3xl:mb-0"} onClick={onClick}>
           Details
         </Button>
-        <Button
-          className={"h-8 w-44 "}
-          variant={isDone}
-          onClick={() => {
-            setIsDone(isDone === "deactive" ? "secondary" : "deactive");
-          }}
-        >
-          {isDone === "deactive" ? "Done" : "Mark As Done"}
-        </Button>
+        {status && (
+          <Button
+            className={"h-8 w-44 3xl:ml-4"}
+            variant={isDone}
+            onClick={() => {
+              setIsDone(isDone === "deactive" ? "secondary" : "deactive");
+            }}
+          >
+            {isDone === "deactive" ? "Done" : "Mark As Done"}
+          </Button>
+        )}
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ const orders = [
     orderAmount: "1200",
     date: "02 Jan 2023",
     address: "86, R.K Tower, Sonargaon Road, Banglamotor, Dhaka",
-    status: true,
+    status: "complete",
   },
   {
     customerName: "Ayesha Ahmed",
@@ -17,7 +17,7 @@ const orders = [
     orderAmount: "750",
     date: "10 Jan 2023",
     address: "42, Green Avenue, Gulshan, Dhaka",
-    status: true,
+    status: "incomplete",
   },
   {
     customerName: "Rahim Khan",
@@ -25,7 +25,7 @@ const orders = [
     orderAmount: "2200",
     date: "15 Jan 2023",
     address: "28, Red Plaza, Dhanmondi, Dhaka",
-    status: false,
+    status: "incomplete",
   },
   {
     customerName: "Sara Rahman",
@@ -33,7 +33,7 @@ const orders = [
     orderAmount: "1500",
     date: "20 Jan 2023",
     address: "10, Blue Tower, Uttara, Dhaka",
-    status: false,
+    status: "incomplete",
   },
   {
     customerName: "Nasir Uddin",
@@ -41,7 +41,7 @@ const orders = [
     orderAmount: "1800",
     date: "25 Jan 2023",
     address: "5, Yellow Lane, Mirpur, Dhaka",
-    status: false,
+    status: "incomplete",
   },
   // 10 more entries with status: false
   {
@@ -50,7 +50,7 @@ const orders = [
     orderAmount: "850",
     date: "28 Jan 2023",
     address: "123 Main Street, Cityville, Dhaka",
-    status: false,
+    status: "incomplete",
   },
   {
     customerName: "Jane Smith",
@@ -58,7 +58,7 @@ const orders = [
     orderAmount: "1600",
     date: "05 Feb 2023",
     address: "456 Elm Avenue, Townsville, Dhaka",
-    status: false,
+    status: "incomplete",
   },
   {
     customerName: "David Johnson",
@@ -66,7 +66,7 @@ const orders = [
     orderAmount: "2000",
     date: "12 Feb 2023",
     address: "789 Oak Road, Villagetown, Dhaka",
-    status: false,
+    status: "incomplete",
   },
   {
     customerName: "Emily Brown",
@@ -74,7 +74,7 @@ const orders = [
     orderAmount: "1200",
     date: "18 Feb 2023",
     address: "101 Pine Lane, Countryside, Dhaka",
-    status: false,
+    status: "incomplete",
   },
   {
     customerName: "Michael Wilson",
@@ -82,7 +82,7 @@ const orders = [
     orderAmount: "750",
     date: "25 Feb 2023",
     address: "555 Maple Street, Suburbia, Dhaka",
-    status: false,
+    status: "incomplete",
   },
   {
     customerName: "Jessica Davis",
@@ -90,7 +90,6 @@ const orders = [
     orderAmount: "3000",
     date: "03 Mar 2023",
     address: "777 Birch Avenue, Metroville, Dhaka",
-    status: false,
   },
 ];
 
@@ -99,7 +98,9 @@ const TabContent = ({ selectedOrder }) => {
 
   useEffect(() => {
     setIsDone(() =>
-      selectedOrder && selectedOrder.status ? "deactive" : "secondary"
+      selectedOrder && selectedOrder.status === "complete"
+        ? "deactive"
+        : "secondary"
     );
   }, [selectedOrder]);
 
