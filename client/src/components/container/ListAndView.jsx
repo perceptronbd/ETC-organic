@@ -79,9 +79,9 @@ export const ListAndView = ({ data }) => {
     <>
       <div className="flex">
         <div className="w-[560px] 3xl:w-[750px] h-[90vh] overflow-x-auto pr-1 mr-2">
-          {data.map((order) => (
+          {data.map((order, index) => (
             <ListCard
-              key={order.customerName}
+              key={index}
               data={order}
               status={order.status}
               onClick={() => handleOrderClick(order)}
