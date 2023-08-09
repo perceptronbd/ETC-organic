@@ -31,12 +31,12 @@ export const ListCard = (props) => {
         </div>
       </div>
       <div className="w-[40%] 3xl:w-[50%] flex flex-col 3xl:flex-row justify-end items-end">
-        <Button className={"h-8 w-44 mb-4  3xl:mb-0"} onClick={onClick}>
+        <Button className={"h-8 w-44  3xl:mb-0"} onClick={onClick}>
           Details
         </Button>
         {status && (
           <Button
-            className={"h-8 w-44 3xl:ml-4"}
+            className={"h-8 w-44 3xl:ml-4 mt-4"}
             variant={isDone}
             onClick={() => {
               setIsDone(isDone === "deactive" ? "secondary" : "deactive");
