@@ -14,5 +14,6 @@ export { Text } from "./text/Text";
 export { ListTable } from "./table/ListTable";
 //Container
 export { Container } from "./container/Container";
+export { ListAndView } from "./container/ListAndView";
 //Card
 export { ListCard } from "./card/ListCard";
