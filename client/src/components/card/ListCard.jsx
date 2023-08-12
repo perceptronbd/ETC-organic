@@ -20,7 +20,7 @@ export const ListCard = (props) => {
             <Text className={"w-44 text-textColor-light"}>
               {textFormat(key)}
             </Text>
-            <Text className={"font-semibold"}>{data[key]}</Text>
+            <Text className={"w-36 font-semibold"}>{data[key]}</Text>
           </div>
         ))}
       </div>

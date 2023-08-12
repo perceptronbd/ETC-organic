@@ -38,7 +38,7 @@ export const Login = () => {
 
   return (
     <div className="w-full h-screen flex justify-center items-center">
-      <div className="bg-foreground w-[752px] h-[630px] p-8 rounded-[40px] flex justify-center items-center">
+      <div className="bg-foreground w-[50%] h-[90%] 3xl:w-[752px] 3xl:h-[630px] p-8 rounded-[40px] flex justify-center items-center">
         <form
           onSubmit={handleSubmit}
           className="flex flex-col w-full h-full items-center"

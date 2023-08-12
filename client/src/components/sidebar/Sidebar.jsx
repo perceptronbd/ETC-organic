@@ -56,7 +56,9 @@ export const Sidebar = () => {
     <>
       <div
         className={` bg-foreground p-2 rounded-r-lg text-borderColor h-full z-40 ease-in-out duration-100 ${
-          showSidebar ? "w-80 translate-x-0" : "w-[5vw] -translate-x-full"
+          showSidebar
+            ? "w-80 3xl:w-[340px]  translate-x-0"
+            : "w-[5vw] -translate-x-full"
         }`}
       >
         {showSidebar ? (
