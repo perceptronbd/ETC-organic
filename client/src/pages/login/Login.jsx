@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Button, FormInput, Text } from "../../components";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [values, setValues] = useState({
     phoneNumber: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const inputs = [
     {
@@ -14,7 +17,7 @@ export const Login = () => {
       type: "tel",
       placeholder: "Phone Number",
       required: true,
-      pattern: "[0-9]{3}-[0-9]{2}-[0-9]{3}",
+      pattern: "[0-9]{11}",
       errorMessage: "Please enter a valid phone number",
     },
     {
@@ -30,6 +33,7 @@ export const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(values);
+    navigate("/product-list");
   };
 
   const onChange = (e) => {
