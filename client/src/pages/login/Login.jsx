@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, FormInput, Text } from "../../components";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export const Login = () => {
   const [values, setValues] = useState({
@@ -9,6 +10,8 @@ export const Login = () => {
   });
 
   const navigate = useNavigate();
+
+  const { login } = useAuth();
 
   const inputs = [
     {
@@ -32,8 +35,7 @@ export const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
-    navigate("/product-list");
+    login(values);
   };
 
   const onChange = (e) => {

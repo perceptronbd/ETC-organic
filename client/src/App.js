@@ -1,5 +1,6 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { useAuth } from "./context/AuthContext";
 import {
   AddProduct,
   EditProduct,
@@ -16,10 +17,20 @@ import {
 } from "./pages";
 
 export default function App() {
+  const { user } = useAuth();
+
   return (
     <Routes>
-      <Route exact path="/login" element={<Login />} />
-      <Route exact path="/" element={<Home />}>
+      <Route
+        exact
+        path="/login"
+        element={!user ? <Login /> : <Navigate to={"/"} />}
+      />
+      <Route
+        exact
+        path="/"
+        element={user ? <Home /> : <Navigate to={"/login"} />}
+      >
         <Route path="overview" element={<Overview />} />
         <Route path="product-list" element={<ProductList />} />
         <Route path="product-list/add-product" element={<AddProduct />} />
