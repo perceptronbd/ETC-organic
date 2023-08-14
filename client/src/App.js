@@ -2,6 +2,7 @@ import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 import {
+  AddEmployee,
   AddProduct,
   EditProduct,
   Employees,
@@ -14,6 +15,7 @@ import {
   PurchaseReport,
   Sales,
   SalesReport,
+  UpdateEmployee,
 } from "./pages";
 
 export default function App() {
@@ -41,6 +43,8 @@ export default function App() {
         <Route path="purchase-report" element={<PurchaseReport />} />
         <Route path="orders" element={<Orders />} />
         <Route path="employees" element={<Employees />} />
+        <Route path="employees/add-employee" element={<AddEmployee />} />
+        <Route path="employees/update-employee" element={<UpdateEmployee />} />
       </Route>
     </Routes>
   );

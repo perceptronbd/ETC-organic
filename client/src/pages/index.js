@@ -16,3 +16,5 @@ export { PurchaseReport } from "./reports/PurchaseReport";
 export { Orders } from "./orders/Orders";
 //Empolyees
 export { Employees } from "./employees/Employees";
+export { UpdateEmployee } from "./employees/UpdateEmployee";
+export { AddEmployee } from "./employees/AddEmployee";
