@@ -24,7 +24,7 @@ export default function App() {
       <Route
         exact
         path="/login"
-        element={!user ? <Login /> : <Navigate to={"/"} />}
+        element={!user ? <Login /> : <Navigate to={"/overview"} />}
       />
       <Route
         exact

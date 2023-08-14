@@ -11,9 +11,12 @@ import {
   FaUsers,
   FaShoppingBag,
 } from "react-icons/fa";
+import { useAuth } from "../../context/AuthContext";
 
 export const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(true);
+
+  const { logout } = useAuth();
 
   const navLinks = [
     {
@@ -125,17 +128,21 @@ export const Sidebar = () => {
               </div>
               <div className="fixed pl-2  hover:cursor-pointertext-lg font-semibold bottom-2 h-12 w-[90%] flex justify-between items-center">
                 User Name
-                <NavLink to={"/login"}>
+                <button
+                  onClick={() => {
+                    logout();
+                  }}
+                >
                   <BiLogOut
                     className="hover:cursor-pointer bg-background hover:bg-accent-secondary hover:text-foreground transition-all ease-in-out duration-300 rounded-md p-1"
                     size={"34px"}
                   />
-                </NavLink>
+                </button>
               </div>
             </div>
           </>
         ) : (
-          <>{/* bottom button */}</>
+          <></>
         )}
         <button
           onClick={() => setShowSidebar(!showSidebar)}
