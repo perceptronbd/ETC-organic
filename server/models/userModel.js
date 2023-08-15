@@ -31,6 +31,10 @@ const userSchema = mongoose.Schema(
     phone: {
       type: String
     },
+    designation: {
+      type: String,
+      required: [true, "Please add a designation"],
+    },
 
   },
   {

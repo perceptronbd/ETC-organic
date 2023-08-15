@@ -15,10 +15,10 @@ const generateToken = (id) => {
 
 // Register User
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password, phone } = req.body;
+    const { name, email, password, phone, designation } = req.body;
   
     // Validation
-    if (!name || !email || !password || !phone) {
+    if (!name || !email || !password || !phone || !designation) {
       res.status(400);
       throw new Error("Please fill in all required fields");
     }
@@ -28,11 +28,11 @@ const registerUser = asyncHandler(async (req, res) => {
     }
   
     // Check if user email already exists
-    const userExists = await User.findOne({ email });
+    const userExists = await User.findOne({ phone });
   
     if (userExists) {
       res.status(400);
-      throw new Error("Email has already been registered");
+      throw new Error("Phone number already already been registered");
     }
   
     // Create new user
@@ -41,6 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
       email,
       password,
       phone,
+      designation
     });
   
     //   Generate Token
@@ -56,13 +57,14 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   
     if (user) {
-      const { _id, name, email, photo, phone} = user;
+      const { _id, name, email, photo, phone,designation} = user;
       res.status(201).json({
         _id,
         name,
         email,
         photo,
         phone,
+        designation,
         token,
       });
     } else {
@@ -108,7 +110,7 @@ const registerUser = asyncHandler(async (req, res) => {
      });
    }
      if (user && passwordIsCorrect) {
-       const { _id, name, email, photo, phone, } = user;
+       const { _id, name, email, photo, phone, designation} = user;
        res.status(200).json({
          _id,
          name,
@@ -116,6 +118,7 @@ const registerUser = asyncHandler(async (req, res) => {
          photo,
          phone,
          token,
+         designation
        });
      } else {
        res.status(400);
