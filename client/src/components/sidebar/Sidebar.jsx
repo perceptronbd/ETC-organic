@@ -111,11 +111,9 @@ export const Sidebar = () => {
                               : "flex items-center font-semibold text-lg text-textColor opacity-70  text transition-all ease-in-out duration-300 group-hover:text-foreground group-hover:opacity-100"
                           }
                           to={link.path}
+                          key={linkIndex}
                         >
-                          <li
-                            className="group h-10 rounded-md w-[90%] hover:bg-accent-primary p-2 flex items-center transition-all ease-in-out duration-500 hover:text-foreground"
-                            key={linkIndex}
-                          >
+                          <li className="group h-10 rounded-md w-[90%] hover:bg-accent-primary p-2 flex items-center transition-all ease-in-out duration-500 hover:text-foreground">
                             {link.icon}
                             <span className="w-4"></span>
                             {link.title}
