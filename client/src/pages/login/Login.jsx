@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, FormInput, Text } from "../../components";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 export const Login = () => {
@@ -8,8 +7,6 @@ export const Login = () => {
     phoneNumber: "",
     password: "",
   });
-
-  const navigate = useNavigate();
 
   const { login } = useAuth();
 
