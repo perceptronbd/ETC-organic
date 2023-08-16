@@ -17,6 +17,7 @@ import {
   SalesReport,
   UpdateEmployee,
 } from "./pages";
+import { Component } from "./components/Component";
 
 export default function App() {
   const { user } = useAuth();
@@ -28,6 +29,7 @@ export default function App() {
         path="/login"
         element={!user ? <Login /> : <Navigate to={"/overview"} />}
       />
+      <Route path="/component" element={<Component />} />
       <Route
         exact
         path="/"

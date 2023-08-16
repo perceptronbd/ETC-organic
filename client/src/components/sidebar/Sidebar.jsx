@@ -77,22 +77,22 @@ export const Sidebar = () => {
               <div className="mt-4 pl-8">
                 <nav className="h-full w-full">
                   <ul>
-                    <li className="group h-10 rounded-md w-[90%] hover:bg-accent-primary p-2 flex items-center transition-all ease-in-out duration-500 hover:text-foreground">
-                      <NavLink
-                        className={({ isActive, isPending }) =>
-                          isPending
-                            ? "pending"
-                            : isActive
-                            ? "flex items-center font-semibold text-lg pl-2 text-accent-primary group-hover:text-foreground transition-all ease-in-out duration-300 "
-                            : "flex items-center font-semibold text-lg text-textColor opacity-70 transition-all ease-in-out duration-500 group-hover:text-foreground group-hover:opacity-100"
-                        }
-                        to="/overview"
-                      >
+                    <NavLink
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "flex items-center font-semibold text-lg pl-2 text-accent-primary group-hover:text-foreground transition-all ease-in-out duration-300 "
+                          : "flex items-center font-semibold text-lg text-textColor opacity-70 transition-all ease-in-out duration-500 group-hover:text-foreground group-hover:opacity-100"
+                      }
+                      to="/overview"
+                    >
+                      <li className="group h-10 rounded-md w-[90%] hover:bg-accent-primary p-2 flex items-center transition-all ease-in-out duration-500 hover:text-foreground">
                         <FaChartLine />
-                        <span className="w-4"></span>
+                        <span className="w-4" />
                         Overview
-                      </NavLink>
-                    </li>
+                      </li>
+                    </NavLink>
                   </ul>
                 </nav>
                 {navLinks.map((section, index) => (
@@ -102,25 +102,25 @@ export const Sidebar = () => {
                     </h1>
                     <ul>
                       {section.links.map((link, linkIndex) => (
-                        <li
-                          className="group h-10 rounded-md w-[90%] hover:bg-accent-primary p-2 flex items-center transition-all ease-in-out duration-500 hover:text-foreground"
-                          key={linkIndex}
+                        <NavLink
+                          className={({ isActive, isPending }) =>
+                            isPending
+                              ? "pending"
+                              : isActive
+                              ? "flex items-center font-semibold text-lg pl-2 text-accent-primary group-hover:text-foreground transition-all ease-in-out duration-500 "
+                              : "flex items-center font-semibold text-lg text-textColor opacity-70  text transition-all ease-in-out duration-300 group-hover:text-foreground group-hover:opacity-100"
+                          }
+                          to={link.path}
                         >
-                          <NavLink
-                            className={({ isActive, isPending }) =>
-                              isPending
-                                ? "pending"
-                                : isActive
-                                ? "flex items-center font-semibold text-lg pl-2 text-accent-primary group-hover:text-foreground transition-all ease-in-out duration-500 "
-                                : "flex items-center font-semibold text-lg text-textColor opacity-70  text transition-all ease-in-out duration-300 group-hover:text-foreground group-hover:opacity-100"
-                            }
-                            to={link.path}
+                          <li
+                            className="group h-10 rounded-md w-[90%] hover:bg-accent-primary p-2 flex items-center transition-all ease-in-out duration-500 hover:text-foreground"
+                            key={linkIndex}
                           >
                             {link.icon}
                             <span className="w-4"></span>
                             {link.title}
-                          </NavLink>
-                        </li>
+                          </li>
+                        </NavLink>
                       ))}
                     </ul>
                   </nav>

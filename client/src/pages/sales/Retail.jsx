@@ -52,61 +52,71 @@ export const Retail = () => {
         onSubmit={onSubmit}
         className="w-full bg-foreground rounded-xl rounded-tl-none pb-4"
       >
-        <div className="grid grid-cols-2 gap-2 w-full h-[520px]">
+        <div className="grid grid-cols-2 gap-2 w-full h-[400px]">
           <div className="bg-foreground rounded-xl w-full p-4">
             <FormInput
+              id={"proprietorName"}
               label={"Product Name"}
               placeholder={"Product Name"}
               name={"productName"}
               pattern={"[A-Za-z ]+"}
               errorMessage={"Please enter a valid name"}
-              className={"bg-background"}
               onChange={onChange}
               required
             />
             <IncDecButton
+              id={"quantity"}
               name={"quantity"}
               value={quantity}
               onChange={changeQuantity}
-              label={"Quantity"}
+              label={"Quantity :"}
+              placeholder={"Quantity"}
               required
             />
             <FormInput
+              id={"price"}
               label={"Price"}
               placeholder={"Price"}
               pattern={"[0-9]+"}
               name={"price"}
               errorMessage={"Please enter a valid price"}
-              className={"bg-background"}
               onChange={onChange}
               required
             />
             <FormInput
+              id={"discount"}
               label={"Discount"}
               placeholder={"Discount"}
               pattern={"[0-9]+"}
               name={"discount"}
               errorMessage={"Please enter a discount"}
-              className={"bg-background"}
               onChange={onChange}
               required
             />
             <FormInput
+              id={"finalPrice"}
               label={"Final Price"}
               placeholder={"Final Price"}
               pattern={"[0-9]+"}
               name={"finalPrice"}
               errorMessage={"Please enter a valid price"}
-              className={"bg-background"}
               onChange={onChange}
               required
             />
           </div>
           <div className="bg-foreground rounded-xl w-full p-4">
+            <SelectInput
+              label={"Branch"}
+              name={"branch"}
+              selectOpts={branch}
+              className={"border-accent-primary"}
+              onChange={onChange}
+              required
+            />
             <FormInput
+              id={"customerName"}
               label={"Customer Name"}
               name={"customerName"}
-              className={"bg-background"}
               placeholder={"Customer Name"}
               pattern={"[A-Za-z ]+"}
               errorMessage={"Please enter a valid name"}
@@ -114,33 +124,25 @@ export const Retail = () => {
               required
             />
             <FormInput
+              id={"customerNumber"}
               label={"Customer Number"}
               name={"customerNumber"}
-              className={"bg-background"}
               placeholder={"Number"}
               onChange={onChange}
               required
             />
             <FormInput
+              id={"customerID"}
               label={"Customer ID"}
               placeholder={"ID"}
               name={"customerID"}
-              className={"bg-background"}
               errorMessage={"Please enter a ID"}
-              onChange={onChange}
-              required
-            />
-
-            <SelectInput
-              label={"Branch"}
-              name={"branch"}
-              selectOpts={branch}
               onChange={onChange}
               required
             />
           </div>
         </div>
-        <div className="w-full flex justify-start px-4 mt-8">
+        <div className="w-full flex justify-start px-4">
           <Button type={"submit"}>Done</Button>
         </div>
       </form>

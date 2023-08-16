@@ -5,7 +5,7 @@ const Tab = ({ label, isActive, onClick }) => {
     <button
       className={`${
         isActive ? "bg-white hover:bg-white" : " "
-      } text-accent-primary font-semibold px-4 py-2 rounded-t-md focus:outline-none hover:bg-gray-200 transition-all ease-in-out duration-300`}
+      } text-accent-secondary font-semibold px-4 py-2 rounded-t-md focus:outline-none hover:bg-gray-200 transition-all ease-in-out duration-300`}
       onClick={onClick}
     >
       {label}
@@ -36,7 +36,7 @@ export const Tabs = ({ tabs }) => {
           />
         ))}
       </div>
-      <div className="">
+      <div>
         {tabs.map((tab) => (
           <TabPanel key={tab.label} isActive={tab.label === activeTab}>
             {tab.content}

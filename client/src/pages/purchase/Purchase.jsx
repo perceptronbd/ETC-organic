@@ -47,15 +47,15 @@ export const Purchase = () => {
     <Container>
       <Text h1>Purchase</Text>
       <form action="submit" onSubmit={onSubmit} className="w-full">
-        <div className="grid grid-cols-2 gap-2 w-full h-[500px] p-2">
+        <div className="grid grid-cols-2 gap-2 w-full h-[450px] p-2">
           <div className="bg-foreground rounded-xl w-full p-4">
             <FormInput
+              id={"productName"}
               label={"Product Name"}
               placeholder={"Product Name"}
               name={"productName"}
               pattern={"[A-Za-z ]+"}
               errorMessage={"Please enter a valid name"}
-              className={"bg-background"}
               onChange={onChange}
               required
             />
@@ -67,41 +67,41 @@ export const Purchase = () => {
               required
             />
             <FormInput
+              id={"totalPurchasingPrice"}
               label={"Total Purchasing Price"}
               placeholder={"Total Price"}
               pattern={"[0-9]+"}
               name={"totalPurchasingPrice"}
               errorMessage={"Please enter a valid price"}
-              className={"bg-background"}
               onChange={onChange}
               required
             />
             <FormInput
+              id={"transportatoinCost"}
               label={"Transportation Cost"}
               placeholder={"Total Price"}
               pattern={"[0-9]+"}
               name={"transportatoinCost"}
               errorMessage={"Please enter a valid price"}
-              className={"bg-background"}
               onChange={onChange}
               required
             />
           </div>
           <div className="bg-foreground rounded-xl w-full p-4">
             <FormInput
+              id={"supplierName"}
               label={"Supplier Name"}
               placeholder={"Supplier Name"}
               pattern={"[A-Za-z ]+"}
               name={"supplierName"}
-              className={"bg-background"}
               errorMessage={"Please enter a name"}
               onChange={onChange}
               required
             />
             <FormInput
+              id={"supplierNumber"}
               label={"Supplier Number"}
               name={"supplierNumber"}
-              className={"bg-background"}
               placeholder={"01xxxxxxxxxx"}
               pattern={"[0-9]{11}"}
               errorMessage={"Please enter a valid phone number"}

@@ -21,7 +21,7 @@ export const EmployeeTable = ({ data }) => {
               className={`border-b-8 border-background font-semibold`}
             >
               <td className="p-4 bg-foreground rounded-l-2xl">{item.name}</td>
-              <td className={`flex justify-center bg-foreground p-4 text-sm`}>
+              <td className={`flex bg-foreground p-4 text-sm`}>
                 <span
                   className={`px-2 py-1  rounded-full ${
                     item.designation === "Manager"

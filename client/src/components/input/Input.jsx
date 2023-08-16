@@ -6,15 +6,21 @@ export const Input = (props) => {
   const { id, onChange, className, ...inputProps } = props;
 
   return (
-    <input
-      {...inputProps}
-      onChange={onChange}
-      className={twMerge(
-        clsx(
-          "border rounded-full w-72 p-2 m-2 focus:outline-none focus:ring-1 focus:border-accent-secondary"
-        ),
-        className
-      )}
-    />
+    <>
+      <div class="relative">
+        <input
+          type="text"
+          id="floating_filled"
+          class="block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-700  border-4 border-red-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          placeholder=" "
+        />
+        <label
+          for="floating_filled"
+          class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:bg-white"
+        >
+          Floating filled
+        </label>
+      </div>
+    </>
   );
 };

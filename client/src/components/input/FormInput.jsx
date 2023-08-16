@@ -5,21 +5,24 @@ export const FormInput = (props) => {
   const { id, onChange, className, errorMessage, label, ...inputProps } = props;
 
   return (
-    <div className="flex flex-col my-2 mb-8">
-      {label && (
-        <label htmlFor={id} className="font-semibold mb-2">
-          {label}
-        </label>
-      )}
+    <div className="relative my-4">
       <input
         id={id}
         {...inputProps}
         onChange={onChange}
         className={cw(
-          "peer border rounded-xl w-72 p-2 focus:outline-none focus:ring-1 focus:border-accent-secondary placeholder:px-2",
+          "peer block border rounded-xl w-72 p-2 focus:outline-none focus:ring-1 focus:border-accent-secondary placeholder:text-transparent",
           className
         )}
       />
+      {label && (
+        <label
+          htmlFor={id}
+          className="absolute text-sm px-1 text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-accent-secondary peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:bg-white"
+        >
+          {label}
+        </label>
+      )}
       <span className="text-red-500 hidden peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
         {errorMessage}
       </span>

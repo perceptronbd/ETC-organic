@@ -55,7 +55,12 @@ export const Login = () => {
           <div className="flex flex-col ">
             <Text h3>Login</Text>
             {inputs.map((input) => (
-              <FormInput {...input} key={input.id} onChange={onChange} />
+              <FormInput
+                {...input}
+                key={input.id}
+                onChange={onChange}
+                label={input.placeholder}
+              />
             ))}
           </div>
           <hr className="py-4 " />

@@ -13,19 +13,15 @@ export const SelectInput = (props) => {
   } = props;
 
   return (
-    <div className="flex flex-col">
-      {label && (
-        <label htmlFor={id} className="font-semibold mb-2">
-          {label}
-        </label>
-      )}
+    <div className="relative my-4">
       <select
         name="name"
         id="id"
         {...inputProps}
         onChange={onChange}
         className={cw(
-          `border rounded-xl w-72 p-2 focus:outline-none focus:ring-1 focus:border-accent-secondary `
+          `peer block border rounded-xl w-72 p-2 focus:outline-none focus:ring-1 focus:border-accent-secondary `,
+          className
         )}
       >
         <optgroup label="Select" className="font-semibold text-sm">
@@ -36,6 +32,14 @@ export const SelectInput = (props) => {
           ))}
         </optgroup>
       </select>
+      {label && (
+        <label
+          htmlFor={id}
+          className="absolute text-sm px-1 text-gray-500 duration-300 transform -translate-y-6 bg-foreground scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-accent-secondary peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:bg-white"
+        >
+          {label}
+        </label>
+      )}
 
       <span className="text-red-500 hidden peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
         {errorMessage}
