@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import {
   Button,
+  Checkbox,
   Container,
   FormInput,
   LinkButton,
   SelectInput,
   Text,
-  TextInput,
 } from "../../components";
 import { IoIosArrowBack } from "react-icons/io";
 
@@ -20,18 +20,33 @@ const categories = [
 
 export const AddEmployee = () => {
   const [formValues, setFormValues] = useState({
-    productName: "",
-    category: "",
-    salesPrice: "",
-    purchasePrice: "",
-    csb: "",
-    points: "",
-    unit: "",
-    description: "",
+    employeeName: "",
+    employeeNumber: "",
+    designation: "",
+    branch: "",
+    productManagement: false,
+    inputSales: false,
   });
 
   const onChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  };
+
+  const onChangeCheckbox = (e) => {
+    const { name, checked } = e.target;
+
+    if (name === "fullAccess") {
+      setFormValues((prevValues) => ({
+        ...prevValues,
+        productManagement: checked,
+        inputSales: checked,
+      }));
+    } else {
+      setFormValues((prevValues) => ({
+        ...prevValues,
+        [name]: checked,
+      }));
+    }
   };
 
   const onSubmit = (e) => {
@@ -47,85 +62,78 @@ export const AddEmployee = () => {
           Back
         </LinkButton>
       </div>
-      <form action="submit" onSubmit={onSubmit} className="pb-4">
-        <FormInput
-          className={"w-full "}
-          label={"Product Name"}
-          name={"productName"}
-          required
-          onChange={onChange}
-        />
-        <div className="grid grid-cols-2 gap-x-8 gap-y-2 w-[80%]">
-          <div className="col-start-1 col-end-3">
-            <SelectInput
-              className={"w-[40%]"}
-              label={"Category"}
-              name={"category"}
-              required
-              selectOpts={categories}
-              onChange={onChange}
-            />
-          </div>
-          <div className="flex">
-            <FormInput
-              label={"Sales Price"}
-              name={"salesPrice"}
-              type={"number"}
-              pattern={"[0-9]{3}-[0-9]{2}-[0-9]{3}"}
-              required
-              onChange={onChange}
-            />
-            <Text className={"flex items-end m-4 text-textColor-light"} h3>
-              BDT
-            </Text>
-          </div>
-          <div className="flex">
-            <FormInput
-              label={"Purchase Price"}
-              name={"purchasePrice"}
-              type={"number"}
-              pattern={"[0-9]{3}-[0-9]{2}-[0-9]{3}"}
-              required
-              onChange={onChange}
-            />
-            <Text className={"flex items-end m-4 text-textColor-light"} h3>
-              BDT
-            </Text>
-          </div>
+      <form
+        action="submit"
+        onSubmit={onSubmit}
+        className="bg-white rounded-lg p-4"
+      >
+        <section className="grid grid-cols-2 gap-x-8 w-[80%]">
           <FormInput
-            label={"CSB"}
-            name={"csb"}
-            type={"number"}
-            pattern={"[0-9]{3}-[0-9]{2}-[0-9]{3}"}
+            id={"employeeName"}
+            label={"Employee Name"}
+            name={"employeeName"}
+            placeholder={"Employee Name"}
             required
             onChange={onChange}
           />
+
           <FormInput
-            label={"Points"}
-            name={"points"}
+            id={"employeeNumber"}
+            label={"Employee Number"}
+            name={"employeeNumber"}
+            placeholder={"Employee Number"}
             type={"number"}
-            pattern={"[0-9]{3}-[0-9]{2}-[0-9]{3}"}
+            pattern={"[0-9]{11}"}
             required
             onChange={onChange}
           />
           <SelectInput
-            label={"Unit"}
-            name={"unit"}
-            type={"number"}
+            label={"Designation"}
+            name={"designation"}
             required
             selectOpts={categories}
             onChange={onChange}
           />
-        </div>
-        <TextInput
-          className={"mb-4"}
-          name={"description"}
-          label={"Description"}
-          required
-          onChange={onChange}
-        />
-        <Button className={`bg-accent-secondary`} type={"submit"}>
-          Add Product
+          <SelectInput
+            label={"Branch"}
+            name={"branch"}
+            required
+            selectOpts={categories}
+            onChange={onChange}
+          />
+        </section>
+        <section className="relative border rounded-lg p-4 w-72 my-4">
+          <Text
+            className={
+              "absolute -top-3 px-1 text-sm text-textColor-light bg-white "
+            }
+          >
+            Permissions
+          </Text>
+          <div className="flex flex-col">
+            <Checkbox
+              label={"Full Access"}
+              name={"fullAccess"}
+              checked={formValues.fullAccess}
+              onChange={onChangeCheckbox}
+            />
+            <Checkbox
+              label={"Product Management"}
+              name={"productManagement"}
+              checked={formValues.productManagement}
+              onChange={onChangeCheckbox}
+            />
+            <Checkbox
+              label={"Input Sales"}
+              name={"inputSales"}
+              checked={formValues.inputSales}
+              onChange={onChangeCheckbox}
+            />
+          </div>
+        </section>
+
+        <Button className={`bg-accent-secondary mt-4`} type={"submit"}>
+          Add
         </Button>
       </form>
     </Container>

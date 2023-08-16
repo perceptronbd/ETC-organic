@@ -4,6 +4,7 @@ export { Input } from "./input/Input";
 export { FormInput } from "./input/FormInput";
 export { TextInput } from "./input/TextInput";
 export { SelectInput } from "./input/SelectInput";
+export { Checkbox } from "./input/Checkbox";
 //Button
 export { Button } from "./button/Button";
 export { LinkButton } from "./button/LinkButton";
