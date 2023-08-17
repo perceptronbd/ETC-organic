@@ -133,7 +133,7 @@ export const UpdateEmployee = () => {
         </section>
 
         <Button className={`bg-accent-secondary mt-4`} type={"submit"}>
-          Add
+          Update
         </Button>
         <span className="p-2" />
         <LinkButton className={"bg-red-500"} to={-1}>
