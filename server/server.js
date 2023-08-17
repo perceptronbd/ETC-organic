@@ -4,8 +4,23 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const http = require('http');
+const userRoute = require("./routes/userRoutes")
+const errorHandler = require("./middleware/errorMiddleware")
 
 const app = express()
+//middleware
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+//error handler 
+app.use(errorHandler)
+
+
+
+// Routes Middleware
+app.use("/api/users", userRoute)
+
 
 const PORT = process.env.PORT || 5000
 
@@ -14,6 +29,10 @@ app.get('/', (req, res) => {
     // This line has been corrected to use the `json()` method
     res.json({ message: 'Hey, world!' });
   });
+
+
+
+
 
 //connect to db and start server 
 
