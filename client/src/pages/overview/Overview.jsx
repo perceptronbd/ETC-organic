@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Text } from "../../components";
 import { BiLogOut } from "react-icons/bi";
 import { useAuth } from "../../context/AuthContext";
 
 export const Overview = () => {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   return (
     <Container>
@@ -17,7 +21,7 @@ export const Overview = () => {
           </Text>
         </section>
         <section className="flex items-center w-fit px-4 py-2 bg-foreground rounded-lg">
-          <Text h3>User name</Text>
+          <Text h3>{user.phoneNumber}</Text>
           <button
             onClick={() => {
               logout();
