@@ -55,7 +55,6 @@ export const UpdateEmployee = () => {
         ...formValues,
         permissions: { ...formValues.permissions, [name]: checked },
       });
-      // Update the fullAccess state based on the status of individual permissions
       const hasUncheckedPermission = Object.values({
         ...formValues.permissions,
         [name]: checked,
