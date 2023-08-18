@@ -16,7 +16,7 @@ import { useAuth } from "../../context/AuthContext";
 export const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(true);
 
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
 
   const navLinks = [
     {
@@ -125,7 +125,7 @@ export const Sidebar = () => {
                 ))}
               </div>
               <div className="fixed pl-2  hover:cursor-pointertext-lg font-semibold bottom-2 h-12 w-[90%] flex justify-between items-center">
-                User Name
+                {user.phoneNumber}
                 <button
                   onClick={() => {
                     logout();
