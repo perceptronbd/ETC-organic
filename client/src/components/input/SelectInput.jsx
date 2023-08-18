@@ -4,6 +4,7 @@ import { cw } from "../../utils/cw";
 export const SelectInput = (props) => {
   const {
     id,
+    name,
     onChange,
     className,
     errorMessage,
@@ -15,8 +16,8 @@ export const SelectInput = (props) => {
   return (
     <div className="relative my-4">
       <select
-        name="name"
         id={id}
+        name={name}
         {...inputProps}
         onChange={onChange}
         className={cw(
