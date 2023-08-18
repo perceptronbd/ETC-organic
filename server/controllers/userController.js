@@ -15,10 +15,10 @@ const generateToken = (id) => {
 
 // Register User
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password, phone, designation } = req.body;
+    const { name, email, password, phone, designation, branch, permissoins } = req.body;
   
     // Validation
-    if (!name || !email || !password || !phone || !designation) {
+    if (!name || !email || !password || !phone || !designation || !branch || !permissoins ) {
       res.status(400);
       throw new Error("Please fill in all required fields");
     }
@@ -41,7 +41,9 @@ const registerUser = asyncHandler(async (req, res) => {
       email,
       password,
       phone,
-      designation
+      designation,
+      branch,
+      permissoins
     });
   
     //   Generate Token
@@ -57,15 +59,16 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   
     if (user) {
-      const { _id, name, email, photo, phone,designation} = user;
+      const { _id, name, email, phone,designation,branch,permissoins} = user;
       res.status(201).json({
         _id,
         name,
         email,
-        photo,
         phone,
         designation,
         token,
+        branch,
+        permissoins
       });
     } else {
       res.status(400);
@@ -110,15 +113,16 @@ const registerUser = asyncHandler(async (req, res) => {
      });
    }
      if (user && passwordIsCorrect) {
-       const { _id, name, email, photo, phone, designation} = user;
+       const { _id, name, email,  phone, designation,branch,permissoins} = user;
        res.status(200).json({
          _id,
          name,
          email,
-         photo,
          phone,
          token,
-         designation
+         designation,
+         branch,
+         permissoins
        });
      } else {
        res.status(400);
