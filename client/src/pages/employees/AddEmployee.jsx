@@ -19,13 +19,19 @@ const categories = [
 ];
 
 export const AddEmployee = () => {
+  const [fullAccess, setFullAccess] = useState(false);
+
   const [formValues, setFormValues] = useState({
-    employeeName: "",
-    employeeNumber: "",
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
     designation: "",
     branch: "",
-    productManagement: false,
-    inputSales: false,
+    permissions: {
+      productManagement: false,
+      inputSales: false,
+    },
   });
 
   const onChange = (e) => {
@@ -36,16 +42,24 @@ export const AddEmployee = () => {
     const { name, checked } = e.target;
 
     if (name === "fullAccess") {
-      setFormValues((prevValues) => ({
-        ...prevValues,
-        productManagement: checked,
-        inputSales: checked,
-      }));
+      setFullAccess(checked);
+      const updatedPermissions = Object.fromEntries(
+        Object.keys(formValues.permissions).map((permission) => [
+          permission,
+          checked,
+        ])
+      );
+      setFormValues({ ...formValues, permissions: updatedPermissions });
     } else {
-      setFormValues((prevValues) => ({
-        ...prevValues,
+      setFormValues({
+        ...formValues,
+        permissions: { ...formValues.permissions, [name]: checked },
+      });
+      const hasUncheckedPermission = Object.values({
+        ...formValues.permissions,
         [name]: checked,
-      }));
+      }).some((permission) => !permission);
+      setFullAccess(!hasUncheckedPermission);
     }
   };
 
@@ -67,20 +81,29 @@ export const AddEmployee = () => {
         onSubmit={onSubmit}
         className="bg-white rounded-lg p-4"
       >
-        <section className="grid grid-cols-2 gap-x-8 w-[80%]">
+        <div className="grid grid-cols-2 gap-x-8 w-[80%]">
           <FormInput
-            id={"employeeName"}
+            id={"name"}
             label={"Employee Name"}
-            name={"employeeName"}
+            name={"name"}
             placeholder={"Employee Name"}
+            required
+            onChange={onChange}
+          />
+          <FormInput
+            id={"email"}
+            label={"Email Address"}
+            name={"email"}
+            type={"email"}
+            placeholder={"Email Address"}
             required
             onChange={onChange}
           />
 
           <FormInput
-            id={"employeeNumber"}
-            label={"Employee Number"}
-            name={"employeeNumber"}
+            id={"phone"}
+            label={"Phone Number"}
+            name={"phone"}
             placeholder={"Employee Number"}
             type={"number"}
             pattern={"[0-9]{11}"}
@@ -88,10 +111,22 @@ export const AddEmployee = () => {
             onChange={onChange}
           />
           <SelectInput
+            id={"designation"}
             label={"Designation"}
             name={"designation"}
             required
             selectOpts={categories}
+            onChange={onChange}
+          />
+        </div>
+        <div className="grid grid-rows-2">
+          <FormInput
+            id={"password"}
+            label={"Password"}
+            name={"password"}
+            placeholder={"Password"}
+            type={"password"}
+            required
             onChange={onChange}
           />
           <SelectInput
@@ -101,7 +136,7 @@ export const AddEmployee = () => {
             selectOpts={categories}
             onChange={onChange}
           />
-        </section>
+        </div>
         <section className="relative border rounded-lg p-4 w-72 my-4">
           <Text
             className={
@@ -114,19 +149,19 @@ export const AddEmployee = () => {
             <Checkbox
               label={"Full Access"}
               name={"fullAccess"}
-              checked={formValues.fullAccess}
+              checked={fullAccess}
               onChange={onChangeCheckbox}
             />
             <Checkbox
               label={"Product Management"}
               name={"productManagement"}
-              checked={formValues.productManagement}
+              checked={formValues.permissions.productManagement}
               onChange={onChangeCheckbox}
             />
             <Checkbox
               label={"Input Sales"}
               name={"inputSales"}
-              checked={formValues.inputSales}
+              checked={formValues.permissions.inputSales}
               onChange={onChangeCheckbox}
             />
           </div>

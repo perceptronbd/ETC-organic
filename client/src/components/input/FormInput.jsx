@@ -12,7 +12,7 @@ export const FormInput = (props) => {
         {...inputProps}
         onChange={onChange}
         className={cw(
-          "peer block border rounded-xl w-72 p-2 focus:outline-none focus:ring-1 focus:border-accent-secondary placeholder:text-transparent",
+          "peer block border rounded-lg w-72 p-2 focus:outline-none focus:ring-1 focus:border-accent-secondary placeholder:text-transparent",
           className
         )}
       />

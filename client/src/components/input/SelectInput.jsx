@@ -16,15 +16,15 @@ export const SelectInput = (props) => {
     <div className="relative my-4">
       <select
         name="name"
-        id="id"
+        id={id}
         {...inputProps}
         onChange={onChange}
         className={cw(
-          `peer block border rounded-xl w-72 p-2 focus:outline-none focus:ring-1 focus:border-accent-secondary `,
+          `peer block border rounded-lg w-72 p-2 focus:outline-none focus:ring-1 focus:border-accent-secondary `,
           className
         )}
       >
-        <optgroup label="Select" className="font-semibold text-sm">
+        <optgroup label={label} className="font-semibold text-sm">
           {selectOpts.map((opt) => (
             <option value={opt.value} key={opt.value} className="bg-background">
               {opt.label}
