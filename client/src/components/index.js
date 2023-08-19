@@ -13,8 +13,10 @@ export { IncDecButton } from "./button/IncDecButton";
 export { Text } from "./text/Text";
 //Table
 export { ListTable } from "./table/ListTable";
+export { StockTable } from "./table/StockTable";
 //Container
 export { Container } from "./container/Container";
 export { ListAndView } from "./container/ListAndView";
 //Card
 export { ListCard } from "./card/ListCard";
+export { SalesCard } from "./card/SalesCard";
