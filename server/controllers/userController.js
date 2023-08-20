@@ -15,10 +15,10 @@ const generateToken = (id) => {
 
 // Register User
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password, phone, designation, branch, permissoins } = req.body;
+    const { name, email, password, phone, designation, branch, permissions } = req.body;
   
     // Validation
-    if (!name || !email || !password || !phone || !designation || !branch || !permissoins ) {
+    if (!name || !email || !password || !phone || !designation || !branch || !permissions ) {
       res.status(400);
       throw new Error("Please fill in all required fields");
     }
@@ -43,7 +43,7 @@ const registerUser = asyncHandler(async (req, res) => {
       phone,
       designation,
       branch,
-      permissoins
+      permissions
     });
   
     //   Generate Token
@@ -59,7 +59,7 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   
     if (user) {
-      const { _id, name, email, phone,designation,branch,permissoins} = user;
+      const { _id, name, email, phone,designation,branch,permissions} = user;
       res.status(201).json({
         _id,
         name,
@@ -68,7 +68,7 @@ const registerUser = asyncHandler(async (req, res) => {
         designation,
         token,
         branch,
-        permissoins
+        permissions
       });
     } else {
       res.status(400);
@@ -92,7 +92,7 @@ const registerUser = asyncHandler(async (req, res) => {
      const user = await User.findOne({phone})
 
      if(!user){
-      res.status("400")
+      res.status(400)
       throw new Error("User not found")
     
 
@@ -101,8 +101,9 @@ const registerUser = asyncHandler(async (req, res) => {
     const passwordIsCorrect = await bcrypt.compare(password, user.password)
 
      //generate token 
-     const token = generateToken(user._id);
+    const token = generateToken(user._id);
      if(passwordIsCorrect){
+      // const token = generateToken(user._id);
       // Send HTTP-only cookie
      res.cookie("token", token, {
        path: "/",
@@ -113,7 +114,7 @@ const registerUser = asyncHandler(async (req, res) => {
      });
    }
      if (user && passwordIsCorrect) {
-       const { _id, name, email,  phone, designation,branch,permissoins} = user;
+       const { _id, name, email,  phone, designation,branch,permissions} = user;
        res.status(200).json({
          _id,
          name,
@@ -122,7 +123,7 @@ const registerUser = asyncHandler(async (req, res) => {
          token,
          designation,
          branch,
-         permissoins
+         permissions
        });
      } else {
        res.status(400);
@@ -130,8 +131,14 @@ const registerUser = asyncHandler(async (req, res) => {
      }
   })
 
+  const getAllUsers = asyncHandler(async(req,res) => {
+    const allUsers = await User.find({})
+    res.status(200).json(allUsers)
+  })
+
 
   module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    getAllUsers
    };
