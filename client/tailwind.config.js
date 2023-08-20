@@ -15,6 +15,10 @@ module.exports = {
           secondary: "#0C904D",
         },
       },
+      fontFamily: {
+        sans: ["Poppins", "sans-serif"],
+        montserrat: ["Montserrat", "sans-serif"],
+      },
     },
   },
   plugins: [],

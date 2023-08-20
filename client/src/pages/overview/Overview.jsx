@@ -1,5 +1,12 @@
 import React from "react";
-import { Container, SalesCard, StockTable, Text } from "../../components";
+import {
+  CalendarComponent,
+  Container,
+  DonutChart,
+  SalesCard,
+  StockTable,
+  Text,
+} from "../../components";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { HiOutlineStatusOnline, HiOutlineStatusOffline } from "react-icons/hi";
 
@@ -244,12 +251,11 @@ export const Overview = () => {
           <StockTable data={data} />
         </section>
         <section className="bg-green-400 row-start-1 col-start-5 row-span-2 col-span-2 h-full rounded-lg">
-          A calender(perhaps)
+          <CalendarComponent />
         </section>
-        <section className="bg-purple-400 col-start-5 row-span-3 col-span-2 rounded-lg">
-          Top Sellings(circle chart)
-          <div>Product names</div>
-        </section>{" "}
+        <section className="col-start-5 row-span-3 col-span-2 rounded-lg flex items-end">
+          <DonutChart />
+        </section>
       </div>
     </Container>
   );

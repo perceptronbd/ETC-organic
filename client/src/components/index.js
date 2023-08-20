@@ -20,3 +20,7 @@ export { ListAndView } from "./container/ListAndView";
 //Card
 export { ListCard } from "./card/ListCard";
 export { SalesCard } from "./card/SalesCard";
+//Calendar
+export { CalendarComponent } from "./calendar/CalendarComponent";
+//Chart
+export { DonutChart } from "./chart/DonutChart";
