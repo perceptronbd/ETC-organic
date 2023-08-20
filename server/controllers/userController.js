@@ -136,9 +136,45 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(200).json(allUsers)
   })
 
+  const updateUSer = asyncHandler(async(req,res) => {
+
+    const userID = req.params.id
+    const { name, email, phone, designation, branch, permissions} = req.body
+
+    const user = User.findByid(userID)
+
+    if(!user){
+      res.status(404)
+      throw new Error('user not found')
+
+    }
+
+    user.name = name || user.name
+    user.email = email || user.email;
+    user.phone = phone || user.phone;
+    user.designation = designation || user.designation;
+    user.branch = branch || user.branch;
+    user.permissions = permissions || user.permissions;
+
+    const updatedUser = await user.save()
+
+    res.status(200).json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      phone: updatedUser.phone,
+      designation: updatedUser.designation,
+      branch: updatedUser.branch,
+      permissions: updatedUser.permissions
+  });
+
+
+  })
+
 
   module.exports = {
     registerUser,
     loginUser,
-    getAllUsers
+    getAllUsers,
+    updateUSer
    };
