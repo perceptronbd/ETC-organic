@@ -61,7 +61,7 @@ export const Sidebar = () => {
       <div
         className={` bg-foreground p-2 rounded-r-lg text-borderColor h-full z-40 ease-in-out duration-100 ${
           showSidebar
-            ? "w-80 3xl:w-[340px]  translate-x-0"
+            ? "w-80 3xl:w-[400px]  translate-x-0"
             : "w-[5vw] -translate-x-full"
         }`}
       >
@@ -97,7 +97,7 @@ export const Sidebar = () => {
                           ? "pending"
                           : isActive
                           ? "flex items-center font-semibold text-lg pl-2 text-accent-primary group-hover:text-foreground transition-all ease-in-out duration-300 "
-                          : "flex items-center font-semibold text-lg text-textColor opacity-70 transition-all ease-in-out duration-300 group-hover:text-foreground group-hover:opacity-100"
+                          : "flex items-center font-semibold text-lg text-textColor opacity-70  text transition-all ease-in-out duration-300 group-hover:text-foreground group-hover:opacity-100"
                       }
                       to="/overview"
                     >
