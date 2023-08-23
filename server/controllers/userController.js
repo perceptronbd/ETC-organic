@@ -141,7 +141,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const userID = req.params.id
     const { name, email, phone, designation, branch, permissions} = req.body
 
-    const user = User.findByid(userID)
+    const user = await User.findById(userID)
 
     if(!user){
       res.status(404)
@@ -156,16 +156,18 @@ const registerUser = asyncHandler(async (req, res) => {
     user.branch = branch || user.branch;
     user.permissions = permissions || user.permissions;
 
-    const updatedUser = await user.save()
+    const updateduser =  new User({...user})
+
+     await updateduser.save()
 
     res.status(200).json({
-      _id: updatedUser._id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      phone: updatedUser.phone,
-      designation: updatedUser.designation,
-      branch: updatedUser.branch,
-      permissions: updatedUser.permissions
+      _id: updateduser._id,
+      name: updateduser.name,
+      email: updateduser.email,
+      phone: updateduser.phone,
+      designation: updateduser.designation,
+      branch: updateduser.branch,
+      permissions: updateduser.permissions
   });
 
 

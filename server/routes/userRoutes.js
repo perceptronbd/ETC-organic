@@ -1,12 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const {registerUser, loginUser,getAllUsers} = require("../controllers/userController.js");
+const {registerUser, loginUser,getAllUsers, updateUSer} = require("../controllers/userController.js");
 // const protect = require("../middleware/authMiddleware.js");
 
 //User 
-router.post("/register", registerUser);
 router.post("/login", loginUser);
-router.get('/users', getAllUsers);
+
+//employee
+router.post("/employee/register", registerUser);
+router.get('/employee/users', getAllUsers);
+router.put("/employee/update-users/:id",updateUSer)
 
 
 // //Sales
