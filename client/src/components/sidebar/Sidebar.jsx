@@ -12,6 +12,7 @@ import {
   FaShoppingBag,
 } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
+import { Text } from "../text/Text";
 
 export const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(true);
@@ -66,14 +67,27 @@ export const Sidebar = () => {
       >
         {showSidebar ? (
           <>
-            <div className="w-full h-full ">
-              <button
-                className="flex ml-2 p-2 text-2xl text-accent-primary bg-background rounded-md items-center cursor-pointer left-[80%] top-2 z-50"
-                onClick={() => setShowSidebar(!showSidebar)}
-              >
-                <BsLayoutSidebar />
-              </button>
-
+            <div className="w-full h-full">
+              <div className="flex items-center">
+                <button
+                  className="flex ml-2 p-2 text-2xl text-accent-primary bg-background rounded-md items-center cursor-pointer left-[80%] top-2 z-50 mr-4"
+                  onClick={() => setShowSidebar(!showSidebar)}
+                >
+                  <BsLayoutSidebar />
+                </button>
+                <div>
+                  <Text
+                    h1
+                    className={"text-accent-secondary text-2xl 3xl:text-3xl"}
+                  >
+                    etc
+                    <span className="text-accent-primary"> organic</span>
+                  </Text>
+                  <Text className={"text-[10px] 3xl:text-xs"}>
+                    Enterprise Resource Planning
+                  </Text>
+                </div>
+              </div>
               <div className="mt-4 pl-8">
                 <nav className="h-full w-full">
                   <ul>
@@ -83,11 +97,11 @@ export const Sidebar = () => {
                           ? "pending"
                           : isActive
                           ? "flex items-center font-semibold text-lg pl-2 text-accent-primary group-hover:text-foreground transition-all ease-in-out duration-300 "
-                          : "flex items-center font-semibold text-lg text-textColor opacity-70 transition-all ease-in-out duration-500 group-hover:text-foreground group-hover:opacity-100"
+                          : "flex items-center font-semibold text-lg text-textColor opacity-70 transition-all ease-in-out duration-300 group-hover:text-foreground group-hover:opacity-100"
                       }
                       to="/overview"
                     >
-                      <li className="group h-10 rounded-md w-[90%] hover:bg-accent-primary p-2 flex items-center transition-all ease-in-out duration-500 hover:text-foreground">
+                      <li className="group h-10 rounded-md w-[90%] hover:bg-accent-primary p-2 flex items-center transition-all ease-in-out duration-300 hover:text-foreground">
                         <FaChartLine />
                         <span className="w-4" />
                         Overview
@@ -107,13 +121,13 @@ export const Sidebar = () => {
                             isPending
                               ? "pending"
                               : isActive
-                              ? "flex items-center font-semibold text-lg pl-2 text-accent-primary group-hover:text-foreground transition-all ease-in-out duration-500 "
+                              ? "flex items-center font-semibold text-lg pl-2 text-accent-primary group-hover:text-foreground transition-all ease-in-out duration-300 "
                               : "flex items-center font-semibold text-lg text-textColor opacity-70  text transition-all ease-in-out duration-300 group-hover:text-foreground group-hover:opacity-100"
                           }
                           to={link.path}
                           key={linkIndex}
                         >
-                          <li className="group h-10 rounded-md w-[90%] hover:bg-accent-primary p-2 flex items-center transition-all ease-in-out duration-500 hover:text-foreground">
+                          <li className="group h-10 rounded-md w-[90%] hover:bg-accent-primary p-2 flex items-center transition-all ease-in-out duration-300 hover:text-foreground">
                             {link.icon}
                             <span className="w-4"></span>
                             {link.title}
