@@ -30,19 +30,31 @@ export const SalesCard = (props) => {
   }, [amount]);
 
   return (
-    <div className={cw("bg-foreground rounded-lg px-3 py-2", className)}>
-      {Icon && (
-        <Icon
-          className={cw("w-8 h-8 mb-3 p-1 rounded-lg text-foreground", {
+    <div
+      className={cw(
+        "grid grid-rows-5 grid-cols-2 gap-2 bg-foreground rounded-lg px-3 py-2 h-20 3xl:h-28",
+        className
+      )}
+    >
+      <Icon
+        className={cw(
+          "w-6 h-6 3xl:w-8 3xl:h-8 p-1 rounded-lg text-foreground 3xl:row-start-1 ",
+          {
             "bg-yellow-500": type === "Total Sales",
             "bg-green-500": type === "Online Sales",
             "bg-red-500": type === "Offline Sales",
-          })}
-        />
-      )}
-      <Text h1>{formattedAmount}</Text>
-      <Text className={"text-textColor-light text-sm rounded-full"}>
+          }
+        )}
+      />
+      <Text className={"3xl:row-end-6  text-textColor-light text-sm "}>
         {type}
+      </Text>
+
+      <Text
+        h2
+        className={"3xl:font-bold 3xl:text-3xl row-end-4 3xl:row-start-3"}
+      >
+        {formattedAmount}
       </Text>
     </div>
   );

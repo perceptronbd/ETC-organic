@@ -1,17 +1,5 @@
-import React, { useState } from "react";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import React from "react";
 
 export const CalendarComponent = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
-
-  return (
-    <>
-      <Calendar onChange={handleDateChange} value={selectedDate} />
-    </>
-  );
+  return <div>CalendarComponent</div>;
 };

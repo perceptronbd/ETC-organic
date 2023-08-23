@@ -226,36 +226,36 @@ const data = [
 export const Overview = () => {
   return (
     <Container className={"3xl:mx-2"}>
-      <div className="grid grid-rows-5 grid-cols-6 gap-3  h-full">
-        <section className="grid grid-cols-3 gap-2 h-full col-span-4 row-span-1">
+      <div className="grid grid-rows-5 grid-cols-6 gap-3 h-full">
+        <section className="grid grid-cols-3 3xl:grid-rows-5 grid-rows-4 gap-2 h-full col-span-4 row-span-1">
+          <Text h2>Overview</Text>
+          <div className="row-start-1 col-start-3 3xl:row-start-2 bg-foreground">
+            This Week
+          </div>
           <SalesCard
             icon={TbCurrencyTaka}
             type={"Total Sales"}
             amount={10000}
+            className={"col-start-1 row-start-2 3xl:row-start-3"}
           />
           <SalesCard
             icon={HiOutlineStatusOnline}
             type={"Online Sales"}
             amount={6500}
+            className={"col-start-2 row-start-2 3xl:row-start-3"}
           />
           <SalesCard
             icon={HiOutlineStatusOffline}
             type={"Offline Sales"}
             amount={3500}
+            className={"col-start-3 3xl:row-start-3"}
           />
         </section>
-        <section className="h-full row-span-4 col-span-4 bg-foreground rounded-lg">
-          <Text h3 className={"mx-2 my-4"}>
-            Stock Quantity
-          </Text>
+        <section className="h-full row-span-4 col-span-4 rounded-lg">
           <StockTable data={data} />
         </section>
-        <section className="bg-green-400 row-start-1 col-start-5 row-span-2 col-span-2 h-full rounded-lg">
-          <CalendarComponent />
-        </section>
-        <section className="col-start-5 row-span-3 col-span-2 rounded-lg flex items-end">
-          <DonutChart />
-        </section>
+        <section className="bg-green-400 row-start-1 col-start-5 row-span-2 col-span-2 h-full rounded-lg"></section>
+        <section className="col-start-5 row-span-3 col-span-2 rounded-lg flex items-end"></section>
       </div>
     </Container>
   );
