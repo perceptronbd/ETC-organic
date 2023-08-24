@@ -15,10 +15,10 @@ const generateToken = (id) => {
 
 // Register User
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password, phone, designation } = req.body;
+    const { name, email, password, phone, designation, branch, permissions } = req.body;
   
     // Validation
-    if (!name || !email || !password || !phone || !designation) {
+    if (!name || !email || !password || !phone || !designation || !branch || !permissions ) {
       res.status(400);
       throw new Error("Please fill in all required fields");
     }
@@ -41,7 +41,9 @@ const registerUser = asyncHandler(async (req, res) => {
       email,
       password,
       phone,
-      designation
+      designation,
+      branch,
+      permissions
     });
   
     //   Generate Token
@@ -57,15 +59,16 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   
     if (user) {
-      const { _id, name, email, photo, phone,designation} = user;
+      const { _id, name, email, phone,designation,branch,permissions} = user;
       res.status(201).json({
         _id,
         name,
         email,
-        photo,
         phone,
         designation,
         token,
+        branch,
+        permissions
       });
     } else {
       res.status(400);
@@ -89,7 +92,7 @@ const registerUser = asyncHandler(async (req, res) => {
      const user = await User.findOne({phone})
 
      if(!user){
-      res.status("400")
+      res.status(400)
       throw new Error("User not found")
     
 
@@ -98,8 +101,9 @@ const registerUser = asyncHandler(async (req, res) => {
     const passwordIsCorrect = await bcrypt.compare(password, user.password)
 
      //generate token 
-     const token = generateToken(user._id);
+    const token = generateToken(user._id);
      if(passwordIsCorrect){
+      // const token = generateToken(user._id);
       // Send HTTP-only cookie
      res.cookie("token", token, {
        path: "/",
@@ -110,15 +114,16 @@ const registerUser = asyncHandler(async (req, res) => {
      });
    }
      if (user && passwordIsCorrect) {
-       const { _id, name, email, photo, phone, designation} = user;
+       const { _id, name, email,  phone, designation,branch,permissions} = user;
        res.status(200).json({
          _id,
          name,
          email,
-         photo,
          phone,
          token,
-         designation
+         designation,
+         branch,
+         permissions
        });
      } else {
        res.status(400);
@@ -126,8 +131,68 @@ const registerUser = asyncHandler(async (req, res) => {
      }
   })
 
+  const getAllUsers = asyncHandler(async(req,res) => {
+    const allUsers = await User.find({})
+    res.status(200).json(allUsers)
+  })
+
+  const updateUser = asyncHandler(async(req,res) => {
+
+    const userID = req.params.id
+
+    const userData = req.body
+
+    console.log(userData)
+
+    const updatedUser = await User.findByIdAndUpdate(userID, userData, {
+      new: true,
+    });
+    console.log("Updated user:", updatedUser);
+
+    await updatedUser.save()
+
+    res.status(200).json({"message":"User has been updated"})
+
+
+
+    
+
+    const user = await User.findById(userID)
+
+    if(!user){
+      res.status(404)
+      throw new Error('user not found')
+
+    }
+
+    user.name = name || user.name
+    user.email = email || user.email;
+    user.phone = phone || user.phone;
+    user.designation = designation || user.designation;
+    user.branch = branch || user.branch;
+    user.permissions = permissions || user.permissions;
+
+    const updateduser =  new User({...user})
+
+     await updateduser.save()
+
+    res.status(200).json({
+      _id: updateduser._id,
+      name: updateduser.name,
+      email: updateduser.email,
+      phone: updateduser.phone,
+      designation: updateduser.designation,
+      branch: updateduser.branch,
+      permissions: updateduser.permissions
+  });
+
+
+  })
+
 
   module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    getAllUsers,
+    updateUser
    };
