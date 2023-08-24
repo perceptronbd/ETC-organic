@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {registerUser, loginUser,getAllUsers, updateUSer} = require("../controllers/userController.js");
+const {registerUser, loginUser,getAllUsers, updateUser} = require("../controllers/userController.js");
 // const protect = require("../middleware/authMiddleware.js");
 
 //User 
@@ -9,7 +9,7 @@ router.post("/login", loginUser);
 //employee
 router.post("/employee/register", registerUser);
 router.get('/employee/users', getAllUsers);
-router.put("/employee/update-users/:id",updateUSer)
+router.put("/employee/update-users/:id",updateUser)
 
 
 // //Sales

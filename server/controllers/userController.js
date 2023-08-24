@@ -136,10 +136,26 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(200).json(allUsers)
   })
 
-  const updateUSer = asyncHandler(async(req,res) => {
+  const updateUser = asyncHandler(async(req,res) => {
 
     const userID = req.params.id
-    const { name, email, phone, designation, branch, permissions} = req.body
+
+    const userData = req.body
+
+    console.log(userData)
+
+    const updatedUser = await User.findByIdAndUpdate(userID, userData, {
+      new: true,
+    });
+    console.log("Updated user:", updatedUser);
+
+    await updatedUser.save()
+
+    res.status(200).json({"message":"User has been updated"})
+
+
+
+    
 
     const user = await User.findById(userID)
 
@@ -178,5 +194,5 @@ const registerUser = asyncHandler(async (req, res) => {
     registerUser,
     loginUser,
     getAllUsers,
-    updateUSer
+    updateUser
    };
