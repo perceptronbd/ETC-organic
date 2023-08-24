@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        "3xl": { min: "1366px" },
+        "3xl": { min: "1367px" },
       },
       colors: {
         background: "#F8F8F8",
