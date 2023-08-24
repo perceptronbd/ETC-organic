@@ -9,7 +9,7 @@ export const StockTable = ({ data }) => {
           <Text h3 className={"mx-6"}>
             Stock Quantity
           </Text>
-          <div className="w-full max-h-96 overflow-y-auto relative rounded-lg">
+          <div className="w-full max-h-[430px] 3xl:max-h-[700px] overflow-y-auto relative rounded-lg">
             <table className="w-full">
               <thead className="text-xs text-textColor-light uppercase bg-foreground  sticky top-0">
                 <tr className="w-[900px]">
