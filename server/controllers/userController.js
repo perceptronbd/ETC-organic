@@ -157,34 +157,6 @@ const registerUser = asyncHandler(async (req, res) => {
 
     
 
-    const user = await User.findById(userID)
-
-    if(!user){
-      res.status(404)
-      throw new Error('user not found')
-
-    }
-
-    user.name = name || user.name
-    user.email = email || user.email;
-    user.phone = phone || user.phone;
-    user.designation = designation || user.designation;
-    user.branch = branch || user.branch;
-    user.permissions = permissions || user.permissions;
-
-    const updateduser =  new User({...user})
-
-     await updateduser.save()
-
-    res.status(200).json({
-      _id: updateduser._id,
-      name: updateduser.name,
-      email: updateduser.email,
-      phone: updateduser.phone,
-      designation: updateduser.designation,
-      branch: updateduser.branch,
-      permissions: updateduser.permissions
-  });
 
 
   })
