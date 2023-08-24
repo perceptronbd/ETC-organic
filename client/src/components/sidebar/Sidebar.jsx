@@ -21,6 +21,16 @@ export const Sidebar = () => {
 
   const navLinks = [
     {
+      title: "Home",
+      links: [
+        {
+          title: "Overview",
+          path: "/overview",
+          icon: <FaChartLine />,
+        },
+      ],
+    },
+    {
       title: "Dashboard",
       links: [
         {
@@ -89,7 +99,7 @@ export const Sidebar = () => {
                 </div>
               </div>
               <div className="mt-4 pl-8">
-                <nav className="h-full w-full">
+                {/* <nav className="h-full w-full">
                   <ul>
                     <NavLink
                       className={({ isActive, isPending }) =>
@@ -108,10 +118,10 @@ export const Sidebar = () => {
                       </li>
                     </NavLink>
                   </ul>
-                </nav>
+                </nav> */}
                 {navLinks.map((section, index) => (
                   <nav className="h-full w-full" key={index}>
-                    <h1 className="mt-4 text-base font-semibold  text-textColor opacity-50">
+                    <h1 className="mt-4 text-sm font-medium  text-textColor opacity-50">
                       {section.title}
                     </h1>
                     <ul>
