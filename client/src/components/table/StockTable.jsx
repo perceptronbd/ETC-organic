@@ -9,8 +9,8 @@ export const StockTable = ({ data }) => {
           <Text h3 className={"mx-6"}>
             Stock Quantity
           </Text>
-          <div className="w-full h-[480px] 3xl:h-[780px] overflow-y-auto relative rounded-lg">
-            <table className="w-full">
+          <div className="w-full max-h-[480px] 3xl:max-h-[780px] overflow-y-auto rounded-lg">
+            <table className="w-full border-collapse">
               <thead className="text-xs text-textColor-light uppercase bg-foreground  sticky top-0">
                 <tr className="w-[900px]">
                   {Object.keys(data[0]).map((item, index) =>
@@ -30,7 +30,7 @@ export const StockTable = ({ data }) => {
                 {data.map((item, index) => (
                   <tr
                     key={index}
-                    className={`border-b-2 border-foreground font-semibold`}
+                    className={`border-b-2 border-foreground font-semibold `}
                   >
                     {Object.keys(item).map((key, index) => {
                       if (key === "id") return "";
