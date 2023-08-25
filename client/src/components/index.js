@@ -9,6 +9,7 @@ export { Checkbox } from "./input/Checkbox";
 export { Button } from "./button/Button";
 export { LinkButton } from "./button/LinkButton";
 export { IncDecButton } from "./button/IncDecButton";
+export { Dropdown } from "./button/Dropdown";
 //Text
 export { Text } from "./text/Text";
 //Table
