@@ -42,7 +42,7 @@ export const Dropdown = (props) => {
         )}
       >
         {open ? (
-          <ul className="">
+          <ul>
             {listItem ? (
               listItem.map((item, index) => (
                 <li
