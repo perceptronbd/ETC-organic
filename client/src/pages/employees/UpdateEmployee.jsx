@@ -71,7 +71,7 @@ export const UpdateEmployee = () => {
   return (
     <Container>
       <div className="flex items-center justify-between mb-4">
-        <Text h1>Add Employee</Text>
+        <Text h1>Update Employee</Text>
         <LinkButton className={`w-auto h-8`} to={-1} icon={IoIosArrowBack}>
           Back
         </LinkButton>
