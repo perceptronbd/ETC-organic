@@ -8,6 +8,7 @@ import {
   Text,
   TextInput,
   Container,
+  ImgInput,
 } from "../../components";
 
 const categories = [
@@ -19,6 +20,7 @@ const categories = [
 ];
 
 export const EditProduct = () => {
+  const [file, setFile] = useState();
   const [formValues, setFormValues] = useState({
     productName: "",
     category: "",
@@ -28,10 +30,22 @@ export const EditProduct = () => {
     points: "",
     unit: "",
     description: "",
+    image: null,
   });
 
   const onChange = (e) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+    if (e.target.name === "image") {
+      const selectedFile = e.target.files[0];
+      if (selectedFile) {
+        setFormValues({ ...formValues, [e.target.name]: selectedFile });
+        setFile(URL.createObjectURL(selectedFile));
+      } else {
+        setFormValues({ ...formValues, [e.target.name]: null });
+        setFile(null);
+      }
+    } else {
+      setFormValues({ ...formValues, [e.target.name]: e.target.value });
+    }
   };
 
   const onSubmit = (e) => {
@@ -47,53 +61,57 @@ export const EditProduct = () => {
           Back
         </LinkButton>
       </div>
-      <form action="submit" onSubmit={onSubmit} className="pb-4">
-        <FormInput
-          className={"w-full "}
-          label={"Product Name"}
-          name={"productName"}
-          required
-          onChange={onChange}
-        />
+      <form
+        action="submit"
+        onSubmit={onSubmit}
+        className="bg-white p-4 rounded-lg"
+      >
+        <></>
         <div className="grid grid-cols-2 gap-x-8 gap-y-2 w-[80%]">
-          <div className="col-start-1 col-end-3">
-            <SelectInput
-              className={"w-[40%]"}
-              label={"Category"}
-              name={"category"}
-              required
-              selectOpts={categories}
-              onChange={onChange}
-            />
-          </div>
-          <div className="flex">
+          <FormInput
+            id={"productName"}
+            label={"Product Name"}
+            placeholder={"Product Name"}
+            name={"productName"}
+            required
+            onChange={onChange}
+          />{" "}
+          <SelectInput
+            className={"w-[40%]"}
+            label={"Category"}
+            name={"category"}
+            required
+            selectOpts={categories}
+            onChange={onChange}
+          />
+          <>
             <FormInput
+              id={"salesPrice"}
               label={"Sales Price"}
+              placeholder={"Sales Price"}
               name={"salesPrice"}
               type={"number"}
               pattern={"[0-9]{3}-[0-9]{2}-[0-9]{3}"}
               required
               onChange={onChange}
             />
-            <Text className={"flex items-end m-4 text-textColor-light"} h3>
-              BDT
-            </Text>
-          </div>
-          <div className="flex">
+          </>
+          <>
             <FormInput
+              id={"purchasePrice"}
               label={"Purchase Price"}
+              placeholder={"Purchase Price"}
               name={"purchasePrice"}
               type={"number"}
               pattern={"[0-9]{3}-[0-9]{2}-[0-9]{3}"}
               required
               onChange={onChange}
             />
-            <Text className={"flex items-end m-4 text-textColor-light"} h3>
-              BDT
-            </Text>
-          </div>
+          </>
           <FormInput
+            id={"csb"}
             label={"CSB"}
+            placeholder={"CSB"}
             name={"csb"}
             type={"number"}
             pattern={"[0-9]{3}-[0-9]{2}-[0-9]{3}"}
@@ -101,7 +119,9 @@ export const EditProduct = () => {
             onChange={onChange}
           />
           <FormInput
+            id={"points"}
             label={"Points"}
+            placeholder={"Points"}
             name={"points"}
             type={"number"}
             pattern={"[0-9]{3}-[0-9]{2}-[0-9]{3}"}
@@ -117,20 +137,29 @@ export const EditProduct = () => {
             onChange={onChange}
           />
         </div>
+        <div className="mb-4">
+          <ImgInput
+            file={file}
+            label={"Upload Image"}
+            id={"img"}
+            onChange={onChange}
+          />
+        </div>
         <TextInput
+          id={"description"}
           className={"mb-4"}
           name={"description"}
           label={"Description"}
+          placeholder={"Description"}
           required
           onChange={onChange}
         />
-        <Button className={`bg-accent-secondary`} type={"submit"}>
-          Update
+        <Button className={`bg-accent-secondary mr-2`} type={"submit"}>
+          Update Product
         </Button>
-        <span className="p-2" />
-        <LinkButton className={"bg-red-500"} to={-1}>
+        <Button className={`bg-red-500`} type={"submit"}>
           Delete
-        </LinkButton>
+        </Button>
       </form>
     </Container>
   );
