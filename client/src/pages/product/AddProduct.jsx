@@ -77,9 +77,9 @@ export const AddProduct = () => {
             onChange={onChange}
           />{" "}
           <SelectInput
-            className={"w-[40%]"}
-            label={"Category"}
-            name={"category"}
+            label={"Branch"}
+            name={"Branch"}
+            className={"border-accent-primary"}
             required
             selectOpts={categories}
             onChange={onChange}
