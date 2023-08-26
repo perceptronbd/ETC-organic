@@ -15,9 +15,9 @@ export const Table = ({ data }) => {
   };
 
   return (
-    <div className="w-full p-2 bg-foreground max-h-[80vh] overflow-y-auto relative rounded-lg">
+    <div className="w-full p-2 bg-foreground rounded-lg">
       <SearchInput value={searchQuery} onChange={handleSearch} />
-      <div className="w-full max-h-[480px] 3xl:max-h-[780px] overflow-y-auto">
+      <div className="w-full max-h-[75vh] 3xl:max-h-[80vh] overflow-y-auto">
         <table className="w-full border-collapse">
           <thead className="h-12 bg-foreground sticky top-0 border-b-2">
             <tr>
