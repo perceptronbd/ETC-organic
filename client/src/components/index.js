@@ -6,6 +6,7 @@ export { TextInput } from "./input/TextInput";
 export { SelectInput } from "./input/SelectInput";
 export { Checkbox } from "./input/Checkbox";
 export { ImgInput } from "./input/ImgInput";
+export { SearchInput } from "./input/SearchInput";
 //Button
 export { Button } from "./button/Button";
 export { LinkButton } from "./button/LinkButton";
