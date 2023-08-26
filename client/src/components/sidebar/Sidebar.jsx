@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { BiLogOut, BiSolidPurchaseTagAlt } from "react-icons/bi";
-import { BsFillArrowRightCircleFill } from "react-icons/bs";
+import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import {
   FaChartLine,
   FaBoxes,
@@ -69,7 +69,7 @@ export const Sidebar = () => {
   return (
     <div className="bg-foreground h-[98%] rounded-md m-2 mr-4">
       <div className={` ${open ? "w-64" : "w-24 "}  p-5 relative duration-300`}>
-        <BsFillArrowRightCircleFill
+        <BsFillArrowLeftCircleFill
           className={`absolute w-8 h-8  cursor-pointer -right-3 top-9 text-accent-secondary border-foreground bg-foreground
            border-2 rounded-full  ${!open && "rotate-180"}`}
           onClick={() => setOpen(!open)}
