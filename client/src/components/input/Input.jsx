@@ -1,6 +1,4 @@
 import React from "react";
-import { twMerge } from "tailwind-merge";
-import clsx from "clsx";
 
 export const Input = (props) => {
   const { id, onChange, className, ...inputProps } = props;
@@ -13,6 +11,7 @@ export const Input = (props) => {
           id="floating_filled"
           class="block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-700  border-4 border-red-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
+          {...inputProps}
         />
         <label
           for="floating_filled"

@@ -8,6 +8,7 @@ import {
   Text,
   TextInput,
   Container,
+  ImgInput,
 } from "../../components";
 
 const categories = [
@@ -19,6 +20,7 @@ const categories = [
 ];
 
 export const AddProduct = () => {
+  const [file, setFile] = useState();
   const [formValues, setFormValues] = useState({
     productName: "",
     category: "",
@@ -28,10 +30,22 @@ export const AddProduct = () => {
     points: "",
     unit: "",
     description: "",
+    image: null,
   });
 
   const onChange = (e) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+    if (e.target.name === "image") {
+      const selectedFile = e.target.files[0];
+      if (selectedFile) {
+        setFormValues({ ...formValues, [e.target.name]: selectedFile });
+        setFile(URL.createObjectURL(selectedFile));
+      } else {
+        setFormValues({ ...formValues, [e.target.name]: null });
+        setFile(null);
+      }
+    } else {
+      setFormValues({ ...formValues, [e.target.name]: e.target.value });
+    }
   };
 
   const onSubmit = (e) => {
@@ -63,9 +77,9 @@ export const AddProduct = () => {
             onChange={onChange}
           />{" "}
           <SelectInput
-            className={"w-[40%]"}
-            label={"Category"}
-            name={"category"}
+            label={"Branch"}
+            name={"Branch"}
+            className={"border-accent-primary"}
             required
             selectOpts={categories}
             onChange={onChange}
@@ -120,6 +134,14 @@ export const AddProduct = () => {
             type={"number"}
             required
             selectOpts={categories}
+            onChange={onChange}
+          />
+        </div>
+        <div className="mb-4">
+          <ImgInput
+            file={file}
+            label={"Upload Image"}
+            id={"img"}
             onChange={onChange}
           />
         </div>

@@ -29,3 +29,13 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(85, 85, 85, 0.5); /* Use rgba to set transparency */
 }
+
+.react-calendar {
+  @apply !rounded-lg !border-none !font-montserrat;
+}
+.react-calendar__tile {
+  border-radius: 8px !important;
+}
+.react-calendar__tile--active {
+  background-color: #a259ff !important;
+}
