@@ -161,10 +161,26 @@ const registerUser = asyncHandler(async (req, res) => {
 
   })
 
+  const getUserById = asyncHandler(async(req,res) => {
+    const userId = req.params.id
+
+    const user = await User.findById(userId)
+
+    if(!userId){
+      res.status(404);
+      throw new Error("User not found");
+    }
+
+    res.status(200).json(user)
+
+
+  })
+
 
   module.exports = {
     registerUser,
     loginUser,
     getAllUsers,
-    updateUser
+    updateUser,
+    getUserById
    };
