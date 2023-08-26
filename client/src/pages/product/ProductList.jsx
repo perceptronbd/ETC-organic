@@ -9,7 +9,7 @@ export const ProductList = () => {
       sn: 1,
       name: "Product 1",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -19,7 +19,7 @@ export const ProductList = () => {
       sn: 2,
       name: "Product 2",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -29,7 +29,7 @@ export const ProductList = () => {
       sn: 3,
       name: "Product 3",
       imgUrl: "https://picsum.photos/200/300",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -39,7 +39,7 @@ export const ProductList = () => {
       sn: 4,
       name: "Product 4",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -49,7 +49,7 @@ export const ProductList = () => {
       sn: 5,
       name: "Product 5",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -60,7 +60,7 @@ export const ProductList = () => {
       sn: 6,
       name: "Product 6",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -70,7 +70,7 @@ export const ProductList = () => {
       sn: 7,
       name: "Product 7",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -80,7 +80,7 @@ export const ProductList = () => {
       sn: 8,
       name: "Product 8",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -90,7 +90,7 @@ export const ProductList = () => {
       sn: 9,
       name: "Product 9",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -100,7 +100,7 @@ export const ProductList = () => {
       sn: 10,
       name: "Product 10",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -110,7 +110,7 @@ export const ProductList = () => {
       sn: 11,
       name: "Product 11",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -120,7 +120,7 @@ export const ProductList = () => {
       sn: 12,
       name: "Product 12",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -130,7 +130,7 @@ export const ProductList = () => {
       sn: 13,
       name: "Product 13",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -140,7 +140,7 @@ export const ProductList = () => {
       sn: 14,
       name: "Product 14",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -150,7 +150,7 @@ export const ProductList = () => {
       sn: 15,
       name: "Product 15",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -160,7 +160,7 @@ export const ProductList = () => {
       sn: 16,
       name: "Product 16",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -170,7 +170,7 @@ export const ProductList = () => {
       sn: 17,
       name: "Product 17",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -180,7 +180,7 @@ export const ProductList = () => {
       sn: 18,
       name: "Product 18",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -190,7 +190,7 @@ export const ProductList = () => {
       sn: 19,
       name: "Product 19",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
@@ -200,7 +200,7 @@ export const ProductList = () => {
       sn: 20,
       name: "Product 20",
       imgUrl: "",
-      sales_price: 500,
+      "sales price": 500,
       csb: 100,
       points: 40,
       description:
