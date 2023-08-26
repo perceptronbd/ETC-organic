@@ -1,10 +1,11 @@
 import React from "react";
-import { LinkButton } from "../../components";
+import { LinkButton, SearchInput } from "../../components";
 
 export const EmployeeTable = ({ data }) => {
   return (
-    <div className="w-full bg-foreground">
-      <div className="w-full max-h-[80vh]  overflow-y-auto">
+    <div className="w-full p-2 bg-foreground rounded-lg">
+      <SearchInput />
+      <div className="w-full max-h-[78vh] overflow-y-auto">
         <table className="w-full ">
           <thead className="h-12 bg-foreground text-textColor-light sticky top-0 border-b-2">
             <tr>
