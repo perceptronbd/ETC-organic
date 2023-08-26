@@ -5,7 +5,7 @@ export const SearchInput = (props) => {
 
   return (
     <>
-      <div className="relative w-[200px] bg-background rounded">
+      <div className="relative w-72 bg-background rounded">
         <label for="search" className="flex items-center w-full h-10">
           <input
             autocomplete="off"
