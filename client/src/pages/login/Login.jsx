@@ -46,9 +46,9 @@ export const Login = () => {
           onSubmit={handleSubmit}
           className="flex flex-col w-full h-full items-center"
         >
-          <div className="w-32 h-32 m-16 bg-accent-secondary rounded-md flex justify-center items-center">
-            LOGO
-          </div>
+          <Text className="w-32 h-32 m-16 bg-background text-accent-secondary rounded-md flex flex-col justify-center items-center font-bold text-5xl">
+            ETC <span className="text-accent-primary text-2xl">organic</span>
+          </Text>
           <div className="flex flex-col ">
             <Text h3>Login</Text>
             {inputs.map((input) => (
