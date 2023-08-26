@@ -112,11 +112,12 @@ export const Sidebar = () => {
                       isPending
                         ? "pending"
                         : isActive
-                        ? "flex font-semibold text-lg text-accent-primary hover:bg-accent-primary hover:text-foreground rounded-md p-2 cursor-pointer items-center transition-all duration-200"
+                        ? "flex font-semibold text-lg text-accent-primary hover:bg-accent-primary hover:text-foreground rounded-md p-2 cursor-pointer items-center transition-all duration-200 "
                         : "flex font-semibold text-lg text-textColor hover:bg-accent-primary hover:text-foreground rounded-md p-2 cursor-pointer items-center transition-all duration-200"
                     }
                     to={link.path}
                     key={linkIndex}
+                    title={link.title}
                   >
                     <li
                       className={`flex rounded-md cursor-pointer  text-sm items-center`}
