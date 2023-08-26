@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text } from "../text/Text";
+import { SearchInput } from "../input/SearchInput";
 
 export const StockTable = ({ data }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const filteredData = data.filter((item) =>
+    Object.values(item).some((value) =>
+      value.toString().toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  );
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
   return (
     <>
       {data ? (
         <article className=" rounded-lg bg-foreground pt-4 pl-1 pb-1">
-          <Text h3 className={"mx-6"}>
-            Stock Quantity
-          </Text>
+          <div className="flex justify-between items-center px-4">
+            <Text h2>Stock Quantity</Text>
+            <SearchInput value={searchQuery} onChange={handleSearch} />
+          </div>
           <div className="w-full max-h-[480px] 3xl:max-h-[780px] overflow-y-auto rounded-lg">
             <table className="w-full border-collapse">
               <thead className="text-xs text-textColor-light uppercase border-b-2 border-background  bg-foreground  sticky top-0">
@@ -28,7 +41,7 @@ export const StockTable = ({ data }) => {
                 </tr>
               </thead>
               <tbody>
-                {data.map((item, index) => (
+                {filteredData.map((item, index) => (
                   <tr
                     key={index}
                     className={`border-b-2 border-background font-semibold `}
