@@ -19,7 +19,7 @@ app.use(errorHandler)
 
 
 // Routes Middleware
-app.use("/api/users", userRoute)
+app.use("/api", userRoute)
 
 
 const PORT = process.env.PORT || 5000

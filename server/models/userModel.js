@@ -23,11 +23,7 @@ const userSchema = mongoose.Schema(
       minLength: [6, "Password must be up to 6 characters"],
       //   maxLength: [23, "Password must not be more than 23 characters"],
     },
-    photo: {
-      type: String,
-      required: [true, "Please add a photo"],
-      default: "https://i.ibb.co/4pDNDk1/avatar.png",
-    },
+    
     phone: {
       type: String
     },
@@ -35,7 +31,21 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add a designation"],
     },
+    branch: {
+      type: String,
+      required: [true, "Please add a designation"],
+    },
 
+    permissions: 
+      {productManagement: {
+        type: Boolean,
+        required: true
+      },
+      inputSales:{
+        type: Boolean,
+        required: true
+      }
+    }
   },
   {
     timestamps: true,
