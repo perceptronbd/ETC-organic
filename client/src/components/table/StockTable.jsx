@@ -11,16 +11,17 @@ export const StockTable = ({ data }) => {
           </Text>
           <div className="w-full max-h-[480px] 3xl:max-h-[780px] overflow-y-auto rounded-lg">
             <table className="w-full border-collapse">
-              <thead className="text-xs text-textColor-light uppercase bg-foreground  sticky top-0">
+              <thead className="text-xs text-textColor-light uppercase border-b-2 border-background  bg-foreground  sticky top-0">
                 <tr className="w-[900px]">
                   {Object.keys(data[0]).map((item, index) =>
                     item === "id" ? (
                       ""
                     ) : (
-                      <th className="p-4 whitespace-nowrap " key={index}>
-                        <span className="border px-2 py-1 border-textColor-light font-medium rounded-full">
-                          {item}
-                        </span>
+                      <th
+                        className="p-4 font-medium whitespace-nowrap text-left"
+                        key={index}
+                      >
+                        {item}
                       </th>
                     )
                   )}
@@ -30,22 +31,12 @@ export const StockTable = ({ data }) => {
                 {data.map((item, index) => (
                   <tr
                     key={index}
-                    className={`border-b-2 border-foreground font-semibold `}
+                    className={`border-b-2 border-background font-semibold `}
                   >
                     {Object.keys(item).map((key, index) => {
                       if (key === "id") return "";
-                      return key === "Product Name" ? (
-                        <td
-                          className="p-4 text-center bg-background "
-                          key={index}
-                        >
-                          {item[key]}
-                        </td>
-                      ) : (
-                        <td
-                          className="p-4 text-center text-textColor-light bg-background"
-                          key={index}
-                        >
+                      return (
+                        <td className="p-4 text-left" key={index}>
                           {item[key]}
                         </td>
                       );
