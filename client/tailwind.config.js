@@ -12,7 +12,7 @@ module.exports = {
         textColor: { DEFAULT: "#303030", light: "#9a9a9a" },
         accent: {
           primary: "#A259FF",
-          secondary: "#22c55e",
+          secondary: "#0C904D",
         },
       },
       fontFamily: {
