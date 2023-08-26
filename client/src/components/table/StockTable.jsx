@@ -41,21 +41,27 @@ export const StockTable = ({ data }) => {
                 </tr>
               </thead>
               <tbody>
-                {filteredData.map((item, index) => (
-                  <tr
-                    key={index}
-                    className={`border-b-2 border-background font-semibold `}
-                  >
-                    {Object.keys(item).map((key, index) => {
-                      if (key === "id") return "";
-                      return (
-                        <td className="p-4 text-left" key={index}>
-                          {item[key]}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
+                {filteredData.length === 0 ? (
+                  <div className="font-bold text-xl text-textColor-light my-8">
+                    No Data
+                  </div>
+                ) : (
+                  filteredData.map((item, index) => (
+                    <tr
+                      key={index}
+                      className={`border-b-2 border-background font-semibold `}
+                    >
+                      {Object.keys(item).map((key, index) => {
+                        if (key === "id") return "";
+                        return (
+                          <td className="p-4 text-left" key={index}>
+                            {item[key]}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
