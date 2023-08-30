@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {registerUser, loginUser,getAllUsers, updateUser, getUserById} = require("../controllers/userController.js");
-const {createProduct,getAllProducts}  = require("../controllers/productController.js");
+const {createProduct,getAllProducts,calculateProductStock}  = require("../controllers/productController.js");
 // const protect = require("../middleware/authMiddleware.js");
 
 //User 
@@ -13,10 +13,12 @@ router.get('/employee/users', getAllUsers);
 router.put("/employee/update-users/:id",updateUser)
 router.get("/employee/getuserbyid/:id",getUserById)
 
-//products
+//products  
 
 router.post("/products/createproduct",createProduct)
 router.get("/products/getproducts",getAllProducts)
+router.get("/products/getstock",calculateProductStock)
+
 
 
 
