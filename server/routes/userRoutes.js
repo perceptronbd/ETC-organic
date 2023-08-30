@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {registerUser, loginUser,getAllUsers, updateUser, getUserById} = require("../controllers/userController.js");
-const {createProduct}  = require("../controllers/productController.js");
+const {createProduct,getAllProducts}  = require("../controllers/productController.js");
 // const protect = require("../middleware/authMiddleware.js");
 
 //User 
@@ -16,6 +16,9 @@ router.get("/employee/getuserbyid/:id",getUserById)
 //products
 
 router.post("/products/createproduct",createProduct)
+router.get("/products/getproducts",getAllProducts)
+
+
 
 
 // //Sales
