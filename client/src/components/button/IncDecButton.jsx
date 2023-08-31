@@ -13,7 +13,7 @@ export const IncDecButton = (props) => {
   };
 
   return (
-    <div className="flex items-center my-4">
+    <div className="flex items-center my-2">
       {props.label ? (
         <label className="font-medium mb-2 mr-2 text-textColor-light">
           {props.label}
