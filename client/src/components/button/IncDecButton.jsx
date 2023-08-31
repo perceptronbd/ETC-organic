@@ -32,7 +32,7 @@ export const IncDecButton = (props) => {
         <input
           name={name}
           type="text"
-          className="w-10 bg-background rounded-md m-2 p-1"
+          className="w-10 bg-background rounded-md m-2 p-1 text-center"
           value={value}
           onChange={onChange}
         />
