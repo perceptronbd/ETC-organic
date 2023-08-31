@@ -15,6 +15,25 @@ const branch = [
   { value: "5", label: "Category 5" },
 ];
 
+const products = [
+  {
+    value: "1",
+    label: "Product 1",
+  },
+  {
+    value: "2",
+    label: "Product 2",
+  },
+  {
+    value: "3",
+    label: "Product 3",
+  },
+  {
+    value: "4",
+    label: "Product 4",
+  },
+];
+
 export const Wholesale = () => {
   const [quantity, setQuantity] = useState(0);
 
@@ -53,14 +72,12 @@ export const Wholesale = () => {
         className="w-full bg-foreground rounded-xl pb-4"
       >
         <div className="grid grid-cols-2 gap-2 w-full h-[400px]">
-          <div className="bg-foreground rounded-xl w-full p-4">
-            <FormInput
+          <div className="bg-foreground grid grid-rows-6 gap-2 rounded-xl w-full p-4">
+            <SelectInput
               id={"productName"}
               label={"Product Name"}
-              placeholder={"Product Name"}
               name={"productName"}
-              pattern={"[A-Za-z ]+"}
-              errorMessage={"Please enter a valid name"}
+              selectOpts={products}
               onChange={onChange}
               required
             />
@@ -102,7 +119,7 @@ export const Wholesale = () => {
               required
             />
           </div>
-          <div className="bg-foreground rounded-xl w-full p-4">
+          <div className="bg-foreground grid grid-rows-6 gap-2 rounded-xl w-full p-4">
             <SelectInput
               label={"Branch"}
               name={"branch"}
