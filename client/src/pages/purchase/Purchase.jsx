@@ -9,32 +9,32 @@ import {
 } from "../../components";
 
 const branch = [
-  { value: "1", label: "Category 1" },
-  { value: "2", label: "Category 2" },
-  { value: "3", label: "Category 3" },
-  { value: "4", label: "Category 4" },
-  { value: "5", label: "Category 5" },
+  { id: "1", name: "Dagon" },
+  { id: "2", name: "Feni" },
 ];
 
 const products = [
   {
-    value: "1",
-    label: "Product 1",
+    id: "1",
+    name: "Product 1",
+    price: "1000",
   },
   {
-    value: "2",
-    label: "Product 2",
+    id: "2",
+    name: "Product 2",
+    price: "2000",
   },
   {
-    value: "3",
-    label: "Product 3",
+    id: "3",
+    name: "Product 3",
+    price: "3000",
   },
   {
-    value: "4",
-    label: "Product 4",
+    id: "4",
+    name: "Product 4",
+    price: "4000",
   },
 ];
-
 export const Purchase = () => {
   const [quantity, setQuantity] = useState(0);
 
