@@ -36,11 +36,11 @@ const products = [
   },
 ];
 export const Purchase = () => {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const changeQuantity = (newQuantity) => {
     setQuantity(newQuantity);
-    setFormValues({ ...formValues, quantity: newQuantity.toString() });
   };
 
   const [formValues, setFormValues] = useState({
@@ -54,7 +54,13 @@ export const Purchase = () => {
   });
 
   const onChange = (e) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+
+    if (name === "productName") {
+      const selected = products.find((product) => product.name === value);
+      setSelectedProduct(selected);
+    }
   };
 
   const onSubmit = (e) => {
@@ -70,7 +76,7 @@ export const Purchase = () => {
           <div className="bg-foreground grid grid-rows-6 gap-y-2 rounded-xl w-full p-4">
             <SelectInput
               id={"productName"}
-              label={"Product Name"}
+              label={"Product"}
               name={"productName"}
               selectOpts={products}
               onChange={onChange}
@@ -90,7 +96,8 @@ export const Purchase = () => {
               pattern={"[0-9]+"}
               name={"totalPurchasingPrice"}
               errorMessage={"Please enter a valid price"}
-              onChange={onChange}
+              value={selectedProduct ? selectedProduct.price * quantity : 0}
+              readOnly
               required
             />
             <FormInput
@@ -105,6 +112,14 @@ export const Purchase = () => {
             />
           </div>
           <div className="bg-foreground grid grid-rows-6 gap-y-2 rounded-xl w-full p-4">
+            <SelectInput
+              label={"Branch"}
+              name={"branch"}
+              selectOpts={branch}
+              className={"border-accent-primary"}
+              onChange={onChange}
+              required
+            />
             <FormInput
               id={"supplierName"}
               label={"Supplier Name"}
@@ -123,13 +138,6 @@ export const Purchase = () => {
               pattern={"[0-9]{11}"}
               errorMessage={"Please enter a valid phone number"}
               type={"tel"}
-              onChange={onChange}
-              required
-            />
-            <SelectInput
-              label={"Branch"}
-              name={"branch"}
-              selectOpts={branch}
               onChange={onChange}
               required
             />

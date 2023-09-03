@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   FormInput,
@@ -57,8 +57,32 @@ export const Retail = () => {
   });
 
   const onChange = (e) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // Use the updater function to update state based on the previous state
+    setFormValues((prevFormValues) => ({
+      ...prevFormValues,
+      [name]: value,
+    }));
   };
+
+  useEffect(() => {
+    if (formValues.productName && quantity > 0) {
+      const selectedProduct = products.find(
+        (product) => product.name === formValues.productName
+      );
+      console.log("selectedProduct", selectedProduct);
+      if (selectedProduct) {
+        const totalPrice = selectedProduct.price * quantity;
+        setFormValues({
+          ...formValues,
+          price: selectedProduct.price,
+          finalPrice: totalPrice.toString(),
+        });
+        console.log("totalPrice", totalPrice);
+      }
+    }
+  }, [formValues, quantity]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -97,6 +121,7 @@ export const Retail = () => {
               placeholder={"Price"}
               pattern={"[0-9]+"}
               name={"price"}
+              value={formValues.price}
               errorMessage={"Please enter a valid price"}
               onChange={onChange}
               required
