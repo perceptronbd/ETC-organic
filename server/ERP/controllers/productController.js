@@ -45,6 +45,8 @@ const getAllProducts = asyncHandler(async(req,res) => {
 
 });
 
+
+
 module.exports = {
     createProduct,
     getAllProducts,

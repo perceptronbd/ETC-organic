@@ -4,8 +4,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const http = require('http');
-const userRoute = require("./routes/userRoutes")
-const errorHandler = require("./middleware/errorMiddleware")
+const userRoute = require("./ERP/routes/userRoutes")
+const errorHandler = require("./ERP/middleware/errorMiddleware")
 
 const app = express()
 //middleware
