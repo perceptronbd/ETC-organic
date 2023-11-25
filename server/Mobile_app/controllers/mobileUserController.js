@@ -60,15 +60,6 @@ exports.register = asyncHandler(async (req, res) => {
     // Generate Token
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
-    // Send HTTP-only cookie
-    res.cookie("token", token, {
-        path: "/",
-        httpOnly: true,
-        expires: new Date(Date.now() + 1000 * 86400), // 1 day
-        sameSite: "none",
-        secure: true,
-    });
-
     res.status(201).json({
         data: {
             _id: user._id,
