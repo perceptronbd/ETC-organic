@@ -7,6 +7,7 @@ const http = require('http');
 const userRoute = require("./ERP/routes/userRoutes")
 const mobileUserRoute = require("./Mobile_app/routes/userRoutes")
 const errorHandler = require("./ERP/middleware/errorMiddleware")
+const mobileErrorHandler = require("./Mobile_app/middleware/errorMiddleware")
 
 const app = express()
 //middleware
@@ -16,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 
 //error handler 
 app.use(errorHandler)
-
+app.use(mobileErrorHandler)
 
 
 // Routes Middleware
