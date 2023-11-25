@@ -5,7 +5,9 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const http = require('http');
 const userRoute = require("./ERP/routes/userRoutes")
+const mobileUserRoute = require("./Mobile_app/routes/userRoutes")
 const errorHandler = require("./ERP/middleware/errorMiddleware")
+const mobileErrorHandler = require("./Mobile_app/middleware/errorMiddleware")
 
 const app = express()
 //middleware
@@ -20,6 +22,8 @@ app.use(errorHandler)
 
 // Routes Middleware
 app.use("/api", userRoute)
+app.use("/mobile", mobileUserRoute)
+app.use(mobileErrorHandler)
 
 
 const PORT = process.env.PORT || 5000
