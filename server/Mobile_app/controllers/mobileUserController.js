@@ -74,3 +74,42 @@ exports.register = asyncHandler(async (req, res) => {
 });
 
 
+exports.login = asyncHandler(async (req, res) => {
+    const { mobileNumber, password } = req.body;
+
+    if (!mobileNumber || !password) {
+        res.status(400);
+        throw new Error("Please provide both mobile number and password");
+    }
+
+    // Check if user exists with the given mobile number
+    const user = await User.findOne({ mobileNumber });
+    if (!user) {
+        res.status(401);
+        throw new Error('Invalid credentials');
+    }
+
+    // Compare the provided password with the stored hashed password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+        res.status(401);
+        throw new Error('Invalid credentials');
+    }
+
+    // Generate Token
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        expiresIn: '7d' 
+    });
+
+    res.status(200).json({
+        data: {
+            _id: user._id,
+            name: user.name,
+            mobileNumber,
+            token
+        },
+        message: "User logged in successfully"
+    });
+});
+
+
