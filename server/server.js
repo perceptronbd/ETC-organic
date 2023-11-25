@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const http = require('http');
+const multer = require('multer');
 const userRoute = require("./ERP/routes/userRoutes")
 const mobileUserRoute = require("./Mobile_app/routes/userRoutes")
 const errorHandler = require("./ERP/middleware/errorMiddleware")
@@ -23,6 +24,7 @@ app.use(errorHandler)
 // Routes Middleware
 app.use("/api", userRoute)
 app.use("/mobile", mobileUserRoute)
+app.use("/profileUpdate", mobileUserRoute)
 app.use(mobileErrorHandler)
 
 
