@@ -17,12 +17,13 @@ app.use(express.urlencoded({ extended: false }));
 
 //error handler 
 app.use(errorHandler)
-app.use(mobileErrorHandler)
+
 
 
 // Routes Middleware
 app.use("/api", userRoute)
 app.use("/mobile", mobileUserRoute)
+app.use(mobileErrorHandler)
 
 
 const PORT = process.env.PORT || 5000

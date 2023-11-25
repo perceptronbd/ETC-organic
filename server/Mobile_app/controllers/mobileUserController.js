@@ -70,12 +70,15 @@ exports.register = asyncHandler(async (req, res) => {
     });
 
     res.status(201).json({
-        _id: user._id,
-        name,
-        mobileNumber,
-        token,
-        referralCode: user.referralCode,
-        referredBy: user.referredBy
+        data: {
+            _id: user._id,
+            name,
+            mobileNumber,
+            token,
+            referralCode: user.referralCode,
+            referredBy: user.referredBy
+        },
+        message: "User registered successfully"
     });
 });
 
