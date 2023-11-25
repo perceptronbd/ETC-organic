@@ -17,31 +17,39 @@ exports.updateProfile = asyncHandler(async (req, res) => {
         nationalIdImage = req.files.nationalIdImage[0].path; // Adjust according to your files structure
     }
 
-    const errors = [];
+    const missingFields = [];
 
     // Check if district is empty
     if (!district) {
-        errors.push('District must be provided');
+        missingFields.push('District');
     }
 
     // Check if thana is empty
     if (!thana) {
-        errors.push('Thana must be provided');
+        missingFields.push('Thana');
     }
 
     // Check if image is empty
     if (!image) {
-        errors.push('Image must be provided');
+        missingFields.push('Image');
     }
 
     // Check if nationalIdImage is empty
     if (!nationalIdImage) {
-        errors.push('National ID Image must be provided');
+        missingFields.push('National ID Image');
     }
 
-    // If there are errors, return them as an array
-    if (errors.length > 0) {
-        return res.status(400).json({ message: errors });
+    // Construct a message based on the missing fields
+    let message;
+    if (missingFields.length === 1) {
+        message = `Please provide ${missingFields[0]}`;
+    } else if (missingFields.length > 1) {
+        message = `Please provide ${missingFields.join(', ')}`;
+    } 
+
+    // If there are missing fields, return the message
+    if (message) {
+        return res.status(400).json({ message });
     }
 
     const userDetails = await UserDetails.findOne({ user: userId });
