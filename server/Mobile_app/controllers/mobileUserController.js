@@ -78,8 +78,9 @@ exports.login = asyncHandler(async (req, res) => {
     const { mobileNumber, password } = req.body;
 
     if (!mobileNumber || !password) {
+        const message = !mobileNumber && !password ? "Please provide both mobile number and password" :!mobileNumber ? "Please provide mobile number" :"Please provide password";
         res.status(400);
-        throw new Error("Please provide both mobile number and password");
+        throw new Error(message);
     }
 
     // Check if user exists with the given mobile number
