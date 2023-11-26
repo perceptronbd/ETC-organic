@@ -1,5 +1,7 @@
 const asyncHandler = require("express-async-handler");
 
+
+
 const Product = require("../../models/productModel");
 
 const createProduct  = asyncHandler(async(req,res) =>{
@@ -41,14 +43,14 @@ const getAllProducts = asyncHandler(async(req,res) => {
     }
 
     res.status(200).json(productsWithTotalStock);
-
-
 });
+
 
 
 
 module.exports = {
     createProduct,
     getAllProducts,
-    calculateProductStock 
+    calculateProductStock,
+    
 };
