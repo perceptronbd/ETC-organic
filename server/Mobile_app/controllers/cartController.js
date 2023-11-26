@@ -16,9 +16,9 @@ exports.addToCart = asyncHandler(async (req, res) => {
     throw new Error('Product not found');
   }
 
-  const cart = await Cart.findOne({ user: userId });
+  const cart = await Cart.findOne({ user: userId , order: false });
   if (!cart) {
-    // If the user doesn't have a cart yet, create a new one
+    // If the user doesn't have a cart or the cart is already ordered, create a new one
     const newCart = new Cart({
       user: userId,
       products: [{ product: product, quantity }],
@@ -52,7 +52,7 @@ exports.removeFromCart = asyncHandler(async (req, res) => {
   const { productId } = req.body;
   const userId = req.user._id;
 
-  const cart = await Cart.findOne({ user: userId });
+  const cart = await Cart.findOne({ user: userId , order: false });
   if (!cart) {
     throw new Error("Cart not found");
   }
@@ -72,6 +72,33 @@ exports.removeFromCart = asyncHandler(async (req, res) => {
   await cart.save();
 
   res.json({ message: "Product removed from cart successfully", cart });
+});
+
+
+exports.updateCart = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+  const newProducts = req.body.products;
+
+  let totalPrice = 0;
+  let updatedProducts = [];
+  for (const item of newProducts) {
+    const product = await Product.findById(item.productId);
+    if (!product) {
+      throw new Error(`Product with ID ${item.productId} not found`);
+    }
+    totalPrice += product.salesPrice * item.quantity;
+    updatedProducts.push({ product: item.productId, quantity: item.quantity });
+  }
+
+  // Find the user's cart where order is false
+  let cart = await Cart.findOne({ user: userId, order: false });
+
+  cart.products = updatedProducts;
+  cart.totalPrice = totalPrice;
+
+  await cart.save();
+
+  res.json(cart);
 });
 
 
@@ -180,7 +207,7 @@ exports.getTotalPrice = asyncHandler(async (req, res) => {
   const userId = req.user._id;
 
   // Find the user's cart
-  const cart = await Cart.findOne({ user: userId });
+  const cart = await Cart.findOne({ user: userId , order: false });
 
   if (!cart) {
     throw new Error("Cart not found");
@@ -194,7 +221,7 @@ exports.getCartDetails = asyncHandler(async (req, res) => {
   const userId = req.user._id;
 
   // Find the user's cart and populate the 'products' field with product details
-  const cart = await Cart.findOne({ user: userId })
+  const cart = await Cart.findOne({ user: userId, order: false})
     .populate({
       path: 'products.product',
       model: 'Product',

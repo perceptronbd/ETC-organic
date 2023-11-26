@@ -16,6 +16,7 @@ router.post('/add-to-cart',authenticateUser,cartController.addToCart);
 router.post('/remove-from-cart',authenticateUser,cartController.removeFromCart);
 router.post('/increase-quantity',authenticateUser,cartController.increaseQuantity);
 router.post('/decrease-quantity',authenticateUser,cartController.decreaseQuantity);
+router.post('/update-cart',authenticateUser,cartController.updateCart);
 router.get('/get-cart-price',authenticateUser,cartController.getTotalPrice);
 router.get('/get-cart-details',authenticateUser,cartController.getCartDetails);
 

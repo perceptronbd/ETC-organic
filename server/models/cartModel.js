@@ -11,6 +11,7 @@ const cartSchema = new mongoose.Schema({
     }
   ],
   totalPrice: { type: Number, default: 0 },
+  order: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model('Cart', cartSchema);
