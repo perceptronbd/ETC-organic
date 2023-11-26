@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const Product = require('../models/productModel');
+const Branch = require('../models/branchModel');
+
+
 const ProductPurchaseSchema = new Schema({
     productName: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: Product,
         required: true
     },
     supplierName: {
@@ -21,7 +26,8 @@ const ProductPurchaseSchema = new Schema({
         min: 0
     },
     branch: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref:Branch,
         required: true
     },
     transportationCost: {
