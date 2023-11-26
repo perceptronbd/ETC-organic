@@ -24,7 +24,6 @@ app.use(errorHandler)
 // Routes Middleware
 app.use("/api", userRoute)
 app.use("/mobile", mobileUserRoute)
-app.use("/profileUpdate", mobileUserRoute)
 app.use(mobileErrorHandler)
 
 
