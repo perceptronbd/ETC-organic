@@ -7,6 +7,7 @@ const http = require('http');
 const multer = require('multer');
 const userRoute = require("./ERP/routes/userRoutes")
 const branchRoute = require("./ERP/routes/branchRoutes")
+const purchaseRoute = require("./ERP/routes/purchaseRoutes")
 const mobileUserRoute = require("./Mobile_app/routes/userRoutes")
 const errorHandler = require("./ERP/middleware/errorMiddleware")
 const mobileErrorHandler = require("./Mobile_app/middleware/errorMiddleware")
@@ -22,10 +23,13 @@ app.use(errorHandler)
 
 
 
-// Routes Middleware
+// ERP Routes
 app.use("/api", userRoute)
 app.use("/api", branchRoute)
+app.use("/api", purchaseRoute)
 
+
+//Mobile Routes
 app.use("/mobile", mobileUserRoute)
 app.use("/profileUpdate", mobileUserRoute)
 app.use(mobileErrorHandler)

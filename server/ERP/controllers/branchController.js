@@ -28,4 +28,18 @@ const addBranch = async (req, res) => {
     }
 };
 
-module.exports = {addBranch}
+const getBranch = async (req, res) => {
+    try {
+        const branches = await Branch.find();
+
+        res.status(200).json({
+            code: 200,
+            data: branches,
+        });
+    } catch (error) {
+        console.error('Error fetching branches:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+module.exports = {addBranch, getBranch}

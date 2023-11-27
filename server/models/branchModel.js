@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const Product = require("../models/productModel")
 
-const Leora = ""
+
 
 const branchSchema = new mongoose.Schema({
     name: {

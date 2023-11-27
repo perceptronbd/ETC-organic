@@ -5,14 +5,18 @@ const Product = require('../models/productModel');
 const Branch = require('../models/branchModel');
 
 
-const ProductPurchaseSchema = new Schema({
-    productName: {
+const PurchaseSchema = new Schema({
+    product: {
         type: mongoose.Schema.Types.ObjectId,
         ref: Product,
         required: true
     },
     supplierName: {
         type: String,
+        required: true
+    },
+    supplierNumber: {
+        type: Number,
         required: true
     },
     quantity: {
@@ -27,7 +31,7 @@ const ProductPurchaseSchema = new Schema({
     },
     branch: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:Branch,
+        ref: Branch,
         required: true
     },
     transportationCost: {
@@ -37,4 +41,4 @@ const ProductPurchaseSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('ProductPurchase', ProductPurchaseSchema);
+module.exports = mongoose.model('ProductPurchase', PurchaseSchema);

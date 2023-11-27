@@ -2,8 +2,11 @@ const express = require("express");
 const router = express.Router();
 
 
-const {addBranch}  = require("../controllers/branchController");
+const {addBranch, getBranch}  = require("../controllers/branchController");
 
-router.post("/products/createBranch",addBranch)
+router.post("/branch/createBranch",addBranch)
+router.get("/branch/getBranch", getBranch)
+
+
 
 module.exports = router;
