@@ -2,7 +2,7 @@ import { withExpoSnack } from "nativewind";
 import { View } from "react-native";
 import { StyledComponent } from "nativewind";
 import { StyledButton, StyledInput } from "../components";
-import { Avatar, Text } from "react-native-paper";
+import { Avatar, Text, TextInput } from "react-native-paper";
 
 const Home = () => {
   return (
@@ -23,7 +23,7 @@ const Home = () => {
       </StyledComponent>
       <StyledComponent
         component={View}
-        className="flex-3 w-full items-center my-8 justify-center"
+        className="flex-3 w-full items-center my-6 justify-center"
       >
         <StyledInput label={"Phone Number"} mode={"outlined"} />
         <StyledInput label={"Password"} mode={"outlined"} />

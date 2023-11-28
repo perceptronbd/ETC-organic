@@ -8,9 +8,9 @@ export const StyledButton = ({ children, ...props }) => {
 
   return (
     <StyledComponent
-      {...rest}
       component={Button}
-      tw={`w-52 rounded-lg ${className}`}
+      {...rest}
+      tw={`w-52 h-12 justify-center items-center rounded-lg ${className}`}
       mode={variant === "outlined" ? "outlined" : "contained"}
       textColor={variant === "outlined" ? COLOR.secondary : COLOR.foreground}
       buttonColor={variant === "outlined" ? "" : COLOR.secondary}
