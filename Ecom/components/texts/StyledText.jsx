@@ -4,6 +4,7 @@ import { StyledComponent } from "nativewind";
 
 export function StyledText({
   children,
+  className,
   variant = "bodyMedium",
   type = "regular",
 }) {
@@ -14,6 +15,7 @@ export function StyledText({
       style={{
         fontFamily: type === "b" ? "mon-b" : type === "m" ? "mon-m" : "mon",
       }}
+      tw={`${className}`}
     >
       {children}
     </StyledComponent>
