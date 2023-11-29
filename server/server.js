@@ -5,9 +5,17 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const http = require('http');
 const multer = require('multer');
+
+//ERP Routes
 const userRoute = require("./ERP/routes/userRoutes")
 const branchRoute = require("./ERP/routes/branchRoutes")
+const purchaseRoute = require("./ERP/routes/purchaseRoutes")
+const salesRoute = require("./ERP/routes/salesRouter")
+
+//Mobile Routes
 const mobileUserRoute = require("./Mobile_app/routes/userRoutes")
+
+//error Middlewares
 const errorHandler = require("./ERP/middleware/errorMiddleware")
 const mobileErrorHandler = require("./Mobile_app/middleware/errorMiddleware")
 
@@ -22,10 +30,16 @@ app.use(errorHandler)
 
 
 
-// Routes Middleware
+// ERP Routes
 app.use("/api", userRoute)
 app.use("/api", branchRoute)
+app.use("/api", purchaseRoute)
+app.use("/api", salesRoute)
 
+
+
+
+//Mobile Routes
 app.use("/mobile", mobileUserRoute)
 app.use(mobileErrorHandler)
 
