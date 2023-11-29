@@ -8,11 +8,11 @@ export const StyledInput = ({ className, ...props }) => {
   return (
     <StyledComponent
       component={TextInput}
-      tw={`w-72 ${className}`}
+      tw={`w-72 my-1 ${className}`}
       activeOutlineColor="#0C904D"
       outlineStyle={{
-        borderRadius: 15,
-        borderWidth: 2,
+        borderRadius: 18,
+        borderWidth: 1,
       }}
       {...rest}
     />
