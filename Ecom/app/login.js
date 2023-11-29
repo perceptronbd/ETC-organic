@@ -3,10 +3,15 @@ import { View } from "react-native";
 import { StyledComponent } from "nativewind";
 import { StyledButton, StyledInput, StyledText } from "../components";
 import { Avatar } from "react-native-paper";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import COLOR from "../constants/COLOR";
 
 const login = () => {
+  const onLogin = () => {
+    console.log("login");
+    router.replace("/home");
+  };
+
   return (
     <StyledComponent
       component={View}
@@ -35,12 +40,14 @@ const login = () => {
         <StyledInput label={"Phone Number"} mode={"outlined"} />
         <StyledInput label={"Password"} mode={"outlined"} />
       </StyledComponent>
-      <StyledButton>Login</StyledButton>
+
+      <StyledButton onPress={onLogin}>Login</StyledButton>
 
       <StyledText className="pt-2">
         Don't have an account?{" "}
         <StyledComponent
           component={Link}
+          replace={true}
           href={"signUp"}
           className={`flex justify-center items-center`}
         >
