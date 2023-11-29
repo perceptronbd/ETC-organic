@@ -32,8 +32,12 @@ export default function Layout() {
       }}
     >
       <Stack.Screen
-        name="home"
-        options={{ title: "Home", headerShown: false }}
+        name="login"
+        options={{ title: "Login", headerShown: false }}
+      />
+      <Stack.Screen
+        name="signUp"
+        options={{ title: "Sign Up", headerShown: false }}
       />
     </Stack>
   );
