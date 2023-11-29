@@ -10,7 +10,7 @@ const multer = require('multer');
 const userRoute = require("./ERP/routes/userRoutes")
 const branchRoute = require("./ERP/routes/branchRoutes")
 const purchaseRoute = require("./ERP/routes/purchaseRoutes")
-const salesRoute = require("./ERP/routes/salesController")
+const salesRoute = require("./ERP/routes/salesRouter")
 
 //Mobile Routes
 const mobileUserRoute = require("./Mobile_app/routes/userRoutes")

@@ -75,12 +75,12 @@ const addSale = asyncHandler(async (req, res) => {
         // Send a success response
         res.status(201).json({
             code: 201,
-            data: { sale: newSale },
+            sale: newSale ,
             message: "Sale added successfully",
         });
     } catch (error) {
         console.error("Error adding sale:", error);
-        res.status(500).json({ error: "Internal server error" });
+        res.status(500).json({ message: "Internal server error" });
     }
 });
 

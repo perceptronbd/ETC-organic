@@ -63,12 +63,12 @@ const addPurchase = async (req, res) => {
         // Send a success response
         res.status(201).json({
             code: 201,
-            data: { purchase: newPurchase },
+            purchase: newPurchase ,
             message: "Purchase added successfully",
         });
     } catch (error) {
         console.error("Error adding purchase:", error);
-        res.status(500).json({ error: "Internal server error" });
+        res.status(500).json({ message: "Internal server error" });
     }
 };
 

@@ -8,7 +8,7 @@ const addBranch = async (req, res) => {
         const existingBranch = await Branch.findOne({ name });
 
         if (existingBranch) {
-            return res.status(400).json({ error: "Branch with this name already exists" });
+            return res.status(400).json({ message: "Branch with this name already exists" });
         }
 
         // Create a new branch
@@ -24,7 +24,7 @@ const addBranch = async (req, res) => {
         });
     } catch (error) {
         console.error("Error adding branch:", error);
-        res.status(500).json({ error: "Internal server error" });
+        res.status(500).json({ message: "Internal server error" });
     }
 };
 
@@ -34,11 +34,11 @@ const getBranch = async (req, res) => {
 
         res.status(200).json({
             code: 200,
-            data: branches,
+            branches
         });
     } catch (error) {
         console.error('Error fetching branches:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ message: 'Internal server error' });
     }
 }
 
