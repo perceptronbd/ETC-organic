@@ -29,7 +29,7 @@ export const StyledButton = ({ children, ...props }) => {
             color: variant === "secondary" ? COLOR.secondary : COLOR.foreground,
           }}
         >
-          Button
+          {children}
         </StyledComponent>
       </StyledComponent>
     </View>
