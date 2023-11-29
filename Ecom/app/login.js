@@ -1,8 +1,8 @@
 import { withExpoSnack } from "nativewind";
 import { View } from "react-native";
 import { StyledComponent } from "nativewind";
-import { StyledButton, StyledInput } from "../components";
-import { Avatar, Text } from "react-native-paper";
+import { StyledButton, StyledInput, StyledText } from "../components";
+import { Avatar } from "react-native-paper";
 import { Link } from "expo-router";
 import COLOR from "../constants/COLOR";
 
@@ -14,40 +14,45 @@ const login = () => {
     >
       <StyledComponent
         component={View}
-        className="w-full items-center justify-center"
+        className="items-center justify-center p-12"
       >
         <Avatar.Image
           size={100}
           style={{ backgroundColor: "none " }}
           source={require("../assets/logo/ETC.png")}
         />
-        <Text variant="headlineSmall"> ETC Organic</Text>
+        <StyledText type="b" variant="headlineSmall">
+          ETC Organic
+        </StyledText>
       </StyledComponent>
       <StyledComponent
         component={View}
-        className="flex-3 w-full items-center my-6 justify-center"
+        className="flex-3 w-full items-center my-4 justify-center"
       >
+        <StyledText variant="titleMedium" type="b" className="w-72 ">
+          Login
+        </StyledText>
         <StyledInput label={"Phone Number"} mode={"outlined"} />
         <StyledInput label={"Password"} mode={"outlined"} />
       </StyledComponent>
       <StyledButton>Login</StyledButton>
 
-      <StyledComponent component={Text} className="pt-2">
+      <StyledText className="pt-2">
         Don't have an account?{" "}
         <StyledComponent
           component={Link}
           href={"signUp"}
           className={`flex justify-center items-center`}
         >
-          <StyledComponent
-            component={Text}
+          <StyledText
             style={{ color: COLOR.secondary }}
-            className={`font-bold underline`}
+            type="b"
+            className={`underline`}
           >
             Sign Up
-          </StyledComponent>
+          </StyledText>
         </StyledComponent>
-      </StyledComponent>
+      </StyledText>
     </StyledComponent>
   );
 };
