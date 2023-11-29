@@ -36,6 +36,7 @@ const signUp = () => {
         <StyledInput label={"Name"} mode={"outlined"} />
         <StyledInput label={"New Password"} mode={"outlined"} />
         <StyledInput label={"Confirm Password"} mode={"outlined"} />
+        <StyledInput label={"Enter Ref Code"} mode={"outlined"} />
       </StyledComponent>
       <StyledButton>Sign Up</StyledButton>
 
