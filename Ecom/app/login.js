@@ -9,7 +9,7 @@ import COLOR from "../constants/COLOR";
 const login = () => {
   const onLogin = () => {
     console.log("login");
-    router.replace("/home");
+    router.push("/(tabs)");
   };
 
   return (

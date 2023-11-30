@@ -8,7 +8,7 @@ export default function Page() {
       component={View}
       className="flex-1 justify-center items-center"
     >
-      <Text> This is Home</Text>
+      <Text>wallet</Text>
     </StyledComponent>
   );
 }
