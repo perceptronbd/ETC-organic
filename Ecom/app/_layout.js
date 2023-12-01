@@ -39,7 +39,7 @@ export default function Layout() {
         name="signUp"
         options={{ title: "Sign Up", headerShown: false }}
       />
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
     </Stack>
   );
 }
