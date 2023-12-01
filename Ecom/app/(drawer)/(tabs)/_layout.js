@@ -10,7 +10,13 @@ const Layout = () => {
           tabBarActiveTintColor: COLOR.tertiary,
           tabBarShowLabel: false,
           headerShown: false,
+
           tabBarStyle: {
+            alignContent: "center",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: 8,
+            borderRadius: 10,
             backgroundColor: COLOR.background,
             borderTopWidth: 0,
           },
@@ -51,6 +57,7 @@ const Layout = () => {
         <Tabs.Screen
           name="profile"
           options={{
+            headerShown: false,
             tabBarIcon: ({ size, color }) => (
               <Ionicons name="person-outline" size={size} color={color} />
             ),
