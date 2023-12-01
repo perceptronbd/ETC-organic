@@ -1,14 +1,17 @@
 import React from "react";
 import { TextInput } from "react-native-paper";
-import { StyledComponent } from "nativewind";
 
-export const StyledInput = ({ className, ...props }) => {
+export const StyledInput = ({ style, ...props }) => {
   const { variant, ...rest } = props;
 
   return (
-    <StyledComponent
-      component={TextInput}
-      tw={`w-72 my-1 ${className}`}
+    <TextInput
+      style={{
+        width: 300,
+        height: 50,
+        marginVertical: 2,
+        ...style,
+      }}
       activeOutlineColor="#0C904D"
       outlineStyle={{
         borderRadius: 18,

@@ -1,11 +1,6 @@
-import { Stack, Tabs } from "expo-router";
+import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import COLOR from "../../constants/COLOR";
-import { Text } from "react-native-paper";
-import { View } from "react-native";
-import { StyledComponent } from "nativewind";
 
 const Layout = () => {
   return (
