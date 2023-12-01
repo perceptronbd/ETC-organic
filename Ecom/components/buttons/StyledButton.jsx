@@ -23,6 +23,7 @@ export const StyledButton = ({ children, ...props }) => {
       textColor={"white"}
       rippleColor={COLOR.tertiary}
       onPress={() => console.log("Pressed")}
+      {...rest}
     >
       {children}
     </Button>
