@@ -72,4 +72,20 @@ const addPurchase = async (req, res) => {
     }
 };
 
-module.exports = { addPurchase };
+const getAllPurchases = async (req, res) => {
+    try {
+        // Fetch all purchase records
+        const purchases = await Purchase.find();
+
+        res.status(200).json({
+            code: 200,
+            data: purchases,
+            message: 'All purchase records retrieved successfully',
+        });
+    } catch (error) {
+        console.error('Error fetching purchases:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+module.exports = { addPurchase, getAllPurchases };
