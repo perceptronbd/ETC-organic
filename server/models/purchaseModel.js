@@ -38,7 +38,15 @@ const PurchaseSchema = new Schema({
         type: Number,
         required: true,
         min: 0
+    },
+
+    purchaseDate: {
+        type: Date,
+        default: Date.now,
     }
 });
+
+
+
 
 module.exports = mongoose.model('ProductPurchase', PurchaseSchema);
