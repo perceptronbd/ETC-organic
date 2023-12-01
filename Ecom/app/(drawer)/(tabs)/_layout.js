@@ -1,6 +1,6 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import COLOR from "../../constants/COLOR";
+import COLOR from "../../../constants/COLOR";
 
 const Layout = () => {
   return (
@@ -9,11 +9,17 @@ const Layout = () => {
         screenOptions={{
           tabBarActiveTintColor: COLOR.tertiary,
           tabBarShowLabel: false,
+          headerShown: false,
+
           tabBarStyle: {
+            alignContent: "center",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: 8,
+            borderRadius: 10,
             backgroundColor: COLOR.background,
             borderTopWidth: 0,
           },
-          headerTransparent: true,
         }}
       >
         <Tabs.Screen
@@ -51,6 +57,7 @@ const Layout = () => {
         <Tabs.Screen
           name="profile"
           options={{
+            headerShown: false,
             tabBarIcon: ({ size, color }) => (
               <Ionicons name="person-outline" size={size} color={color} />
             ),

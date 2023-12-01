@@ -8,7 +8,13 @@ function LogoTitle() {
 
 export default function index() {
   return (
-    <View>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Stack.Screen
         options={{
           title: "My home",

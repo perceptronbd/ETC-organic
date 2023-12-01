@@ -1,10 +1,10 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-export default function Page() {
+export default function tutorials() {
   return (
     <View>
-      <Text>favorite</Text>
+      <Text>tutorials</Text>
     </View>
   );
 }
