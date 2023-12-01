@@ -1,14 +1,10 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { StyledComponent } from "nativewind";
 
-export default function Page() {
+export default function index() {
   return (
-    <StyledComponent
-      component={View}
-      className="flex-1 justify-center items-center"
-    >
-      <Text> This is Home</Text>
-    </StyledComponent>
+    <View>
+      <Text>index</Text>
+    </View>
   );
 }

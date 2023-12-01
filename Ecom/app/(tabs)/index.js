@@ -1,6 +1,5 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { StyledComponent } from "nativewind";
 import { Stack } from "expo-router";
 
 function LogoTitle() {
@@ -9,10 +8,7 @@ function LogoTitle() {
 
 export default function index() {
   return (
-    <StyledComponent
-      component={View}
-      className="flex-1 justify-center items-center "
-    >
+    <View>
       <Stack.Screen
         options={{
           title: "My home",
@@ -22,10 +18,10 @@ export default function index() {
           headerTitleStyle: {
             fontWeight: "bold",
           },
-          headerTitle: (props) => <LogoTitle {...props} />,
+          headerTitle: (props) => <LogoTitle />,
         }}
       />
-      <StyledComponent component={Text}>index</StyledComponent>
-    </StyledComponent>
+      <Text>index</Text>
+    </View>
   );
 }

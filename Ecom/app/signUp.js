@@ -1,6 +1,4 @@
-import { withExpoSnack } from "nativewind";
 import { View } from "react-native";
-import { StyledComponent } from "nativewind";
 import { StyledButton, StyledInput, StyledText } from "../components";
 import { Avatar } from "react-native-paper";
 import { Link, router } from "expo-router";
@@ -13,13 +11,20 @@ const signUp = () => {
   };
 
   return (
-    <StyledComponent
-      component={View}
-      className="flex-1 items-center justify-center bg-background"
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: COLOR.background,
+      }}
     >
-      <StyledComponent
-        component={View}
-        className="items-center justify-center p-12"
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          height: 250,
+        }}
       >
         <Avatar.Image
           size={100}
@@ -29,12 +34,9 @@ const signUp = () => {
         <StyledText type="b" variant="headlineSmall">
           ETC Organic
         </StyledText>
-      </StyledComponent>
-      <StyledComponent
-        component={View}
-        className="flex-3 w-full items-center my-4 justify-center"
-      >
-        <StyledText variant="titleMedium" type="b" className="w-72 ">
+      </View>
+      <View>
+        <StyledText variant="titleMedium" type="b">
           Sign Up
         </StyledText>
         <StyledInput label={"Phone Number"} mode={"outlined"} />
@@ -42,17 +44,12 @@ const signUp = () => {
         <StyledInput label={"New Password"} mode={"outlined"} />
         <StyledInput label={"Confirm Password"} mode={"outlined"} />
         <StyledInput label={"Enter Ref Code"} mode={"outlined"} />
-      </StyledComponent>
+      </View>
       <StyledButton onPress={onSignUp}>Sign Up</StyledButton>
 
       <StyledText className="pt-2">
         Already have an account?{" "}
-        <StyledComponent
-          component={Link}
-          replace={true}
-          href={"login"}
-          className={`flex justify-center items-center`}
-        >
+        <Link replace={true} href={"login"}>
           <StyledText
             style={{ color: COLOR.secondary }}
             type="b"
@@ -60,9 +57,9 @@ const signUp = () => {
           >
             Login
           </StyledText>
-        </StyledComponent>
+        </Link>
       </StyledText>
-    </StyledComponent>
+    </View>
   );
 };
-export default withExpoSnack(signUp);
+export default signUp;
