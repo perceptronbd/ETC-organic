@@ -9,11 +9,11 @@ const Layout = () => {
         screenOptions={{
           tabBarActiveTintColor: COLOR.tertiary,
           tabBarShowLabel: false,
+          headerShown: false,
           tabBarStyle: {
             backgroundColor: COLOR.background,
             borderTopWidth: 0,
           },
-          headerTransparent: true,
         }}
       >
         <Tabs.Screen
