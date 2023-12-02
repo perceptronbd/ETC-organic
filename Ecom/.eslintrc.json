@@ -13,6 +13,8 @@
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "no-unused-vars": "warn",
-    "no-undef": "error"
+    "no-undef": "error",
+    "no-restricted-modules": "warn",
+    "no-restricted-imports": "warn"
   }
 }
