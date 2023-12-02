@@ -1,10 +1,13 @@
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
+import { router } from "expo-router";
 import { usePathname } from "expo-router/src/hooks";
 import React, { useEffect } from "react";
-import { renderIcon } from "./renderIcon";
+import { Text, View } from "react-native";
+import { Avatar } from "react-native-paper";
 import COLOR from "../../constants/COLOR";
-import { router } from "expo-router";
+import { StyledText } from "../texts/StyledText";
 import { drawerContents } from "./drawerContents";
+import { renderIcon } from "./renderIcon";
 
 export const CustomDrawerContent = (props) => {
   const pathName = usePathname();
@@ -14,7 +17,28 @@ export const CustomDrawerContent = (props) => {
   }, [pathName]);
 
   const drawerItems = drawerContents.map((item, index) => {
-    return (
+    return item.labal === "Profile" ? (
+      <View
+        key={index}
+        style={{
+          flexDirection: "row",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          marginVertical: 20,
+          marginLeft: 15,
+        }}
+      >
+        <Avatar.Image
+          size={50}
+          style={{ backgroundColor: "none ", marginRight: 10 }}
+          source={require("../../assets/img/user.png")}
+        />
+        <View>
+          <StyledText type="b">Mr. Tofayel</StyledText>
+          <Text>@userid_001</Text>
+        </View>
+      </View>
+    ) : (
       <DrawerItem
         key={index}
         label={item.labal}
@@ -25,7 +49,7 @@ export const CustomDrawerContent = (props) => {
         style={{
           backgroundColor: item.pathName === pathName ? COLOR.secondary : null,
         }}
-        icon={({ size, color }) =>
+        icon={({ size }) =>
           renderIcon({
             library: item.iconLibrary,
             name: item.icon,

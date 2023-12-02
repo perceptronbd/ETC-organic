@@ -1,7 +1,7 @@
-import { View } from "react-native";
-import { StyledButton, StyledInput, StyledText } from "../components";
-import { Avatar } from "react-native-paper";
 import { Link, router } from "expo-router";
+import { View } from "react-native";
+import { Avatar } from "react-native-paper";
+import { StyledButton, StyledInput, StyledText } from "../components";
 import COLOR from "../constants/COLOR";
 
 const login = () => {
@@ -31,16 +31,29 @@ const login = () => {
           style={{ backgroundColor: "none " }}
           source={require("../assets/logo/ETC.png")}
         />
-        <StyledText type="b" variant="headlineSmall">
+        <StyledText
+          type="b"
+          variant="headlineSmall"
+        >
           ETC Organic
         </StyledText>
       </View>
       <View>
-        <StyledText variant="titleMedium" type="b" className="w-72 ">
+        <StyledText
+          variant="titleMedium"
+          type="b"
+          className="w-72 "
+        >
           Login
         </StyledText>
-        <StyledInput label={"Phone Number"} mode={"outlined"} />
-        <StyledInput label={"Password"} mode={"outlined"} />
+        <StyledInput
+          label={"Phone Number"}
+          mode={"outlined"}
+        />
+        <StyledInput
+          label={"Password"}
+          mode={"outlined"}
+        />
       </View>
 
       <StyledButton onPress={onLogin}>Login</StyledButton>

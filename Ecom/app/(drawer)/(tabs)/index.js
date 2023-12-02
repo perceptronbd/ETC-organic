@@ -1,10 +1,7 @@
-import { View, Text } from "react-native";
-import React from "react";
 import { Stack } from "expo-router";
-
-function LogoTitle() {
-  return <Text>Home</Text>;
-}
+import React from "react";
+import { View } from "react-native";
+import { StyledText } from "../../../components";
 
 export default function index() {
   return (
@@ -21,13 +18,9 @@ export default function index() {
 
           headerStyle: { backgroundColor: "#f4511e" },
           headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
-          headerTitle: (props) => <LogoTitle />,
         }}
       />
-      <Text>index</Text>
+      <StyledText>Index</StyledText>
     </View>
   );
 }
