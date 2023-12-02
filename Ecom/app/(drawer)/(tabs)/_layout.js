@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { DrawerToggleButton } from "@react-navigation/drawer";
 import { Tabs } from "expo-router";
+import { Searchbar } from "react-native-paper";
 import COLOR from "../../../constants/COLOR";
 
 const Layout = () => {
@@ -10,6 +11,20 @@ const Layout = () => {
         screenOptions={{
           tabBarActiveTintColor: COLOR.tertiary,
           tabBarShowLabel: false,
+
+          headerTitle: () => (
+            <Searchbar
+              placeholder="প্রোডাক্ট খুঁজুন"
+              style={{
+                width: 280,
+                paddingVertical: 0,
+                textAlign: "center",
+                padding: 0,
+                margin: 0,
+                backgroundColor: COLOR.background,
+              }}
+            />
+          ),
           headerLeft: () => <DrawerToggleButton />,
           tabBarStyle: {
             alignContent: "center",
@@ -25,7 +40,7 @@ const Layout = () => {
         <Tabs.Screen
           name="wallet"
           options={{
-            title: "Wallet",
+            headerTitle: "Wallet",
             headerStyle: { backgroundColor: COLOR.background, elevation: 0 },
             tabBarIcon: ({ size, color }) => (
               <Ionicons
@@ -39,7 +54,7 @@ const Layout = () => {
         <Tabs.Screen
           name="favorite"
           options={{
-            title: "Favorite",
+            headerTitle: "Favorite",
             headerStyle: { backgroundColor: COLOR.background, elevation: 0 },
             tabBarIcon: ({ size, color }) => (
               <Ionicons
@@ -67,7 +82,7 @@ const Layout = () => {
         <Tabs.Screen
           name="cart"
           options={{
-            title: "Cart",
+            headerTitle: "Cart",
             headerStyle: { backgroundColor: COLOR.background, elevation: 0 },
             tabBarIcon: ({ size, color }) => (
               <Ionicons
