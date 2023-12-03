@@ -6,3 +6,10 @@ export { StyledButton } from "./buttons/StyledButton";
 export { StyledText } from "./texts/StyledText";
 //drawer
 export { CustomDrawerContent } from "./drawer/CustomDrawerContent";
+//carousel
+export { Carousel } from "./carousel/Carousel";
+//cards
+export { ProductCard } from "./cards/ProductCard";
+//catergory
+export { Category } from "./category/Category";
+export { Favorite } from "./category/Favorite";
