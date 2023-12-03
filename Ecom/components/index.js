@@ -11,4 +11,5 @@ export { Carousel } from "./carousel/Carousel";
 //cards
 export { ProductCard } from "./cards/ProductCard";
 //catergory
+export { Category } from "./category/Category";
 export { Favorite } from "./category/Favorite";

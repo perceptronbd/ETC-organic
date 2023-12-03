@@ -4,7 +4,7 @@ import tw from "twrnc";
 import { ProductCard } from "../cards/ProductCard";
 import { StyledText } from "../texts/StyledText";
 
-export function Favorite({ products }) {
+export function Category({ categoryTitle = "Category 1", products }) {
   return (
     <View style={tw.style(`my-2`)}>
       <StyledText
@@ -12,21 +12,15 @@ export function Favorite({ products }) {
         variant="titleLarge"
         style={tw`my-2`}
       >
-        Favourites
+        {categoryTitle}
       </StyledText>
-      <ScrollView
-        style={tw.style(``)}
-        horizontal
-      >
-        {products.map(
-          (item) =>
-            item.favorite && (
-              <ProductCard
-                key={item.id}
-                productData={item}
-              />
-            )
-        )}
+      <ScrollView horizontal>
+        {products.map((item) => (
+          <ProductCard
+            key={item.id}
+            productData={item}
+          />
+        ))}
       </ScrollView>
     </View>
   );

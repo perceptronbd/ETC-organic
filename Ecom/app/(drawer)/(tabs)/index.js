@@ -1,7 +1,12 @@
 import React from "react";
 import { ScrollView, View } from "react-native";
 import tw from "twrnc";
-import { Carousel, Favorite, StyledButton } from "../../../components";
+import {
+  Carousel,
+  Category,
+  Favorite,
+  StyledButton,
+} from "../../../components";
 
 const favoriteProduct = [
   {
@@ -31,6 +36,24 @@ const favoriteProduct = [
     points: "৫০",
     favorite: true,
   },
+  {
+    id: 4,
+    name: "কারকুমা জয়েন্ট গার্ড",
+    img: require("../../../assets/product/karkuma.png"),
+    price: "৫৮০",
+    csb: "৮০",
+    points: "৫০",
+    favorite: false,
+  },
+  {
+    id: 5,
+    name: "Lotion",
+    img: require("../../../assets/product/lotion.png"),
+    price: "৫০০",
+    csb: "৮০",
+    points: "৫০",
+    favorite: false,
+  },
 ];
 
 export default function index() {
@@ -47,6 +70,7 @@ export default function index() {
         </View>
         {/* Categories */}
         <Favorite products={favoriteProduct} />
+        <Category products={favoriteProduct} />
       </ScrollView>
     </>
   );
