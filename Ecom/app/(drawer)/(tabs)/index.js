@@ -1,22 +1,53 @@
 import React from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import tw from "twrnc";
-import { Carousel, StyledButton, StyledText } from "../../../components";
+import { Carousel, Favorite, StyledButton } from "../../../components";
+
+const favoriteProduct = [
+  {
+    id: 0,
+    name: "তুলশি বীজ জুস",
+    img: require("../../../assets/product/tulshi.png"),
+    price: "৫০০",
+    csb: "৮০",
+    points: "৫০",
+    favorite: true,
+  },
+  {
+    id: 2,
+    name: "কারকুমা জয়েন্ট গার্ড",
+    img: require("../../../assets/product/karkuma.png"),
+    price: "৫৮০",
+    csb: "৮০",
+    points: "৫০",
+    favorite: true,
+  },
+  {
+    id: 3,
+    name: "Lotion",
+    img: require("../../../assets/product/lotion.png"),
+    price: "৫০০",
+    csb: "৮০",
+    points: "৫০",
+    favorite: true,
+  },
+];
 
 export default function index() {
   return (
     <>
-      <View style={tw`flex-1`}>
-        <View style={tw.style(`items-center h-fit`, {})}>
+      <ScrollView style={tw`flex-1 p-2`}>
+        <View style={tw.style(`items-center`, {})}>
           <Carousel />
           <StyledButton
-            style={tw`rounded-full justify-center items-center w-[95%]`}
+            style={tw`rounded-full justify-center items-center w-full`}
           >
             Book Now
           </StyledButton>
         </View>
-        <StyledText>Home</StyledText>
-      </View>
+        {/* Categories */}
+        <Favorite products={favoriteProduct} />
+      </ScrollView>
     </>
   );
 }

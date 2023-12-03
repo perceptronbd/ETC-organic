@@ -8,3 +8,7 @@ export { StyledText } from "./texts/StyledText";
 export { CustomDrawerContent } from "./drawer/CustomDrawerContent";
 //carousel
 export { Carousel } from "./carousel/Carousel";
+//cards
+export { ProductCard } from "./cards/ProductCard";
+//catergory
+export { Favorite } from "./category/Favorite";
