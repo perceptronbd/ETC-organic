@@ -25,7 +25,11 @@ export const CustomDrawerContent = (props) => {
           justifyContent: "flex-start",
           alignItems: "center",
           marginVertical: 20,
+          marginRight: 10,
           marginLeft: 15,
+          backgroundColor: COLOR.neutral,
+          padding: 20,
+          borderRadius: 10,
         }}
       >
         <Avatar.Image
