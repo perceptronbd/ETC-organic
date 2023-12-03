@@ -6,7 +6,7 @@ import { StyledText } from "../texts/StyledText";
 
 export function Category({ categoryTitle = "Category 1", products }) {
   return (
-    <View style={tw.style(`my-2`)}>
+    <View style={tw.style(`my-1`)}>
       <StyledText
         type="b"
         variant="titleLarge"

@@ -84,17 +84,17 @@ export function Carousel() {
 
 const styles = StyleSheet.create({
   container: {
-    height: 260,
+    height: 230,
     width,
     marginTop: 5,
   },
   carousel: {
     width,
-    maxHeight: 260,
+    maxHeight: 230,
   },
   image: {
     width: width - 20,
-    height: 240,
+    height: 210,
     resizeMode: "cover",
     borderRadius: 10,
     marginHorizontal: 10,
