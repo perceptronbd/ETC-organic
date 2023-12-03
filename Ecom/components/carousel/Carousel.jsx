@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Dimensions,
   FlatList,
@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-const { width, height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 const carouselItem = require("./carousel.json");
 const viewConfigRef = { viewAreaCoveragePercentThreshold: 95 };
 
@@ -15,16 +15,21 @@ export function Carousel() {
   let flatListRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const onViewRef = useRef(({ changed }) => {
-    console.log("changed", changed);
-    if (changed[0].isViewable) {
-      setCurrentIndex(changed[0].index);
-    }
-  });
-
   const scrollToIndex = (index) => {
-    flatListRef.current?.scrollToIndex({ animated: true, index: index });
+    flatListRef.current?.scrollToIndex({ animated: true, index });
   };
+
+  // Function to automatically slide the carousel
+  const autoSlide = () => {
+    const nextIndex = (currentIndex + 1) % carouselItem.length;
+    setCurrentIndex(nextIndex);
+    scrollToIndex(nextIndex);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(autoSlide, 3000); // Change slide every 3 seconds (3000 milliseconds)
+    return () => clearInterval(interval); // Clear interval on component unmount
+  }, [currentIndex]); // Re-run when currentIndex changes
 
   const renderItems = ({ item }) => {
     return (
@@ -54,7 +59,6 @@ export function Carousel() {
         }}
         style={styles.carousel}
         viewabilityConfig={viewConfigRef}
-        onViewableItemsChanged={onViewRef.current}
       />
 
       <View style={styles.dotView}>
