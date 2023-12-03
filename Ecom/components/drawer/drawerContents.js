@@ -32,6 +32,6 @@ export const drawerContents = [
     icon: "logout",
     iconLibrary: "MaterialIcons",
     pathName: "/logout",
-    route: "/(tabs)/profile",
+    route: "/login",
   },
 ];
