@@ -12,7 +12,7 @@ export default function index() {
           alignItems: "center",
         }}
       >
-        <StyledText>Index</StyledText>
+        <StyledText>ইন্ডেক্স </StyledText>
       </View>
     </>
   );
