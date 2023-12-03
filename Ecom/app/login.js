@@ -59,7 +59,7 @@ const login = () => {
       <StyledButton onPress={onLogin}>Login</StyledButton>
 
       <StyledText className="pt-2">
-        Don't have an account?{" "}
+        Don&apos;t have an account?{" "}
         <Link
           replace={true}
           href={"signUp"}
