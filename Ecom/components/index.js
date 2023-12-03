@@ -6,3 +6,5 @@ export { StyledButton } from "./buttons/StyledButton";
 export { StyledText } from "./texts/StyledText";
 //drawer
 export { CustomDrawerContent } from "./drawer/CustomDrawerContent";
+//carousel
+export { Carousel } from "./carousel/Carousel";
