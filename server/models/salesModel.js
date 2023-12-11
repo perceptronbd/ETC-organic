@@ -20,7 +20,7 @@ const salesSchema = new Schema({
         required: true
     },
     customerId: {
-        type: Number,
+        type: String,
         },
     quantity: {
         type: Number,
