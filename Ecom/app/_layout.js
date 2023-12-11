@@ -1,5 +1,6 @@
-import { SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
+import { SplashScreen, Stack } from "expo-router";
+import { NativeBaseProvider } from "native-base";
 import { useEffect } from "react";
 
 SplashScreen.preventAutoHideAsync();
@@ -26,14 +27,25 @@ export default function Layout() {
   }
 
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="login" options={{ headerShown: false }} />
-      <Stack.Screen name="signUp" options={{ headerShown: false }} />
-      <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
-    </Stack>
+    <NativeBaseProvider>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen
+          name="login"
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="signUp"
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="(drawer)"
+          options={{ headerShown: false }}
+        />
+      </Stack>
+    </NativeBaseProvider>
   );
 }
