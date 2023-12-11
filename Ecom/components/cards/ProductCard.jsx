@@ -72,7 +72,7 @@ export function ProductCard({ productData }) {
         <Ionicons
           name="add-circle"
           size={35}
-          color="black"
+          color={COLOR.tertiary}
         />
       </View>
     </View>
