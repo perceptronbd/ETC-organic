@@ -10,7 +10,7 @@ export const StyledButton = ({ children, ...props }) => {
     <Button
       buttonColor={COLOR.secondary}
       style={tw.style("rounded-xl  mt-2", style)}
-      contentStyle={tw`py-1 w-64 ${contentStyle} `}
+      contentStyle={tw.style(`py-1 w-64`, contentStyle)}
       textColor={"white"}
       rippleColor={COLOR.tertiary}
       onPress={() => console.log("Pressed")}
