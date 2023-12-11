@@ -5,7 +5,6 @@ const profileUpdateController = require('../controllers/profileUpdateController'
 const cartController = require('../controllers/cartController');
 const orderController = require('../controllers/orderController');
 const upload = require('../middleware/imageMiddleware');
-const updatecsb = require('../controllers/updateCSB');
 const authenticateUser = require('../middleware/authMiddleware'); 
 
 //user
@@ -26,7 +25,5 @@ router.get('/get-cart-details',authenticateUser,cartController.getCartDetails);
 router.post('/place-order',authenticateUser,orderController.placeOrder);
 router.get('/get-user-order-details',authenticateUser,orderController.getOrderDetails);
 
-//updateCsb
-router.post('/updatecsb', updatecsb.updateUserCSB);
 
 module.exports = router; 
