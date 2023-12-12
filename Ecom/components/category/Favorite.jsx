@@ -7,25 +7,13 @@ import { StyledText } from "../texts/StyledText";
 export function Favorite({ products }) {
   return (
     <View style={tw.style(`my-1`)}>
-      <StyledText
-        type="b"
-        variant="titleLarge"
-        style={tw`my-2`}
-      >
+      <StyledText type="b" variant="titleMedium" style={tw`my-2`}>
         Favourites
       </StyledText>
-      <ScrollView
-        style={tw.style(``)}
-        horizontal
-      >
+      <ScrollView style={tw.style(``)} horizontal>
         {products.map(
           (item) =>
-            item.favorite && (
-              <ProductCard
-                key={item.id}
-                productData={item}
-              />
-            )
+            item.favorite && <ProductCard key={item.id} productData={item} />,
         )}
       </ScrollView>
     </View>
