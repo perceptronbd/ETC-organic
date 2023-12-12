@@ -6,24 +6,28 @@ import {
   Category,
   Favorite,
   StyledButton,
-  StyledToast,
 } from "../../../components";
 import { favoriteProduct } from "../../../constants/mockData";
+import { useCustomToast } from "../../../hooks";
 
 export default function index() {
+  const showToast = useCustomToast();
+
   return (
     <>
       <ScrollView style={tw`flex-1 p-2`}>
         <View style={tw.style(`items-center`, {})}>
           <Carousel />
-          <StyledToast
-            title={"Some Random Ass Title"}
-            description={"Some random ass description!"}
+
+          <StyledButton
+            style={tw`rounded-full`}
+            contentStyle={tw`w-96`}
+            onPress={() =>
+              showToast({ description: "world", variant: "warning" })
+            }
           >
-            <StyledButton style={tw`rounded-full`} contentStyle={tw`w-96`}>
-              Book Now
-            </StyledButton>
-          </StyledToast>
+            Book Now
+          </StyledButton>
         </View>
         {/* Categories */}
         <Favorite products={favoriteProduct} />

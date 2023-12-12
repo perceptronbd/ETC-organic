@@ -1,29 +1,10 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import { useToast } from "native-base";
 import React from "react";
-import { Pressable, View } from "react-native";
-import tailwind, { style } from "twrnc";
+import { View } from "react-native";
+import tailwind from "twrnc";
 import { StyledText } from "../texts/StyledText";
 
-export const StyledToast = ({ children, title, description, variant }) => {
-  const toast = useToast();
-
-  const showToast = () => {
-    toast.show({
-      render: () => (
-        <Toast title={title} description={description} variant={variant} />
-      ),
-    });
-  };
-
-  return (
-    <Pressable onPress={showToast} style={style}>
-      {children}
-    </Pressable>
-  );
-};
-
-const Toast = ({ title, description, variant }) => {
+export const StyledToast = ({ title, description, variant }) => {
   return (
     <View
       style={tailwind.style(
