@@ -28,23 +28,12 @@ const productDetails = () => {
         >
           <Image size={"2xl"} source={item.img} alt={item.name} />
         </View>
-
-        <View style={tailwind` flex-row justify-between items-end mb-4`}>
-          {/* Name */}
-          <StyledText variant="titleLarge" type="b">
-            {item.name}
-          </StyledText>
-          <View style={tailwind``}>
-            {/* Price */}
-            <StyledText variant="titleLarge">৳ {item.price}</StyledText>
-          </View>
-        </View>
         {/* Points */}
-        <View style={tailwind`flex-row gap-1 justify-start items-center mb-2`}>
-          <MaterialIcons name="stars" size={20} color={COLOR.tertiary} />
+        <View style={tailwind`flex-row gap-1 justify-start items-center mb-1`}>
+          <MaterialIcons name="stars" size={15} color={COLOR.tertiary} />
           <StyledText
             type="b"
-            variant="titleLarge"
+            variant="titleMedium"
             style={tailwind`text-[${COLOR.tertiary}]`}
           >
             {item.points}
@@ -56,6 +45,17 @@ const productDetails = () => {
             points
           </StyledText>
         </View>
+        <View style={tailwind` flex-row justify-between items-end mb-4`}>
+          {/* Name */}
+          <StyledText variant="titleLarge" type="b">
+            {item.name}
+          </StyledText>
+          <View style={tailwind``}>
+            {/* Price */}
+            <StyledText variant="titleLarge">৳ {item.price}</StyledText>
+          </View>
+        </View>
+
         {/* Details */}
         <ScrollView
           style={tailwind.style(``, {
