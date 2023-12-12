@@ -6,55 +6,9 @@ import {
   Category,
   Favorite,
   StyledButton,
+  StyledToast,
 } from "../../../components";
-
-const favoriteProduct = [
-  {
-    id: 0,
-    name: "তুলশি বীজ জুস",
-    img: require("../../../assets/product/tulshi.png"),
-    price: "৫০০",
-    csb: "৮০",
-    points: "৫০",
-    favorite: true,
-  },
-  {
-    id: 2,
-    name: "কারকুমা জয়েন্ট গার্ড",
-    img: require("../../../assets/product/karkuma.png"),
-    price: "৫৮০",
-    csb: "৮০",
-    points: "৫০",
-    favorite: true,
-  },
-  {
-    id: 3,
-    name: "Lotion",
-    img: require("../../../assets/product/lotion.png"),
-    price: "৫০০",
-    csb: "৮০",
-    points: "৫০",
-    favorite: true,
-  },
-  {
-    id: 4,
-    name: "কারকুমা জয়েন্ট গার্ড",
-    img: require("../../../assets/product/karkuma.png"),
-    price: "৫৮০",
-    csb: "৮০",
-    points: "৫০",
-    favorite: false,
-  },
-  {
-    id: 5,
-    name: "Lotion",
-    img: require("../../../assets/product/lotion.png"),
-    price: "৫০০",
-    csb: "৮০",
-    points: "৫০",
-    favorite: false,
-  },
-];
+import { favoriteProduct } from "../../../constants/mockData";
 
 export default function index() {
   return (
@@ -62,11 +16,14 @@ export default function index() {
       <ScrollView style={tw`flex-1 p-2`}>
         <View style={tw.style(`items-center`, {})}>
           <Carousel />
-          <StyledButton
-            style={tw`rounded-full justify-center items-center w-full`}
+          <StyledToast
+            title={"Some Random Ass Title"}
+            description={"Some random ass description!"}
           >
-            Book Now
-          </StyledButton>
+            <StyledButton style={tw`rounded-full`} contentStyle={tw`w-96`}>
+              Book Now
+            </StyledButton>
+          </StyledToast>
         </View>
         {/* Categories */}
         <Favorite products={favoriteProduct} />

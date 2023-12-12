@@ -13,3 +13,5 @@ export { ProductCard } from "./cards/ProductCard";
 //catergory
 export { Category } from "./category/Category";
 export { Favorite } from "./category/Favorite";
+//toast
+export { StyledToast } from "./toast/StyledToast";

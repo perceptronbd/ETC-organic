@@ -13,7 +13,6 @@ export const StyledButton = ({ children, ...props }) => {
       contentStyle={tw.style(`py-1 w-64`, contentStyle)}
       textColor={"white"}
       rippleColor={COLOR.tertiary}
-      onPress={() => console.log("Pressed")}
       {...rest}
     >
       {children}
