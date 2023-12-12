@@ -11,7 +11,7 @@ export const HeaderComponent = ({ imgURL, points }) => {
   return (
     <View
       style={tailwind.style(
-        `flex-row items-center justify-between gap-2 w-full`,
+        `w-full flex-row items-center justify-between gap-2`,
       )}
     >
       <Input
@@ -32,8 +32,8 @@ export const HeaderComponent = ({ imgURL, points }) => {
         }
       />
       <View style={tailwind`flex-row items-center gap-2`}>
-        <View style={tailwind`justify-center items-center`}>
-          <Octicons name="feed-star" size={24} color={COLOR.tertiary} />
+        <View style={tailwind`items-center justify-center`}>
+          <Octicons name="feed-star" size={20} color={COLOR.tertiary} />
           <StyledText
             variant="bodySmall"
             type="m"

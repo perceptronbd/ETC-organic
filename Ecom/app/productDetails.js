@@ -21,66 +21,21 @@ const productDetails = () => {
   }, []);
 
   return (
-    <View style={tailwind`flex-1 justify-between items-center p-4`}>
+    <View style={tailwind`flex-1 items-center justify-between p-4`}>
       <View>
-        <View
-          style={tailwind`bg-[${COLOR.foreground}] rounded-md  items-center my-8`}
-        >
-          <Image size={"2xl"} source={item.img} alt={item.name} />
-        </View>
-        {/* Points */}
-        <View style={tailwind`flex-row gap-1 justify-start items-center mb-1`}>
-          <MaterialIcons name="stars" size={15} color={COLOR.tertiary} />
-          <StyledText
-            type="b"
-            variant="titleMedium"
-            style={tailwind`text-[${COLOR.tertiary}]`}
-          >
-            {item.points}
-          </StyledText>
-          <StyledText
-            variant="bodySmall"
-            style={tailwind`text-[${COLOR.tertiary}]`}
-          >
-            points
-          </StyledText>
-        </View>
-        <View style={tailwind` flex-row justify-between items-end mb-4`}>
-          {/* Name */}
-          <StyledText variant="titleLarge" type="b">
-            {item.name}
-          </StyledText>
-          <View style={tailwind``}>
-            {/* Price */}
-            <StyledText variant="titleLarge">৳ {item.price}</StyledText>
-          </View>
-        </View>
-
-        {/* Details */}
-        <ScrollView
-          style={tailwind.style(``, {
-            maxHeight: 100,
-          })}
-        >
-          <StyledText variant="bodySmall" type="b">
-            Details:
-          </StyledText>
-          <StyledText variant="bodySmall">{item.details}</StyledText>
-        </ScrollView>
-        {/* CSB */}
-        <View style={tailwind`flex-row gap-2 justify-end items-center`}>
-          <MaterialCommunityIcons
-            name="alert-circle-outline"
-            size={20}
-            color="gray"
-          />
-          <StyledText variant="titleLarge">{item.csb} CSB</StyledText>
-        </View>
+        <ProductImage image={item.img} name={item.name} />
+        <Points points={item.points} />
+        <ProductDetails
+          title={item.name}
+          price={item.price}
+          details={item.details}
+          csb={item.csb}
+        />
       </View>
       {/* Add to cart */}
       <View style={tailwind`w-full`}>
         <Counter value={value} setValue={setValue} />
-        <View style={tailwind`flex-row gap-2 mt-4 mb-8`}>
+        <View style={tailwind`mb-8 mt-4 flex-row gap-2`}>
           <StyledText variant="bodyMedium">ডেলিভারি ডেডলাইন:</StyledText>
           <StyledText variant="bodyMedium" type="b">
             2 Days
@@ -96,6 +51,74 @@ const productDetails = () => {
         </StyledButton>
       </View>
     </View>
+  );
+};
+
+const ProductImage = ({ image, name }) => {
+  return (
+    <View
+      style={tailwind`bg-[${COLOR.foreground}] my-8  items-center rounded-md`}
+    >
+      <Image size={"2xl"} source={image} alt={name} />
+    </View>
+  );
+};
+
+const Points = ({ points }) => {
+  return (
+    <View style={tailwind`mb-1 flex-row items-center justify-start gap-1`}>
+      <MaterialIcons name="stars" size={15} color={COLOR.tertiary} />
+      <StyledText
+        type="b"
+        variant="titleMedium"
+        style={tailwind`text-[${COLOR.tertiary}]`}
+      >
+        {points}
+      </StyledText>
+      <StyledText
+        variant="bodySmall"
+        style={tailwind`text-[${COLOR.tertiary}]`}
+      >
+        points
+      </StyledText>
+    </View>
+  );
+};
+
+const ProductDetails = ({ title, price, details, csb }) => {
+  return (
+    <>
+      <View style={tailwind` mb-4 flex-row items-end justify-between`}>
+        {/* Name */}
+        <StyledText variant="titleLarge" type="b">
+          {title}
+        </StyledText>
+        <View style={tailwind``}>
+          {/* Price */}
+          <StyledText variant="titleLarge">৳ {price}</StyledText>
+        </View>
+      </View>
+      {/* Details */}
+      <ScrollView
+        style={tailwind.style(``, {
+          maxHeight: 100,
+        })}
+      >
+        <StyledText variant="bodySmall" type="b">
+          Details:
+        </StyledText>
+        <StyledText variant="bodySmall">{details}</StyledText>
+      </ScrollView>
+      {/* CSB */}
+      <View style={tailwind`flex-row items-center justify-end gap-2`}>
+        <MaterialCommunityIcons
+          name="alert-circle-outline"
+          size={20}
+          color="gray"
+        />
+        <StyledText variant="titleLarge">{csb} CSB</StyledText>
+      </View>
+    </>
   );
 };
 
