@@ -1,13 +1,18 @@
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import { Image } from "native-base";
 import React, { useState } from "react";
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 import tw from "twrnc";
 import COLOR from "../../constants/COLOR";
 import { StyledText } from "../texts/StyledText";
 
 export function ProductCard({ productData }) {
   const [isFavorite, setIsFavorite] = useState(productData.favorite);
+
+  const handleNavigation = () => {
+    router.push({ pathname: "productDetails", params: productData });
+  };
 
   const handleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -35,9 +40,12 @@ export function ProductCard({ productData }) {
         />
       </View>
       {/* Product Image */}
-      <View style={tw`w-36 justify-center items-center `}>
+      <Pressable
+        onPress={handleNavigation}
+        style={tw`w-36 justify-center items-center `}
+      >
         <Image size={"xl"} source={productData.img} alt={productData.name} />
-      </View>
+      </Pressable>
       {/* Product Name */}
       <StyledText type="b" variant="bodySmall" style={tw`mb-1`}>
         {productData.name}

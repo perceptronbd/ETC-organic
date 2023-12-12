@@ -17,4 +17,3 @@ export { Favorite } from "./category/Favorite";
 export { StyledToast } from "./toast/StyledToast";
 //header
 export { HeaderComponent } from "./header/HeaderComponent";
-

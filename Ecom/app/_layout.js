@@ -2,6 +2,7 @@ import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { NativeBaseProvider } from "native-base";
 import { useEffect } from "react";
+import { StyledText } from "../components";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -33,17 +34,19 @@ export default function Layout() {
           headerShown: false,
         }}
       >
+        <Stack.Screen name="login" options={{ headerShown: false }} />
+        <Stack.Screen name="signUp" options={{ headerShown: false }} />
+        <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
         <Stack.Screen
-          name="login"
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="signUp"
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="(drawer)"
-          options={{ headerShown: false }}
+          name="productDetails"
+          options={{
+            headerShown: true,
+            headerTitle: () => (
+              <StyledText variant="titleMedium" type="b">
+                বিস্তারিত
+              </StyledText>
+            ),
+          }}
         />
       </Stack>
     </NativeBaseProvider>
