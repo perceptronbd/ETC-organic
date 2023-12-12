@@ -16,12 +16,10 @@ export default function index() {
   return (
     <>
       <ScrollView style={tw`flex-1 p-2`}>
-        <View style={tw.style(`items-center`, {})}>
+        <View style={tw.style(`w-full items-center`, {})}>
           <Carousel />
 
           <StyledButton
-            style={tw`rounded-full`}
-            contentStyle={tw`w-96`}
             onPress={() =>
               showToast({ description: "world", variant: "warning" })
             }
