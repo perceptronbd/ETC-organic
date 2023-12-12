@@ -1,8 +1,31 @@
-import { View } from "react-native";
-import { StyledButton, StyledInput, StyledText } from "../components";
-import { Avatar } from "react-native-paper";
 import { Link, router } from "expo-router";
+import { View } from "react-native";
+import { Avatar } from "react-native-paper";
+import { StyledButton, StyledInput, StyledText } from "../components";
 import COLOR from "../constants/COLOR";
+
+const inputFeilds = [
+  {
+    label: "Phone Number",
+    mode: "outlined",
+  },
+  {
+    label: "Name",
+    mode: "outlined",
+  },
+  {
+    label: "New Password",
+    mode: "outlined",
+  },
+  {
+    label: "Confirm Password",
+    mode: "outlined",
+  },
+  {
+    label: "Enter Ref Code",
+    mode: "outlined",
+  },
+];
 
 const signUp = () => {
   const onSignUp = () => {
@@ -39,13 +62,18 @@ const signUp = () => {
         <StyledText variant="titleMedium" type="b">
           Sign Up
         </StyledText>
-        <StyledInput label={"Phone Number"} mode={"outlined"} />
-        <StyledInput label={"Name"} mode={"outlined"} />
-        <StyledInput label={"New Password"} mode={"outlined"} />
-        <StyledInput label={"Confirm Password"} mode={"outlined"} />
-        <StyledInput label={"Enter Ref Code"} mode={"outlined"} />
+        {inputFeilds.map((inputFeild, index) => (
+          <StyledInput key={index} {...inputFeild} />
+        ))}
       </View>
-      <StyledButton onPress={onSignUp}>Sign Up</StyledButton>
+      <StyledButton
+        style={{
+          width: 300,
+        }}
+        onPress={onSignUp}
+      >
+        Sign Up
+      </StyledButton>
 
       <StyledText className="pt-2">
         Already have an account?{" "}
