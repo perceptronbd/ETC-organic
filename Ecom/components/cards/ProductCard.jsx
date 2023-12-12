@@ -1,6 +1,7 @@
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Image } from "native-base";
 import React, { useState } from "react";
-import { Image, View } from "react-native";
+import { View } from "react-native";
 import tw from "twrnc";
 import COLOR from "../../constants/COLOR";
 import { StyledText } from "../texts/StyledText";
@@ -13,15 +14,11 @@ export function ProductCard({ productData }) {
   };
 
   return (
-    <View style={tw.style(`w-52 bg-[${COLOR.foreground}] p-2 rounded-lg mr-3`)}>
+    <View style={tw.style(`w-40 bg-[${COLOR.foreground}] p-2 rounded-lg mr-3`)}>
       {/* Points and Favorite */}
       <View style={tw.style(`flex-row justify-between`)}>
         <View style={tw.style(`flex-row items-center gap-1 `)}>
-          <MaterialIcons
-            name="stars"
-            size={24}
-            color={COLOR.tertiary}
-          />
+          <MaterialIcons name="stars" size={20} color={COLOR.tertiary} />
           <StyledText
             type="b"
             variant="titleMedium"
@@ -32,36 +29,27 @@ export function ProductCard({ productData }) {
         </View>
         <Ionicons
           name={isFavorite ? "heart-sharp" : "heart-outline"}
-          size={24}
+          size={20}
           color={isFavorite ? "red" : "black"}
           onPress={handleFavorite}
         />
       </View>
       {/* Product Image */}
-      <View style={tw`h-48 justify-center items-center `}>
-        <Image
-          size={200}
-          style={tw.style(`w-full`)}
-          source={productData.img}
-        />
+      <View style={tw`w-36 justify-center items-center `}>
+        <Image size={"xl"} source={productData.img} alt={productData.name} />
       </View>
       {/* Product Name */}
-      <StyledText
-        type="b"
-        style={tw`mb-1`}
-      >
+      <StyledText type="b" variant="bodySmall" style={tw`mb-1`}>
         {productData.name}
       </StyledText>
       {/* Product Price and point*/}
       <View style={tw.style(`flex-row justify-between items-center`)}>
         <View>
-          <StyledText
-            variant="titleLarge"
-            type="b"
-          >
+          <StyledText variant="titleMedium" type="b">
             ৳ {productData.price}
           </StyledText>
           <StyledText
+            variant="bodySmall"
             style={tw`text-[${COLOR.tertiary}]`}
             type="m"
           >
@@ -69,11 +57,7 @@ export function ProductCard({ productData }) {
           </StyledText>
         </View>
         {/* Add Button */}
-        <Ionicons
-          name="add-circle"
-          size={35}
-          color={COLOR.tertiary}
-        />
+        <Ionicons name="add-circle" size={30} color={COLOR.tertiary} />
       </View>
     </View>
   );
