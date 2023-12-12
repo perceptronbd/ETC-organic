@@ -15,3 +15,6 @@ export { Category } from "./category/Category";
 export { Favorite } from "./category/Favorite";
 //toast
 export { StyledToast } from "./toast/StyledToast";
+//header
+export { HeaderComponent } from "./header/HeaderComponent";
+

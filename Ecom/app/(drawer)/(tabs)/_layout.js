@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { DrawerToggleButton } from "@react-navigation/drawer";
 import { Tabs } from "expo-router";
-import { Searchbar } from "react-native-paper";
+import { HeaderComponent } from "../../../components";
 import COLOR from "../../../constants/COLOR";
 
 const Layout = () => {
@@ -13,16 +13,9 @@ const Layout = () => {
           tabBarShowLabel: false,
 
           headerTitle: () => (
-            <Searchbar
-              placeholder="প্রোডাক্ট খুঁজুন"
-              style={{
-                width: 280,
-                paddingVertical: 0,
-                textAlign: "center",
-                padding: 0,
-                margin: 0,
-                backgroundColor: COLOR.background,
-              }}
+            <HeaderComponent
+              imgURL={require("../../../assets/img/user.png")}
+              points={"300"}
             />
           ),
           headerLeft: () => <DrawerToggleButton />,
@@ -43,11 +36,7 @@ const Layout = () => {
             headerTitle: "Wallet",
             headerStyle: { backgroundColor: COLOR.background, elevation: 0 },
             tabBarIcon: ({ size, color }) => (
-              <Ionicons
-                name="wallet-outline"
-                size={size}
-                color={color}
-              />
+              <Ionicons name="wallet-outline" size={size} color={color} />
             ),
           }}
         />
@@ -57,11 +46,7 @@ const Layout = () => {
             headerTitle: "Favorite",
             headerStyle: { backgroundColor: COLOR.background, elevation: 0 },
             tabBarIcon: ({ size, color }) => (
-              <Ionicons
-                name="heart-outline"
-                size={size}
-                color={color}
-              />
+              <Ionicons name="heart-outline" size={size} color={color} />
             ),
           }}
         />
@@ -71,11 +56,7 @@ const Layout = () => {
             title: "Home",
             headerStyle: { backgroundColor: COLOR.background, elevation: 0 },
             tabBarIcon: ({ size, color }) => (
-              <Ionicons
-                name="home-outline"
-                size={size}
-                color={color}
-              />
+              <Ionicons name="home-outline" size={size} color={color} />
             ),
           }}
         />
@@ -85,11 +66,7 @@ const Layout = () => {
             headerTitle: "Cart",
             headerStyle: { backgroundColor: COLOR.background, elevation: 0 },
             tabBarIcon: ({ size, color }) => (
-              <Ionicons
-                name="cart-outline"
-                size={size}
-                color={color}
-              />
+              <Ionicons name="cart-outline" size={size} color={color} />
             ),
           }}
         />
@@ -100,11 +77,7 @@ const Layout = () => {
             headerStyle: { backgroundColor: COLOR.background, elevation: 0 },
             headerShown: false,
             tabBarIcon: ({ size, color }) => (
-              <Ionicons
-                name="person-outline"
-                size={size}
-                color={color}
-              />
+              <Ionicons name="person-outline" size={size} color={color} />
             ),
           }}
         />
