@@ -20,6 +20,7 @@ export const Counter = ({ value, setValue }) => {
       <IconButton
         icon={"minus"}
         iconColor="white"
+        size={15}
         style={tailwind`bg-[${COLOR.tertiary}]`}
         onPress={decrement}
       />
@@ -29,6 +30,7 @@ export const Counter = ({ value, setValue }) => {
       <IconButton
         icon={"plus"}
         iconColor="white"
+        size={15}
         style={tailwind`bg-[${COLOR.tertiary}]`}
         onPress={increment}
       />
