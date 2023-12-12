@@ -9,10 +9,14 @@ export const StyledButton = ({ children, ...props }) => {
   return (
     <Button
       buttonColor={variant === "outline" ? null : COLOR.secondary}
-      style={tw.style("mt-2  h-10  rounded-xl", style, {
-        "border border-black": variant === "outline",
-      })}
-      contentStyle={tw.style(`h-10 w-64`, contentStyle)}
+      style={tw.style(
+        "mt-2  h-10 items-center justify-center rounded-xl",
+        style,
+        {
+          "border border-black": variant === "outline",
+        },
+      )}
+      contentStyle={tw.style(`h-10 w-64 `, contentStyle)}
       textColor={variant === "outline" ? "black" : "white"}
       maxFontSizeMultiplier={1}
       rippleColor={COLOR.tertiary}
