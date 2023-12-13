@@ -7,12 +7,10 @@ import { StyledText } from "../texts/StyledText";
 export const StyledToast = ({ title, description, variant }) => {
   const { width } = Dimensions.get("window");
 
-  console.log(width);
-
   return (
     <View
       style={tailwind.style(
-        `flex-row gap-4 items-center bg-white shadow-md rounded-md py-2 px-4`,
+        `flex-row items-center justify-between gap-4 rounded-md bg-white px-4 py-2 shadow-md`,
         {
           width: width - 32,
         },
@@ -23,37 +21,44 @@ export const StyledToast = ({ title, description, variant }) => {
         },
       )}
     >
-      {variant === "success" && (
-        <MaterialIcons
-          name="done"
-          size={24}
-          style={tailwind.style(
-            `text-green-500 border-2 w-8 h-8 border-green-500 rounded-full p-1`,
-          )}
-        />
-      )}
-      {variant === "warning" && (
-        <MaterialIcons
-          name="warning"
-          size={24}
-          style={tailwind.style(`text-yellow-500 w-8 h-8 rounded-full p-1`)}
-        />
-      )}
-      {variant === "danger" && (
-        <MaterialIcons
-          name="dangerous"
-          size={26}
-          style={tailwind.style(`text-red-500 w-8 h-8  rounded-full p-1`, {})}
-        />
-      )}
-      <View style={tailwind.style(`flex mr-2`, {})}>
-        {title && (
-          <StyledText variant="titleMedium" type="m">
-            {title}
-          </StyledText>
+      <View>
+        {/* icon */}
+        {variant === "success" && (
+          <MaterialIcons
+            name="done"
+            size={24}
+            style={tailwind.style(
+              `h-8 w-8 rounded-full border-2 border-green-500 p-1 text-green-500`,
+            )}
+          />
         )}
-        <StyledText variant="bodyMedium">{description}</StyledText>
+        {variant === "warning" && (
+          <MaterialIcons
+            name="warning"
+            size={24}
+            style={tailwind.style(`h-8 w-8 rounded-full p-1 text-yellow-500`)}
+          />
+        )}
+        {variant === "danger" && (
+          <MaterialIcons
+            name="dangerous"
+            size={26}
+            style={tailwind.style(`h-8 w-8 rounded-full  p-1 text-red-500`, {})}
+          />
+        )}
+
+        {/* title */}
+        <View style={tailwind.style(`mr-2 flex`, {})}>
+          {title && (
+            <StyledText variant="titleMedium" type="m">
+              {title}
+            </StyledText>
+          )}
+          {/* description */}
+          <StyledText variant="bodyMedium">{description}</StyledText>
+        </View>
       </View>
+      {/* close button */}
     </View>
   );
 };
