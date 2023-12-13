@@ -27,9 +27,9 @@ export function Carousel() {
   };
 
   useEffect(() => {
-    const interval = setInterval(autoSlide, 3000); // Change slide every 3 seconds (3000 milliseconds)
-    return () => clearInterval(interval); // Clear interval on component unmount
-  }, [currentIndex]); // Re-run when currentIndex changes
+    const interval = setInterval(autoSlide, 3000);
+    return () => clearInterval(interval);
+  }, [currentIndex]);
 
   const renderItems = ({ item }) => {
     return (
@@ -37,10 +37,7 @@ export function Carousel() {
         onPress={() => console.log("clicked")}
         activeOpacity={1}
       >
-        <Image
-          source={{ uri: item.url }}
-          style={styles.image}
-        />
+        <Image source={{ uri: item.url }} style={styles.image} />
       </TouchableOpacity>
     );
   };
