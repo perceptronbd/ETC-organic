@@ -2,7 +2,9 @@ import { useFonts } from "expo-font";
 import { SplashScreen, Stack } from "expo-router";
 import { NativeBaseProvider } from "native-base";
 import { useEffect } from "react";
+import { PaperProvider } from "react-native-paper";
 import { StyledText } from "../components";
+import { CartProvider } from "../contexts/CartContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -28,27 +30,31 @@ export default function Layout() {
   }
 
   return (
-    <NativeBaseProvider>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen name="login" options={{ headerShown: false }} />
-        <Stack.Screen name="signUp" options={{ headerShown: false }} />
-        <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
-        <Stack.Screen
-          name="productDetails"
-          options={{
-            headerShown: true,
-            headerTitle: () => (
-              <StyledText variant="titleMedium" type="b">
-                বিস্তারিত
-              </StyledText>
-            ),
-          }}
-        />
-      </Stack>
-    </NativeBaseProvider>
+    <CartProvider>
+      <PaperProvider>
+        <NativeBaseProvider>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
+            <Stack.Screen name="login" options={{ headerShown: false }} />
+            <Stack.Screen name="signUp" options={{ headerShown: false }} />
+            <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+            <Stack.Screen
+              name="productDetails"
+              options={{
+                headerShown: true,
+                headerTitle: () => (
+                  <StyledText variant="titleMedium" type="b">
+                    বিস্তারিত
+                  </StyledText>
+                ),
+              }}
+            />
+          </Stack>
+        </NativeBaseProvider>
+      </PaperProvider>
+    </CartProvider>
   );
 }

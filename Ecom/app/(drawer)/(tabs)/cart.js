@@ -1,7 +1,16 @@
-import { View, Text } from "react-native";
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { Text, View } from "react-native";
+import CartContext from "../../../contexts/CartContext";
 
 export default function Page() {
+  const { products } = useContext(CartContext);
+
+  console.log("cart page", products);
+
+  useEffect(() => {
+    console.log("cart page useEffect", products);
+  }, [products]);
+
   return (
     <View
       style={{
@@ -10,7 +19,9 @@ export default function Page() {
         alignItems: "center",
       }}
     >
-      <Text>cart</Text>
+      {products.map((item, index) => (
+        <Text key={index}>{item.name}</Text>
+      ))}
     </View>
   );
 }

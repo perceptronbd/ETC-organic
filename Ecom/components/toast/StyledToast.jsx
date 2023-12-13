@@ -27,7 +27,7 @@ export const StyledToast = ({
         },
       )}
     >
-      <View>
+      <View style={tailwind`flex-row items-center justify-start gap-4`}>
         {/* icon */}
         {variant === "success" && (
           <MaterialIcons
