@@ -8,6 +8,7 @@ import { Counter, StyledButton, StyledText } from "../components";
 import COLOR from "../constants/COLOR";
 import CartContext from "../contexts/CartContext";
 import { useCustomToast } from "../hooks";
+import { formatNumbers } from "../utils/formatNumbers";
 
 const productDetails = () => {
   const { updateProductDetails } = useContext(CartContext);
@@ -68,7 +69,7 @@ const productDetails = () => {
         <View style={tailwind`mb-8 mt-4 flex-row gap-2`}>
           <StyledText variant="bodyMedium">ডেলিভারি ডেডলাইন:</StyledText>
           <StyledText variant="bodyMedium" type="b">
-            2 Days
+            {formatNumbers(2)} Days
           </StyledText>
         </View>
 
@@ -99,7 +100,7 @@ const Points = ({ points }) => {
         variant="titleMedium"
         style={tailwind`text-[${COLOR.tertiary}]`}
       >
-        {points}
+        {formatNumbers(points)}
       </StyledText>
       <StyledText
         variant="bodySmall"
@@ -126,7 +127,7 @@ const ProductDetails = ({ title, price, details, csb }) => {
         </StyledText>
         <View style={tailwind``}>
           {/* Price */}
-          <StyledText variant="titleLarge">৳ {price}</StyledText>
+          <StyledText variant="titleLarge">৳ {formatNumbers(price)}</StyledText>
         </View>
       </View>
       {/* Details */}
@@ -212,7 +213,7 @@ const ProductDetails = ({ title, price, details, csb }) => {
           color="gray"
           onPress={showModal}
         />
-        <StyledText variant="titleLarge">{csb} CSB</StyledText>
+        <StyledText variant="titleLarge">{formatNumbers(csb)} CSB</StyledText>
       </View>
     </>
   );

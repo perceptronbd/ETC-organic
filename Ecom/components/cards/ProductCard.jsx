@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { Pressable, View } from "react-native";
 import tw from "twrnc";
 import COLOR from "../../constants/COLOR";
+import { formatNumbers } from "../../utils/formatNumbers";
 import { StyledText } from "../texts/StyledText";
 
 export function ProductCard({ productData }) {
@@ -29,7 +30,7 @@ export function ProductCard({ productData }) {
             variant="titleMedium"
             style={tw`text-[${COLOR.tertiary}]`}
           >
-            {productData.points}
+            {formatNumbers(productData.points)}
           </StyledText>
         </View>
         <Ionicons
@@ -54,14 +55,14 @@ export function ProductCard({ productData }) {
       <View style={tw.style(`flex-row items-center justify-between`)}>
         <View>
           <StyledText variant="titleMedium" type="b">
-            ৳ {productData.price}
+            ৳ {formatNumbers(productData.price)}
           </StyledText>
           <StyledText
             variant="bodySmall"
             style={tw`text-[${COLOR.tertiary}]`}
             type="m"
           >
-            {productData.csb} CSB
+            {formatNumbers(productData.csb)} CSB
           </StyledText>
         </View>
         {/* Add Button */}

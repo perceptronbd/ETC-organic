@@ -7,6 +7,7 @@ import tailwind from "twrnc";
 import { CartCard, StyledButton, StyledText } from "../../../components";
 import COLOR from "../../../constants/COLOR";
 import CartContext from "../../../contexts/CartContext";
+import { formatNumbers } from "../../../utils/formatNumbers";
 
 export default function Page() {
   const { products } = useContext(CartContext);
@@ -16,6 +17,11 @@ export default function Page() {
   useEffect(() => {
     console.log("cart page useEffect", products);
   }, [products]);
+
+  const totalPrice = products.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0,
+  );
 
   return (
     <View style={tailwind`flex-1`}>
@@ -59,12 +65,12 @@ export default function Page() {
           </StyledText>
         </View>
       )}
-      <Checkout />
+      {products.length > 0 && <Checkout totalPrice={totalPrice} />}
     </View>
   );
 }
 
-const Checkout = () => {
+const Checkout = ({ totalPrice }) => {
   return (
     <View style={tailwind`p-4`}>
       <View style={tailwind`flex-row`}>
@@ -76,7 +82,7 @@ const Checkout = () => {
         >
           মোটঃ
         </StyledText>
-        <StyledText type="b"> ৳ ১৫০০</StyledText>
+        <StyledText type="b"> ৳ {formatNumbers(totalPrice)}</StyledText>
         <StyledText> +ডেলিভারি চার্জ</StyledText>
       </View>
       <StyledButton>চেকআউট</StyledButton>

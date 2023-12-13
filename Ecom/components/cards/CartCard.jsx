@@ -2,6 +2,7 @@ import React from "react";
 import { Dimensions, Image, View } from "react-native";
 import tailwind from "twrnc";
 import COLOR from "../../constants/COLOR";
+import { formatNumbers } from "../../utils/formatNumbers";
 import { Counter } from "../buttons/Counter";
 import { StyledText } from "../texts/StyledText";
 
@@ -55,7 +56,9 @@ export const CartCard = ({ name, price, image, quantity }) => {
             >
               মূল্য
             </StyledText>
-            <StyledText type="b">৳ {price}</StyledText>
+            <StyledText type="b">
+              ৳ {formatNumbers(price * quantity)}
+            </StyledText>
           </View>
           <View>
             <StyledText

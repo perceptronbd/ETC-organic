@@ -5,9 +5,9 @@ export const favoriteProduct = [
     details:
       "DetaLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac sapien nec metus imperdiet hendrerit vel eget mauris. Sed metus augue, sollicitudin ac nulla sit amet, tincidunt laoreet eros.",
     img: require("../assets/product/tulshi.png"),
-    price: "৫০০",
-    csb: "৮০",
-    points: "৫০",
+    price: "500",
+    csb: "80",
+    points: "50",
     favorite: true,
   },
   {
@@ -16,9 +16,9 @@ export const favoriteProduct = [
     details:
       "DetaLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac sapien nec metus imperdiet hendrerit vel eget mauris. Sed metus augue, sollicitudin ac nulla sit amet, tincidunt laoreet eros.",
     img: require("../assets/product/karkuma.png"),
-    price: "৫৮০",
-    csb: "৮০",
-    points: "৫০",
+    price: "580",
+    csb: "80",
+    points: "120",
     favorite: true,
   },
   {
@@ -27,9 +27,9 @@ export const favoriteProduct = [
     details:
       "DetaLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac sapien nec metus imperdiet hendrerit vel eget mauris. Sed metus augue, sollicitudin ac nulla sit amet, tincidunt laoreet eros.",
     img: require("../assets/product/lotion.png"),
-    price: "৫০০",
-    csb: "৮০",
-    points: "৫০",
+    price: "400",
+    csb: "80",
+    points: "50",
     favorite: true,
   },
   {
@@ -38,9 +38,9 @@ export const favoriteProduct = [
     details:
       "DetaLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac sapien nec metus imperdiet hendrerit vel eget mauris. Sed metus augue, sollicitudin ac nulla sit amet, tincidunt laoreet eros.",
     img: require("../assets/product/karkuma.png"),
-    price: "৫৮০",
-    csb: "৮০",
-    points: "৫০",
+    price: "650",
+    csb: "40",
+    points: "20",
     favorite: false,
   },
   {
@@ -49,9 +49,9 @@ export const favoriteProduct = [
     details:
       "DetaLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac sapien nec metus imperdiet hendrerit vel eget mauris. Sed metus augue, sollicitudin ac nulla sit amet, tincidunt laoreet eros.",
     img: require("../assets/product/lotion.png"),
-    price: "৫০০",
-    csb: "৮০",
-    points: "৫০",
+    price: "250",
+    csb: "76",
+    points: "90",
     favorite: false,
   },
 ];
