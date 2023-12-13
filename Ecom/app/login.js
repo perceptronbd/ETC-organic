@@ -31,39 +31,28 @@ const login = () => {
           style={{ backgroundColor: "none " }}
           source={require("../assets/logo/ETC.png")}
         />
-        <StyledText
-          type="b"
-          variant="headlineSmall"
-        >
+        <StyledText type="b" variant="headlineSmall">
           ETC Organic
         </StyledText>
       </View>
       <View>
-        <StyledText
-          variant="titleMedium"
-          type="b"
-          className="w-72 "
-        >
+        <StyledText variant="titleMedium" type="b" className="w-72 ">
           Login
         </StyledText>
-        <StyledInput
-          label={"Phone Number"}
-          mode={"outlined"}
-        />
-        <StyledInput
-          label={"Password"}
-          mode={"outlined"}
-        />
+        <StyledInput label={"Phone Number"} mode={"outlined"} />
+        <StyledInput label={"Password"} mode={"outlined"} />
       </View>
 
-      <StyledButton onPress={onLogin}>Login</StyledButton>
+      <StyledButton contentStyle={"w-72"} onPress={onLogin}>
+        Login
+      </StyledButton>
 
       <StyledText className="pt-2">
         Don&apos;t have an account?{" "}
         <Link
           replace={true}
           href={"signUp"}
-          className={`flex justify-center items-center`}
+          className={`flex items-center justify-center`}
         >
           <StyledText
             style={{ color: COLOR.secondary }}

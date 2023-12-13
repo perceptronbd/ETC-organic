@@ -7,63 +7,22 @@ import {
   Favorite,
   StyledButton,
 } from "../../../components";
-
-const favoriteProduct = [
-  {
-    id: 0,
-    name: "তুলশি বীজ জুস",
-    img: require("../../../assets/product/tulshi.png"),
-    price: "৫০০",
-    csb: "৮০",
-    points: "৫০",
-    favorite: true,
-  },
-  {
-    id: 2,
-    name: "কারকুমা জয়েন্ট গার্ড",
-    img: require("../../../assets/product/karkuma.png"),
-    price: "৫৮০",
-    csb: "৮০",
-    points: "৫০",
-    favorite: true,
-  },
-  {
-    id: 3,
-    name: "Lotion",
-    img: require("../../../assets/product/lotion.png"),
-    price: "৫০০",
-    csb: "৮০",
-    points: "৫০",
-    favorite: true,
-  },
-  {
-    id: 4,
-    name: "কারকুমা জয়েন্ট গার্ড",
-    img: require("../../../assets/product/karkuma.png"),
-    price: "৫৮০",
-    csb: "৮০",
-    points: "৫০",
-    favorite: false,
-  },
-  {
-    id: 5,
-    name: "Lotion",
-    img: require("../../../assets/product/lotion.png"),
-    price: "৫০০",
-    csb: "৮০",
-    points: "৫০",
-    favorite: false,
-  },
-];
+import { favoriteProduct } from "../../../constants/mockData";
+import { useCustomToast } from "../../../hooks";
 
 export default function index() {
+  const showToast = useCustomToast();
+
   return (
     <>
       <ScrollView style={tw`flex-1 p-2`}>
-        <View style={tw.style(`items-center`, {})}>
+        <View style={tw.style(`w-full items-center`, {})}>
           <Carousel />
+
           <StyledButton
-            style={tw`rounded-full justify-center items-center w-full`}
+            onPress={() =>
+              showToast({ description: "world", variant: "warning" })
+            }
           >
             Book Now
           </StyledButton>
