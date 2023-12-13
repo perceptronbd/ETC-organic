@@ -4,7 +4,13 @@ import { Dimensions, View } from "react-native";
 import tailwind from "twrnc";
 import { StyledText } from "../texts/StyledText";
 
-export const StyledToast = ({ title, description, variant }) => {
+export const StyledToast = ({
+  title,
+  description,
+  variant,
+  isClosed = false,
+  onClose,
+}) => {
   const { width } = Dimensions.get("window");
 
   return (
@@ -59,6 +65,9 @@ export const StyledToast = ({ title, description, variant }) => {
         </View>
       </View>
       {/* close button */}
+      {isClosed && (
+        <MaterialIcons name="close" size={24} color="black" onPress={onClose} />
+      )}
     </View>
   );
 };
