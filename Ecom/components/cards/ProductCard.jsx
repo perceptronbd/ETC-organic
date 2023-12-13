@@ -19,7 +19,7 @@ export function ProductCard({ productData }) {
   };
 
   return (
-    <View style={tw.style(`w-40 bg-[${COLOR.foreground}] p-2 rounded-lg mr-3`)}>
+    <View style={tw.style(`w-40 bg-[${COLOR.foreground}] mr-3 rounded-lg p-2`)}>
       {/* Points and Favorite */}
       <View style={tw.style(`flex-row justify-between`)}>
         <View style={tw.style(`flex-row items-center gap-1 `)}>
@@ -42,7 +42,7 @@ export function ProductCard({ productData }) {
       {/* Product Image */}
       <Pressable
         onPress={handleNavigation}
-        style={tw`w-36 justify-center items-center `}
+        style={tw`w-36 items-center justify-center `}
       >
         <Image size={"xl"} source={productData.img} alt={productData.name} />
       </Pressable>
@@ -51,7 +51,7 @@ export function ProductCard({ productData }) {
         {productData.name}
       </StyledText>
       {/* Product Price and point*/}
-      <View style={tw.style(`flex-row justify-between items-center`)}>
+      <View style={tw.style(`flex-row items-center justify-between`)}>
         <View>
           <StyledText variant="titleMedium" type="b">
             ৳ {productData.price}
@@ -65,7 +65,12 @@ export function ProductCard({ productData }) {
           </StyledText>
         </View>
         {/* Add Button */}
-        <Ionicons name="add-circle" size={30} color={COLOR.tertiary} />
+        <Ionicons
+          name="add-circle"
+          size={30}
+          color={COLOR.tertiary}
+          onPress={handleNavigation}
+        />
       </View>
     </View>
   );
