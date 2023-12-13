@@ -1,8 +1,7 @@
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { useLocalSearchParams, useNavigation } from "expo-router";
-import { Image } from "native-base";
 import React, { useContext, useState } from "react";
-import { ScrollView, View } from "react-native";
+import { Image, ScrollView, View } from "react-native";
 import { Modal, Portal } from "react-native-paper";
 import tailwind from "twrnc";
 import { Counter, StyledButton, StyledText } from "../components";
@@ -84,9 +83,9 @@ const productDetails = () => {
 const ProductImage = ({ image, name }) => {
   return (
     <View
-      style={tailwind`bg-[${COLOR.foreground}] my-8  items-center rounded-md`}
+      style={tailwind`bg-[${COLOR.foreground}] mb-4 h-56 items-center justify-center rounded-md p-2`}
     >
-      <Image size={"2xl"} source={image} alt={name} />
+      <Image source={image} alt={name} />
     </View>
   );
 };
@@ -113,7 +112,7 @@ const Points = ({ points }) => {
 };
 
 const ProductDetails = ({ title, price, details, csb }) => {
-  const [visible, setVisible] = React.useState(true);
+  const [visible, setVisible] = React.useState(false);
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
