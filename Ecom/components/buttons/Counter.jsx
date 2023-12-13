@@ -6,12 +6,12 @@ import COLOR from "../../constants/COLOR";
 
 export const Counter = ({ value, setValue }) => {
   const increment = () => {
-    setValue(value + 1);
+    setValue((prev) => prev + 1);
   };
 
   const decrement = () => {
     if (value > 0) {
-      setValue(value - 1);
+      setValue((prev) => prev - 1);
     }
   };
 
