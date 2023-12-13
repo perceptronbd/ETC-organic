@@ -1,24 +1,46 @@
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { useLocalSearchParams } from "expo-router";
 import { Image } from "native-base";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { ScrollView, View } from "react-native";
 import tailwind from "twrnc";
 import { Counter, StyledButton, StyledText } from "../components";
 import COLOR from "../constants/COLOR";
+import CartContext from "../contexts/CartContext";
+import { useCustomToast } from "../hooks";
 
 const productDetails = () => {
-  const [value, setValue] = useState(0);
+  const { updateProductDetails } = useContext(CartContext);
+  const showToast = useCustomToast();
+
+  const [quantity, setQuantity] = useState(0);
 
   const item = useLocalSearchParams();
 
-  useEffect(() => {
-    console.log("item", item);
+  // useEffect(() => {
+  //   console.log("item", item);
 
-    return () => {
-      console.log("call API to save the data");
-    };
-  }, []);
+  //   return () => {
+  //     console.log("call API to save the data");
+  //   };
+  // }, []);
+
+  const onAddToCart = () => {
+    if (quantity === 0) {
+      showToast({
+        description: "Please select quantity",
+        variant: "warning",
+        placement: "top",
+      });
+      return;
+    }
+    showToast({ description: "Added to cart", variant: "success" });
+    updateProductDetails({ item, quantity });
+    // updateProductDetails({
+    //   id: item.id,
+    //   quantity,
+    // });
+  };
 
   return (
     <View style={tailwind`flex-1 items-center justify-between p-4`}>
@@ -34,19 +56,15 @@ const productDetails = () => {
       </View>
       {/* Add to cart */}
       <View style={tailwind`w-full`}>
-        <Counter value={value} setValue={setValue} />
+        <Counter value={quantity} setValue={setQuantity} />
         <View style={tailwind`mb-8 mt-4 flex-row gap-2`}>
           <StyledText variant="bodyMedium">ডেলিভারি ডেডলাইন:</StyledText>
           <StyledText variant="bodyMedium" type="b">
             2 Days
           </StyledText>
         </View>
-        <StyledButton
-          variant={"outline"}
-          onPress={() => {
-            console.log("Added to cart");
-          }}
-        >
+
+        <StyledButton variant={"outline"} onPress={onAddToCart}>
           Add to Cart
         </StyledButton>
       </View>
