@@ -10,6 +10,7 @@ export { CustomDrawerContent } from "./drawer/CustomDrawerContent";
 //carousel
 export { Carousel } from "./carousel/Carousel";
 //cards
+export { CartCard } from "./cards/CartCard";
 export { ProductCard } from "./cards/ProductCard";
 //catergory
 export { Category } from "./category/Category";
