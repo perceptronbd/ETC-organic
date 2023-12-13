@@ -7,12 +7,16 @@ export const useCustomToast = () => {
   const toast = useToast();
 
   const closeToast = (props) => {
-    console.log("close toast");
-    console.log(props.id);
     toast.close(props.id);
   };
 
-  const showToast = ({ title, description, variant, placement = "bottom" }) => {
+  const showToast = ({
+    title,
+    description,
+    variant,
+    placement = "bottom",
+    duration = 2000,
+  }) => {
     const toastOptions = {
       render: (props) => (
         <StyledToast
@@ -24,6 +28,7 @@ export const useCustomToast = () => {
         />
       ),
       placement: placement,
+      duration: duration,
     };
 
     toast.show(toastOptions);
