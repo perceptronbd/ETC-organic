@@ -52,6 +52,28 @@ export default function Layout() {
                 ),
               }}
             />
+            <Stack.Screen
+              name="checkOut/index"
+              options={{
+                headerShown: true,
+                headerTitle: () => (
+                  <StyledText variant="titleMedium" type="b">
+                    চেকআউট
+                  </StyledText>
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="checkOut/confirmOrder"
+              options={{
+                headerShown: true,
+                headerTitle: () => (
+                  <StyledText variant="titleMedium" type="b">
+                    চেকআউট
+                  </StyledText>
+                ),
+              }}
+            />
           </Stack>
         </NativeBaseProvider>
       </PaperProvider>
