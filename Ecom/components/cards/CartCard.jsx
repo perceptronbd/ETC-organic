@@ -6,7 +6,7 @@ import { formatNumbers } from "../../utils/formatNumbers";
 import { Counter } from "../buttons/Counter";
 import { StyledText } from "../texts/StyledText";
 
-export const CartCard = ({ name, price, image, quantity }) => {
+export const CartCard = ({ name, price, image, quantity, setQuantity }) => {
   const { width } = Dimensions.get("window");
 
   return (
@@ -74,7 +74,7 @@ export const CartCard = ({ name, price, image, quantity }) => {
         </View>
       </View>
 
-      <Counter value={quantity} />
+      <Counter value={quantity} setValue={setQuantity} />
     </View>
   );
 };

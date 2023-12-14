@@ -10,13 +10,22 @@ import CartContext from "../../../contexts/CartContext";
 import { formatNumbers } from "../../../utils/formatNumbers";
 
 export default function Page() {
-  const { products } = useContext(CartContext);
+  const { products, updateProductDetails } = useContext(CartContext);
 
   console.log("cart page", products);
 
   useEffect(() => {
     console.log("cart page useEffect", products);
   }, [products]);
+
+  const onCheckout = () => {
+    router.push("/checkOut");
+  };
+
+  const handleQuantityChange = (productId, newQuantity) => {
+    updateProductDetails({ id: productId, quantity: newQuantity });
+    // Other logic as needed
+  };
 
   const totalPrice = products.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -48,6 +57,9 @@ export default function Page() {
               image={item.img}
               price={item.price}
               quantity={item.quantity}
+              setQuantity={(newQuantity) =>
+                handleQuantityChange(item.id, newQuantity)
+              }
             />
           ))}
         </ScrollView>
@@ -65,12 +77,14 @@ export default function Page() {
           </StyledText>
         </View>
       )}
-      {products.length > 0 && <Checkout totalPrice={totalPrice} />}
+      {products.length > 0 && (
+        <Checkout totalPrice={totalPrice} onCheckout={onCheckout} />
+      )}
     </View>
   );
 }
 
-const Checkout = ({ totalPrice }) => {
+const Checkout = ({ totalPrice, onCheckout }) => {
   return (
     <View style={tailwind`p-4`}>
       <View style={tailwind`flex-row`}>
@@ -85,7 +99,7 @@ const Checkout = ({ totalPrice }) => {
         <StyledText type="b"> ৳ {formatNumbers(totalPrice)}</StyledText>
         <StyledText> +ডেলিভারি চার্জ</StyledText>
       </View>
-      <StyledButton>চেকআউট</StyledButton>
+      <StyledButton onPress={onCheckout}>চেকআউট</StyledButton>
     </View>
   );
 };

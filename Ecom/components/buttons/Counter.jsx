@@ -7,12 +7,14 @@ import { formatNumbers } from "../../utils/formatNumbers";
 
 export const Counter = ({ value, setValue }) => {
   const increment = () => {
-    setValue((prev) => prev + 1);
+    const newValue = value + 1;
+    setValue(newValue);
   };
 
   const decrement = () => {
-    if (value > 0) {
-      setValue((prev) => prev - 1);
+    const newValue = value - 1;
+    if (newValue > 0) {
+      setValue(newValue);
     }
   };
 
