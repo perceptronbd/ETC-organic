@@ -3,10 +3,9 @@ import { Dimensions, Image, View } from "react-native";
 import tailwind from "twrnc";
 import COLOR from "../../constants/COLOR";
 import { formatNumbers } from "../../utils/formatNumbers";
-import { Counter } from "../buttons/Counter";
 import { StyledText } from "../texts/StyledText";
 
-export const CartCard = ({ name, price, image, quantity, setQuantity }) => {
+export const OrderCard = ({ name, price, image, quantity }) => {
   const { width } = Dimensions.get("window");
 
   return (
@@ -61,20 +60,36 @@ export const CartCard = ({ name, price, image, quantity, setQuantity }) => {
             </StyledText>
           </View>
           <View>
-            <StyledText
-              variant="bodySmall"
-              style={{
-                color: "#808080",
-              }}
-            >
-              প্রোডাক্টের ক্যাটেগরি
-            </StyledText>
-            <StyledText type="b">ঔষধ</StyledText>
+            <View>
+              <StyledText
+                variant="bodySmall"
+                style={{
+                  color: "#808080",
+                }}
+              >
+                প্রোডাক্টের ক্যাটেগরি
+              </StyledText>
+              <StyledText
+                type="b"
+                style={{
+                  marginBottom: 10,
+                }}
+              >
+                ঔষধ
+              </StyledText>
+              <StyledText
+                variant="bodySmall"
+                style={{
+                  color: "#808080",
+                }}
+              >
+                কোয়ান্টীটি
+              </StyledText>
+              <StyledText type="b">{formatNumbers(quantity)}</StyledText>
+            </View>
           </View>
         </View>
       </View>
-
-      <Counter value={quantity} setValue={setQuantity} />
     </View>
   );
 };
