@@ -6,20 +6,22 @@ export const CartProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
   const updateProductDetails = (details) => {
-    //spread array and add new details
-    // setProducts([...products, details]);
-    //if the previous details is same as the new details then update the quantity
-    //else add new details console.log("CartContext");
+    const { id, quantity } = details;
 
-    const newProducts = [...products];
-    const index = newProducts.findIndex((p) => p.id === details.id);
-    if (index === -1) {
-      newProducts.push(details);
+    console.log("updateProductDetails", details);
+
+    // Check if the product already exists in the cart
+    const existingProductIndex = products.findIndex((p) => p.id === id);
+
+    if (existingProductIndex !== -1) {
+      // If the product exists, update its quantity
+      const updatedProducts = [...products];
+      updatedProducts[existingProductIndex].quantity = quantity;
+      setProducts(updatedProducts);
     } else {
-      newProducts[index] = details;
+      // If the product is new, add it to the cart
+      setProducts([...products, details]);
     }
-
-    setProducts([...newProducts]);
   };
 
   return (

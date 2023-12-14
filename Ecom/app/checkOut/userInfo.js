@@ -220,6 +220,7 @@ const userInfo = () => {
               />
             ) : input.type === "checkbox" ? (
               <BouncyCheckbox
+                key={input.id}
                 size={25}
                 text="তথ্য গুলো সেভ করুন"
                 fillColor={COLOR.tertiary}
