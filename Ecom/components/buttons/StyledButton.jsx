@@ -10,6 +10,7 @@ export const StyledButton = ({
   height,
   size,
   children,
+  disabled,
   ...props
 }) => {
   const textColor =
@@ -85,9 +86,14 @@ export const StyledButton = ({
 
   return (
     <Button
-      buttonColor={variant === "outline" || variant === "ghost" ? "" : color}
+      disabled={disabled}
       style={tw.style(
-        "mt-2 items-center justify-center rounded-xl",
+        `mt-2 items-center justify-center rounded-xl bg-[${COLOR.primary}]`,
+        variant === "outline" || variant === "ghost"
+          ? ""
+          : disabled
+            ? `bg-[${COLOR.neutral}]`
+            : `bg-[${color}]`,
         determineWidth(),
         determineHeight(),
         determineSize(),
