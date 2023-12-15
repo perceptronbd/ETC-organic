@@ -13,7 +13,6 @@ export function StyledText({
       variant={variant}
       style={{
         fontFamily: type === "b" ? "mon-b" : type === "m" ? "mon-m" : "mon",
-        textAlign: "justify",
         color: color ? color : "black",
         ...style,
       }}

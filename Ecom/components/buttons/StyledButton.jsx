@@ -88,7 +88,7 @@ export const StyledButton = ({
     <Button
       disabled={disabled}
       style={tw.style(
-        `mt-2 items-center justify-center rounded-xl bg-[${COLOR.primary}]`,
+        `mt-2 items-center justify-center rounded-xl `,
         variant === "outline" || variant === "ghost"
           ? ""
           : disabled
