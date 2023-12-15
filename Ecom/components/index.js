@@ -13,6 +13,7 @@ export { Carousel } from "./carousel/Carousel";
 export { CartCard } from "./cards/CartCard";
 export { OrderCard } from "./cards/OrderCard";
 export { ProductCard } from "./cards/ProductCard";
+export { ReferredEarnCard } from "./cards/ReferredEarnCard";
 //catergory
 export { Category } from "./category/Category";
 export { Favorite } from "./category/Favorite";
@@ -20,3 +21,5 @@ export { Favorite } from "./category/Favorite";
 export { StyledToast } from "./toast/StyledToast";
 //header
 export { HeaderComponent } from "./header/HeaderComponent";
+//modals
+export { ContentModal } from "./modals/ContentModal";
