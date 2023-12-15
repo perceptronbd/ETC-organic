@@ -43,7 +43,7 @@ const login = () => {
         <StyledInput label={"Password"} mode={"outlined"} />
       </View>
 
-      <StyledButton contentStyle={"w-72"} onPress={onLogin}>
+      <StyledButton width="md" height={"md"} onPress={onLogin}>
         Login
       </StyledButton>
 

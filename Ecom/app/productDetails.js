@@ -73,7 +73,7 @@ const productDetails = () => {
           </StyledText>
         </View>
 
-        <StyledButton variant={"outline"} onPress={onAddToCart}>
+        <StyledButton variant={"outline"} height={"md"} onPress={onAddToCart}>
           Add to Cart
         </StyledButton>
       </View>

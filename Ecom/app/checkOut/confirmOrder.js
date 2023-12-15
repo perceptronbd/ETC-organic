@@ -26,7 +26,7 @@ const confirmOrder = () => {
   };
 
   const navigateToMyOrder = () => {
-    router.push("checkOut/myOrders");
+    router.push("/(drawer)/(tabs)/");
     setVisible(false);
   };
 
@@ -93,49 +93,53 @@ const confirmOrder = () => {
         </View>
       </View>
       <StyledButton onPress={onConfirm}>কনফার্ম অর্ডার</StyledButton>
+      <ConfirmationModel
+        visible={visible}
+        hideModal={hideModal}
+        navigateToMyOrder={navigateToMyOrder}
+      />
+    </View>
+  );
+};
 
-      <Portal>
-        <Modal
-          visible={visible}
-          onDismiss={hideModal}
-          contentContainerStyle={{
-            height: "40%",
-            backgroundColor: "white",
-            borderRadius: 10,
-            padding: 50,
-            margin: 20,
-            justifyContent: "space-between",
-          }}
-        >
-          <StyledText variant="titleLarge" type="b">
-            অর্ডার কনফার্মেশন
-          </StyledText>
-          <View>
-            <StyledText
-              variant="titleMedium"
-              type="b"
-              style={{
-                marginBottom: 2,
-              }}
-            >
-              আপনার অর্ডার টি গ্রহণ করা হয়েছে
-            </StyledText>
-            <StyledText>
-              অর্ডারের প্রোগ্রেস দেখতে প্রোফাইল সেকশনে গিয়ে মাই অর্ডার এ ক্লিক
-              করুন
-            </StyledText>
-          </View>
-          <StyledButton
-            onPress={navigateToMyOrder}
-            contentStyle={{
-              width: 260,
+const ConfirmationModel = ({ visible, hideModal, navigateToMyOrder }) => {
+  return (
+    <Portal>
+      <Modal
+        visible={visible}
+        onDismiss={hideModal}
+        contentContainerStyle={{
+          height: "40%",
+          backgroundColor: "white",
+          borderRadius: 10,
+          padding: 50,
+          margin: 20,
+          justifyContent: "space-between",
+        }}
+      >
+        <StyledText variant="titleLarge" type="b">
+          অর্ডার কনফার্মেশন
+        </StyledText>
+        <View>
+          <StyledText
+            variant="titleMedium"
+            type="b"
+            style={{
+              marginBottom: 2,
             }}
           >
-            মাই অর্ডার
-          </StyledButton>
-        </Modal>
-      </Portal>
-    </View>
+            আপনার অর্ডার টি গ্রহণ করা হয়েছে
+          </StyledText>
+          <StyledText>
+            আপনার অর্ডার আগামী ৩ দিনের মধ্যে ডেলিভার করা হবে. অর্ডারের প্রোগ্রেস
+            দেখতে প্রোফাইল সেকশনে গিয়ে মাই অর্ডার এ ক্লিক করুন।
+          </StyledText>
+        </View>
+        <StyledButton onPress={navigateToMyOrder} width={"sm"}>
+          ঠিক আছে
+        </StyledButton>
+      </Modal>
+    </Portal>
   );
 };
 

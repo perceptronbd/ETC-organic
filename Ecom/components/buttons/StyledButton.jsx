@@ -3,24 +3,109 @@ import { Button } from "react-native-paper";
 import tw from "twrnc";
 import COLOR from "../../constants/COLOR";
 
-export const StyledButton = ({ children, ...props }) => {
-  const { style, contentStyle, variant, ...rest } = props;
+export const StyledButton = ({
+  variant,
+  color = COLOR.secondary,
+  width,
+  height,
+  size,
+  children,
+  ...props
+}) => {
+  const textColor =
+    variant === "outline" ? "black" : variant === "ghost" ? color : "white";
+  const textSize = (height === "sm") | (size === "sm") ? "text-xs" : "";
+
+  const determineWidth = () => {
+    if (width) {
+      switch (width) {
+        case "md":
+          return "w-72";
+        case "sm":
+          return "w-48";
+        default:
+          return `w-${width}`;
+      }
+    }
+
+    if (size) {
+      switch (size) {
+        case "md":
+          return "w-72";
+        case "sm":
+          return "w-48";
+        default:
+          return "w-96";
+      }
+    }
+
+    return "w-96";
+  };
+
+  const determineHeight = () => {
+    if (height) {
+      switch (height) {
+        case "md":
+          return "h-10";
+        case "sm":
+          return "h-8";
+        default:
+          return `h-${height}`;
+      }
+    }
+
+    if (size) {
+      switch (size) {
+        case "md":
+          return "h-10";
+        case "sm":
+          return "h-8";
+        default:
+          return "h-12";
+      }
+    }
+
+    return "h-12";
+  };
+
+  const determineSize = () => {
+    if (size) {
+      switch (size) {
+        case "md":
+          return "h-10 w-72";
+        case "sm":
+          return "h-8 w-48";
+        default:
+          return "h-12 w-96";
+      }
+    }
+
+    return "";
+  };
 
   return (
     <Button
-      buttonColor={variant === "outline" ? null : COLOR.secondary}
+      buttonColor={variant === "outline" || variant === "ghost" ? "" : color}
       style={tw.style(
-        "mt-2 h-10 items-center justify-center rounded-xl",
-        style,
+        "mt-2 items-center justify-center rounded-xl",
+        determineWidth(),
+        determineHeight(),
+        determineSize(),
         {
           "border border-black": variant === "outline",
+          "border-none": variant === "ghost",
         },
       )}
-      contentStyle={tw.style(`w-96`, contentStyle)}
-      textColor={variant === "outline" ? "black" : "white"}
+      contentStyle={tw.style(
+        determineWidth(),
+        determineHeight(),
+        determineSize(),
+      )}
+      textColor={textColor}
       maxFontSizeMultiplier={1}
+      labelStyle={tw.style(textSize)}
       rippleColor={COLOR.tertiary}
-      {...rest}
+      {...props}
     >
       {children}
     </Button>

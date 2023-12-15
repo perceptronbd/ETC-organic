@@ -66,7 +66,12 @@ const signUp = () => {
           <StyledInput key={index} {...inputFeild} />
         ))}
       </View>
-      <StyledButton contentStyle={"w-72"} onPress={onSignUp}>
+      <StyledButton
+        width={"md"}
+        height={"md"}
+        contentStyle={"w-72"}
+        onPress={onSignUp}
+      >
         Sign Up
       </StyledButton>
 

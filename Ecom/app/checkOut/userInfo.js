@@ -176,7 +176,7 @@ const userInfo = () => {
   };
 
   return (
-    <View style={tailwind`flex-1 px-8 py-4`}>
+    <View style={tailwind`flex-1 px-4 py-4`}>
       <StyledText
         style={{
           marginBottom: 20,
@@ -256,7 +256,7 @@ const userInfo = () => {
             );
           })}
         </View>
-        <StyledButton contentStyle={"w-72"} onPress={handleSaveAndContinue}>
+        <StyledButton height={"md"} onPress={handleSaveAndContinue}>
           পরের ধাপ
         </StyledButton>
       </View>

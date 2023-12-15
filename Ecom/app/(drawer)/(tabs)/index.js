@@ -20,6 +20,7 @@ export default function index() {
           <Carousel />
 
           <StyledButton
+            height={"md"}
             onPress={() =>
               showToast({ description: "world", variant: "warning" })
             }
