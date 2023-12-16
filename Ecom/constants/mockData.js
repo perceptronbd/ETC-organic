@@ -55,3 +55,48 @@ export const favoriteProduct = [
     favorite: false,
   },
 ];
+
+export const earnedCSB = [
+  {
+    id: 0,
+    date: "12/12/2020",
+    time: "12:00 PM",
+    csb: "50",
+    percentage: "5",
+  },
+  {
+    id: 1,
+    date: "12/12/2020",
+    time: "12:00 PM",
+    csb: "50",
+    percentage: "5",
+  },
+  {
+    id: 2,
+    date: "12/12/2020",
+    time: "12:00 PM",
+    csb: "50",
+    percentage: "5",
+  },
+  {
+    id: 3,
+    date: "12/12/2020",
+    time: "12:00 PM",
+    csb: "50",
+    percentage: "5",
+  },
+  {
+    id: 4,
+    date: "12/12/2020",
+    time: "12:00 PM",
+    csb: "50",
+    percentage: "5",
+  },
+  {
+    id: 5,
+    date: "12/12/2020",
+    time: "12:00 PM",
+    csb: "50",
+    percentage: "5",
+  },
+];
