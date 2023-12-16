@@ -5,11 +5,20 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import tailwind from "twrnc";
 import COLOR from "../../constants/COLOR";
 import { StyledText } from "../texts/StyledText";
-<AntDesign name="closecircleo" size={24} color="black" />;
 
-export const BankInfoCard = ({ bank, branch, acc }) => {
-  const [isSelected, setSelection] = React.useState(false);
-
+export const BankInfoCard = ({
+  id,
+  bank,
+  branch,
+  acc,
+  isSelected,
+  setSelection,
+}) => {
+  const handleSelection = () => {
+    console.log(`selected ${bank}`);
+    console.log(isSelected);
+    setSelection(id);
+  };
   return (
     <View
       style={tailwind`border bg-white border-[${COLOR.neutral}] w-60 rounded-lg p-2`}
@@ -18,6 +27,7 @@ export const BankInfoCard = ({ bank, branch, acc }) => {
         <BouncyCheckbox
           size={20}
           fillColor={COLOR.tertiary}
+          isChecked={isSelected}
           innerIconStyle={{
             borderWidth: 2,
 
@@ -26,14 +36,12 @@ export const BankInfoCard = ({ bank, branch, acc }) => {
           textStyle={{
             textDecorationLine: "none",
           }}
-          onPress={(isChecked) => {
-            setSelection(isChecked);
-          }}
+          onPress={handleSelection}
         />
         <AntDesign
           name="close"
           size={20}
-          color="black"
+          color={COLOR.neutralDark}
           onPress={() => {
             console.log(`deleted ${bank}`);
           }}
