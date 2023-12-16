@@ -32,7 +32,28 @@ export default function Page() {
     <View style={tailwind.style(`flex-1 gap-4  p-4`, {})}>
       <CSBbalance onRedeem={showRedeem} onWithdraw={onWithdraw} />
       <ContentModal visible={visibleRedeem} hideModal={hideRedeem}>
-        <StyledText>Redeem Modal</StyledText>
+        <View style={tailwind`flex items-center justify-between`}>
+          <StyledText
+            variant="titleMedium"
+            type="b"
+            style={{ marginBottom: 10, textAlign: "center" }}
+          >
+            অভিনন্দন!!
+          </StyledText>
+          <StyledText
+            variant="titleMedium"
+            type="b"
+            style={{ marginBottom: 20, textAlign: "center" }}
+          >
+            আপনার CSB রিডিম করার মাধ্যমে টাকা তে রুপান্তর হয়েছে
+          </StyledText>
+          <StyledText style={{ marginBottom: 20, textAlign: "center" }}>
+            আপনি এখন Cash Withdraw এর জন্য Request পাঠানোর উপযোগী
+          </StyledText>
+          <StyledButton width={"md"} onPress={hideRedeem}>
+            ঠিক আছে
+          </StyledButton>
+        </View>
       </ContentModal>
 
       <Divider />
