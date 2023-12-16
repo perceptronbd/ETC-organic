@@ -109,7 +109,7 @@ export const StyledButton = ({
       )}
       textColor={textColor}
       maxFontSizeMultiplier={1}
-      labelStyle={tw.style(textSize)}
+      labelStyle={tw.style(textSize, { fontFamily: "mon" })}
       rippleColor={COLOR.tertiary}
       {...props}
     >
