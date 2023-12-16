@@ -8,7 +8,7 @@ import { StyledText } from "../texts/StyledText";
 export const GoBack = ({ children, route }) => {
   return (
     <Pressable
-      style={tailwind`my-2 flex-row items-center px-2`}
+      style={tailwind`flex-row items-center`}
       onPress={() => router.replace(route)}
     >
       <Ionicons name="md-chevron-back-sharp" size={24} color="black" />

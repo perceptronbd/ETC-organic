@@ -11,6 +11,7 @@ export { CustomDrawerContent } from "./drawer/CustomDrawerContent";
 //carousel
 export { Carousel } from "./carousel/Carousel";
 //cards
+export { BankInfoCard } from "./cards/BankInfoCard";
 export { CartCard } from "./cards/CartCard";
 export { OrderCard } from "./cards/OrderCard";
 export { ProductCard } from "./cards/ProductCard";
