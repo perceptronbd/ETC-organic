@@ -31,7 +31,7 @@ const Layout = () => {
         }}
       >
         <Tabs.Screen
-          name="wallet"
+          name="(wallet)"
           options={{
             headerTitle: "Wallet",
             headerStyle: { backgroundColor: COLOR.background, elevation: 0 },
@@ -50,8 +50,9 @@ const Layout = () => {
             ),
           }}
         />
+
         <Tabs.Screen
-          name="index"
+          name="home"
           options={{
             title: "Home",
             headerStyle: { backgroundColor: COLOR.background, elevation: 0 },
