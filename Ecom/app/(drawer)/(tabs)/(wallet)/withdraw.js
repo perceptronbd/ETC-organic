@@ -11,6 +11,7 @@ import {
   StyledText,
 } from "../../../../components";
 import COLOR from "../../../../constants/COLOR";
+import { bankInfo } from "../../../../constants/mockData";
 
 const withdraw = () => {
   return (
@@ -92,26 +93,14 @@ const PaymentWithdraw = () => {
             gap: 10,
           }}
         >
-          <BankInfoCard
-            bank={"Islami Bank"}
-            branch={"Mirput"}
-            acc={"4988459739892"}
-          />
-          <BankInfoCard
-            bank={"Islami Bank"}
-            branch={"Mirput"}
-            acc={"4988459739892"}
-          />
-          <BankInfoCard
-            bank={"Islami Bank"}
-            branch={"Mirput"}
-            acc={"4988459739892"}
-          />
-          <BankInfoCard
-            bank={"Islami Bank"}
-            branch={"Mirput"}
-            acc={"4988459739892"}
-          />
+          {bankInfo.map((item) => (
+            <BankInfoCard
+              key={item.id}
+              bank={item.bank}
+              branch={item.branch}
+              acc={item.acc}
+            />
+          ))}
         </ScrollView>
       </View>
     </View>
