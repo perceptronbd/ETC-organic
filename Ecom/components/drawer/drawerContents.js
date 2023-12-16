@@ -7,6 +7,13 @@ export const drawerContents = [
     route: "/(tabs)/profile",
   },
   {
+    labal: "Home",
+    icon: "home-outline",
+    iconLibrary: "Ionicons",
+    pathName: "/home",
+    route: "/(tabs)/home",
+  },
+  {
     labal: "Refer & Earn Program",
     icon: "people-circle-outline",
     iconLibrary: "Ionicons",
