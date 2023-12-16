@@ -102,10 +102,10 @@ const CSBbalance = ({ onRedeem, onWithdraw }) => {
       </StyledText>
       {/* Buttons */}
       <View style={tailwind`flex-row justify-between gap-2`}>
-        <StyledButton width={"20"} onPress={onRedeem}>
+        <StyledButton width={"28"} onPress={onRedeem}>
           Redeem
         </StyledButton>
-        <StyledButton width={"72"} onPress={onWithdraw}>
+        <StyledButton width={"64"} onPress={onWithdraw}>
           Request to Withdraw
         </StyledButton>
       </View>
