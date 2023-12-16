@@ -6,7 +6,7 @@ import tailwind from "twrnc";
 import COLOR from "../../constants/COLOR";
 import { StyledText } from "../texts/StyledText";
 
-export const BankInfoCard = ({ id, bank, branch, acc }) => {
+export const BankInfoCard = ({ id, bank, branch, acc, deleteBankInfo }) => {
   return (
     <View
       style={tailwind`border bg-white border-[${COLOR.neutral}] h-40 w-60 rounded-lg p-2`}
@@ -19,6 +19,7 @@ export const BankInfoCard = ({ id, bank, branch, acc }) => {
           color={COLOR.neutralDark}
           onPress={() => {
             console.log(`deleted ${bank}`);
+            deleteBankInfo(id);
           }}
         />
       </View>

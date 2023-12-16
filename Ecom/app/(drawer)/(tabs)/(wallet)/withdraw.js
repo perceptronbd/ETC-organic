@@ -13,7 +13,7 @@ import {
   StyledText,
 } from "../../../../components";
 import COLOR from "../../../../constants/COLOR";
-import { bankInfo } from "../../../../constants/mockData";
+import { bankInfo as bankData } from "../../../../constants/mockData";
 import { useModal } from "../../../../hooks/useModal";
 
 const withdraw = () => {
@@ -51,11 +51,13 @@ const withdraw = () => {
   };
 
   return (
-    <View style={tailwind`flex-1 justify-between  px-4 pt-4`}>
-      <GoBack route={"/(drawer)/(tabs)/(wallet)"}>উত্তোলন</GoBack>
-      <BalanceWithdraw />
-      <Divider />
-      <PaymentWithdraw onBkash={onBkash} onNagad={onNagad} />
+    <View style={tailwind`flex-1 justify-between px-3 pt-4`}>
+      <View>
+        <GoBack route={"/(drawer)/(tabs)/(wallet)"}>উত্তোলন</GoBack>
+        <BalanceWithdraw />
+        <Divider />
+        <PaymentWithdraw onBkash={onBkash} onNagad={onNagad} />
+      </View>
       <ContentModal visible={isBkash} hideModal={hideBkash}>
         <View style={tailwind`flex items-center justify-center`}>
           <StyledText variant="titleLarge" type="b">
@@ -129,13 +131,17 @@ const BalanceWithdraw = () => {
 };
 
 const PaymentWithdraw = ({ onBkash, onNagad }) => {
-  const [selectedBankId, setSelectedBankId] = React.useState(null);
+  const [bankInfo, setBankInfo] = React.useState(bankData);
+  const [selectedBank, setSelectedBank] = React.useState(null);
+
+  const deleteBankInfo = (id) => {
+    setBankInfo(bankInfo.filter((item) => item.id !== id));
+    if (selectedBank === id) {
+      setSelectedBank(null);
+    }
+  };
 
   const [bank, setBank] = React.useState("delivery");
-
-  const handleBankSelection = (bankId) => {
-    setSelectedBankId((prev) => (prev === bankId ? null : bankId));
-  };
 
   return (
     <View style={tailwind`flex py-4`}>
@@ -185,8 +191,7 @@ const PaymentWithdraw = ({ onBkash, onNagad }) => {
                 bank={item.bank}
                 branch={item.branch}
                 acc={item.acc}
-                isSelected={selectedBankId === item.id}
-                setSelection={handleBankSelection}
+                deleteBankInfo={deleteBankInfo}
               />
             ))}
           </ScrollView>
