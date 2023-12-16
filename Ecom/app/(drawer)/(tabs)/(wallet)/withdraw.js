@@ -2,7 +2,7 @@ import { router } from "expo-router";
 import React from "react";
 import { Image, Pressable, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { Divider } from "react-native-paper";
+import { Divider, RadioButton } from "react-native-paper";
 import tailwind from "twrnc";
 import {
   BankInfoCard,
@@ -131,6 +131,8 @@ const BalanceWithdraw = () => {
 const PaymentWithdraw = ({ onBkash, onNagad }) => {
   const [selectedBankId, setSelectedBankId] = React.useState(null);
 
+  const [bank, setBank] = React.useState("delivery");
+
   const handleBankSelection = (bankId) => {
     setSelectedBankId((prev) => (prev === bankId ? null : bankId));
   };
@@ -166,24 +168,29 @@ const PaymentWithdraw = ({ onBkash, onNagad }) => {
         <StyledText variant="bodySmall" type="b" color={COLOR.neutralDark}>
           Bank
         </StyledText>
-        <ScrollView
-          horizontal
-          contentContainerStyle={{
-            gap: 10,
-          }}
+        <RadioButton.Group
+          onValueChange={(newValue) => setBank(newValue)}
+          value={bank}
         >
-          {bankInfo.map((item) => (
-            <BankInfoCard
-              key={item.id}
-              id={item.id}
-              bank={item.bank}
-              branch={item.branch}
-              acc={item.acc}
-              isSelected={selectedBankId === item.id}
-              setSelection={handleBankSelection}
-            />
-          ))}
-        </ScrollView>
+          <ScrollView
+            horizontal
+            contentContainerStyle={{
+              gap: 10,
+            }}
+          >
+            {bankInfo.map((item) => (
+              <BankInfoCard
+                key={item.id}
+                id={item.id}
+                bank={item.bank}
+                branch={item.branch}
+                acc={item.acc}
+                isSelected={selectedBankId === item.id}
+                setSelection={handleBankSelection}
+              />
+            ))}
+          </ScrollView>
+        </RadioButton.Group>
         <StyledButton variant={"outline"}>Add New Bank Account</StyledButton>
       </View>
     </View>

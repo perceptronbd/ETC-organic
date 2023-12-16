@@ -1,43 +1,18 @@
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { View } from "react-native";
-import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { RadioButton } from "react-native-paper";
 import tailwind from "twrnc";
 import COLOR from "../../constants/COLOR";
 import { StyledText } from "../texts/StyledText";
 
-export const BankInfoCard = ({
-  id,
-  bank,
-  branch,
-  acc,
-  isSelected,
-  setSelection,
-}) => {
-  const handleSelection = () => {
-    console.log(`selected ${bank}`);
-    console.log(isSelected);
-    setSelection(id);
-  };
+export const BankInfoCard = ({ id, bank, branch, acc }) => {
   return (
     <View
-      style={tailwind`border bg-white border-[${COLOR.neutral}] w-60 rounded-lg p-2`}
+      style={tailwind`border bg-white border-[${COLOR.neutral}] h-40 w-60 rounded-lg p-2`}
     >
       <View style={tailwind`flex-row justify-between`}>
-        <BouncyCheckbox
-          size={20}
-          fillColor={COLOR.tertiary}
-          isChecked={isSelected}
-          innerIconStyle={{
-            borderWidth: 2,
-
-            borderColor: isSelected ? COLOR.tertiary : COLOR.neutral,
-          }}
-          textStyle={{
-            textDecorationLine: "none",
-          }}
-          onPress={handleSelection}
-        />
+        <RadioButton value={id} color={COLOR.tertiary} />
         <AntDesign
           name="close"
           size={20}
