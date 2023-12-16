@@ -26,7 +26,7 @@ const confirmOrder = () => {
   };
 
   const navigateToMyOrder = () => {
-    router.push("/(drawer)/(tabs)/");
+    router.push("/(drawer)/(tabs)/home");
     setVisible(false);
   };
 
