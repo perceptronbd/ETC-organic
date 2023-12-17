@@ -14,10 +14,13 @@ import {
 } from "../../../../components";
 import COLOR from "../../../../constants/COLOR";
 import { bankInfo as bankData } from "../../../../constants/mockData";
+import { useCustomToast } from "../../../../hooks";
 import { useModal } from "../../../../hooks/useModal";
 
 const withdraw = () => {
   const [paymentType, setPaymentType] = useState(""); //state value for payment type selection for withdraw
+
+  const showToast = useCustomToast();
 
   const {
     visible: isBkash,
@@ -36,12 +39,25 @@ const withdraw = () => {
   } = useModal();
 
   const openConfirmModal = () => {
-    showConfirmModal();
+    if (paymentType === "bkash") {
+      showBkash();
+    } else if (paymentType === "nagad") {
+      showNagad();
+    } else if (paymentType === "bank") {
+      showConfirmModal();
+    } else {
+      showToast({
+        description: "দয়া করে Payment সিলেক্ট করুন​।",
+        variant: "warning",
+      });
+    }
   };
 
   const goHome = () => {
     router.replace("/(drawer)/(tabs)/home");
     hideConfirmModal();
+    hideBkash();
+    hideNagad();
   };
 
   return (
@@ -62,7 +78,9 @@ const withdraw = () => {
           </StyledText>
           <StyledText>আপনার পার্সোনাল বিকাশ নাম্বার ইনপুট করুন</StyledText>
           <StyledInput mode={"outlined"} label={"Phone No."} />
-          <StyledButton width={"md"}>কনফার্ম</StyledButton>
+          <StyledButton width={"md"} onPress={goHome}>
+            কনফার্ম
+          </StyledButton>
         </View>
       </ContentModal>
       <ContentModal visible={isNagad} hideModal={hideNagad}>
@@ -72,7 +90,9 @@ const withdraw = () => {
           </StyledText>
           <StyledText>আপনার পার্সোনাল নগদ নাম্বার ইনপুট করুন</StyledText>
           <StyledInput mode={"outlined"} label={"Phone No."} />
-          <StyledButton width={"md"}>কনফার্ম</StyledButton>
+          <StyledButton width={"md"} onPress={goHome}>
+            কনফার্ম
+          </StyledButton>
         </View>
       </ContentModal>
       <ContentModal visible={isConfirmModal} hideModal={hideConfirmModal}>
@@ -93,6 +113,7 @@ const withdraw = () => {
           </StyledButton>
         </View>
       </ContentModal>
+
       <StyledButton onPress={openConfirmModal}>Withdraw Request</StyledButton>
     </View>
   );
