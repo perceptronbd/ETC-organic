@@ -127,8 +127,6 @@ const BalanceWithdraw = () => {
   );
 };
 
-//BUG: when a bank is selected and then bkash or nagad is selected, the selected bank is still selected
-
 const PaymentWithdraw = ({ paymentType, setPaymentType }) => {
   const [bankInfo, setBankInfo] = React.useState(bankData); //state value for bank info fetched from the server for the logged in user
   const [selectedBank, setSelectedBank] = React.useState(null); //state value for selected bank to withdraw
