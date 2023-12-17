@@ -1,5 +1,5 @@
 import { router } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import { Image, Pressable, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { Divider, RadioButton } from "react-native-paper";
@@ -17,6 +17,8 @@ import { bankInfo as bankData } from "../../../../constants/mockData";
 import { useModal } from "../../../../hooks/useModal";
 
 const withdraw = () => {
+  const [paymentType, setPaymentType] = useState(""); //state value for payment type selection for withdraw
+
   const {
     visible: isBkash,
     showModal: showBkash,
@@ -33,14 +35,6 @@ const withdraw = () => {
     hideModal: hideConfirmModal,
   } = useModal();
 
-  const onBkash = () => {
-    showBkash();
-  };
-
-  const onNagad = () => {
-    showNagad();
-  };
-
   const openConfirmModal = () => {
     showConfirmModal();
   };
@@ -56,7 +50,10 @@ const withdraw = () => {
         <GoBack route={"/(drawer)/(tabs)/(wallet)"}>উত্তোলন</GoBack>
         <BalanceWithdraw />
         <Divider />
-        <PaymentWithdraw onBkash={onBkash} onNagad={onNagad} />
+        <PaymentWithdraw
+          paymentType={paymentType}
+          setPaymentType={setPaymentType}
+        />
       </View>
       <ContentModal visible={isBkash} hideModal={hideBkash}>
         <View style={tailwind`flex items-center justify-center`}>
@@ -130,10 +127,30 @@ const BalanceWithdraw = () => {
   );
 };
 
-//TODO: selecting bank or mobile banking
-const PaymentWithdraw = ({ onBkash, onNagad }) => {
-  const [bankInfo, setBankInfo] = React.useState(bankData);
-  const [selectedBank, setSelectedBank] = React.useState(null);
+//BUG: when a bank is selected and then bkash or nagad is selected, the selected bank is still selected
+
+const PaymentWithdraw = ({ paymentType, setPaymentType }) => {
+  const [bankInfo, setBankInfo] = React.useState(bankData); //state value for bank info fetched from the server for the logged in user
+  const [selectedBank, setSelectedBank] = React.useState(null); //state value for selected bank to withdraw
+  const [bank, setBank] = React.useState(""); //state value for group selection of the bank accounts
+
+  const onBkash = () => {
+    setPaymentType("bkash"); //set the payment type to bkash
+  };
+
+  const onNagad = () => {
+    setPaymentType("nagad"); //set the payment type to nagad
+  };
+
+  const onSelectBank = (id) => {
+    //find the bank info from the bankInfo array with the id
+    const selectBank = bankInfo.find((item) => item.id === id);
+
+    setBank(id); //set the value of bank to the id of the selected bank for group selection
+
+    setSelectedBank((prev) => (prev === selectBank ? null : selectBank)); //set the selected bank to the selectedBank state
+    setPaymentType("bank"); //set the payment type to bank
+  };
 
   const deleteBankInfo = (id) => {
     setBankInfo(bankInfo.filter((item) => item.id !== id));
@@ -141,8 +158,6 @@ const PaymentWithdraw = ({ onBkash, onNagad }) => {
       setSelectedBank(null);
     }
   };
-
-  const [bank, setBank] = React.useState("delivery");
 
   return (
     <View style={tailwind`flex py-4`}>
@@ -158,14 +173,20 @@ const PaymentWithdraw = ({ onBkash, onNagad }) => {
             <Image
               alt="Image"
               source={require("../../../../assets/img/bKash.png")}
-              style={tailwind`h-20 w-28 rounded-lg`}
+              style={tailwind.style(`h-20 w-28 rounded-lg`, {
+                borderWidth: paymentType === "bkash" ? 2 : 0,
+                borderColor: COLOR.tertiary,
+              })}
             />
           </Pressable>
           <Pressable onPress={onNagad}>
             <Image
               alt="Image"
               source={require("../../../../assets/img/nagad.png")}
-              style={tailwind`h-20 w-28 rounded-lg`}
+              style={tailwind.style(`h-20 w-28 rounded-lg`, {
+                borderWidth: paymentType === "nagad" ? 2 : 0,
+                borderColor: COLOR.tertiary,
+              })}
             />
           </Pressable>
         </View>
@@ -175,10 +196,7 @@ const PaymentWithdraw = ({ onBkash, onNagad }) => {
         <StyledText variant="bodySmall" type="b" color={COLOR.neutralDark}>
           Bank
         </StyledText>
-        <RadioButton.Group
-          onValueChange={(newValue) => setBank(newValue)}
-          value={bank}
-        >
+        <RadioButton.Group onValueChange={onSelectBank} value={bank}>
           <ScrollView
             horizontal
             contentContainerStyle={{

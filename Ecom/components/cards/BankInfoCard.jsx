@@ -9,7 +9,7 @@ import { StyledText } from "../texts/StyledText";
 export const BankInfoCard = ({ id, bank, branch, acc, deleteBankInfo }) => {
   return (
     <View
-      style={tailwind`border bg-white border-[${COLOR.neutral}] h-40 w-60 rounded-lg p-2`}
+      style={tailwind`border bg-white border-[${COLOR.neutral}] h-36 w-60 rounded-lg p-2`}
     >
       <View style={tailwind`flex-row justify-between`}>
         <RadioButton value={id} color={COLOR.tertiary} />
