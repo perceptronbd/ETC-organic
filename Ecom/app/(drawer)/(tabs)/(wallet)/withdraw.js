@@ -130,6 +130,7 @@ const BalanceWithdraw = () => {
   );
 };
 
+//TODO: selecting bank or mobile banking
 const PaymentWithdraw = ({ onBkash, onNagad }) => {
   const [bankInfo, setBankInfo] = React.useState(bankData);
   const [selectedBank, setSelectedBank] = React.useState(null);
