@@ -9,7 +9,7 @@ export const GoBack = ({ children, route }) => {
   return (
     <Pressable
       style={tailwind`flex-row items-center`}
-      onPress={() => router.replace(route)}
+      onPress={() => router.push(route)}
     >
       <Ionicons name="md-chevron-back-sharp" size={24} color="black" />
       <StyledText type="b">{children}</StyledText>
