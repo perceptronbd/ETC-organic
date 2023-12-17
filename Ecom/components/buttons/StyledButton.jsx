@@ -9,6 +9,7 @@ export const StyledButton = ({
   width,
   height,
   size,
+  rounded = "xl",
   children,
   disabled,
   ...props
@@ -88,7 +89,7 @@ export const StyledButton = ({
     <Button
       disabled={disabled}
       style={tw.style(
-        `mt-2 items-center justify-center rounded-xl `,
+        `mt-2 items-center justify-center rounded-${rounded} `,
         variant === "outline" || variant === "ghost"
           ? ""
           : disabled
