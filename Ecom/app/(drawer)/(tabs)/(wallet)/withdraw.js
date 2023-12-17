@@ -136,10 +136,12 @@ const PaymentWithdraw = ({ paymentType, setPaymentType }) => {
 
   const onBkash = () => {
     setPaymentType("bkash"); //set the payment type to bkash
+    setBank(""); //set the value of bank to empty string for group selection
   };
 
   const onNagad = () => {
     setPaymentType("nagad"); //set the payment type to nagad
+    setBank(""); //set the value of bank to empty string for group selection
   };
 
   const onSelectBank = (id) => {
