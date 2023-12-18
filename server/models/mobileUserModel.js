@@ -9,6 +9,7 @@ const mobileUserSchema = new mongoose.Schema({
     CSB: {type: Number},
     totalCSB: {type: Number},
     Points: {type: Number},
+    taka: {type:Number}
 });
 
 module.exports = mongoose.model('MobileUser', mobileUserSchema);
