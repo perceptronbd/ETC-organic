@@ -6,13 +6,14 @@ export function StyledText({
   style,
   variant = "bodyMedium",
   type = "regular",
+  color,
 }) {
   return (
     <Text
       variant={variant}
       style={{
         fontFamily: type === "b" ? "mon-b" : type === "m" ? "mon-m" : "mon",
-        textAlign: "justify",
+        color: color ? color : "black",
         ...style,
       }}
     >

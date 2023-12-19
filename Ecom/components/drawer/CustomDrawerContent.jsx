@@ -49,9 +49,11 @@ export const CustomDrawerContent = (props) => {
         labelStyle={{
           marginLeft: -20,
           color: item.pathName === pathName ? "white" : "black",
+          fontFamily: "mon",
         }}
         style={{
           backgroundColor: item.pathName === pathName ? COLOR.secondary : null,
+          borderRadius: 10,
         }}
         icon={({ size }) =>
           renderIcon({

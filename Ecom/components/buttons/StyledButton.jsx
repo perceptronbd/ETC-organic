@@ -9,7 +9,9 @@ export const StyledButton = ({
   width,
   height,
   size,
+  rounded = "xl",
   children,
+  disabled,
   ...props
 }) => {
   const textColor =
@@ -85,9 +87,14 @@ export const StyledButton = ({
 
   return (
     <Button
-      buttonColor={variant === "outline" || variant === "ghost" ? "" : color}
+      disabled={disabled}
       style={tw.style(
-        "mt-2 items-center justify-center rounded-xl",
+        `mt-2 items-center justify-center rounded-${rounded} `,
+        variant === "outline" || variant === "ghost"
+          ? ""
+          : disabled
+            ? `bg-[${COLOR.neutral}]`
+            : `bg-[${color}]`,
         determineWidth(),
         determineHeight(),
         determineSize(),
@@ -103,7 +110,7 @@ export const StyledButton = ({
       )}
       textColor={textColor}
       maxFontSizeMultiplier={1}
-      labelStyle={tw.style(textSize)}
+      labelStyle={tw.style(textSize, { fontFamily: "mon" })}
       rippleColor={COLOR.tertiary}
       {...props}
     >

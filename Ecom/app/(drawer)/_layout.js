@@ -8,11 +8,16 @@ export default function Layout() {
       screenOptions={{
         headerTitle: "",
         headerShown: false,
-        headerTransparent: true,
       }}
     >
       <Drawer.Screen
         name="points"
+        options={{
+          headerShown: true,
+        }}
+      />
+      <Drawer.Screen
+        name="referEarn"
         options={{
           headerShown: true,
         }}

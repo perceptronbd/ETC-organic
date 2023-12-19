@@ -10,7 +10,7 @@ import {
 import { favoriteProduct } from "../../../constants/mockData";
 import { useCustomToast } from "../../../hooks";
 
-export default function index() {
+export default function Page() {
   const showToast = useCustomToast();
 
   return (

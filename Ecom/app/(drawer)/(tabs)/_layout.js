@@ -11,7 +11,6 @@ const Layout = () => {
         screenOptions={{
           tabBarActiveTintColor: COLOR.tertiary,
           tabBarShowLabel: false,
-
           headerTitle: () => (
             <HeaderComponent
               imgURL={require("../../../assets/img/user.png")}
@@ -31,7 +30,7 @@ const Layout = () => {
         }}
       >
         <Tabs.Screen
-          name="wallet"
+          name="(wallet)"
           options={{
             headerTitle: "Wallet",
             headerStyle: { backgroundColor: COLOR.background, elevation: 0 },
@@ -51,7 +50,7 @@ const Layout = () => {
           }}
         />
         <Tabs.Screen
-          name="index"
+          name="home"
           options={{
             title: "Home",
             headerStyle: { backgroundColor: COLOR.background, elevation: 0 },
@@ -73,9 +72,8 @@ const Layout = () => {
         <Tabs.Screen
           name="profile"
           options={{
-            title: "Profile",
+            headerTitle: "Profile",
             headerStyle: { backgroundColor: COLOR.background, elevation: 0 },
-            headerShown: false,
             tabBarIcon: ({ size, color }) => (
               <Ionicons name="person-outline" size={size} color={color} />
             ),

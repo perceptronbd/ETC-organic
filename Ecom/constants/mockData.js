@@ -55,3 +55,69 @@ export const favoriteProduct = [
     favorite: false,
   },
 ];
+
+export const earnedCSB = [
+  {
+    id: 0,
+    date: "12/12/2020",
+    time: "12:00 PM",
+    csb: "50",
+    percentage: "5",
+  },
+  {
+    id: 1,
+    date: "12/12/2020",
+    time: "12:00 PM",
+    csb: "50",
+    percentage: "5",
+  },
+  {
+    id: 2,
+    date: "12/12/2020",
+    time: "12:00 PM",
+    csb: "50",
+    percentage: "5",
+  },
+  {
+    id: 3,
+    date: "12/12/2020",
+    time: "12:00 PM",
+    csb: "50",
+    percentage: "5",
+  },
+  {
+    id: 4,
+    date: "12/12/2020",
+    time: "12:00 PM",
+    csb: "50",
+    percentage: "5",
+  },
+  {
+    id: 5,
+    date: "12/12/2020",
+    time: "12:00 PM",
+    csb: "50",
+    percentage: "5",
+  },
+];
+
+export const bankInfo = [
+  {
+    id: 0,
+    bank: "Islami Bank",
+    branch: "Mirpur",
+    acc: "4988459739892",
+  },
+  {
+    id: 1,
+    bank: "Duthc Bangla Bank",
+    branch: "Bashundhara",
+    acc: "4988459739892",
+  },
+  {
+    id: 2,
+    bank: "Janata Bank",
+    branch: "Shibchar",
+    acc: "4988459739892",
+  },
+];
