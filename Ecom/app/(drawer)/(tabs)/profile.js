@@ -1,12 +1,13 @@
 import { View } from "native-base";
 import React, { useState } from "react";
-import { Image, Text } from "react-native";
+import { Image } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import { ScrollView } from "react-native-gesture-handler";
-import { Avatar, Divider } from "react-native-paper";
+import { Avatar, DataTable, Divider } from "react-native-paper";
 import tailwind from "twrnc";
 import { StyledButton, StyledText } from "../../../components";
 import COLOR from "../../../constants/COLOR";
+import { formatNumbers } from "../../../utils/formatNumbers";
 
 const addressInput = [
   {
@@ -148,43 +149,16 @@ const addressInput = [
 
 export default function Page() {
   return (
-    <View style={tailwind`flex-1 px-3 py-4`}>
+    <ScrollView style={tailwind`flex-1 px-3 py-4`}>
       <View style={tailwind`flex items-center rounded-xl bg-white p-2`}>
         <Profile />
         <CSBandPoints />
-        <Divider
-          style={tailwind`border-0.5 w-full border border-[${COLOR.neutral}]`}
-        />
+        <Divider style={tailwind`w-full border border-[${COLOR.neutral}]`} />
         <NIDandAddress />
         <StyledButton width={"md"}>তথ্য সেভ করুন</StyledButton>
       </View>
-      <StyledText
-        variant="titleMedium"
-        type="b"
-        style={{
-          marginTop: 20,
-          marginLeft: 10,
-        }}
-      >
-        অর্ডার সমূহ
-      </StyledText>
-      <ScrollView
-        contentContainerStyle={{
-          padding: 20,
-          alignItems: "center",
-          rowGap: 20,
-        }}
-      >
-        <Text>profile</Text>
-        <Text>profile</Text>
-        <Text>profile</Text>
-        <Text>profile</Text>
-        <Text>profile</Text>
-        <Text>profile</Text>
-        <Text>profile</Text>
-        <Text>profile</Text>
-      </ScrollView>
-    </View>
+      <Orders />
+    </ScrollView>
   );
 }
 
@@ -285,6 +259,115 @@ const NIDandAddress = () => {
             />
           ) : null;
         })}
+      </View>
+    </View>
+  );
+};
+
+const Orders = () => {
+  return (
+    <View>
+      <StyledText
+        variant="titleMedium"
+        type="b"
+        style={{
+          marginTop: 20,
+          marginLeft: 10,
+        }}
+      >
+        অর্ডার সমূহ
+      </StyledText>
+      <View
+        style={{
+          paddingHorizontal: 10,
+          paddingTop: 10,
+          maxHeight: 700,
+          rowGap: 20,
+        }}
+      >
+        <StyledText
+          variant="bodySmall"
+          style={{
+            marginBottom: -10,
+          }}
+        >
+          পেন্ডিং অর্ডার
+        </StyledText>
+        <ScrollView
+          contentContainerStyle={{
+            rowGap: 10,
+          }}
+        >
+          <OrderCard />
+          <OrderCard />
+          <OrderCard />
+        </ScrollView>
+        <StyledText
+          variant="bodySmall"
+          style={{
+            marginBottom: -10,
+          }}
+        >
+          কমপ্লিটেড অর্ডার
+        </StyledText>
+        <ScrollView
+          contentContainerStyle={{
+            rowGap: 10,
+          }}
+        >
+          <OrderCard />
+          <OrderCard />
+          <OrderCard />
+        </ScrollView>
+      </View>
+    </View>
+  );
+};
+
+const OrderCard = () => {
+  return (
+    <View style={tailwind`rounded-md bg-white`}>
+      <DataTable>
+        <DataTable.Header style={{}}>
+          <DataTable.Title style={{ flex: 2 }}>Item Name</DataTable.Title>
+          <DataTable.Title numeric>QTY</DataTable.Title>
+          <DataTable.Title numeric>Price</DataTable.Title>
+          <DataTable.Title numeric>T. Price</DataTable.Title>
+        </DataTable.Header>
+        <DataTable.Row>
+          <DataTable.Cell style={{ flex: 2 }}>তুলশী বীজ জুস</DataTable.Cell>
+          <DataTable.Cell numeric>{formatNumbers(2)}</DataTable.Cell>
+          <DataTable.Cell numeric>৳ {formatNumbers(420)}</DataTable.Cell>
+          <DataTable.Cell numeric>৳ {formatNumbers(840)}</DataTable.Cell>
+        </DataTable.Row>
+        <DataTable.Row>
+          <DataTable.Cell style={{ flex: 2 }}>তুলশী বীজ জুস</DataTable.Cell>
+          <DataTable.Cell numeric>{formatNumbers(2)}</DataTable.Cell>
+          <DataTable.Cell numeric>৳ {formatNumbers(420)}</DataTable.Cell>
+          <DataTable.Cell numeric>৳ {formatNumbers(840)}</DataTable.Cell>
+        </DataTable.Row>
+      </DataTable>
+      <Divider />
+      <View style={tailwind`p-4`}>
+        <View style={tailwind`mb-4 flex-row justify-between`}>
+          <StyledText>Sub Total</StyledText>
+          <StyledText type="b">৳ {formatNumbers(1840)}</StyledText>
+        </View>
+        <View style={tailwind`flex-row justify-between`}>
+          <StyledText>+Delivery Charge</StyledText>
+          <StyledText type="b">৳ {formatNumbers(60)}</StyledText>
+        </View>
+      </View>
+      <Divider />
+      <View style={tailwind`p-4`}>
+        <View style={tailwind`flex-row justify-between`}>
+          <StyledText variant="titleSmall" type="b">
+            Grand Total
+          </StyledText>
+          <StyledText variant="titleMedium" type="b">
+            ৳ {formatNumbers(1840)}
+          </StyledText>
+        </View>
       </View>
     </View>
   );
