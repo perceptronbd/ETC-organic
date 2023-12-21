@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler');
 const User = require("../../models/userModel");
 
 const productManagement = asyncHandler(async (req, res, next) => {
-    const userId = req.params.id;
+    const userId = userId
     console.log(userId);
     const userData = await User.findById(userId);
 
@@ -22,7 +22,7 @@ const productManagement = asyncHandler(async (req, res, next) => {
 });
 
 const salesManagement = asyncHandler(async (req, res, next) => {
-    const userId = req.params.userId;
+    const userId = req.userId;
     const userData = await User.findById(userId);
 
     if (!userData) {
