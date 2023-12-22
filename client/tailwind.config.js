@@ -19,7 +19,7 @@ module.exports = {
       colors: {
         background: "hsl(0, 0%, 95%)",
         foreground: "hsl(0, 0%, 100%)",
-        textColor: { DEFAULT: "hsl(0, 0%, 20%)", light: "hsl(0, 0%, 16%)" },
+        textColor: { DEFAULT: "hsl(0, 0%, 20%)", light: "hsl(0, 0%, 30%)" },
         primary: {
           DEFAULT: "hsl(150, 85%, 31%)",
           light: "hsl(150, 50%, 60%)",
@@ -30,7 +30,7 @@ module.exports = {
         },
         accent: {
           DEFAULT: "hsl(266, 100%, 67%)",
-          secondary: "hsl(266, 100%, 80%)",
+          light: "hsl(266, 100%, 80%)",
         },
         destructive: {
           DEFAULT: "hsl(0 62.8% 30.6%)",
