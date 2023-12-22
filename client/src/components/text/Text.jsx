@@ -1,24 +1,40 @@
 import React from "react";
 import { cw } from "../../utils/cw";
 
-export const Text = (props) => {
-  const { children, className } = props;
+export const Text = ({ variant = "bodyMedium", type = "normal", children, className }) => {
+  const Component =
+    (variant === "headerLarge" && "h1") ||
+    (variant === "headerMedium" && "h2") ||
+    (variant === "headerSmall" && "h3") ||
+    (variant === "titleLarge" && "h4") ||
+    (variant === "titleMedium" && "h5") ||
+    (variant === "titleSmall" && "h6") ||
+    (variant === "bodyMedium" && "p") ||
+    (variant === "bodySmall" && "p");
+
   return (
-    <p
+    <Component
       className={cw(
+        "text-textColor",
         {
-          "text-2xl font-bold": props.h1,
-          "text-xl font-semibold": props.h2,
-          "text-lg font-semibold": props.h3,
-          "text-base font-semibold": props.h4,
-          "text-base font-medium": props.h5,
-          "text-base font-normal": props.h6,
-          "text-sm font-normal": props.p,
+          "text-7xl": variant === "headerLarge",
+          "text-5xl": variant === "headerMedium",
+          "text-3xl": variant === "headerSmall",
+          "text-2xl": variant === "titleLarge",
+          "text-xl": variant === "titleMedium",
+          "text-lg": variant === "titleSmall",
+          "text-base": variant === "bodyMedium",
+          "text-sm": variant === "bodySmall",
+        },
+        {
+          "font-bold": type === "b",
+          "font-medium": type === "m",
+          "font-normal": type === "normal",
         },
         className
       )}
     >
       {children}
-    </p>
+    </Component>
   );
 };

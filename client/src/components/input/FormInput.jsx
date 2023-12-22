@@ -28,7 +28,9 @@ export const FormInput = React.forwardRef(
             {placeholder}
           </label>
         )}
-        <span className="mt-2 hidden w-fit gap-2 rounded-full bg-red-200 px-1 py-0.5 text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
+        <span
+          className={`mt-1 hidden w-fit gap-2 rounded-full bg-red-200 px-1 py-0.5 text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block`}
+        >
           <div className="flex gap-2">
             <AlertCircle size={15} className="text-red-500" />
             {errorMessage}

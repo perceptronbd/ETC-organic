@@ -3,7 +3,7 @@ import React from "react";
 import { cw } from "../../utils/cw";
 
 export const Input = React.forwardRef(
-  ({ className, id, name, placeholder, type, onChange, errorMessage, ...props }, ref) => {
+  ({ className, id, name, placeholder, type, errorMessage, ...props }, ref) => {
     return (
       <div className="relative my-2 ">
         <input
@@ -13,7 +13,6 @@ export const Input = React.forwardRef(
           placeholder={placeholder}
           autoComplete="off"
           {...props}
-          onChange={onChange}
           className={cw(
             "peer block h-10 w-72 rounded-lg border p-2 text-textColor-light placeholder:text-transparent focus:border-primary focus:text-textColor focus:outline-none focus:ring-1",
             className
