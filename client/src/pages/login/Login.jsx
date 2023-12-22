@@ -40,24 +40,16 @@ export const Login = () => {
   };
 
   return (
-    <div className="w-full h-screen flex justify-center items-center">
+    <div className="w-full h-screen flex justify-center items-center bg-muted">
       <div className="bg-foreground w-[50%] h-[90%] 3xl:w-[752px] 3xl:h-[630px] p-8 rounded-[40px] flex justify-center items-center">
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col w-full h-full items-center"
-        >
-          <Text className="w-32 h-32 m-16 bg-background text-accent-secondary rounded-md flex flex-col justify-center items-center font-bold text-5xl">
+        <form onSubmit={handleSubmit} className="flex flex-col w-full h-full items-center">
+          <Text className="w-32 h-32 m-16 bg-primary text-accent-secondary rounded-md flex flex-col justify-center items-center font-bold text-5xl">
             ETC <span className="text-accent-primary text-2xl">organic</span>
           </Text>
           <div className="flex flex-col ">
             <Text h3>Login</Text>
             {inputs.map((input) => (
-              <FormInput
-                {...input}
-                key={input.id}
-                onChange={onChange}
-                label={input.placeholder}
-              />
+              <FormInput {...input} key={input.id} onChange={onChange} label={input.placeholder} />
             ))}
           </div>
           <hr className="py-4 " />
