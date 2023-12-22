@@ -19,7 +19,7 @@ module.exports = {
       colors: {
         background: "hsl(0, 0%, 95%)",
         foreground: "hsl(0, 0%, 100%)",
-        textColor: { DEFAULT: "hsl(0, 0%, 20%)", light: "hsl(0, 0%, 30%)" },
+        textColor: { DEFAULT: "hsl(0, 0%, 20%)", light: "hsl(0, 0%, 40%)" },
         primary: {
           DEFAULT: "hsl(150, 85%, 31%)",
           light: "hsl(150, 50%, 60%)",
