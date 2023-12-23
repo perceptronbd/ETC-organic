@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { IoIosArrowBack } from "react-icons/io";
 import {
   Button,
   Checkbox,
@@ -8,15 +9,7 @@ import {
   SelectInput,
   Text,
 } from "../../components";
-import { IoIosArrowBack } from "react-icons/io";
-
-const categories = [
-  { value: "1", label: "Category 1" },
-  { value: "2", label: "Category 2" },
-  { value: "3", label: "Category 3" },
-  { value: "4", label: "Category 4" },
-  { value: "5", label: "Category 5" },
-];
+import { selectBranch, selectDesignation } from "../../const/mockData";
 
 export const AddEmployee = () => {
   const [fullAccess, setFullAccess] = useState(false);
@@ -44,10 +37,7 @@ export const AddEmployee = () => {
     if (name === "fullAccess") {
       setFullAccess(checked);
       const updatedPermissions = Object.fromEntries(
-        Object.keys(formValues.permissions).map((permission) => [
-          permission,
-          checked,
-        ])
+        Object.keys(formValues.permissions).map((permission) => [permission, checked])
       );
       setFormValues({ ...formValues, permissions: updatedPermissions });
     } else {
@@ -70,18 +60,14 @@ export const AddEmployee = () => {
 
   return (
     <Container>
-      <div className="flex items-center justify-between mb-4">
+      <div className="mb-4 flex items-center justify-between">
         <Text h1>Add Employee</Text>
-        <LinkButton className={`w-auto h-8`} to={-1} icon={IoIosArrowBack}>
+        <LinkButton className={`h-8 w-auto`} to={-1} icon={IoIosArrowBack}>
           Back
         </LinkButton>
       </div>
-      <form
-        action="submit"
-        onSubmit={onSubmit}
-        className="bg-white rounded-lg p-4"
-      >
-        <div className="grid grid-cols-2 gap-x-8 w-[80%]">
+      <form action="submit" onSubmit={onSubmit} className="rounded-lg bg-white p-4">
+        <div className="grid w-[80%] grid-cols-2 gap-x-8">
           <FormInput
             id={"name"}
             label={"Employee Name"}
@@ -110,14 +96,7 @@ export const AddEmployee = () => {
             required
             onChange={onChange}
           />
-          <SelectInput
-            id={"designation"}
-            label={"Designation"}
-            name={"designation"}
-            required
-            selectOpts={categories}
-            onChange={onChange}
-          />
+          <SelectInput {...selectDesignation} />
         </div>
         <div className="grid grid-rows-2">
           <FormInput
@@ -129,20 +108,10 @@ export const AddEmployee = () => {
             required
             onChange={onChange}
           />
-          <SelectInput
-            label={"Branch"}
-            name={"branch"}
-            required
-            selectOpts={categories}
-            onChange={onChange}
-          />
+          <SelectInput {...selectBranch} />
         </div>
-        <section className="relative border rounded-lg p-4 w-72 my-4">
-          <Text
-            className={
-              "absolute -top-3 px-1 text-sm text-textColor-light bg-white "
-            }
-          >
+        <section className="relative my-4 w-72 rounded-lg border p-4">
+          <Text className={"absolute -top-3 bg-white px-1 text-sm text-textColor-light "}>
             Permissions
           </Text>
           <div className="flex flex-col">

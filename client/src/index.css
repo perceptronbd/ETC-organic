@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    @apply font-montserrat;
+    @apply font-montserrat text-textColor;
     --radius: 0.5rem;
   }
 }

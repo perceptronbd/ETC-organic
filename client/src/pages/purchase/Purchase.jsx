@@ -1,40 +1,6 @@
 import React, { useState } from "react";
-import {
-  Text,
-  Container,
-  FormInput,
-  IncDecButton,
-  SelectInput,
-  Button,
-} from "../../components";
-
-const branch = [
-  { id: "1", name: "Dagon" },
-  { id: "2", name: "Feni" },
-];
-
-const products = [
-  {
-    id: "1",
-    name: "Product 1",
-    price: "1000",
-  },
-  {
-    id: "2",
-    name: "Product 2",
-    price: "2000",
-  },
-  {
-    id: "3",
-    name: "Product 3",
-    price: "3000",
-  },
-  {
-    id: "4",
-    name: "Product 4",
-    price: "4000",
-  },
-];
+import { Button, Container, FormInput, IncDecButton, SelectInput, Text } from "../../components";
+import { selectBranch, selectItem } from "../../const/mockData";
 export const Purchase = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -57,10 +23,10 @@ export const Purchase = () => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
 
-    if (name === "productName") {
-      const selected = products.find((product) => product.name === value);
-      setSelectedProduct(selected);
-    }
+    // if (name === "productName") {
+    //   const selected = products.find((product) => product.name === value);
+    //   setSelectedProduct(selected);
+    // }
   };
 
   const onSubmit = (e) => {
@@ -72,16 +38,9 @@ export const Purchase = () => {
     <Container>
       <Text h1>Purchase</Text>
       <form action="submit" onSubmit={onSubmit} className="w-full">
-        <div className="grid grid-cols-2 gap-2 w-full h-[450px] p-2">
-          <div className="bg-foreground grid grid-rows-6 gap-y-2 rounded-xl w-full p-4">
-            <SelectInput
-              id={"productName"}
-              label={"Product"}
-              name={"productName"}
-              selectOpts={products}
-              onChange={onChange}
-              required
-            />
+        <div className="grid h-[450px] w-full grid-cols-2 gap-2 p-2">
+          <div className="grid w-full grid-rows-6 gap-y-2 rounded-xl bg-foreground p-4">
+            <SelectInput {...selectItem} />
             <IncDecButton
               name={"quantity"}
               value={quantity}
@@ -111,15 +70,8 @@ export const Purchase = () => {
               required
             />
           </div>
-          <div className="bg-foreground grid grid-rows-6 gap-y-2 rounded-xl w-full p-4">
-            <SelectInput
-              label={"Branch"}
-              name={"branch"}
-              selectOpts={branch}
-              className={"border-accent-primary"}
-              onChange={onChange}
-              required
-            />
+          <div className="grid w-full grid-rows-6 gap-y-2 rounded-xl bg-foreground p-4">
+            <SelectInput {...selectBranch} />
             <FormInput
               id={"supplierName"}
               label={"Supplier Name"}
@@ -143,7 +95,7 @@ export const Purchase = () => {
             />
           </div>
         </div>
-        <div className="w-full flex justify-center mt-8">
+        <div className="mt-8 flex w-full justify-center">
           <Button type={"submit"}>Done</Button>
         </div>
       </form>

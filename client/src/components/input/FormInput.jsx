@@ -15,7 +15,7 @@ export const FormInput = React.forwardRef(
           {...props}
           onChange={onChange}
           className={cw(
-            "peer block h-10 w-72 rounded-lg border p-2 text-textColor-light placeholder:text-transparent focus:border-primary focus:text-textColor focus:outline-none focus:ring-1",
+            "peer block h-10 w-72 rounded-lg border p-2 text-textColor-light placeholder:text-transparent hover:border-primary focus:border-primary focus:text-textColor focus:outline-none focus:ring-1",
             className
           )}
           ref={ref}

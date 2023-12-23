@@ -2,22 +2,15 @@ import React, { useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import {
   Button,
+  Container,
   FormInput,
+  ImgInput,
   LinkButton,
   SelectInput,
   Text,
   TextInput,
-  Container,
-  ImgInput,
 } from "../../components";
-
-const categories = [
-  { value: "1", label: "Category 1" },
-  { value: "2", label: "Category 2" },
-  { value: "3", label: "Category 3" },
-  { value: "4", label: "Category 4" },
-  { value: "5", label: "Category 5" },
-];
+import { selectItem } from "../../const/mockData";
 
 export const AddProduct = () => {
   const [file, setFile] = useState();
@@ -55,19 +48,15 @@ export const AddProduct = () => {
 
   return (
     <Container>
-      <div className="flex items-center justify-between mb-4">
+      <div className="mb-4 flex items-center justify-between">
         <Text h1>Add Product</Text>
-        <LinkButton className={`w-auto h-8`} to={-1} icon={IoIosArrowBack}>
+        <LinkButton className={`h-8 w-auto`} to={-1} icon={IoIosArrowBack}>
           Back
         </LinkButton>
       </div>
-      <form
-        action="submit"
-        onSubmit={onSubmit}
-        className="bg-white p-4 rounded-lg"
-      >
+      <form action="submit" onSubmit={onSubmit} className="rounded-lg bg-white p-4">
         <></>
-        <div className="grid grid-cols-2 gap-x-8 gap-y-2 w-[80%]">
+        <div className="grid w-[80%] grid-cols-2 gap-x-8 gap-y-2">
           <FormInput
             id={"productName"}
             label={"Product Name"}
@@ -76,14 +65,7 @@ export const AddProduct = () => {
             required
             onChange={onChange}
           />{" "}
-          <SelectInput
-            label={"Branch"}
-            name={"Branch"}
-            className={"border-accent-primary"}
-            required
-            selectOpts={categories}
-            onChange={onChange}
-          />
+          <SelectInput {...selectItem} />
           <>
             <FormInput
               id={"salesPrice"}
@@ -128,22 +110,10 @@ export const AddProduct = () => {
             required
             onChange={onChange}
           />
-          <SelectInput
-            label={"Unit"}
-            name={"unit"}
-            type={"number"}
-            required
-            selectOpts={categories}
-            onChange={onChange}
-          />
+          <SelectInput {...selectItem} />
         </div>
         <div className="mb-4">
-          <ImgInput
-            file={file}
-            label={"Upload Image"}
-            id={"img"}
-            onChange={onChange}
-          />
+          <ImgInput file={file} label={"Upload Image"} id={"img"} onChange={onChange} />
         </div>
         <TextInput
           id={"description"}

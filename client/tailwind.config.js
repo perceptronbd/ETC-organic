@@ -37,8 +37,8 @@ module.exports = {
           foreground: "hsl(210 40% 98%)",
         },
         muted: {
-          DEFAULT: "hsl(210 40% 96.1%)",
-          foreground: "hsl(222.2 47.4% 11.2%)",
+          DEFAULT: "hsl(210 40% 90%)",
+          light: "hsl(210 40% 98%)",
         },
       },
       fontFamily: {

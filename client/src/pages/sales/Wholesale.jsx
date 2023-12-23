@@ -1,38 +1,6 @@
 import React, { useState } from "react";
-import {
-  Container,
-  FormInput,
-  IncDecButton,
-  SelectInput,
-  Button,
-} from "../../components";
-const branch = [
-  { id: "1", name: "Dagon" },
-  { id: "2", name: "Feni" },
-];
-
-const products = [
-  {
-    id: "1",
-    name: "Product 1",
-    price: "1000",
-  },
-  {
-    id: "2",
-    name: "Product 2",
-    price: "2000",
-  },
-  {
-    id: "3",
-    name: "Product 3",
-    price: "3000",
-  },
-  {
-    id: "4",
-    name: "Product 4",
-    price: "4000",
-  },
-];
+import { Button, Container, FormInput, IncDecButton, SelectInput } from "../../components";
+import { selectBranch, selectItem } from "../../const/mockData";
 
 export const Wholesale = () => {
   const [quantity, setQuantity] = useState(0);
@@ -65,22 +33,11 @@ export const Wholesale = () => {
   };
 
   return (
-    <Container className={"h-auto p-0 m-0 3xl:m-0"}>
-      <form
-        action="submit"
-        onSubmit={onSubmit}
-        className="w-full bg-foreground rounded-xl pb-4"
-      >
-        <div className="grid grid-cols-2 gap-2 w-full h-[400px]">
-          <div className="bg-foreground grid grid-rows-6 gap-2 rounded-xl w-full p-4">
-            <SelectInput
-              id={"productName"}
-              label={"Product Name"}
-              name={"productName"}
-              selectOpts={products}
-              onChange={onChange}
-              required
-            />
+    <Container className={"3xl:m-0 m-0 h-auto p-0"}>
+      <form action="submit" onSubmit={onSubmit} className="w-full rounded-xl bg-foreground pb-4">
+        <div className="grid h-[400px] w-full grid-cols-2 gap-2">
+          <div className="grid w-full grid-rows-6 gap-2 rounded-xl bg-foreground p-4">
+            <SelectInput {...selectItem} />
             <IncDecButton
               name={"quantity"}
               value={quantity}
@@ -119,15 +76,8 @@ export const Wholesale = () => {
               required
             />
           </div>
-          <div className="bg-foreground grid grid-rows-6 gap-2 rounded-xl w-full p-4">
-            <SelectInput
-              label={"Branch"}
-              name={"branch"}
-              selectOpts={branch}
-              className={"border-accent-primary"}
-              onChange={onChange}
-              required
-            />
+          <div className="grid w-full grid-rows-6 gap-2 rounded-xl bg-foreground p-4">
+            <SelectInput {...selectBranch} />
             <FormInput
               id={"proprietorName"}
               label={"Proprietor Name"}
@@ -168,7 +118,7 @@ export const Wholesale = () => {
             />
           </div>
         </div>
-        <div className="w-full flex justify-start px-4">
+        <div className="flex w-full justify-start px-4">
           <Button type={"submit"}>Done</Button>
         </div>
       </form>
