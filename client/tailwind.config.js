@@ -32,10 +32,6 @@ module.exports = {
           DEFAULT: "hsl(266, 100%, 67%)",
           light: "hsl(266, 100%, 80%)",
         },
-        destructive: {
-          DEFAULT: "hsl(0 62.8% 30.6%)",
-          foreground: "hsl(210 40% 98%)",
-        },
         muted: {
           DEFAULT: "hsl(210 40% 90%)",
           light: "hsl(210 40% 98%)",

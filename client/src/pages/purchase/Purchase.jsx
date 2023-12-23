@@ -35,8 +35,10 @@ export const Purchase = () => {
   };
 
   return (
-    <Container>
-      <Text h1>Purchase</Text>
+    <Container className={"flex-col justify-start"}>
+      <Text variant="titleSmall" type="m" className={"self-start"}>
+        Purchase
+      </Text>
       <form action="submit" onSubmit={onSubmit} className="w-full">
         <div className="grid h-[450px] w-full grid-cols-2 gap-2 p-2">
           <div className="grid w-full grid-rows-6 gap-y-2 rounded-xl bg-foreground p-4">

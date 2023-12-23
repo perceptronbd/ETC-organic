@@ -1,11 +1,12 @@
 import React from "react";
-import { LinkButton } from "../button/LinkButton";
+import { Link } from "react-router-dom";
+import { Button } from "../button/Button";
 
 export const ListTable = ({ data }) => {
   return (
-    <div className="w-full max-h-[80vh] overflow-y-auto relative">
+    <div className="relative max-h-[80vh] w-full overflow-y-auto">
       <table className="w-full">
-        <thead className="h-12 bg-background  sticky top-0">
+        <thead className="sticky top-0  h-12 bg-background">
           <tr className="">
             <th className="p-4">SN</th>
             <th className="whitespace-nowrap p-4">Product Name</th>
@@ -19,38 +20,26 @@ export const ListTable = ({ data }) => {
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr
-              key={index}
-              className={`border-b-8 border-background font-semibold`}
-            >
-              <td className="p-4 text-textColor-light bg-foreground rounded-l-2xl">
-                {item.sn}
-              </td>
-              <td className="p-4 bg-foreground ">{item.name}</td>
-              <td className="p-4 bg-foreground ">{item.imgUrl}</td>
-              <td className="p-4 bg-foreground  text-accent-secondary font-bold text-center">
+            <tr key={index} className={`border-b-8 border-background font-semibold`}>
+              <td className="rounded-l-2xl bg-foreground p-4 text-textColor-light">{item.sn}</td>
+              <td className="bg-foreground p-4 ">{item.name}</td>
+              <td className="bg-foreground p-4 ">{item.imgUrl}</td>
+              <td className="text-accent-secondary bg-foreground  p-4 text-center font-bold">
                 {item.sales_price}
               </td>
-              <td className="p-4 bg-foreground  text-accent-primary text-center">
-                {item.csb}
-              </td>
-              <td className="p-4 bg-foreground  text-accent-primary text-center">
-                <span className="border-2 border-accent-primary  bg-opacity-60 px-4 py-1 rounded-full">
+              <td className="text-accent-primary bg-foreground  p-4 text-center">{item.csb}</td>
+              <td className="text-accent-primary bg-foreground  p-4 text-center">
+                <span className="border-accent-primary rounded-full  border-2 bg-opacity-60 px-4 py-1">
                   {item.points}
                 </span>
               </td>
-              <td className="p-4 bg-foreground  text-textColor-light">
-                <div className="max-h-12 text-ellipsis overflow-hidden">
-                  {item.description}
-                </div>
+              <td className="bg-foreground p-4  text-textColor-light">
+                <div className="max-h-12 overflow-hidden text-ellipsis">{item.description}</div>
               </td>
-              <td className="p-4 bg-foreground rounded-r-2xl">
-                <LinkButton
-                  className={`w-14 m-0 h-8 bg-accent-secondary`}
-                  to={"edit-product"}
-                >
-                  Edit
-                </LinkButton>
+              <td className="rounded-r-2xl bg-foreground p-4">
+                <Button asChild>
+                  <Link to={"edit-product"}>Edit </Link>
+                </Button>
               </td>
             </tr>
           ))}

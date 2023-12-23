@@ -9,14 +9,14 @@ export const Button = React.forwardRef(
     return (
       <Comp
         className={cw(
-          "focus-visible:ring-ring inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+          "focus-visible:ring-ring inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
           {
             "bg-primary text-white hover:bg-primary/90": variant === "default",
-            "bg-destructive text-white hover:bg-destructive/90": variant === "destructive",
-            "border border-accent bg-background  text-accent hover:bg-accent hover:text-white":
+            "bg-red-500 text-white hover:bg-red-500/90": variant === "destructive",
+            "border border-accent bg-background text-accent hover:bg-accent hover:text-white":
               variant === "outline",
             "bg-secondary text-white hover:bg-secondary/80": variant === "secondary",
-            "hover:bg-accent hover:text-white": variant === "ghost",
+            "text-accent hover:bg-accent hover:text-white": variant === "ghost",
             "text-primary underline-offset-4 hover:underline": variant === "link",
           },
           {

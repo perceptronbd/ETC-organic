@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { BiLogOut } from "react-icons/bi";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { Button } from "../button/Button";
 import { Text } from "../text/Text";
 import { navLinks } from "./navLinks";
 
@@ -58,9 +58,11 @@ export const Sidebar = () => {
                     key={linkIndex}
                     title={link.title}
                   >
-                    <li className={`flex cursor-pointer items-center gap-4 rounded-md text-sm`}>
+                    <li className={`s flex cursor-pointer items-center gap-4 rounded-md text-sm`}>
                       {link.icon}
-                      <span className={`${!open && "hidden"} origin-left`}>{link.title}</span>
+                      <span className={`${!open && "hidden opacity-0"} origin-left`}>
+                        {link.title}
+                      </span>
                     </li>
                   </NavLink>
                 ))}
@@ -69,20 +71,12 @@ export const Sidebar = () => {
           ))}
         </nav>
       </div>
-      <div className="fixed bottom-2 flex h-12 w-60 items-center justify-between pl-2 text-lg font-semibold hover:cursor-pointer">
-        {open && user.phoneNumber}
-        <button
-          onClick={() => {
-            logout();
-          }}
-        >
-          <BiLogOut
-            className={`rounded-md bg-background p-1 transition-all duration-300 ease-in-out hover:cursor-pointer hover:bg-primary hover:text-foreground ${
-              !open && "ml-5"
-            }`}
-            size={"34px"}
-          />
-        </button>
+      <div
+        className={`fixed bottom-2 flex h-12 ${
+          open ? "w-52" : "w-20"
+        } items-center justify-between p-2 text-lg font-semibold transition-all duration-200 ease-in-out hover:cursor-pointer`}
+      >
+        <Button className="w-full">Logout</Button>
       </div>
     </div>
   );

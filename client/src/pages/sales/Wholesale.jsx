@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Container, FormInput, IncDecButton, SelectInput } from "../../components";
+import { Button, FormInput, IncDecButton, SelectInput } from "../../components";
 import { selectBranch, selectItem } from "../../const/mockData";
 
 export const Wholesale = () => {
@@ -33,10 +33,10 @@ export const Wholesale = () => {
   };
 
   return (
-    <Container className={"3xl:m-0 m-0 h-auto p-0"}>
-      <form action="submit" onSubmit={onSubmit} className="w-full rounded-xl bg-foreground pb-4">
-        <div className="grid h-[400px] w-full grid-cols-2 gap-2">
-          <div className="grid w-full grid-rows-6 gap-2 rounded-xl bg-foreground p-4">
+    <>
+      <form action="submit" onSubmit={onSubmit} className=" w-full rounded-xl bg-foreground pb-4">
+        <div className="flex w-full gap-4 ">
+          <div className="flex flex-col gap-2 rounded-xl bg-foreground p-4">
             <SelectInput {...selectItem} />
             <IncDecButton
               name={"quantity"}
@@ -76,7 +76,7 @@ export const Wholesale = () => {
               required
             />
           </div>
-          <div className="grid w-full grid-rows-6 gap-2 rounded-xl bg-foreground p-4">
+          <div className="flex flex-col gap-2 rounded-xl bg-foreground p-4">
             <SelectInput {...selectBranch} />
             <FormInput
               id={"proprietorName"}
@@ -122,6 +122,6 @@ export const Wholesale = () => {
           <Button type={"submit"}>Done</Button>
         </div>
       </form>
-    </Container>
+    </>
   );
 };

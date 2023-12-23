@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Container,
-  DonutChart,
-  Dropdown,
-  SalesCard,
-  StockTable,
-  Text,
-} from "../../components";
-import { TbCurrencyTaka } from "react-icons/tb";
-import { HiOutlineStatusOnline, HiOutlineStatusOffline } from "react-icons/hi";
+import { Container } from "../../components";
 
 const mostSold = [
   { name: "Product A", value: 500 },
@@ -298,66 +289,8 @@ const listItems = [
 
 export const Overview = () => {
   return (
-    <Container className={"3xl:mx-2"}>
-      <div className="grid grid-rows-5 grid-cols-6 gap-3 h-full">
-        <section className=" grid grid-cols-3 3xl:grid-rows-5 grid-rows-4 gap-2 h-full col-span-4 row-span-1">
-          <div className="row-start-1 col-span-3">
-            <div className="flex justify-between">
-              <Text h2>Overview</Text>
-              <Dropdown listItem={listItems} />
-            </div>
-          </div>
-          <SalesCard
-            icon={TbCurrencyTaka}
-            type={"Total Sales"}
-            amount={10000}
-            className={"col-start-1 row-start-2 "}
-          />
-          <SalesCard
-            icon={HiOutlineStatusOnline}
-            type={"Online Sales"}
-            amount={6500}
-            className={"col-start-2 row-start-2"}
-          />
-          <SalesCard
-            icon={HiOutlineStatusOffline}
-            type={"Offline Sales"}
-            amount={3500}
-            className={"col-start-3"}
-          />
-        </section>
-        <section className="h-full row-span-4 col-span-4 rounded-lg">
-          <StockTable data={data} />
-        </section>
-        <section className="bg-foreground row-start-1 col-start-5 row-span-3 3xl:row-span-2 3xl:row-start-1 col-span-2 h-full rounded-lg p-2">
-          <div>
-            <Text h2>Most Sold Products</Text>
-            <Text className={"text-textColor-light text-sm"}>
-              Piechart of 5 most sold products
-            </Text>
-          </div>
-          <DonutChart data={mostSold} />
-        </section>
-        <section className="col-start-5 row-span-3 col-span-2 rounded-lg bg-foreground p-2">
-          <Text h3>Recent Sales</Text>
-          <div className="w-full max-h-[90%] overflow-y-auto">
-            {recentSales.map((item, index) => (
-              <section
-                className="bg-background flex justify-between items-center p-2 rounded-md mb-0.5"
-                key={index}
-              >
-                <Text className={"font-semibold"}>{item.name}</Text>
-                <Text className={"text-textColor-light"}>
-                  {item.productName}
-                </Text>
-                <Text className={"text-green-500  font-semibold"}>
-                  {item.price}
-                </Text>
-              </section>
-            ))}
-          </div>
-        </section>
-      </div>
+    <Container className={"bg-neutral-200"}>
+      <div className="text-5xl font-bold text-neutral-400">Will Arrive Soon...</div>
     </Container>
   );
 };

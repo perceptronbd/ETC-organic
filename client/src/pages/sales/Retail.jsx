@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, FormInput, IncDecButton, SelectInput } from "../../components";
+import { Button, FormInput, IncDecButton, SelectInput } from "../../components";
 import { selectBranch, selectItem } from "../../const/mockData";
 
 export const Retail = () => {
@@ -57,14 +57,14 @@ export const Retail = () => {
   };
 
   return (
-    <Container className={"3xl:m-0 m-0 h-auto p-0"}>
+    <>
       <form
         action="submit"
         onSubmit={onSubmit}
         className="w-full rounded-xl rounded-tl-none bg-foreground pb-4"
       >
-        <div className="grid h-[400px] w-full grid-cols-2 gap-2">
-          <div className="grid w-full grid-rows-6 gap-2 rounded-xl bg-foreground p-4">
+        <div className="flex gap-4">
+          <div className="flex flex-col gap-2 rounded-xl bg-foreground p-4">
             <SelectInput {...selectItem} />
             <IncDecButton
               id={"quantity"}
@@ -107,7 +107,7 @@ export const Retail = () => {
               required
             />
           </div>
-          <div className="grid w-full grid-rows-6 gap-2 rounded-xl bg-foreground p-4">
+          <div className="flex flex-col gap-2 rounded-xl bg-foreground p-4">
             <SelectInput {...selectBranch} />
             <FormInput
               id={"customerName"}
@@ -142,6 +142,6 @@ export const Retail = () => {
           <Button type={"submit"}>Done</Button>
         </div>
       </form>
-    </Container>
+    </>
   );
 };

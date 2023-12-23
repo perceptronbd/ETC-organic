@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { LinkButton, SearchInput } from "../../components";
+import { Link } from "react-router-dom";
+import { Button, SearchInput } from "../../components";
 
 export const Table = ({ data }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -15,71 +16,53 @@ export const Table = ({ data }) => {
   };
 
   return (
-    <div className="w-full p-2 bg-foreground rounded-lg">
+    <div className="w-full rounded-lg bg-foreground p-2">
       <SearchInput value={searchQuery} onChange={handleSearch} />
-      <div className="w-full max-h-[75vh] 3xl:max-h-[80vh] overflow-y-auto">
+      <div className="3xl:max-h-[80vh] max-h-[75vh] w-full overflow-y-auto">
         <table className="w-full border-collapse">
-          <thead className="h-12 bg-foreground sticky top-0 border-b-2">
+          <thead className="sticky top-0 h-12 border-b-2 bg-foreground">
             <tr>
               {Object.keys(data[0]).map((item, index) =>
                 item === "sn" || item === "imgUrl" ? (
                   ""
                 ) : (
                   <th
-                    className="p-4 font-medium whitespace-nowrap text-left text-textColor-light uppercase"
+                    className="whitespace-nowrap p-4 text-left font-medium uppercase text-textColor-light"
                     key={index}
                   >
                     {item}
                   </th>
                 )
               )}
-              <th className="p-4 font-medium whitespace-nowrap text-left text-textColor-light uppercase">
+              <th className="whitespace-nowrap p-4 text-left font-medium uppercase text-textColor-light">
                 Action
               </th>
             </tr>
           </thead>
           <tbody>
             {filtredData.length === 0 ? (
-              <div className="font-bold text-xl text-textColor-light my-8">
-                No Data
-              </div>
+              <div className="my-8 text-xl font-bold text-textColor-light">No Data</div>
             ) : (
               filtredData.map((item, index) => (
-                <tr
-                  key={index}
-                  className={`border-b-2 border-background font-semibold`}
-                >
-                  <td className="p-4 bg-foreground whitespace-nowrap flex items-center justify-between">
-                    <img
-                      src={item.imgUrl}
-                      alt="Img"
-                      className="border rounded w-10 h-10"
-                    />
+                <tr key={index} className={`border-b-2 border-background font-semibold`}>
+                  <td className="flex items-center justify-between whitespace-nowrap bg-foreground p-4">
+                    <img src={item.imgUrl} alt="Img" className="h-10 w-10 rounded border" />
                     {item.name}
                   </td>
-                  <td className="p-4 bg-foreground  text-green-500 font-bold text-center">
+                  <td className="bg-foreground p-4  text-center font-bold text-green-500">
                     {item["sales price"]}
                   </td>
-                  <td className="p-4 bg-foreground  text-accent-primary text-center">
-                    {item.csb}
+                  <td className="text-accent-primary bg-foreground  p-4 text-center">{item.csb}</td>
+                  <td className="bg-foreground p-4  text-center text-foreground">
+                    <span className="bg-accent-primary rounded-full px-3 py-1">{item.points}</span>
                   </td>
-                  <td className="p-4 bg-foreground  text-foreground text-center">
-                    <span className="bg-accent-primary px-3 py-1 rounded-full">
-                      {item.points}
-                    </span>
+                  <td className="bg-foreground p-4  text-textColor-light">
+                    <div className="max-h-12 overflow-hidden text-ellipsis">{item.description}</div>
                   </td>
-                  <td className="p-4 bg-foreground  text-textColor-light">
-                    <div className="max-h-12 text-ellipsis overflow-hidden">
-                      {item.description}
-                    </div>
-                  </td>
-                  <td className="p-4 bg-foreground rounded-r-2xl">
-                    <LinkButton
-                      className={`w-14 m-0 h-8 bg-accent-secondary`}
-                      to={"edit-product"}
-                    >
-                      Edit
-                    </LinkButton>
+                  <td className="rounded-r-2xl bg-foreground p-4">
+                    <Button asChild>
+                      <Link to={"edit-product"}>Edit</Link>
+                    </Button>
                   </td>
                 </tr>
               ))

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { IoIosArrowBack } from "react-icons/io";
+import { Link } from "react-router-dom";
 import {
   Button,
   Container,
   FormInput,
   ImgInput,
-  LinkButton,
   SelectInput,
   Text,
   TextInput,
@@ -47,14 +46,16 @@ export const AddProduct = () => {
   };
 
   return (
-    <Container>
-      <div className="mb-4 flex items-center justify-between">
-        <Text h1>Add Product</Text>
-        <LinkButton className={`h-8 w-auto`} to={-1} icon={IoIosArrowBack}>
-          Back
-        </LinkButton>
+    <Container className={"flex-col justify-start"}>
+      <div className="mb-2 flex w-full items-center justify-between">
+        <Text variant="titleSmall" type="m">
+          Add Product
+        </Text>
+        <Button asChild variant="ghost">
+          <Link to={-1}>Go Back</Link>
+        </Button>
       </div>
-      <form action="submit" onSubmit={onSubmit} className="rounded-lg bg-white p-4">
+      <form action="submit" onSubmit={onSubmit} className="w-full rounded-lg bg-white p-4">
         <></>
         <div className="grid w-[80%] grid-cols-2 gap-x-8 gap-y-2">
           <FormInput
@@ -124,9 +125,7 @@ export const AddProduct = () => {
           required
           onChange={onChange}
         />
-        <Button className={`bg-accent-secondary`} type={"submit"}>
-          Add Product
-        </Button>
+        <Button type={"submit"}>Add Product</Button>
       </form>
     </Container>
   );

@@ -1,14 +1,6 @@
 import React, { useState } from "react";
-import { IoIosArrowBack } from "react-icons/io";
-import {
-  Button,
-  Checkbox,
-  Container,
-  FormInput,
-  LinkButton,
-  SelectInput,
-  Text,
-} from "../../components";
+import { Link } from "react-router-dom";
+import { Button, Checkbox, Container, FormInput, SelectInput, Text } from "../../components";
 import { selectBranch, selectDesignation } from "../../const/mockData";
 
 export const AddEmployee = () => {
@@ -59,14 +51,16 @@ export const AddEmployee = () => {
   };
 
   return (
-    <Container>
-      <div className="mb-4 flex items-center justify-between">
-        <Text h1>Add Employee</Text>
-        <LinkButton className={`h-8 w-auto`} to={-1} icon={IoIosArrowBack}>
-          Back
-        </LinkButton>
+    <Container className={"justify-start"}>
+      <div className="mb-2 flex w-full items-center justify-between">
+        <Text variant="titleSmall" type="m">
+          Add Employee
+        </Text>
+        <Button asChild>
+          <Link to={-1}>Go Back</Link>
+        </Button>
       </div>
-      <form action="submit" onSubmit={onSubmit} className="rounded-lg bg-white p-4">
+      <form action="submit" onSubmit={onSubmit} className="w-full rounded-lg bg-white p-4">
         <div className="grid w-[80%] grid-cols-2 gap-x-8">
           <FormInput
             id={"name"}

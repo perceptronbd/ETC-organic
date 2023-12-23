@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Text } from "../../components";
-import { Tabs } from "./Tabs";
 import { Retail } from "./Retail";
+import { Tabs } from "./Tabs";
 import { Wholesale } from "./Wholesale";
 
 const tabs = [
@@ -17,11 +17,15 @@ const tabs = [
 
 export const Sales = () => {
   return (
-    <Container>
-      <Text h1 className={"mb-2"}>
-        Sales
-      </Text>
-      <Tabs tabs={tabs} />
+    <Container className={"justify-start"}>
+      <div className="h-full w-full">
+        <Text variant="titleSmall" type="m" className={"mb-2"}>
+          Sales
+        </Text>
+        <section className="flex h-full w-full justify-center">
+          <Tabs tabs={tabs} />
+        </section>
+      </div>
     </Container>
   );
 };

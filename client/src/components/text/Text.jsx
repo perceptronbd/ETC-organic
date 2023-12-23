@@ -28,6 +28,7 @@ export const Text = ({ variant = "bodyMedium", type = "normal", children, classN
         },
         {
           "font-bold": type === "b",
+          "font-semibold": type === "sb",
           "font-medium": type === "m",
           "font-normal": type === "normal",
         },
