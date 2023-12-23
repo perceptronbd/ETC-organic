@@ -1,14 +1,13 @@
 import {
-  FaBoxes,
-  FaCashRegister,
-  FaChartBar,
-  FaChartLine,
-  FaFileInvoice,
-  FaShoppingBag,
-  FaUsers,
-} from "react-icons/fa";
-
-import { BiSolidPurchaseTagAlt } from "react-icons/bi";
+  BarChart4,
+  Boxes,
+  FileBarChart2,
+  GanttChartSquare,
+  ShoppingBag,
+  ShoppingBasket,
+  ShoppingCart,
+  Users,
+} from "lucide-react";
 
 export const navLinks = [
   {
@@ -17,7 +16,7 @@ export const navLinks = [
       {
         title: "Overview",
         path: "/overview",
-        icon: <FaChartLine />,
+        icon: <GanttChartSquare size={18} />,
       },
     ],
   },
@@ -27,32 +26,32 @@ export const navLinks = [
       {
         title: "Product List",
         path: "/product-list",
-        icon: <FaBoxes />,
+        icon: <Boxes strokeWidth={1.3} size={18} />,
       },
       {
         title: "Purchase",
         path: "/purchase",
-        icon: <BiSolidPurchaseTagAlt />,
+        icon: <ShoppingBag size={18} />,
       },
-      { title: "Sales", path: "/sales", icon: <FaCashRegister /> },
+      { title: "Sales", path: "/sales", icon: <ShoppingCart size={18} /> },
     ],
   },
   {
     title: "Reports",
     links: [
-      { title: "Sales Report", path: "/sales-report", icon: <FaChartBar /> },
+      { title: "Sales Report", path: "/sales-report", icon: <BarChart4 size={18} /> },
       {
         title: "Purchase",
         path: "/purchase-report",
-        icon: <FaFileInvoice />,
+        icon: <FileBarChart2 size={18} />,
       },
     ],
   },
   {
     title: "Others",
     links: [
-      { title: "Orders", path: "/orders", icon: <FaShoppingBag /> },
-      { title: "Employees", path: "/employees", icon: <FaUsers /> },
+      { title: "Orders", path: "/orders", icon: <ShoppingBasket size={18} /> },
+      { title: "Employees", path: "/employees", icon: <Users size={18} /> },
     ],
   },
 ];
