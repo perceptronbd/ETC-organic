@@ -40,7 +40,7 @@ export const SelectInput = ({
         className="font-base peer inline-flex h-10 w-72 items-center justify-start gap-[5px] rounded-lg border bg-white px-[15px] text-base leading-none text-textColor outline-none hover:border-primary focus:border focus:border-primary focus:outline-none focus:ring-1 data-[placeholder]:text-textColor-light"
         aria-label="Food"
       >
-        <Select.Value placeholder="Select a fruit…" />
+        <Select.Value placeholder={placeholder} />
         <Select.Icon className="text-textColor">
           <ChevronDownIcon />
         </Select.Icon>
@@ -62,7 +62,7 @@ export const SelectInput = ({
         <Select.Viewport className="p-[5px]">
           {Object.entries(selectOpts).map(([group, options]) => (
             <Select.Group key={group}>
-              <Select.Label className="bg-muted-light mb-1 mt-2 w-fit rounded-lg px-5 text-xs leading-[25px] text-textColor-light">
+              <Select.Label className=" mb-1 mt-2 w-fit px-5 text-xs leading-[25px] text-textColor-light">
                 {group.charAt(0).toUpperCase() + group.slice(1)}
               </Select.Label>
               {options.map(({ value, label }) => (

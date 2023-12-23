@@ -19,7 +19,7 @@ export const selectDesignation = {
 export const selectBranch = {
   id: "branch",
   name: "branch",
-  placeholder: "Branch",
+  placeholder: "Select Branch",
   required: true,
   type: "select",
   selectOpts: {
@@ -33,7 +33,7 @@ export const selectBranch = {
 export const selectItem = {
   id: "item",
   name: "item",
-  placeholder: "Item",
+  placeholder: "Select Item",
   required: true,
   type: "select",
   selectOpts: {
