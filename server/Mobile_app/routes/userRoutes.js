@@ -5,6 +5,7 @@ const profileUpdateController = require('../controllers/profileUpdateController'
 const cartController = require('../controllers/cartController');
 const orderController = require('../controllers/orderController');
 const bankController = require("../controllers/bankController")
+const redeemCSB = require('../controllers/redeemCSBtotaka');
 const upload = require('../middleware/imageMiddleware');
 const authenticateUser = require('../middleware/authMiddleware'); 
 
@@ -33,6 +34,11 @@ router.delete('/deleteBank',authenticateUser,bankController.deleteBank);
 
 
 
+
+
+
+//wallet
+router.post('/redeemCSB',authenticateUser, redeemCSB.redeemCSBtoTaka);
 
 
 
