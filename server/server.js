@@ -11,9 +11,8 @@ const userRoute = require("./ERP/routes/ERPuserRoutes")
 const branchRoute = require("./ERP/routes/branchRoutes")
 const purchaseRoute = require("./ERP/routes/purchaseRoutes")
 const salesRoute = require("./ERP/routes/salesRouter")
+
 const ordersRoute = require("./ERP/routes/orderRouter")
-
-
 
 //Mobile Routes
 const mobileUserRoute = require("./Mobile_app/routes/userRoutes")
@@ -38,9 +37,8 @@ app.use("/api", userRoute)
 app.use("/api", branchRoute)
 app.use("/api", purchaseRoute)
 app.use("/api", salesRoute)
+
 app.use("/api", ordersRoute)
-
-
 
 
 

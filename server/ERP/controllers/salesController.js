@@ -1,15 +1,15 @@
 const asyncHandler = require("express-async-handler");
-
-const Product = require("../../models/productModel");
 const Branch = require("../../models/branchModel");
-
 const Sales = require("../../models/salesModel")
+const updateUserCSB = require("../../utils/updateUserCSB");
+
 
 const addSale = asyncHandler(async (req, res) => {
     try {
         // Get sale details from the request body
         const { product, customerName, customerNumber, customerId, quantity, price, branch, discount, finalPrice } = req.body;
 
+        
         // Create a new sale record
         const newSale = new Sales({
             product,
@@ -71,7 +71,7 @@ const addSale = asyncHandler(async (req, res) => {
         );
 
         console.log(updatedBranch);
-
+        updateUserCSB(product,customerId,quantity);
         // Send a success response
         res.status(201).json({
             code: 201,
@@ -84,4 +84,4 @@ const addSale = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = {addSale};
+module.exports = {addSale, updateUserCSB};
