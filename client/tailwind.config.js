@@ -56,11 +56,11 @@ module.exports = {
           to: { height: 0 },
         },
         enterFromRight: {
-          from: { opacity: 0, transform: "translateX(200px)" },
+          from: { opacity: 0, transform: "translateX(100px)" },
           to: { opacity: 1, transform: "translateX(0)" },
         },
         enterFromLeft: {
-          from: { opacity: 0, transform: "translateX(-200px)" },
+          from: { opacity: 0, transform: "translateX(-100px)" },
           to: { opacity: 1, transform: "translateX(0)" },
         },
         exitToRight: {

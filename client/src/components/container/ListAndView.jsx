@@ -6,15 +6,17 @@ import { Text } from "../text/Text";
 
 const TabContent = ({ selectedOrder }) => {
   const [isDone, setIsDone] = useState(null);
+  const [key, setKey] = useState(0);
 
   useEffect(() => {
     setIsDone(() =>
       selectedOrder && selectedOrder.status === "complete" ? "deactive" : "secondary"
     );
+    setKey((prev) => prev + 1);
   }, [selectedOrder]);
 
   return (
-    <div className="h-[500px] w-fit rounded-lg bg-foreground p-4">
+    <div key={key} className="animate-enterFromLeft h-[500px] w-fit rounded-lg bg-foreground p-4">
       {selectedOrder ? (
         <div className="flex h-full flex-col justify-between">
           <div>
