@@ -28,7 +28,7 @@ router.get('/get-user-order-details',authenticateUser,orderController.getOrderDe
 
 
 //wallet
-router.get('/redeemCSB',authenticateUser, redeemCSB.redeemCSBtoTaka);
+router.post('/redeemCSB',authenticateUser, redeemCSB.redeemCSBtoTaka);
 
 
 
