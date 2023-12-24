@@ -52,7 +52,7 @@ export const productData = [
     "sales price": 500,
     csb: 100,
     points: 40,
-    description: "Loremipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+    description: "This is a product without a detail",
   },
   {
     sn: 2,
