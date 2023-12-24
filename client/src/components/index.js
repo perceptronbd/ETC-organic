@@ -29,3 +29,5 @@ export { SalesCard } from "./card/SalesCard";
 export { CalendarComponent } from "./calendar/CalendarComponent";
 //Chart
 export { DonutChart } from "./chart/DonutChart";
+//Modals
+export { ContentModal } from "./modals/ContentModal";
