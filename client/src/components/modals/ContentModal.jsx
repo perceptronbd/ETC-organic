@@ -1,7 +1,8 @@
 import { X } from "lucide-react";
 import React from "react";
+import { Text } from "../text/Text";
 
-export const ContentModal = ({ isOpen, closeModal, children }) => {
+export const ContentModal = ({ isOpen, closeModal, children, title }) => {
   if (!isOpen) return null;
 
   const handleClick = () => {
@@ -11,7 +12,10 @@ export const ContentModal = ({ isOpen, closeModal, children }) => {
   return (
     <section className="fixed inset-0 z-50 flex items-center justify-center bg-accent/20 transition-all duration-300 ease-in-out">
       <div className="w-fit rounded-lg bg-white p-2 shadow-lg">
-        <div className="flex h-8 w-full justify-end">
+        <div className="my-2 flex h-8 w-full justify-between px-2">
+          <Text variant="titleSmall" type="sb">
+            {title}
+          </Text>
           <button
             onClick={handleClick}
             className={
@@ -21,7 +25,7 @@ export const ContentModal = ({ isOpen, closeModal, children }) => {
             <X className="group-hover:text-white" />
           </button>
         </div>
-        <div className="flex max-h-[90vh] flex-col items-center justify-center gap-2 overflow-y-auto px-1 pt-6">
+        <div className="flex max-h-[90vh] w-fit flex-col items-center justify-center gap-2 overflow-y-auto px-1 pt-6">
           {children}
         </div>
       </div>
