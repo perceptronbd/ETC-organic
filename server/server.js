@@ -11,7 +11,7 @@ const userRoute = require("./ERP/routes/ERPuserRoutes")
 const branchRoute = require("./ERP/routes/branchRoutes")
 const purchaseRoute = require("./ERP/routes/purchaseRoutes")
 const salesRoute = require("./ERP/routes/salesRouter")
-const OrdersRoute = require("./ERP/routes/orderRouter")
+const ordersRoute = require("./ERP/routes/orderRouter")
 
 
 
@@ -38,7 +38,7 @@ app.use("/api", userRoute)
 app.use("/api", branchRoute)
 app.use("/api", purchaseRoute)
 app.use("/api", salesRoute)
-app.use("/api", OrdersRoute)
+app.use("/api", ordersRoute)
 
 
 
