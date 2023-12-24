@@ -1,6 +1,6 @@
+import { ChevronRight } from "lucide-react";
 import React, { useState } from "react";
 import { cw } from "../../utils/cw";
-import { BsChevronRight } from "react-icons/bs";
 
 export const Dropdown = (props) => {
   const { className, classNameDropdown, listItem } = props;
@@ -18,25 +18,25 @@ export const Dropdown = (props) => {
   };
 
   return (
-    <section className="z-50 relative">
+    <section className="relative z-50">
       <button
         onClick={handleOpen}
         className={cw(
-          "flex items-center justify-between bg-foreground w-36 3xl:w-40 px-2 py-0.5 rounded text-sm 3xl:text-base border",
+          "3xl:w-40 3xl:text-base flex w-36 items-center justify-between rounded border bg-foreground px-2 py-0.5 text-sm",
           className
         )}
       >
         {selected ? selected : "Select Option"}
-        <BsChevronRight
-          className={`ml-4 w-3 h-3 3xl:w-4 3xl:h-4 transform transition-transform duration-300 ${
-            open ? "transform rotate-90 transition-transform duration-300" : ""
+        <ChevronRight
+          className={`3xl:w-4 3xl:h-4 ml-4 h-3 w-3 transform transition-transform duration-300 ${
+            open ? "rotate-90 transform transition-transform duration-300" : ""
           } `}
         />
       </button>
       <div
         className={cw(
-          `absolute top-7 w-36 p-1 transition-transform bg-foreground border text-sm 3xl:text-base rounded-md ${
-            open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[-10px]"
+          `3xl:text-base absolute top-7 w-36 rounded-md border bg-foreground p-1 text-sm transition-transform ${
+            open ? "translate-y-0 opacity-100" : "translate-y-[-10px] opacity-0"
           }`,
           classNameDropdown
         )}
@@ -46,7 +46,7 @@ export const Dropdown = (props) => {
             {listItem ? (
               listItem.map((item, index) => (
                 <li
-                  className="w-full hover:bg-background cursor-pointer rounded-md px-2 py-1 transition-all ease-in-out duration-200"
+                  className="w-full cursor-pointer rounded-md px-2 py-1 transition-all duration-200 ease-in-out hover:bg-background"
                   key={index}
                   onClick={() => handleSelect(item.title)}
                 >
@@ -54,7 +54,7 @@ export const Dropdown = (props) => {
                 </li>
               ))
             ) : (
-              <li className="w-full bg-background cursor-pointer rounded-md px-2 py-1 transition-all ease-in-out duration-200">
+              <li className="w-full cursor-pointer rounded-md bg-background px-2 py-1 transition-all duration-200 ease-in-out">
                 No Option
               </li>
             )}

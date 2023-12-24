@@ -1,10 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button, Container, Text } from "../../components";
+import { Button, Container, SearchInput, Table, Text } from "../../components";
 import { productData } from "../../const/mockData";
-import { Table } from "./Table";
+import { useFilter } from "../../hooks";
 
 export const ProductList = () => {
+  const { filterQuery, handleSearch, filteredData } = useFilter({ data: productData });
+
+  const headers = ["Name", "Sales Price", "CSB", "Points", "Description"];
+  const actions = [{ label: "Edit", link: "edit-product" }];
+  const ignoreKeys = ["sn", "imgUrl", "otherKey"];
+
   return (
     <Container className={"flex-col justify-start"}>
       <div className="mb-2 flex w-full items-center justify-between">
@@ -15,7 +21,10 @@ export const ProductList = () => {
           <Link to={"add-product"}>Edit Product</Link>
         </Button>
       </div>
-      <Table data={productData} />
+      <div className="w-full rounded-md bg-foreground p-2">
+        <SearchInput value={filterQuery} onChange={handleSearch} />
+        <Table data={filteredData} headers={headers} actions={actions} ignoreKeys={ignoreKeys} />
+      </div>
     </Container>
   );
 };

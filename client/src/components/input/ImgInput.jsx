@@ -1,10 +1,9 @@
+import { Image } from "lucide-react";
 import React, { useState } from "react";
-import { BiImageAlt } from "react-icons/bi";
 import { Text } from "../text/Text";
 
 export const ImgInput = (props) => {
-  const { id, onChange, className, errorMessage, label, file, ...inputProps } =
-    props;
+  const { id, onChange, className, errorMessage, label, file, ...inputProps } = props;
   const [imagePreview, setImagePreview] = useState(null);
   const [imageName, setImageName] = useState(null);
 
@@ -38,21 +37,21 @@ export const ImgInput = (props) => {
 
       <label
         htmlFor={"image"}
-        className="flex justify-start p-2 3xl:justify-center items-center border w-72 h-32 3xl:w-80 3xl:h-80 rounded-lg text-base 3xl:text-3xl text-textColor-light hover:cursor-pointer"
+        className="3xl:justify-center 3xl:w-80 3xl:h-80 3xl:text-3xl flex h-32 w-72 items-center justify-start rounded-lg border p-2 text-base text-textColor-light hover:cursor-pointer"
       >
         <>
           {imagePreview ? (
-            <section className="flex 3xl:flex-col items-center">
+            <section className="3xl:flex-col flex items-center">
               <img
                 src={imagePreview}
                 alt="Preview"
-                className="w-[122px] h-[122px] 3xl:w-[280px] 3xl:h-[280px] border rounded-lg 3xl:mb-2 mr-2"
+                className="3xl:w-[280px] 3xl:h-[280px] 3xl:mb-2 mr-2 h-[122px] w-[122px] rounded-lg border"
               />
               <Text className={"text-sm"}>{imageName}</Text>
             </section>
           ) : (
             <>
-              <BiImageAlt className="w-[126px] h-[126px] 3xl:w-[50px] 3xl:h-[50px]" />
+              <Image className="3xl:w-[50px] 3xl:h-[50px] h-[126px] w-[126px]" />
               Upload Image
             </>
           )}

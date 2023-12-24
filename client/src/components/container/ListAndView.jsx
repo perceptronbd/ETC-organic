@@ -14,7 +14,7 @@ const TabContent = ({ selectedOrder }) => {
   }, [selectedOrder]);
 
   return (
-    <div className="h-[500px] w-fit rounded-lg bg-neutral-200 p-4">
+    <div className="h-[500px] w-fit rounded-lg bg-foreground p-4">
       {selectedOrder ? (
         <div className="flex h-full flex-col justify-between">
           <div>
