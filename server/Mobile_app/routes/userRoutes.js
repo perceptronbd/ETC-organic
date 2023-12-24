@@ -4,6 +4,7 @@ const userController = require('../controllers/mobileUserController');
 const profileUpdateController = require('../controllers/profileUpdateController');
 const cartController = require('../controllers/cartController');
 const orderController = require('../controllers/orderController');
+const redeemCSB = require('../controllers/redeemCSBtotaka');
 const upload = require('../middleware/imageMiddleware');
 const authenticateUser = require('../middleware/authMiddleware'); 
 
@@ -24,6 +25,11 @@ router.get('/get-cart-details',authenticateUser,cartController.getCartDetails);
 //order
 router.post('/place-order',authenticateUser,orderController.placeOrder);
 router.get('/get-user-order-details',authenticateUser,orderController.getOrderDetails);
+
+
+//wallet
+router.post('/redeemCSB',authenticateUser, redeemCSB.redeemCSBtoTaka);
+
 
 
 module.exports = router; 
