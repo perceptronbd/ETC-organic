@@ -17,7 +17,7 @@ export const Table = ({ data, headers, actions, ignoreKeys = [] }) => {
             <tr>
               {headers.map((header, index) => (
                 <th
-                  className="whitespace-nowrap p-4 text-left text-sm font-medium uppercase text-textColor-light"
+                  className="whitespace-nowrap p-4 text-left text-sm font-medium uppercase text-neutral-400"
                   key={index}
                 >
                   {header}

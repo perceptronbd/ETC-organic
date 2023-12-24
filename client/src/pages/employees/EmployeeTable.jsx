@@ -20,7 +20,7 @@ export const EmployeeTable = ({ data }) => {
       <SearchInput value={searchQuery} onChange={handleSearch} />
       <div className="max-h-[78vh] w-full overflow-y-auto">
         <table className="w-full ">
-          <thead className="sticky top-0 h-12 border-b-2 bg-foreground text-sm font-normal text-textColor-light">
+          <thead className="sticky top-0 h-12 border-b-2 bg-foreground text-sm font-normal text-neutral-400">
             <tr>
               <th className="p-4 text-left">Name</th>
               <th className="whitespace-nowrap p-4 text-left">Designation</th>
