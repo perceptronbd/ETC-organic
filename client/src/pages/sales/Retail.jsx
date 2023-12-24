@@ -1,39 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-  Container,
-  FormInput,
-  IncDecButton,
-  SelectInput,
-  Button,
-} from "../../components";
-
-const branch = [
-  { id: "1", name: "Dagon" },
-  { id: "2", name: "Feni" },
-];
-
-const products = [
-  {
-    id: "1",
-    name: "Product 1",
-    price: "1000",
-  },
-  {
-    id: "2",
-    name: "Product 2",
-    price: "2000",
-  },
-  {
-    id: "3",
-    name: "Product 3",
-    price: "3000",
-  },
-  {
-    id: "4",
-    name: "Product 4",
-    price: "4000",
-  },
-];
+import { Button, FormInput, IncDecButton, SelectInput } from "../../components";
+import { selectBranch, selectItem } from "../../const/mockData";
 
 export const Retail = () => {
   const [quantity, setQuantity] = useState(0);
@@ -68,19 +35,19 @@ export const Retail = () => {
 
   useEffect(() => {
     if (formValues.productName && quantity > 0) {
-      const selectedProduct = products.find(
-        (product) => product.name === formValues.productName
-      );
-      console.log("selectedProduct", selectedProduct);
-      if (selectedProduct) {
-        const totalPrice = selectedProduct.price * quantity;
-        setFormValues({
-          ...formValues,
-          price: selectedProduct.price,
-          finalPrice: totalPrice.toString(),
-        });
-        console.log("totalPrice", totalPrice);
-      }
+      // const selectedProduct = products.find(
+      //   (product) => product.name === formValues.productName
+      // );
+      // console.log("selectedProduct", selectedProduct);
+      // if (selectedProduct) {
+      //   const totalPrice = selectedProduct.price * quantity;
+      //   setFormValues({
+      //     ...formValues,
+      //     price: selectedProduct.price,
+      //     finalPrice: totalPrice.toString(),
+      //   });
+      //   console.log("totalPrice", totalPrice);
+      // }
     }
   }, [formValues, quantity]);
 
@@ -90,22 +57,15 @@ export const Retail = () => {
   };
 
   return (
-    <Container className={"h-auto p-0 m-0 3xl:m-0"}>
+    <>
       <form
         action="submit"
         onSubmit={onSubmit}
-        className="w-full bg-foreground rounded-xl rounded-tl-none pb-4"
+        className="w-full rounded-xl rounded-tl-none bg-foreground pb-4"
       >
-        <div className="grid grid-cols-2 gap-2 w-full h-[400px]">
-          <div className="bg-foreground grid grid-rows-6 gap-2 rounded-xl w-full p-4">
-            <SelectInput
-              id={"productName"}
-              label={"Product Name"}
-              name={"productName"}
-              selectOpts={products}
-              onChange={onChange}
-              required
-            />
+        <div className="flex gap-4">
+          <div className="flex flex-col gap-2 rounded-xl bg-foreground p-4">
+            <SelectInput {...selectItem} />
             <IncDecButton
               id={"quantity"}
               name={"quantity"}
@@ -147,15 +107,8 @@ export const Retail = () => {
               required
             />
           </div>
-          <div className="bg-foreground grid grid-rows-6 gap-2 rounded-xl w-full p-4">
-            <SelectInput
-              label={"Branch"}
-              name={"branch"}
-              selectOpts={branch}
-              className={"border-accent-primary"}
-              onChange={onChange}
-              required
-            />
+          <div className="flex flex-col gap-2 rounded-xl bg-foreground p-4">
+            <SelectInput {...selectBranch} />
             <FormInput
               id={"customerName"}
               label={"Customer Name"}
@@ -185,10 +138,10 @@ export const Retail = () => {
             />
           </div>
         </div>
-        <div className="w-full flex justify-start px-4">
+        <div className="flex w-full justify-start px-4">
           <Button type={"submit"}>Done</Button>
         </div>
       </form>
-    </Container>
+    </>
   );
 };

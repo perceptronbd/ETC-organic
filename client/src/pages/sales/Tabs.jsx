@@ -5,7 +5,7 @@ const Tab = ({ label, isActive, onClick }) => {
     <button
       className={`${
         isActive ? "bg-white hover:bg-white" : " "
-      } text-accent-secondary font-semibold px-4 py-2 rounded-t-md focus:outline-none hover:bg-gray-200 transition-all ease-in-out duration-300`}
+      } text-accent-secondary rounded-t-md px-4 py-2 font-semibold transition-all duration-300 ease-in-out hover:bg-gray-200 focus:outline-none`}
       onClick={onClick}
     >
       {label}
@@ -14,7 +14,7 @@ const Tab = ({ label, isActive, onClick }) => {
 };
 
 const TabPanel = ({ children, isActive }) => {
-  return isActive ? <div>{children}</div> : null;
+  return isActive ? <>{children}</> : null;
 };
 
 export const Tabs = ({ tabs }) => {
@@ -25,8 +25,8 @@ export const Tabs = ({ tabs }) => {
   };
 
   return (
-    <div>
-      <div className="flex">
+    <div className="w-full">
+      <div className="flex ">
         {tabs.map((tab) => (
           <Tab
             key={tab.label}

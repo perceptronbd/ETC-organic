@@ -1,49 +1,43 @@
 import { useEffect, useState } from "react";
-import { Text } from "../text/Text";
-import { ListCard } from "../card/ListCard";
 import { textFormat } from "../../utils/textFormat";
 import { Button } from "../button/Button";
+import { ListCard } from "../card/ListCard";
+import { Text } from "../text/Text";
 
 const TabContent = ({ selectedOrder }) => {
   const [isDone, setIsDone] = useState(null);
 
   useEffect(() => {
     setIsDone(() =>
-      selectedOrder && selectedOrder.status === "complete"
-        ? "deactive"
-        : "secondary"
+      selectedOrder && selectedOrder.status === "complete" ? "deactive" : "secondary"
     );
   }, [selectedOrder]);
 
   return (
-    <div className="w-[400px] 3xl:w-[500px] h-[500px] bg-neutral-200 rounded-lg p-4">
+    <div className="h-[500px] w-fit rounded-lg bg-neutral-200 p-4">
       {selectedOrder ? (
-        <div className="flex flex-col h-full justify-between">
+        <div className="flex h-full flex-col justify-between">
           <div>
-            <Text h2>Details</Text>
-            <div className="w-full my-4">
+            <Text variant="titleMedium" type="sb" className={"text-neutral-400"}>
+              Details
+            </Text>
+            <div className="my-4 w-full">
               {Object.entries(selectedOrder).map(([key, value]) => (
-                <div
-                  key={key}
-                  className="flex font-semibold mb-2 3xl:mb-4 3xl:text-lg"
-                >
-                  <div className="w-40 3xl:w-52 text-textColor-light font-medium">
+                <div key={key} className="3xl:mb-4 3xl:text-lg mb-2 flex font-semibold">
+                  <div className="3xl:w-52 w-40 font-medium text-textColor-light">
                     {textFormat(key)}
                   </div>
                   {key === "status" ? (
                     <Button
                       className={"h-8 w-44 "}
-                      variant={isDone}
                       onClick={() => {
-                        setIsDone(
-                          isDone === "deactive" ? "secondary" : "deactive"
-                        );
+                        setIsDone(isDone === "deactive" ? "secondary" : "deactive");
                       }}
                     >
                       {isDone === "deactive" ? "Done" : "Mark As Done"}
                     </Button>
                   ) : (
-                    <div className="w-60 pl-4 3xl:pl-0">
+                    <div className="3xl:pl-0 w-60 pl-4">
                       {key === "status"
                         ? // Display the status from the selectedOrder object
                           selectedOrder.status
@@ -59,8 +53,7 @@ const TabContent = ({ selectedOrder }) => {
       ) : (
         <>
           <Text h1 className={"text-textColor-light"}>
-            Click <span className="text-accent-secondary"> Details</span> to
-            View Information
+            Click <span className="text-accent-secondary"> Details</span> to View Information
           </Text>
         </>
       )}
@@ -77,8 +70,8 @@ export const ListAndView = ({ data }) => {
 
   return (
     <>
-      <div className="flex">
-        <div className="w-[560px] 3xl:w-[750px] h-[90vh] overflow-x-auto pr-1 mr-2">
+      <div className="flex w-full justify-between gap-4">
+        <div className="h-[90vh] w-fit overflow-auto overflow-x-hidden">
           {data.map((order, index) => (
             <ListCard
               key={index}

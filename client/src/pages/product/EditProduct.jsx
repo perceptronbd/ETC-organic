@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { IoIosArrowBack } from "react-icons/io";
+import { Link } from "react-router-dom";
 import {
   Button,
+  Container,
   FormInput,
-  LinkButton,
+  ImgInput,
   SelectInput,
   Text,
   TextInput,
-  Container,
-  ImgInput,
 } from "../../components";
+import { selectBranch, selectItem } from "../../const/mockData";
 
 const categories = [
   { value: "1", label: "Category 1" },
@@ -54,20 +54,18 @@ export const EditProduct = () => {
   };
 
   return (
-    <Container>
-      <div className="flex items-center justify-between mb-4">
-        <Text h1>Edit Product</Text>
-        <LinkButton className={`w-auto h-8`} to={-1} icon={IoIosArrowBack}>
-          Back
-        </LinkButton>
+    <Container className={"flex-col justify-start"}>
+      <div className="mb-2 flex w-full items-center justify-between">
+        <Text variant="titleSmall" type="m">
+          Edit Product
+        </Text>
+        <Button asChild variant="ghost">
+          <Link to={-1}>Go Back</Link>
+        </Button>
       </div>
-      <form
-        action="submit"
-        onSubmit={onSubmit}
-        className="bg-white p-4 rounded-lg"
-      >
+      <form action="submit" onSubmit={onSubmit} className="w-full rounded-lg bg-white p-4">
         <></>
-        <div className="grid grid-cols-2 gap-x-8 gap-y-2 w-[80%]">
+        <div className="grid w-[80%] grid-cols-2 gap-x-8 gap-y-2">
           <FormInput
             id={"productName"}
             label={"Product Name"}
@@ -76,14 +74,7 @@ export const EditProduct = () => {
             required
             onChange={onChange}
           />{" "}
-          <SelectInput
-            label={"Branch"}
-            name={"Branch"}
-            className={"border-accent-primary"}
-            required
-            selectOpts={categories}
-            onChange={onChange}
-          />
+          <SelectInput {...selectBranch} />
           <>
             <FormInput
               id={"salesPrice"}
@@ -128,22 +119,10 @@ export const EditProduct = () => {
             required
             onChange={onChange}
           />
-          <SelectInput
-            label={"Unit"}
-            name={"unit"}
-            type={"number"}
-            required
-            selectOpts={categories}
-            onChange={onChange}
-          />
+          <SelectInput {...selectItem} />
         </div>
         <div className="mb-4">
-          <ImgInput
-            file={file}
-            label={"Upload Image"}
-            id={"img"}
-            onChange={onChange}
-          />
+          <ImgInput file={file} label={"Upload Image"} id={"img"} onChange={onChange} />
         </div>
         <TextInput
           id={"description"}
@@ -154,10 +133,10 @@ export const EditProduct = () => {
           required
           onChange={onChange}
         />
-        <Button className={`bg-accent-secondary mr-2`} type={"submit"}>
+        <Button className={`mr-2`} type={"submit"}>
           Update Product
         </Button>
-        <Button className={`bg-red-500`} type={"submit"}>
+        <Button variant="destructive" type={"submit"}>
           Delete
         </Button>
       </form>

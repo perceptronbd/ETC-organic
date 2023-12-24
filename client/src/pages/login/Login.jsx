@@ -40,28 +40,30 @@ export const Login = () => {
   };
 
   return (
-    <div className="w-full h-screen flex justify-center items-center">
-      <div className="bg-foreground w-[50%] h-[90%] 3xl:w-[752px] 3xl:h-[630px] p-8 rounded-[40px] flex justify-center items-center">
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col w-full h-full items-center"
-        >
-          <Text className="w-32 h-32 m-16 bg-background text-accent-secondary rounded-md flex flex-col justify-center items-center font-bold text-5xl">
-            ETC <span className="text-accent-primary text-2xl">organic</span>
-          </Text>
+    <div className="flex h-screen w-full items-center justify-center bg-muted">
+      <div className="flex flex-col items-center justify-center rounded-[40px] bg-foreground p-24">
+        <section className="flex flex-col gap-4 ">
+          <img src="/logo192.png" alt="ETC Organic" width={100} height={100} />
+          <span>
+            <Text variant="headerMedium" className={"text-primary"}>
+              ETC
+            </Text>
+            <Text variant="titleLarge" type={"b"} className={"text-secondary"}>
+              Organic
+            </Text>
+          </span>
+        </section>
+        <form onSubmit={handleSubmit} className="flex w-full flex-col items-center">
           <div className="flex flex-col ">
-            <Text h3>Login</Text>
+            <Text variant="bodySmall" className={"text-textColor-light"}>
+              Login
+            </Text>
             {inputs.map((input) => (
-              <FormInput
-                {...input}
-                key={input.id}
-                onChange={onChange}
-                label={input.placeholder}
-              />
+              <FormInput {...input} key={input.id} onChange={onChange} label={input.placeholder} />
             ))}
           </div>
-          <hr className="py-4 " />
-          <Button type="submit" className={"mb-6"}>
+          <hr className="py-1 " />
+          <Button type="submit" className={"w-40"}>
             Login
           </Button>
         </form>
