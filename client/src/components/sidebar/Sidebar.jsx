@@ -16,7 +16,7 @@ export const Sidebar = () => {
       <div className={` ${open ? "w-52" : "w-20 "}  relative p-5 duration-300`}>
         <ArrowRightCircle
           className={`absolute -right-3 top-16 h-6 w-6 cursor-pointer rounded-full border-2 border-foreground bg-foreground text-primary  ${
-            !open && "rotate-180"
+            open ? "rotate-180" : "rotate-0"
           }`}
           onClick={() => setOpen(!open)}
         />

@@ -7,6 +7,7 @@ import {
   ShoppingBasket,
   ShoppingCart,
   Users,
+  Wallet,
 } from "lucide-react";
 
 export const navLinks = [
@@ -46,6 +47,10 @@ export const navLinks = [
         icon: <FileBarChart2 size={18} />,
       },
     ],
+  },
+  {
+    title: "Wallet",
+    links: [{ title: "Cash Withdraw", path: "/cash-withdraw", icon: <Wallet size={18} /> }],
   },
   {
     title: "Others",
