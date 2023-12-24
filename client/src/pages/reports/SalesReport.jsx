@@ -1,15 +1,15 @@
 import React from "react";
-import { Container, ListAndView, Text } from "../../components";
-import { ordersData } from "../../const/mockData";
+import { WillArriveSoon } from "../../components";
 
 export const SalesReport = () => {
   return (
-    <Container className={"justify-start"}>
-      <Text variant="titleSmall" type="m" className={"self-start"}>
-        Sales Report
-      </Text>
+    // <Container className={"w-fit justify-start"}>
+    //   <Text variant="titleSmall" type="m" className={"self-start"}>
+    //     Sales Report
+    //   </Text>
 
-      <ListAndView data={ordersData} />
-    </Container>
+    //   <ListAndView data={ordersData} />
+    // </Container>
+    <WillArriveSoon />
   );
 };

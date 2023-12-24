@@ -20,8 +20,10 @@ export { Table } from "./table/Table";
 //Container
 export { Container } from "./container/Container";
 export { ListAndView } from "./container/ListAndView";
+export { WillArriveSoon } from "./container/WillArriveSoon";
 //Card
 export { ListCard } from "./card/ListCard";
+export { OrderCard } from "./card/OrderCard";
 export { SalesCard } from "./card/SalesCard";
 //Calendar
 export { CalendarComponent } from "./calendar/CalendarComponent";
