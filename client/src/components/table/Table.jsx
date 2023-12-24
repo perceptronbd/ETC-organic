@@ -50,7 +50,7 @@ export const Table = ({ data, headers, actions, ignoreKeys = [] }) => {
                     if (key === "imgUrl") {
                       return (
                         <td
-                          className="flex items-center justify-between whitespace-nowrap rounded-l-md px-2 py-1"
+                          className="flex items-center justify-between whitespace-nowrap px-2 py-1"
                           key={i}
                         >
                           {item[key] ? (
@@ -62,13 +62,13 @@ export const Table = ({ data, headers, actions, ignoreKeys = [] }) => {
                       );
                     }
                     return (
-                      <td className="rounded-l-md px-2 py-1" key={i}>
+                      <td className=" px-2 py-1" key={i}>
                         {item[key]}
                       </td>
                     );
                   })}
                   {actions && actions.length > 0 && (
-                    <td className="rounded-r-md px-2 py-1">
+                    <td className=" px-2 py-1">
                       {actions.map((action, idx) => (
                         <Button asChild key={idx} className={"h-6"}>
                           <Link to={action.link}> {action.label} </Link>
