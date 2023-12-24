@@ -17,7 +17,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        background: "hsl(0, 0%, 95%)",
+        background: "hsl(0, 0%, 90%)",
         foreground: "hsl(0, 0%, 100%)",
         textColor: { DEFAULT: "hsl(0, 0%, 20%)", light: "hsl(0, 0%, 40%)" },
         primary: {

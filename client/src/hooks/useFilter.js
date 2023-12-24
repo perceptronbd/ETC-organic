@@ -1,9 +1,10 @@
 import { useState } from "react";
 
 export const useFilter = ({ data }) => {
+  console.log(data);
   const [filterQuery, setFilterQuery] = useState("");
 
-  const filtredData = data.filter((item) =>
+  const filteredData = data.filter((item) =>
     Object.values(item).some((value) =>
       value.toString().toLowerCase().includes(filterQuery.toLowerCase())
     )
@@ -16,6 +17,6 @@ export const useFilter = ({ data }) => {
   return {
     filterQuery,
     handleSearch,
-    filtredData,
+    filteredData,
   };
 };
