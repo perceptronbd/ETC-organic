@@ -1,15 +1,28 @@
 import { Slot } from "@radix-ui/react-slot";
+import { RefreshCw } from "lucide-react";
 import React from "react";
 import { cw } from "../../utils/cw";
 
 export const Button = React.forwardRef(
-  ({ className, variant = "default", size = "default", asChild = false, ...props }, ref) => {
+  (
+    {
+      className,
+      variant = "default",
+      disabled = false,
+      loading = false,
+      size = "default",
+      asChild = false,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     const Comp = asChild ? Slot : "button";
 
     return (
       <Comp
         className={cw(
-          "focus-visible:ring-ring inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+          "focus-visible:ring-ring inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
           {
             "bg-primary text-white hover:bg-primary/90": variant === "default",
             "bg-red-500 text-white hover:bg-red-500/90": variant === "destructive",
@@ -27,9 +40,21 @@ export const Button = React.forwardRef(
           },
           className
         )}
+        disabled={disabled || loading}
         ref={ref}
         {...props}
-      />
+      >
+        {loading ? (
+          <>
+            <div className="flex h-4 w-4 animate-spin items-center justify-center rounded-full">
+              <RefreshCw />
+            </div>
+            loading...
+          </>
+        ) : (
+          children
+        )}
+      </Comp>
     );
   }
 );
