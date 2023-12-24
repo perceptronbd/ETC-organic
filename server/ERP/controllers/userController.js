@@ -8,8 +8,8 @@ require("dotenv").config()
 
 
 // Generate Token
-const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+const generateToken = (userId) => {
+    return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "1d" });
   };
 
 
@@ -78,58 +78,59 @@ const registerUser = asyncHandler(async (req, res) => {
 
   //login user
 
-  const loginUser = asyncHandler(async(req,res) =>{
-     const {phone,password} = req.body;
-
-     //validate request
-     if(!phone || !password){
+  const loginUser = asyncHandler(async (req, res) => {
+    const { phone, password } = req.body;
+    console.log("Received:", phone, password);
+  
+    // Validate request
+    if (!phone || !password) {
       res.status(400);
-      throw new Error("please add phone and password")
-
-     }
-     //check user exists
-
-     const user = await User.findOne({phone})
-
-     if(!user){
-      res.status(400)
-      throw new Error("User not found")
-    
-
-     }
-     //check password
-    const passwordIsCorrect = await bcrypt.compare(password, user.password)
-
-     //generate token 
+      throw new Error("Please provide both phone and password");
+    }
+  
+    // Check if user exists
+    const user = await User.findOne({ phone });
+    console.log("User:", user);
+  
+    if (!user) {
+      res.status(404);
+      throw new Error("User not found");
+    }
+  
+    // Check password
+    console.log("Stored Password:", user.password);
+    const passwordIsCorrect = await bcrypt.compare(password, user.password);
+    console.log("Password Check:", password, passwordIsCorrect);
+  
+    // Generate token
     const token = generateToken(user._id);
-     if(passwordIsCorrect){
-      // const token = generateToken(user._id);
-      // Send HTTP-only cookie
-     res.cookie("token", token, {
-       path: "/",
-       httpOnly: true,
-       expires: new Date(Date.now() + 1000 * 86400), // 1 day
-       sameSite: "none",
-       secure: true,
-     });
-   }
-     if (user && passwordIsCorrect) {
-       const { _id, name, email,  phone, designation,branch,permissions} = user;
-       res.status(200).json({
-         _id,
-         name,
-         email,
-         phone,
-         token,
-         designation,
-         branch,
-         permissions
-       });
-     } else {
-       res.status(400);
-       throw new Error("Invalid email or password");
-     }
-  })
+  
+    if (passwordIsCorrect) {
+      // Set HTTP-only cookie
+      res.cookie("token", token, {
+        path: "/",
+        httpOnly: true,
+        expires: new Date(Date.now() + 1000 * 86400), // 1 day
+        sameSite: "none",
+        secure: true,
+      });
+  
+      const { _id, name, email, phone, designation, branch, permissions } = user;
+      res.status(200).json({
+        _id,
+        name,
+        email,
+        phone,
+        token,
+        designation,
+        branch,
+        permissions,
+      });
+    } else {
+      res.status(401); // Unauthorized status for incorrect password
+      throw new Error("Invalid phone or password");
+    }
+  });
 
   const getAllUsers = asyncHandler(async(req,res) => {
     const allUsers = await User.find({})
