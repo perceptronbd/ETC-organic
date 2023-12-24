@@ -18,7 +18,7 @@ const tabs = [
 export const Sales = () => {
   return (
     <Container className={"justify-start"}>
-      <div className="h-full w-full">
+      <div className="w-full">
         <Text variant="titleSmall" type="m" className={"mb-2"}>
           Sales
         </Text>

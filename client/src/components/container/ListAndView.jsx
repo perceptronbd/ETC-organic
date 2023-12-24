@@ -1,55 +1,78 @@
+import { RefreshCw } from "lucide-react";
 import { useEffect, useState } from "react";
 import { textFormat } from "../../utils/textFormat";
-import { Button } from "../button/Button";
-import { ListCard } from "../card/ListCard";
+import { OrderCard } from "../card/OrderCard";
 import { Text } from "../text/Text";
 
-const TabContent = ({ selectedOrder }) => {
-  const [isDone, setIsDone] = useState(null);
+const TabContent = ({ selectedOrder, viewLoading }) => {
   const [key, setKey] = useState(0);
 
+  const { status, date } = selectedOrder;
+
   useEffect(() => {
-    setIsDone(() =>
-      selectedOrder && selectedOrder.status === "complete" ? "deactive" : "secondary"
-    );
     setKey((prev) => prev + 1);
   }, [selectedOrder]);
 
-  return (
-    <div key={key} className="animate-enterFromLeft h-[500px] w-fit rounded-lg bg-foreground p-4">
+  return viewLoading ? (
+    <div className="w-[450px] rounded-lg bg-foreground p-4">
+      <div className="flex items-center gap-2">
+        <RefreshCw className="animate-spin text-neutral-400" />
+        <Text variant="titleMedium" type="m" className={"text-neutral-400"}>
+          Loading...
+        </Text>
+      </div>
+    </div>
+  ) : (
+    <article key={key} className=" w-[450px] animate-enterFromLeft rounded-lg bg-foreground p-4">
       {selectedOrder ? (
-        <div className="flex h-full flex-col justify-between">
+        <div className="flex flex-col justify-between">
           <div>
-            <Text variant="titleMedium" type="sb" className={"text-neutral-400"}>
+            <Text variant="titleMedium" type="m" className={"text-neutral-400"}>
               Details
             </Text>
-            <div className="my-4 w-full">
-              {Object.entries(selectedOrder).map(([key, value]) => (
-                <div key={key} className="3xl:mb-4 3xl:text-lg mb-2 flex font-semibold">
-                  <div className="3xl:w-52 w-40 font-medium text-textColor-light">
-                    {textFormat(key)}
+            <hr className="border" />
+            <section className="my-4 w-full">
+              <section className="h-52">
+                {Object.entries(selectedOrder).map(([key, value]) => (
+                  <>
+                    {key === "date" ? null : key === "status" ? null : (
+                      <section key={key} className="flex justify-between gap-4 font-semibold">
+                        <div className="w-40 font-normal text-neutral-400">{textFormat(key)}</div>
+                        <div className="w-60 font-medium">{textFormat(value)}</div>
+                      </section>
+                    )}
+                  </>
+                ))}
+              </section>
+              <section className="rounded-md border-2 px-4 py-2">
+                <div className="mb-4">
+                  <div className="flex w-full items-center justify-between">
+                    <Text variant="titleSmall">Orders</Text>
+
+                    <span className="items-start rounded-full px-2 text-sm">{date}</span>
                   </div>
-                  {key === "status" ? (
-                    <Button
-                      className={"h-8 w-44 "}
-                      onClick={() => {
-                        setIsDone(isDone === "deactive" ? "secondary" : "deactive");
-                      }}
-                    >
-                      {isDone === "deactive" ? "Done" : "Mark As Done"}
-                    </Button>
-                  ) : (
-                    <div className="3xl:pl-0 w-60 pl-4">
-                      {key === "status"
-                        ? // Display the status from the selectedOrder object
-                          selectedOrder.status
-                        : // Display other values
-                          value}
-                    </div>
-                  )}
+                  <span
+                    className={`rounded-full px-2 text-sm ${
+                      status === "complete"
+                        ? "bg-green-200 text-green-500"
+                        : "bg-yellow-200 text-yellow-500"
+                    }`}
+                  >
+                    {textFormat(status)}
+                  </span>
                 </div>
-              ))}
-            </div>
+                {Object.entries(selectedOrder).map(([key, value]) => (
+                  <>
+                    {key === "date" ? null : (
+                      <section key={key} className="flex justify-between gap-4 font-semibold">
+                        <div className="w-40 font-normal text-neutral-400">{textFormat(key)}</div>
+                        <div className="w-60 font-medium">{textFormat(value)}</div>
+                      </section>
+                    )}
+                  </>
+                ))}
+              </section>
+            </section>
           </div>
         </div>
       ) : (
@@ -59,12 +82,13 @@ const TabContent = ({ selectedOrder }) => {
           </Text>
         </>
       )}
-    </div>
+    </article>
   );
 };
 
 export const ListAndView = ({ data }) => {
   const [selectedOrder, setSelectedOrder] = useState(data[0]);
+  const [loading, setLoading] = useState(false);
 
   const handleOrderClick = (order) => {
     setSelectedOrder(order);
@@ -75,15 +99,20 @@ export const ListAndView = ({ data }) => {
       <div className="flex w-full justify-between gap-4">
         <div className="h-[90vh] w-fit overflow-auto overflow-x-hidden">
           {data.map((order, index) => (
-            <ListCard
+            <OrderCard
               key={index}
               data={order}
               status={order.status}
-              onClick={() => handleOrderClick(order)}
+              onClick={() => {
+                console.log("clicked OrderCard");
+                handleOrderClick(order);
+              }}
+              selectedOrder={selectedOrder}
+              setViewLoading={setLoading}
             />
           ))}
         </div>
-        {<TabContent selectedOrder={selectedOrder} />}
+        {<TabContent viewLoading={loading} selectedOrder={selectedOrder} />}
       </div>
     </>
   );

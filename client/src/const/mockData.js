@@ -539,7 +539,7 @@ export const ordersData1 = [
     orderAmount: "1200",
     date: "02 Jan 2023",
     address: "86, R.K Tower, Sonargaon Road, Banglamotor, Dhaka",
-    status: "incomplete",
+    status: "pending",
   },
   {
     customerName: "Ayesha Ahmed",
@@ -547,7 +547,7 @@ export const ordersData1 = [
     orderAmount: "750",
     date: "10 Jan 2023",
     address: "42, Green Avenue, Gulshan, Dhaka",
-    status: "complete",
+    status: "pending",
   },
   {
     customerName: "Rahim Khan",

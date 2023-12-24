@@ -72,7 +72,7 @@ export const Sidebar = () => {
         </nav>
       </div>
       <div
-        className={`fixed bottom-2 flex h-12 ${
+        className={`absolute bottom-2 flex h-12 2xl:bottom-4 ${
           open ? "w-52" : "w-20"
         } items-center justify-between p-2 text-lg font-semibold transition-all duration-200 ease-in-out hover:cursor-pointer`}
       >

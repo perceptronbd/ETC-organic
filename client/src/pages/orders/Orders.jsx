@@ -4,7 +4,7 @@ import { ordersData1 } from "../../const/mockData";
 
 export const Orders = () => {
   return (
-    <Container className={"justify-start"}>
+    <Container className={"w-fit justify-start"}>
       <Text variant="titleSmall" type="m" className={"self-start"}>
         Orders
       </Text>
