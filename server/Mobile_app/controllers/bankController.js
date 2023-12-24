@@ -72,3 +72,6 @@ exports.deleteBank = (req, res) => {
         res.status(500).json({ message: "Error deleting bank" });
       });
   };
+
+
+  
