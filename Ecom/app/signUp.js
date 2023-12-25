@@ -142,9 +142,13 @@ const signUp = () => {
         return;
       }
 
-      registerUser(user).then((res) => {
-        console.log(res);
-      });
+      registerUser(user)
+        .then((res) => {
+          console.log("signUp res:", res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } catch (error) {
       console.log(error);
     }
