@@ -3,70 +3,59 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const http = require('http');
-const multer = require('multer');
+const http = require("http");
+const multer = require("multer");
 
 //ERP Routes
-const userRoute = require("./ERP/routes/ERPuserRoutes")
-const branchRoute = require("./ERP/routes/branchRoutes")
-const purchaseRoute = require("./ERP/routes/purchaseRoutes")
-const salesRoute = require("./ERP/routes/salesRouter")
+const userRoute = require("./ERP/routes/ERPuserRoutes");
+const branchRoute = require("./ERP/routes/branchRoutes");
+const purchaseRoute = require("./ERP/routes/purchaseRoutes");
+const salesRoute = require("./ERP/routes/salesRouter");
 
-const ordersRoute = require("./ERP/routes/orderRouter")
+const ordersRoute = require("./ERP/routes/orderRouter");
 
 //Mobile Routes
-const mobileUserRoute = require("./Mobile_app/routes/userRoutes")
+const mobileUserRoute = require("./Mobile_app/routes/userRoutes");
 
 //error Middlewares
-const errorHandler = require("./ERP/middleware/errorMiddleware")
-const mobileErrorHandler = require("./Mobile_app/middleware/errorMiddleware")
+const errorHandler = require("./ERP/middleware/errorMiddleware");
+const mobileErrorHandler = require("./Mobile_app/middleware/errorMiddleware");
 
-const app = express()
+const app = express();
 //middleware
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-//error handler 
-app.use(errorHandler)
-
-
+//error handler
+app.use(errorHandler);
 
 // ERP Routes
-app.use("/api", userRoute)
-app.use("/api", branchRoute)
-app.use("/api", purchaseRoute)
-app.use("/api", salesRoute)
+app.use("/api", userRoute);
+app.use("/api", branchRoute);
+app.use("/api", purchaseRoute);
+app.use("/api", salesRoute);
 
-app.use("/api", ordersRoute)
-
-
-
+app.use("/api", ordersRoute);
 
 //Mobile Routes
-app.use("/mobile", mobileUserRoute)
-app.use(mobileErrorHandler)
+app.use("/mobile", mobileUserRoute);
+app.use(mobileErrorHandler);
 
+const PORT = process.env.PORT || 5000;
 
-const PORT = process.env.PORT || 5000
+app.get("/", (req, res) => {
+  // This line has been corrected to use the `json()` method
+  res.json({ message: "Hello, world!" });
+});
 
+//connect to db and start server
 
-app.get('/', (req, res) => {
-    // This line has been corrected to use the `json()` method
-    res.json({ message: 'Hello, world!' });
-  });
-
-
-
-
-
-//connect to db and start server 
-
-mongoose.connect(process.env.MONGO_URI)
-        .then(() => {
-            app.listen(PORT, () =>{
-                console.log(`Server running on port ${PORT}`)
-            })
-        })
-
-        .catch((err) => console.log(err))
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch((err) => console.log(err));
