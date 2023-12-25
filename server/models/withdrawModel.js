@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const User = require("../models/mobileUserModel")
 
-const Branch = require("../models/bankModel")
+const Bank = require("../models/bankModel")
 
 const withdrawSchema = new mongoose.Schema({
     userId: {
@@ -10,10 +10,10 @@ const withdrawSchema = new mongoose.Schema({
         ref: User, // Replace 'User' with the actual model name for your user
         required: true
     },
-    bank: {
+    bankId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: Bank, // Replace 'Bank' with the actual model name for your bank
-        required: true
+        
     },
     withdrawAmount: {
         type: Number,
@@ -26,7 +26,7 @@ const withdrawSchema = new mongoose.Schema({
     },
     phoneNumber: {
         type: String,
-        required: true
+        
     },
     status: {
         type: String,
