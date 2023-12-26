@@ -6,8 +6,8 @@ export const registerUser = async (user) => {
     console.log("registerUser res:", res);
     return res;
   } catch (error) {
+    console.log("loginUser error:", error.response);
     const errorResponse = error.response;
-    console.log("registerUser error:", errorResponse.data);
     return errorResponse;
   }
 };
@@ -18,6 +18,8 @@ export const loginUser = async (user) => {
     console.log("loginUser res:", res);
     return res;
   } catch (error) {
-    console.log("loginUser error:", error);
+    console.log("loginUser error:", error.response);
+    const errorResponse = error.response;
+    return errorResponse;
   }
 };
