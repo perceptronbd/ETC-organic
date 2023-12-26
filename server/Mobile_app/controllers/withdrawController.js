@@ -59,3 +59,26 @@ exports.createWithdraw = asyncHandler(async (req, res) => {
 
   res.status(201).json({ message: 'Withdraw created successfully', withdraw, user });
 });
+
+exports.getWithdrawRequests = asyncHandler(async (req, res) => {
+  try {
+    const userId = req.user._id; // Assuming you have user information in req.user
+
+    // Fetch the user and check if it exists
+    const user = await MobileUser.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const name = user.name;
+    const mobileNumber = user.mobileNumber;
+
+    console.log(name, mobileNumber);
+
+    const withdraws = await Withdraw.find({ userId: userId }); // Filter withdraws by user ID
+
+    res.status(200).json({ name, mobileNumber, withdraws });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});

@@ -17,7 +17,8 @@ const checkLogin = (req, res, next) => {
     if (decodedToken) {
       const {userId} = decodedToken;
       req.authenticated = true; 
-      req.userId = userId; // Add userId to the request object
+      req.userId = userId;
+      // console.log(req.userId); // Add userId to the request object
 
       return next();
     }

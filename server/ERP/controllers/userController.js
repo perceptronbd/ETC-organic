@@ -153,14 +153,7 @@ const registerUser = asyncHandler(async (req, res) => {
     await updatedUser.save()
 
     res.status(200).json({"message":"User has been updated"})
-
-
-
-    
-
-
-
-  })
+})
 
   const getUserById = asyncHandler(async(req,res) => {
     const userId = req.params.id

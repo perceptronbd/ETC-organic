@@ -32,6 +32,9 @@ router.get('/get-user-order-details',authenticateUser,orderController.getOrderDe
 //wallet
 router.post('/redeemCSB',authenticateUser, redeemCSB.redeemCSBtoTaka);
 router.post('/withdraw',authenticateUser, withdrawController.createWithdraw);
+router.get('/getwithdraw',authenticateUser, withdrawController.getWithdrawRequests);
+
+
 
 
 
