@@ -1,9 +1,10 @@
 import { FontAwesome } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
-import { Animated, Easing, View } from "react-native";
+import { Animated, Easing } from "react-native";
+import { Modal } from "react-native-paper";
 import COLOR from "../../constants/COLOR";
 
-export const Loading = () => {
+export const Loading = ({ isLoading }) => {
   const [spinValue] = useState(new Animated.Value(0));
 
   useEffect(() => {
@@ -13,7 +14,7 @@ export const Loading = () => {
   const startSpinAnimation = () => {
     Animated.loop(
       Animated.timing(spinValue, {
-        toValue: 2,
+        toValue: 5,
         duration: 3000, // Duration of the animation in milliseconds
         easing: Easing.linear,
         useNativeDriver: true, // For better performance
@@ -27,21 +28,26 @@ export const Loading = () => {
   });
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: COLOR.background,
-      }}
-    >
-      <Animated.View
-        style={{
-          transform: [{ rotate: spin }],
+    <>
+      <Modal
+        visible={isLoading}
+        contentContainerStyle={{
+          height: "auto",
+          width: "auto",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: 20,
+          margin: 20,
         }}
       >
-        <FontAwesome name="spinner" size={30} color={COLOR.secondary} />
-      </Animated.View>
-    </View>
+        <Animated.View
+          style={{
+            transform: [{ rotate: spin }],
+          }}
+        >
+          <FontAwesome name="spinner" size={30} color={COLOR.secondary} />
+        </Animated.View>
+      </Modal>
+    </>
   );
 };
