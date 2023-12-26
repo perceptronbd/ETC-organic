@@ -1,13 +1,11 @@
-import { MaterialIcons } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Avatar } from "react-native-paper";
-import tailwind from "twrnc";
-import { registerUser } from "../api";
+import { registerUser } from "../api/user/authUser";
 import {
-  ContentModal,
   Loading,
+  MessageModal,
   StyledButton,
   StyledInput,
   StyledText,
@@ -135,16 +133,29 @@ const signUp = () => {
       givenCode,
     };
 
+    setLoading(true);
+
     try {
       if (error) {
         console.log(errorMessages);
-        showError();
+        showError(errorMessages, error);
+        setLoading(false);
         return;
       }
 
       registerUser(user)
         .then((res) => {
           console.log("signUp res:", res);
+          const { data, status } = res;
+          const { message } = data;
+          if (status === 200 || status === 201) {
+            setLoading(false);
+            router.push("login");
+            console.log(data);
+          } else {
+            setLoading(false);
+            console.log(message);
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -154,9 +165,7 @@ const signUp = () => {
     }
   };
 
-  return loading ? (
-    <Loading />
-  ) : (
+  return (
     <View
       style={{
         flex: 1,
@@ -209,36 +218,12 @@ const signUp = () => {
           </StyledText>
         </Link>
       </StyledText>
-      <ContentModal visible={isError} hideModal={hideError}>
-        <View style={tailwind`flex-row items-center gap-2 self-center`}>
-          <MaterialIcons
-            name="error-outline"
-            size={24}
-            style={tailwind`text-red-500`}
-          />
-          <StyledText
-            variant="bodyLarge"
-            type="b"
-            style={{
-              color: `red`,
-            }}
-          >
-            Error!
-          </StyledText>
-        </View>
-        {
-          <>
-            {Object.values(errorMessages).map(
-              (error, index) =>
-                error && (
-                  <StyledText key={index} style={tailwind`text-center`}>
-                    {error}
-                  </StyledText>
-                ),
-            )}
-          </>
-        }
-      </ContentModal>
+      <MessageModal
+        visible={isError}
+        hideModal={hideError}
+        modalMessag={errorMessages}
+      />
+      <Loading isLoading={loading} />
     </View>
   );
 };
