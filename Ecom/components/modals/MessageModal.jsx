@@ -23,7 +23,9 @@ export const MessageModal = ({ visible, hideModal, modalMessag, isError }) => {
           },
         )}
       >
-        {typeof modalMessag === "object" ? (
+        {typeof modalMessag === "object" &&
+        modalMessag !== null &&
+        Object.keys(modalMessag).length > 0 ? (
           <View style={tailwind`flex`}>
             <View style={tailwind`flex-row items-center gap-2 self-center`}>
               <MaterialIcons

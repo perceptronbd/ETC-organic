@@ -25,5 +25,6 @@ export { StyledToast } from "./toast/StyledToast";
 export { HeaderComponent } from "./header/HeaderComponent";
 //modals
 export { ContentModal } from "./modals/ContentModal";
+export { MessageModal } from "./modals/MessageModal";
 //animation
 export { Loading } from "./animation/Loading";

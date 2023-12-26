@@ -58,6 +58,13 @@ const signUp = () => {
     hideModal: hideError,
     showModal: showError,
   } = useModal();
+  const {
+    visible: isMessage,
+    hideModal: hideMessage,
+    showModal: showMessage,
+    isError: messageError,
+    modalMessage,
+  } = useModal();
 
   const handleChange = (id, text) => {
     setData((prev) => ({
@@ -154,6 +161,7 @@ const signUp = () => {
             console.log(data);
           } else {
             setLoading(false);
+            showMessage(message, true);
             console.log(message);
           }
         })
@@ -222,6 +230,12 @@ const signUp = () => {
         visible={isError}
         hideModal={hideError}
         modalMessag={errorMessages}
+      />
+      <MessageModal
+        visible={isMessage}
+        hideModal={hideMessage}
+        isError={messageError}
+        modalMessag={modalMessage}
       />
       <Loading isLoading={loading} />
     </View>
