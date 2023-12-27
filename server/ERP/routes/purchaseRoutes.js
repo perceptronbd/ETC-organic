@@ -1,11 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
+const { productManagement } = require("../middleware/authMiddleware");
+const { checkLogin } = require("../middleware/checkLogin");
+
+
 
 const {addPurchase,getAllPurchases}  = require("../controllers/purchaseController");
 
-router.post("/addPurchase",addPurchase)
-router.get("/getallPurchase",getAllPurchases)
+router.post("/addPurchase",checkLogin,productManagement,addPurchase)
+router.get("/getallPurchase",checkLogin, productManagement, getAllPurchases)
 
 
 module.exports = router;
