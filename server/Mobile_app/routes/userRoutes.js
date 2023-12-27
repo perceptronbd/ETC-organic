@@ -4,8 +4,9 @@ const userController = require('../controllers/mobileUserController');
 const profileUpdateController = require('../controllers/profileUpdateController');
 const cartController = require('../controllers/cartController');
 const orderController = require('../controllers/orderController');
-const bankController = require("../controllers/bankController")
 const redeemCSB = require('../controllers/redeemCSBtotaka');
+const bankController = require("../controllers/bankController")
+const withdrawController = require('../controllers/withdrawController')
 const upload = require('../middleware/imageMiddleware');
 const authenticateUser = require('../middleware/authMiddleware'); 
 
@@ -27,6 +28,18 @@ router.get('/get-cart-details',authenticateUser,cartController.getCartDetails);
 router.post('/place-order',authenticateUser,orderController.placeOrder);
 router.get('/get-user-order-details',authenticateUser,orderController.getOrderDetails);
 
+
+//wallet
+router.post('/redeemCSB',authenticateUser, redeemCSB.redeemCSBtoTaka);
+router.post('/withdraw',authenticateUser, withdrawController.createWithdraw);
+router.get('/getwithdraw',authenticateUser, withdrawController.getWithdrawRequests);
+
+
+
+
+
+
+
 //bank
 router.post('/addBank',authenticateUser,bankController.createBank);
 router.get('/getBank',authenticateUser,bankController.fetchBanksByUser);
@@ -34,11 +47,6 @@ router.delete('/deleteBank',authenticateUser,bankController.deleteBank);
 
 
 
-
-
-
-//wallet
-router.post('/redeemCSB',authenticateUser, redeemCSB.redeemCSBtoTaka);
 
 
 
