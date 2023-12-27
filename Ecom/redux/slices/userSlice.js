@@ -5,9 +5,6 @@ export const userSlice = createSlice({
   initialState: {
     user: null,
     isSignedIn: false,
-    loading: false,
-    error: false,
-    message: "",
   },
   reducers: {
     setUser: (state, action) => {
