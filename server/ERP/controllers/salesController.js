@@ -2,6 +2,10 @@ const asyncHandler = require("express-async-handler");
 const Branch = require("../../models/branchModel");
 const Sales = require("../../models/salesModel")
 const updateUserCSB = require("../../utils/updateUserCSB");
+const mobileUser = require("../../models/mobileUserModel");
+const product = require("../../models/productModel");
+
+// Add a new sale
 
 
 const addSale = asyncHandler(async (req, res) => {
@@ -9,7 +13,17 @@ const addSale = asyncHandler(async (req, res) => {
         // Get sale details from the request body
         const { product, customerName, customerNumber, customerId, quantity, price, branch, discount, finalPrice } = req.body;
 
-        
+        const user = await mobileUser.findOne({ mobileNumber: customerNumber });
+
+        if (!user) {
+            return res.status(404).json({
+                code: 404,
+                message: "User not found",
+            });
+        }
+        // const user = await mobileUser.findOne({ mobileNumber: customerNumber });
+
+
         // Create a new sale record
         const newSale = new Sales({
             product,
@@ -23,8 +37,17 @@ const addSale = asyncHandler(async (req, res) => {
             finalPrice,
         });
 
+        newSale.customerId = user._id;
+
+        if(customerId != user._id){
+            return res.status(404).json({
+                code: 404,
+                message: "Customer not found",
+            });
+        }
+
+
         // Save the sale record to the database
-        await newSale.save();
 
         // Update stock in the branch for the sold product
         const branchData = await Branch.findById(branch);
@@ -70,9 +93,12 @@ const addSale = asyncHandler(async (req, res) => {
             { new: true }
         );
 
-        console.log(updatedBranch);
+        // console.log(updatedBranch);
         updateUserCSB(product,customerId,quantity);
         // Send a success response
+
+        await newSale.save();
+
         res.status(201).json({
             code: 201,
             sale: newSale ,
