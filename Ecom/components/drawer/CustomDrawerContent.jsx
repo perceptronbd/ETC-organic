@@ -1,7 +1,8 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { router } from "expo-router";
 import { usePathname } from "expo-router/src/hooks";
-import React, { useEffect } from "react";
+import React from "react";
 import { Text, View } from "react-native";
 import { Avatar } from "react-native-paper";
 import COLOR from "../../constants/COLOR";
@@ -12,9 +13,10 @@ import { renderIcon } from "./renderIcon";
 export const CustomDrawerContent = (props) => {
   const pathName = usePathname();
 
-  useEffect(() => {
-    console.log(pathName);
-  }, [pathName]);
+  const onLogout = async () => {
+    await AsyncStorage.removeItem("user-data");
+    router.push("login");
+  };
 
   const drawerItems = drawerContents.map((item, index) => {
     return item.labal === "Profile" ? (
@@ -63,9 +65,13 @@ export const CustomDrawerContent = (props) => {
             color: item.pathName === pathName ? "white" : "black",
           })
         }
-        onPress={() => {
-          router.push(item.route);
-        }}
+        onPress={
+          item.labal === "Logout"
+            ? onLogout()
+            : () => {
+                router.push(item.route);
+              }
+        }
       />
     );
   });

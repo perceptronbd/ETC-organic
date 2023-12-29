@@ -1,13 +1,12 @@
-import { MaterialIcons } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Link, router } from "expo-router";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Avatar } from "react-native-paper";
-import tailwind from "twrnc";
-import { loginUser } from "../api";
+import { loginUser } from "../api/user/authUser";
 import {
-  ContentModal,
   Loading,
+  MessageModal,
   StyledButton,
   StyledInput,
   StyledText,
@@ -43,6 +42,21 @@ const login = () => {
     hideModal: hideError,
     showModal: showError,
   } = useModal();
+  const {
+    visible: isMessage,
+    hideModal: hideMessage,
+    showModal: showMessage,
+    isError: messageError,
+    modalMessage,
+  } = useModal();
+
+  // useEffect(() => {
+  //   console.log("User data:", user);
+
+  //   // if (user.error) {
+  //   //   showMessage(user.errorMessage, true);
+  //   // }
+  // }, [user]);
 
   useEffect(() => {
     const validateForm = () => {
@@ -88,23 +102,40 @@ const login = () => {
     }));
   };
 
-  const onLogin = () => {
+  const onLogin = async () => {
     if (error) return showError();
-    console.log("onLogin data", data);
+    console.log("before signUp");
+    setLoading(true);
     try {
-      loginUser(data).then((res) => {
-        console.log("onLogin", res);
+      loginUser(data).then(async (res) => {
+        const { data, status } = res;
+        const { data: userData, message } = data;
+        if (status === 200 || status === 201) {
+          setLoading(false);
+          console.log(data);
+          AsyncStorage.setItem("user-data", JSON.stringify(userData));
+          router.push("/(drawer)/(tabs)/home"); //BUG: routing pushes back to login page
+        } else {
+          setLoading(false);
+          showMessage(message, true);
+          console.log(message);
+        }
       });
     } catch (error) {
       console.log(error);
     }
 
-    //router.push("/(drawer)/(tabs)/home");
+    // setLoading(true);
+    // try {
+    //   dispatch(asyncLogin(data));
+    //   setLoading(false);
+    //   console.log("after signUp", user);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
-  return loading ? (
-    <Loading />
-  ) : (
+  return (
     <View
       style={{
         flex: 1,
@@ -162,36 +193,18 @@ const login = () => {
           </StyledText>
         </Link>
       </StyledText>
-      <ContentModal visible={isError} hideModal={hideError}>
-        <View style={tailwind`flex-row items-center gap-2 self-center`}>
-          <MaterialIcons
-            name="error-outline"
-            size={24}
-            style={tailwind`text-red-500`}
-          />
-          <StyledText
-            variant="bodyLarge"
-            type="b"
-            style={{
-              color: `red`,
-            }}
-          >
-            Error!
-          </StyledText>
-        </View>
-        {
-          <>
-            {Object.values(errorMessages).map(
-              (error, index) =>
-                error && (
-                  <StyledText key={index} style={tailwind`text-center`}>
-                    {error}
-                  </StyledText>
-                ),
-            )}
-          </>
-        }
-      </ContentModal>
+      <MessageModal
+        visible={isError}
+        hideModal={hideError}
+        modalMessag={errorMessages}
+      />
+      <MessageModal
+        visible={isMessage}
+        hideModal={hideMessage}
+        isError={messageError}
+        modalMessag={modalMessage}
+      />
+      <Loading isLoading={loading} />
     </View>
   );
 };
