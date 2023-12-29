@@ -50,13 +50,19 @@ const login = () => {
     modalMessage,
   } = useModal();
 
-  // useEffect(() => {
-  //   console.log("User data:", user);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const value = await AsyncStorage.getItem("user-data");
+        const userData = JSON.parse(value);
 
-  //   // if (user.error) {
-  //   //   showMessage(user.errorMessage, true);
-  //   // }
-  // }, [user]);
+        console.log("login userData", userData);
+      } catch (e) {
+        console.log("login error:", e);
+      }
+    };
+    getData();
+  }, []);
 
   useEffect(() => {
     const validateForm = () => {
@@ -102,6 +108,15 @@ const login = () => {
     }));
   };
 
+  const storeUserData = async (userData) => {
+    try {
+      const jsonValue = JSON.stringify(userData);
+      await AsyncStorage.setItem("user-data", jsonValue);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const onLogin = async () => {
     if (error) return showError();
     console.log("before signUp");
@@ -112,13 +127,12 @@ const login = () => {
         const { data: userData, message } = data;
         if (status === 200 || status === 201) {
           setLoading(false);
-          console.log(data);
-          AsyncStorage.setItem("user-data", JSON.stringify(userData));
-          router.push("/(drawer)/(tabs)/home"); //BUG: routing pushes back to login page
+          console.log("user data", userData);
+          storeUserData(userData);
+          router.push("/(drawer)/(tabs)/home");
         } else {
           setLoading(false);
           showMessage(message, true);
-          console.log(message);
         }
       });
     } catch (error) {

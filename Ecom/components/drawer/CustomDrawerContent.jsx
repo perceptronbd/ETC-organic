@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { router } from "expo-router";
 import { usePathname } from "expo-router/src/hooks";
@@ -64,7 +65,16 @@ export const CustomDrawerContent = (props) => {
           })
         }
         onPress={() => {
-          router.push(item.route);
+          if (item.labal === "Logout") {
+            console.log("CustomDrawerContent logout");
+
+            AsyncStorage.removeItem("user-data").then(() => {
+              console.log("removed");
+              router.push("login");
+            });
+          } else {
+            router.push(item.route);
+          }
         }}
       />
     );
