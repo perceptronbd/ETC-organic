@@ -7,6 +7,7 @@ export const ContentModal = ({
   children,
   width,
   height,
+  style,
 }) => {
   return (
     <Portal>
@@ -20,6 +21,7 @@ export const ContentModal = ({
           borderRadius: 10,
           padding: 20,
           margin: 20,
+          ...style,
         }}
       >
         {children}
