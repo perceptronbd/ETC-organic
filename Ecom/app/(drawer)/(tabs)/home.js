@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { ScrollView, View } from "react-native";
 import tw from "twrnc";
 import {
@@ -13,9 +13,19 @@ import { useCustomToast } from "../../../hooks";
 export default function Page() {
   const showToast = useCustomToast();
 
+  const myScroll = useRef(null);
+
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     const userData = await AsyncStorage.getItem("user-data");
+  //     console.log("value:", JSON.parse(userData));
+  //   };
+  //   getUser();
+  // }, []);
+
   return (
     <>
-      <ScrollView style={tw`flex-1 p-2`}>
+      <ScrollView ref={myScroll} style={tw`flex-1 p-2`}>
         <View style={tw.style(`w-full items-center`, {})}>
           <Carousel />
 
