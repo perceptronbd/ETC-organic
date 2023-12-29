@@ -55,8 +55,10 @@ const login = () => {
       try {
         const value = await AsyncStorage.getItem("user-data");
         const userData = JSON.parse(value);
-
-        console.log("login userData", userData);
+        if (userData !== null) {
+          console.log("login userData", userData);
+          router.push("/(drawer)/(tabs)/home");
+        }
       } catch (e) {
         console.log("login error:", e);
       }
