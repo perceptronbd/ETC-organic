@@ -15,7 +15,7 @@ const updateUserCSB = asyncHandler(async (productId, customerId, quantity) => {
     const primaryCSBIncrement = 0.4 * productCSB * quantity;
 
     await MobileUser.findByIdAndUpdate(customerId, {
-        $inc: { CSB: primaryCSBIncrement, points: productPoints* quantity }
+        $inc: { CSB: primaryCSBIncrement, points: productPoints* quantity, totalCSB: primaryCSBIncrement }
     });
 
     let remainingCSB = 1-0.4;
@@ -50,7 +50,7 @@ const updateUserCSB = asyncHandler(async (productId, customerId, quantity) => {
         remainingCSB -= distributionPercentages[i];
 
         await MobileUser.findByIdAndUpdate(currentUser.referredBy, {
-            $inc: { CSB: increment }
+            $inc: { CSB: increment, totalCSB: increment }
         });
 
         currentUserId = currentUser.referredBy;
@@ -60,7 +60,7 @@ const updateUserCSB = asyncHandler(async (productId, customerId, quantity) => {
         const motherAccountId = '6570b8a8b40bb675bcffd527';
 
         await MobileUser.findByIdAndUpdate(motherAccountId, {
-            $inc: { CSB: productCSB*remainingCSB*quantity }
+            $inc: { CSB: productCSB*remainingCSB*quantity, totalCSB: productCSB*remainingCSB*quantity }
         });
 
         const newWalletHistory = new WalletHistory({
