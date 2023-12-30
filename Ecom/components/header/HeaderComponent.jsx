@@ -42,7 +42,7 @@ export const HeaderComponent = ({ imgURL, points }) => {
             {points === undefined ? 0 : points}
           </StyledText>
         </View>
-        {imgURL === "" || imgURL === undefined ? (
+        {imgURL === "" || imgURL === undefined || imgURL === null ? (
           <Avatar.Icon
             size={40}
             icon="account"
@@ -53,7 +53,7 @@ export const HeaderComponent = ({ imgURL, points }) => {
           <Avatar.Image
             size={40}
             style={{ backgroundColor: "none " }}
-            source={imgURL}
+            source={{ uri: imgURL }}
           />
         )}
       </View>
