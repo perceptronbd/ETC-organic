@@ -6,12 +6,23 @@ import React, { useEffect } from "react";
 import { Text, View } from "react-native";
 import { Avatar } from "react-native-paper";
 import COLOR from "../../constants/COLOR";
+import { useAuth } from "../../hooks/useAuth";
 import { StyledText } from "../texts/StyledText";
 import { drawerContents } from "./drawerContents";
 import { renderIcon } from "./renderIcon";
 
 export const CustomDrawerContent = (props) => {
   const pathName = usePathname();
+
+  const [imgUrl, setImgUrl] = React.useState(null);
+
+  useEffect(() => {
+    if (user?.image) {
+      setImgUrl(user.image);
+    }
+  }, [user]);
+
+  const { user } = useAuth();
 
   useEffect(() => {
     console.log(pathName);
@@ -33,14 +44,23 @@ export const CustomDrawerContent = (props) => {
           borderRadius: 10,
         }}
       >
-        <Avatar.Image
-          size={50}
-          style={{ backgroundColor: "none ", marginRight: 10 }}
-          source={require("../../assets/img/user.png")}
-        />
+        {imgUrl ? (
+          <Avatar.Image
+            size={50}
+            style={{ backgroundColor: "none ", marginRight: 10 }}
+            source={{ uri: imgUrl }}
+          />
+        ) : (
+          <Avatar.Icon
+            size={50}
+            icon="account"
+            color={COLOR.neutral}
+            style={{ backgroundColor: COLOR.foreground, marginRight: 10 }}
+          />
+        )}
         <View>
-          <StyledText type="b">Mr. Tofayel</StyledText>
-          <Text>@userid_001</Text>
+          <StyledText type="b">{user?.name}</StyledText>
+          <Text>{user?.mobileNumber}</Text>
         </View>
       </View>
     ) : (
