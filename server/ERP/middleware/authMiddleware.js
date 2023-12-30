@@ -2,8 +2,8 @@ const asyncHandler = require('express-async-handler');
 const User = require("../../models/userModel");
 
 const productManagement = asyncHandler(async (req, res, next) => {
-    const userId = userId
-    console.log(userId);
+    const userId = req.userId;
+    // console.log(userId);
     const userData = await User.findById(userId);
 
 
@@ -24,6 +24,7 @@ const productManagement = asyncHandler(async (req, res, next) => {
 const salesManagement = asyncHandler(async (req, res, next) => {
     const userId = req.userId;
     const userData = await User.findById(userId);
+    // console.log(userId);
 
     if (!userData) {
         return res.status(404).json({ message: "User not found" });

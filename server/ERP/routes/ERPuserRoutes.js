@@ -7,16 +7,14 @@ const {
   updateUser,
   getUserById,
 } = require("../controllers/userController.js");
+const { checkLogin } = require("../middleware/checkLogin");
 const {
   createProduct,
   getAllProducts,
   calculateProductStock,
   addBranch,
 } = require("../controllers/productController.js");
-const {
-  productManagement,
-  salesManagement,
-} = require("../middleware/authMiddleware.js");
+const { productManagement } = require("../middleware/authMiddleware.js");
 
 // const protect = require("../middleware/authMiddleware.js");
 
@@ -25,15 +23,24 @@ router.post("/login", loginUser);
 
 //employee
 router.post("/employee/register", registerUser);
-router.get("/employee/users", getAllUsers);
+router.get("/employee/getallusers", getAllUsers);
 router.put("/employee/update-users/:id", updateUser);
 router.get("/employee/getuserbyid/:id", getUserById);
 
 //products
 
-router.post("/products/createproduct/:id", productManagement, createProduct);
-router.get("/products/getproducts/:id", productManagement, getAllProducts);
-router.get("/products/getstock/:id", productManagement, calculateProductStock);
+router.get(
+  "/products/getproducts",
+  checkLogin,
+  productManagement,
+  getAllProducts
+);
+router.post(
+  "/products/createproduct",
+  checkLogin,
+  productManagement,
+  createProduct
+);
 
 // //Sales
 // router.post("/sales/purchase", inputSales, (req, res)=>{
