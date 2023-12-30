@@ -1,5 +1,5 @@
 import { View } from "native-base";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import { ScrollView } from "react-native-gesture-handler";
@@ -7,6 +7,7 @@ import { Avatar, DataTable, Divider } from "react-native-paper";
 import tailwind from "twrnc";
 import { StyledButton, StyledText } from "../../../components";
 import COLOR from "../../../constants/COLOR";
+import { useAuth } from "../../../hooks/useAuth";
 import { formatNumbers } from "../../../utils/formatNumbers";
 
 const addressInput = [
@@ -148,11 +149,26 @@ const addressInput = [
 ];
 
 export default function Page() {
+  const [imgUrl, setImgUrl] = useState(null);
+
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user?.image) {
+      setImgUrl(user.image);
+    }
+  }, [user]);
+
   return (
     <ScrollView style={tailwind`flex-1 px-3 py-4`}>
       <View style={tailwind`flex items-center rounded-xl bg-white p-2`}>
-        <Profile />
-        <CSBandPoints />
+        <Profile
+          source={imgUrl}
+          name={user?.name}
+          phone={user?.mobileNumber}
+          refCode={user?.referralCode}
+        />
+        <CSBandPoints CSB={user?.CSB} points={user?.points} />
         <Divider style={tailwind`w-full border border-[${COLOR.neutral}]`} />
         <NIDandAddress />
         <StyledButton width={"md"}>তথ্য সেভ করুন</StyledButton>
@@ -162,10 +178,10 @@ export default function Page() {
   );
 }
 
-const Profile = ({ source }) => {
+const Profile = ({ source, name, phone, refCode }) => {
   return (
     <View style={tailwind`w-full flex-row items-center gap-8 py-4`}>
-      {source === undefined ? (
+      {source === undefined || source === null ? (
         <Avatar.Icon
           size={80}
           icon="account"
@@ -177,16 +193,16 @@ const Profile = ({ source }) => {
       )}
       <View>
         <StyledText variant="bodyLarge" type="b">
-          User Name
+          {name}
         </StyledText>
-        <StyledText>@userid_008</StyledText>
-        <StyledText>Refer Code: 86571</StyledText>
+        <StyledText>{phone}</StyledText>
+        <StyledText>Refer Code: {refCode}</StyledText>
       </View>
     </View>
   );
 };
 
-const CSBandPoints = () => {
+const CSBandPoints = ({ CSB, points }) => {
   return (
     <View style={tailwind`w-full flex-row gap-4 py-4 `}>
       <View
@@ -194,7 +210,7 @@ const CSBandPoints = () => {
       >
         <StyledText variant="bodySmall">CSB:</StyledText>
         <StyledText type="b" color={COLOR.primary}>
-          850
+          {CSB === undefined ? 0 : CSB}
         </StyledText>
       </View>
       <View
@@ -202,7 +218,7 @@ const CSBandPoints = () => {
       >
         <StyledText variant="bodySmall">Points:</StyledText>
         <StyledText type="b" color={COLOR.secondary}>
-          100
+          {points === undefined ? 0 : points}
         </StyledText>
       </View>
     </View>
