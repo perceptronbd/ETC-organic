@@ -1,5 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useEffect } from "react";
+import React from "react";
 import { ScrollView, View } from "react-native";
 import tw from "twrnc";
 import {
@@ -13,21 +12,6 @@ import { useCustomToast } from "../../../hooks";
 
 export default function Page() {
   const showToast = useCustomToast();
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const value = await AsyncStorage.getItem("user-data");
-        const userData = JSON.parse(value);
-        if (userData !== null) {
-          console.log("home userData", userData);
-        }
-      } catch (e) {
-        console.log("error:", e);
-      }
-    };
-    getData();
-  }, []);
 
   return (
     <>
