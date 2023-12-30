@@ -7,6 +7,7 @@ const orderController = require('../controllers/orderController');
 const redeemCSB = require('../controllers/redeemCSBtotaka');
 const bankController = require("../controllers/bankController")
 const withdrawController = require('../controllers/withdrawController')
+const walletHistoryController = require('../controllers/walletHistoryController');
 const upload = require('../middleware/imageMiddleware');
 const authenticateUser = require('../middleware/authMiddleware'); 
 
@@ -33,6 +34,7 @@ router.get('/get-user-order-details',authenticateUser,orderController.getOrderDe
 router.post('/redeemCSB',authenticateUser, redeemCSB.redeemCSBtoTaka);
 router.post('/withdraw',authenticateUser, withdrawController.createWithdraw);
 router.get('/getwithdraw',authenticateUser, withdrawController.getWithdrawRequests);
+router.get('/getwallethistory',authenticateUser, walletHistoryController.walletHistory);
 
 
 

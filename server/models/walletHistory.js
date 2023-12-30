@@ -5,18 +5,18 @@ const orderModel = require('./orderModel')
 
 
 const walletHistory = new mongoose.Schema({
-    recievedId: { 
+    recieverId: { 
       type: mongoose.Schema.Types.ObjectId, 
       ref: mobileUser, 
       required: true 
     },
-    orderID: { 
+    purchaserId:{
       type: mongoose.Schema.Types.ObjectId, 
-      ref: orderModel, 
-      required: true 
+      ref: mobileUser, 
+      required: true
     },
     date: { 
-      type: Date 
+      type: String
     },
     time: {
         type: String,
