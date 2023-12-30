@@ -53,10 +53,10 @@ const login = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const value = await AsyncStorage.getItem("user-data");
-        const userData = JSON.parse(value);
-        if (userData !== null) {
-          console.log("login userData", userData);
+        const userData = await AsyncStorage.getItem("user-data");
+        const user = JSON.parse(userData);
+
+        if (user !== null) {
           router.push("/(drawer)/(tabs)/home");
         }
       } catch (e) {
@@ -112,8 +112,12 @@ const login = () => {
 
   const storeUserData = async (userData) => {
     try {
-      const jsonValue = JSON.stringify(userData);
-      await AsyncStorage.setItem("user-data", jsonValue);
+      const { token, user } = userData;
+      console.log("storeUserData", token);
+      console.log("storeUserData", user);
+      const jsonUser = JSON.stringify(user);
+      await AsyncStorage.setItem("user-data", jsonUser);
+      await AsyncStorage.setItem("user-token", token);
     } catch (error) {
       console.log(error);
     }
