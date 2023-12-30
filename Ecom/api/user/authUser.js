@@ -1,3 +1,4 @@
+import { authURL } from "../instances/authURL";
 import { baseURL } from "../instances/baseURL";
 
 export const registerUser = async (user) => {
@@ -19,6 +20,22 @@ export const loginUser = async (user) => {
     return res;
   } catch (error) {
     console.log("loginUser error:", error.response);
+    const errorResponse = error.response;
+    return errorResponse;
+  }
+};
+
+export const getUserDetails = async (token) => {
+  try {
+    const res = await authURL.get("/get-profile", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log("getUserDetails res:", res);
+    return res;
+  } catch (error) {
+    console.log("getUserDetails error:", error.response);
     const errorResponse = error.response;
     return errorResponse;
   }
