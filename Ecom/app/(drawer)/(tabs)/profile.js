@@ -190,20 +190,20 @@ const CSBandPoints = () => {
   return (
     <View style={tailwind`w-full flex-row gap-4 py-4 `}>
       <View
-        style={tailwind`w-40 flex-row items-center gap-2 border-2 px-4 py-2 border-[${COLOR.primary}] bg-[${COLOR.primaryLight}] rounded-xl`}
+        style={tailwind`w-40 flex-row items-center justify-center gap-2 border px-2 border-[${COLOR.primary}] bg-[${COLOR.primaryLight}] rounded-xl`}
       >
-        <StyledText variant="bodyLarge" type="b" color={COLOR.primary}>
-          CSB:
+        <StyledText variant="bodySmall">CSB:</StyledText>
+        <StyledText type="b" color={COLOR.primary}>
+          850
         </StyledText>
-        <StyledText>850</StyledText>
       </View>
       <View
-        style={tailwind`w-40 flex-row items-center gap-2 border-2 px-4 py-2 border-[${COLOR.secondary}] bg-[${COLOR.secondaryLight}] rounded-xl`}
+        style={tailwind`w-40 flex-row items-center justify-center gap-2 border px-2 border-[${COLOR.secondary}] bg-[${COLOR.secondaryLight}] rounded-xl`}
       >
-        <StyledText variant="bodyLarge" type="b" color={COLOR.secondary}>
-          Points:
+        <StyledText variant="bodySmall">Points:</StyledText>
+        <StyledText type="b" color={COLOR.secondary}>
+          100
         </StyledText>
-        <StyledText>100</StyledText>
       </View>
     </View>
   );
