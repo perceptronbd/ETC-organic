@@ -27,11 +27,7 @@ export const loginUser = async (user) => {
 
 export const getUserDetails = async (token) => {
   try {
-    const res = await authURL.get("/get-profile", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await authURL(token).get("/get-profile");
     console.log("getUserDetails res:", res);
     return res;
   } catch (error) {
