@@ -39,14 +39,23 @@ export const HeaderComponent = ({ imgURL, points }) => {
             type="m"
             style={tailwind.style(`text-[${COLOR.tertiary}]`)}
           >
-            {points}
+            {points === undefined ? 0 : points}
           </StyledText>
         </View>
-        <Avatar.Image
-          size={40}
-          style={{ backgroundColor: "none " }}
-          source={imgURL}
-        />
+        {imgURL === "" || imgURL === undefined ? (
+          <Avatar.Icon
+            size={40}
+            icon="account"
+            color="white"
+            style={tailwind`bg-[${COLOR.neutral}]`}
+          />
+        ) : (
+          <Avatar.Image
+            size={40}
+            style={{ backgroundColor: "none " }}
+            source={imgURL}
+          />
+        )}
       </View>
     </View>
   );
