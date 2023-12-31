@@ -1,1 +1,6 @@
-export { getUserDetails, loginUser, registerUser } from "./user/authUser";
+export {
+  getUserDetails,
+  loginUser,
+  registerUser,
+  updateProfile,
+} from "./user/authUser";

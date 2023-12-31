@@ -36,3 +36,20 @@ export const getUserDetails = async (token) => {
     return errorResponse;
   }
 };
+
+export const updateProfile = async (token, data) => {
+  try {
+    const res = await authURL(token).post("/update-profile", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    console.log("updateProfile res:", res);
+    return res;
+  } catch (error) {
+    console.log("updateProfile error:", error.response);
+    const errorResponse = error.response;
+    return errorResponse;
+  }
+};
