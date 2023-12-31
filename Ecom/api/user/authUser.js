@@ -1,3 +1,4 @@
+import axios from "axios";
 import { authURL } from "../instances/authURL";
 import { baseURL } from "../instances/baseURL";
 
@@ -39,11 +40,16 @@ export const getUserDetails = async (token) => {
 
 export const updateProfile = async (token, data) => {
   try {
-    const res = await authURL(token).post("/update-profile", data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
+    const res = await axios.post(
+      "http://192.168.0.110:5000/mobile/update-profile",
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
       },
-    });
+    );
 
     console.log("updateProfile res:", res);
     return res;

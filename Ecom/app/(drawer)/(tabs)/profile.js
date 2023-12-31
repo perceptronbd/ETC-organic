@@ -1,4 +1,7 @@
 import { Feather } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as FileSystem from "expo-file-system";
+import * as ImagePicker from "expo-image-picker";
 import { View } from "native-base";
 import React, { useEffect, useState } from "react";
 import { Image } from "react-native";
@@ -6,9 +9,16 @@ import { SelectList } from "react-native-dropdown-select-list";
 import { ScrollView } from "react-native-gesture-handler";
 import { Avatar, Button, DataTable, Divider } from "react-native-paper";
 import tailwind from "twrnc";
-import { Loading, StyledButton, StyledText } from "../../../components";
+import { updateProfile } from "../../../api/user/authUser";
+import {
+  Loading,
+  MessageModal,
+  StyledButton,
+  StyledText,
+} from "../../../components";
 import COLOR from "../../../constants/COLOR";
 import { useAuth } from "../../../hooks/useAuth";
+import { useModal } from "../../../hooks/useModal";
 import { formatNumbers } from "../../../utils/formatNumbers";
 
 const addressInput = [
@@ -150,38 +160,170 @@ const addressInput = [
 ];
 
 export default function Page() {
-  const [imgUrl, setImgUrl] = useState(null);
+  const [profileImage, setProfileImage] = useState(null);
+  const [nidImage, setNidImage] = useState(null);
+
+  const [data, setData] = useState({
+    image: null,
+    nationalImage: null,
+    division: "",
+    district: "",
+  });
 
   const { user, loading } = useAuth();
 
+  const { visible, showModal, hideModal, isError, modalMessage } = useModal();
+
   useEffect(() => {
     if (user?.image) {
-      setImgUrl(user.image);
+      setProfileImage(user.image);
     }
   }, [user]);
 
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    console.log("pickImage result:", result);
+
+    if (!result.canceled) {
+      const fileInfo = await FileSystem.getInfoAsync(result.assets[0].uri);
+      const fileSizeInBytes = fileInfo.size;
+
+      const maxSizeInBytes = 3 * 1024 * 1024;
+
+      if (fileSizeInBytes <= maxSizeInBytes) {
+        const base64Image = await FileSystem.readAsStringAsync(
+          result.assets[0].uri,
+          {
+            encoding: FileSystem.EncodingType.Base64,
+          },
+        );
+        setProfileImage(base64Image);
+        setData({
+          ...data,
+          image: {
+            uri: result.assets[0].uri,
+            type: result.assets[0].type,
+            name: "image",
+          },
+        });
+      } else {
+        showModal("Image size must be smaller than 3mb", true);
+      }
+    }
+  };
+
+  const pickNID = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log("pickImage result:", result);
+
+    if (!result.canceled) {
+      const fileInfo = await FileSystem.getInfoAsync(result.assets[0].uri);
+      const fileSizeInBytes = fileInfo.size;
+
+      const maxSizeInBytes = 3 * 1024 * 1024;
+
+      if (fileSizeInBytes <= maxSizeInBytes) {
+        const base64Image = await FileSystem.readAsStringAsync(
+          result.assets[0].uri,
+          {
+            encoding: FileSystem.EncodingType.Base64,
+          },
+        );
+        setNidImage(base64Image);
+        setData({
+          ...data,
+          nationalImage: {
+            uri: result.assets[0].uri,
+            type: result.assets[0].type,
+            name: "nationalIdImage",
+          },
+        });
+      } else {
+        showModal("Image size must be smaller than 3mb", true);
+      }
+    }
+  };
+
+  const handleSubmit = async () => {
+    console.log("handleSubmit:", data);
+
+    //validate checks before submitting the form
+    if (data.image === null) {
+      showModal("Please select profile image ", true);
+      return;
+    }
+    if (data.nationalImage === null) {
+      showModal("Please select NID ", true);
+      return;
+    }
+    if (data.division === "") {
+      showModal("Please select a division", true);
+      return;
+    }
+    if (data.district === "") {
+      showModal("Please select a district", true);
+      return;
+    }
+
+    try {
+      AsyncStorage.getItem("user-token").then((token) => {
+        updateProfile(token, data).then((res) => {
+          console.log("updateProfile res:", res);
+        });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return loading ? (
-    <Loading />
+    <Loading isLoading={loading} />
   ) : (
     <ScrollView style={tailwind`flex-1 px-3 py-4`}>
       <View style={tailwind`flex items-center rounded-xl bg-white p-2`}>
         <Profile
-          source={imgUrl}
+          source={profileImage}
           name={user?.name}
           phone={user?.mobileNumber}
           refCode={user?.referralCode}
+          CSB={user?.CSB}
+          points={user?.points}
+          pickImage={pickImage}
         />
-        <CSBandPoints CSB={user?.CSB} points={user?.points} />
         <Divider style={tailwind`w-full border border-[${COLOR.neutral}]`} />
-        <NIDandAddress />
-        <StyledButton width={"md"}>তথ্য সেভ করুন</StyledButton>
+        <NIDandAddress
+          pickNID={pickNID}
+          nidImage={nidImage}
+          setData={setData}
+        />
+        <StyledButton width={"md"} onPress={handleSubmit}>
+          তথ্য সেভ করুন
+        </StyledButton>
       </View>
       <Orders />
+      <MessageModal
+        isError={isError}
+        visible={visible}
+        hideModal={hideModal}
+        modalMessag={modalMessage}
+      />
     </ScrollView>
   );
 }
 
-const Profile = ({ source, name, phone, refCode }) => {
+const Profile = ({ source, name, phone, refCode, CSB, points, pickImage }) => {
   return (
     <View style={tailwind`w-full flex-row items-start gap-8 py-1`}>
       <View style={tailwind`flex`}>
@@ -193,51 +335,61 @@ const Profile = ({ source, name, phone, refCode }) => {
             style={tailwind`bg-[${COLOR.neutral}]`}
           />
         ) : (
-          <Avatar.Image size={80} style={tailwind`bg-[${COLOR.neutral}]`} />
+          <Avatar.Image
+            size={80}
+            style={tailwind`bg-[${COLOR.neutral}]`}
+            source={{ uri: `data:image/jpeg;base64,${source}` }}
+          />
         )}
-        <Button>
+        <Button onPress={pickImage}>
           Edit <Feather name="edit" size={15} color={COLOR.primary} />
         </Button>
       </View>
-      <View>
+      <View style={tailwind`flex gap-1`}>
         <StyledText variant="bodyLarge" type="b">
           {name}
         </StyledText>
         <StyledText>{phone}</StyledText>
-        <StyledText>Refer Code: {refCode}</StyledText>
+        <View
+          style={tailwind`flex-row items-center justify-between gap-2 px-2 bg-[${COLOR.primaryLight}] rounded-md`}
+        >
+          <StyledText variant="bodySmall">Refer Code:</StyledText>
+          <StyledText type="b" color={COLOR.primary}>
+            {refCode}
+          </StyledText>
+        </View>
+        <View
+          style={tailwind`w-32 flex-row items-center justify-between gap-2 px-2 bg-[${COLOR.secondaryLight}] rounded-md`}
+        >
+          <StyledText variant="bodySmall">CSB:</StyledText>
+          <StyledText type="b" color={COLOR.secondary}>
+            {CSB === undefined ? 0 : CSB}
+          </StyledText>
+        </View>
+        <View
+          style={tailwind`w-32 flex-row items-center justify-between gap-2  px-2 bg-[${COLOR.secondaryLight}] rounded-md`}
+        >
+          <StyledText variant="bodySmall">Points:</StyledText>
+          <StyledText type="b" color={COLOR.secondary}>
+            {points === undefined ? 0 : points}
+          </StyledText>
+        </View>
       </View>
     </View>
   );
 };
 
-const CSBandPoints = ({ CSB, points }) => {
-  return (
-    <View style={tailwind`w-full flex-row gap-4 py-4 `}>
-      <View
-        style={tailwind`w-40 flex-row items-center justify-center gap-2 border px-2 border-[${COLOR.primary}] bg-[${COLOR.primaryLight}] rounded-xl`}
-      >
-        <StyledText variant="bodySmall">CSB:</StyledText>
-        <StyledText type="b" color={COLOR.primary}>
-          {CSB === undefined ? 0 : CSB}
-        </StyledText>
-      </View>
-      <View
-        style={tailwind`w-40 flex-row items-center justify-center gap-2 border px-2 border-[${COLOR.secondary}] bg-[${COLOR.secondaryLight}] rounded-xl`}
-      >
-        <StyledText variant="bodySmall">Points:</StyledText>
-        <StyledText type="b" color={COLOR.secondary}>
-          {points === undefined ? 0 : points}
-        </StyledText>
-      </View>
-    </View>
-  );
-};
-
-const NIDandAddress = () => {
+const NIDandAddress = ({ pickNID, setData, nidImage }) => {
   const [division, setDivision] = useState("");
   const [district, setDistrict] = useState("");
 
-  const NIDsrc = "../../../assets/img/nid.jpg";
+  useEffect(() => {
+    setData((prev) => ({
+      ...prev,
+      division,
+      district,
+    }));
+  }, [division, district]);
 
   return (
     <View style={tailwind`w-full justify-between py-4`}>
@@ -245,10 +397,10 @@ const NIDandAddress = () => {
         <StyledText variant="bodySmall">জাতীয় পরিচয়পত্রের ছবি</StyledText>
         <Image
           style={tailwind`h-52 w-full rounded-md bg-[${COLOR.neutral}] border bg-opacity-50 border-[${COLOR.neutralDark}]`}
-          source={{ uri: NIDsrc }}
+          source={{ uri: `data:image/jpeg;base64,${nidImage}` }}
           alt="NID"
         />
-        <Button>
+        <Button onPress={pickNID}>
           Upload NID <Feather name="edit" size={15} color={COLOR.primary} />
         </Button>
       </View>
