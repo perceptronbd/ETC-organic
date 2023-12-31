@@ -1,11 +1,12 @@
+import { Feather } from "@expo/vector-icons";
 import { View } from "native-base";
 import React, { useEffect, useState } from "react";
 import { Image } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import { ScrollView } from "react-native-gesture-handler";
-import { Avatar, DataTable, Divider } from "react-native-paper";
+import { Avatar, Button, DataTable, Divider } from "react-native-paper";
 import tailwind from "twrnc";
-import { StyledButton, StyledText } from "../../../components";
+import { Loading, StyledButton, StyledText } from "../../../components";
 import COLOR from "../../../constants/COLOR";
 import { useAuth } from "../../../hooks/useAuth";
 import { formatNumbers } from "../../../utils/formatNumbers";
@@ -151,7 +152,7 @@ const addressInput = [
 export default function Page() {
   const [imgUrl, setImgUrl] = useState(null);
 
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
   useEffect(() => {
     if (user?.image) {
@@ -159,7 +160,9 @@ export default function Page() {
     }
   }, [user]);
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <ScrollView style={tailwind`flex-1 px-3 py-4`}>
       <View style={tailwind`flex items-center rounded-xl bg-white p-2`}>
         <Profile
@@ -181,16 +184,21 @@ export default function Page() {
 const Profile = ({ source, name, phone, refCode }) => {
   return (
     <View style={tailwind`w-full flex-row items-center gap-8 py-4`}>
-      {source === undefined || source === null ? (
-        <Avatar.Icon
-          size={80}
-          icon="account"
-          color="white"
-          style={tailwind`bg-[${COLOR.neutral}]`}
-        />
-      ) : (
-        <Avatar.Image size={80} style={tailwind`bg-[${COLOR.neutral}]`} />
-      )}
+      <View style={tailwind`flex`}>
+        {source === undefined || source === null ? (
+          <Avatar.Icon
+            size={80}
+            icon="account"
+            color="white"
+            style={tailwind`bg-[${COLOR.neutral}]`}
+          />
+        ) : (
+          <Avatar.Image size={80} style={tailwind`bg-[${COLOR.neutral}]`} />
+        )}
+        <Button>
+          Edit <Feather name="edit" size={15} color={COLOR.primary} />
+        </Button>
+      </View>
       <View>
         <StyledText variant="bodyLarge" type="b">
           {name}
@@ -229,17 +237,20 @@ const NIDandAddress = () => {
   const [division, setDivision] = useState("");
   const [district, setDistrict] = useState("");
 
-  const NIDsrc = require("../../../assets/img/nid.jpg");
+  const NIDsrc = "../../../assets/img/nid.jpg";
 
   return (
     <View style={tailwind`w-full justify-between py-4`}>
-      <View>
+      <View style={tailwind`flex items-start`}>
         <StyledText variant="bodySmall">জাতীয় পরিচয়পত্রের ছবি</StyledText>
         <Image
-          style={tailwind`h-24 w-44 rounded-md bg-[${COLOR.neutral}] border bg-opacity-50 border-[${COLOR.neutralDark}]`}
-          source={NIDsrc}
+          style={tailwind`h-52 w-full rounded-md bg-[${COLOR.neutral}] border bg-opacity-50 border-[${COLOR.neutralDark}]`}
+          source={{ uri: NIDsrc }}
           alt="NID"
         />
+        <Button>
+          Upload NID <Feather name="edit" size={15} color={COLOR.primary} />
+        </Button>
       </View>
       <View>
         {addressInput.map((input) => {
