@@ -27,4 +27,4 @@ export { HeaderComponent } from "./header/HeaderComponent";
 export { ContentModal } from "./modals/ContentModal";
 export { MessageModal } from "./modals/MessageModal";
 //animation
-export { Loading } from "./animation/Loading";
+export { Loading } from "./others/Loading";
