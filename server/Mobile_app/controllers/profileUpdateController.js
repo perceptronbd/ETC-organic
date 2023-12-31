@@ -3,7 +3,10 @@ const UserDetails = require("../../models/userDetailsModel");
 
 exports.updateProfile = asyncHandler(async (req, res) => {
   const userId = req.user._id; // Ensure this correctly fetches the user ID
-  const { district, thana } = req.body;
+  const { district, division } = req.body;
+
+  console.log("req.files", req.files);
+  console.log("req.body", req.body);
 
   // Initialize variables for image paths
   let image, nationalIdImage;
@@ -25,8 +28,8 @@ exports.updateProfile = asyncHandler(async (req, res) => {
   }
 
   // Check if thana is empty
-  if (!thana) {
-    missingFields.push("Thana");
+  if (!division) {
+    missingFields.push("Division");
   }
 
   // Check if image is empty
