@@ -16,11 +16,11 @@ router.post("/register", userController.register);
 router.post("/login", userController.login);
 router.post(
   "/update-profile",
-  authenticateUser,
   upload.fields([
     { name: "image", maxCount: 1 },
     { name: "nationalIdImage", maxCount: 1 },
   ]),
+  authenticateUser,
   profileUpdateController.updateProfile
 );
 router.get(
