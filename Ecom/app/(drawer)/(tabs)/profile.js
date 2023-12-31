@@ -183,7 +183,7 @@ export default function Page() {
 
 const Profile = ({ source, name, phone, refCode }) => {
   return (
-    <View style={tailwind`w-full flex-row items-center gap-8 py-4`}>
+    <View style={tailwind`w-full flex-row items-start gap-8 py-1`}>
       <View style={tailwind`flex`}>
         {source === undefined || source === null ? (
           <Avatar.Icon
