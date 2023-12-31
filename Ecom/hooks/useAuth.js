@@ -7,25 +7,35 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    console.log("useAuth loading....");
     setLoading(true);
 
     const getData = async () => {
       try {
+        //get user token form the local storage
         AsyncStorage.getItem("user-token").then((token) => {
           if (token) {
+            console.log("useAuth fetching....");
             getUserDetails(token).then((res) => {
+              //fetch user details from the server
               const { data, status } = res;
               if (status === 500) {
+                //if server error then set user to original value and loading to false
                 AsyncStorage.getItem("user-data").then((value) => {
                   if (value) {
                     setUser(JSON.parse(value));
+                    console.log("useAuth end....");
+                    setLoading(false);
                   }
                 });
               } else {
                 AsyncStorage.mergeItem("user-data", JSON.stringify(data)).then(
+                  //if no error then merge the fetched data with the local storage and loading to false
                   AsyncStorage.getItem("user-data").then((value) => {
                     if (value) {
                       setUser(JSON.parse(value));
+                      console.log("useAuth end....");
+                      setLoading(false);
                     }
                   }),
                 );
@@ -33,7 +43,6 @@ export const useAuth = () => {
             });
           }
         });
-        setLoading(false);
       } catch (e) {
         console.log("error:", e);
       }
