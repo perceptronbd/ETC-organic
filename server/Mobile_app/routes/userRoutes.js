@@ -23,6 +23,27 @@ router.post(
   authenticateUser,
   profileUpdateController.updateProfile
 );
+router.post(
+  "/update-image",
+  authenticateUser,
+  upload.single("image"),
+  profileUpdateController.handleImage
+);
+
+// Update the route for national image handling
+router.post(
+  "/update-national-image",
+  upload.single("nationalIdImage"),
+  authenticateUser,
+  profileUpdateController.handleNationalImage
+);
+
+// Update the route for district and division handling
+router.post(
+  "/update-district-and-division",
+  authenticateUser,
+  profileUpdateController.handleDistrictAndDivision
+);
 router.get(
   "/get-profile",
   authenticateUser,
