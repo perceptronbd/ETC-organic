@@ -10,6 +10,6 @@ router.get("/getMobileUserOrders", checkLogin, salesManagement, getAllOrders);
 router.get("/displayOrders", checkLogin, salesManagement, displayOrders);
 router.get("/getOnlineOrders", checkLogin, salesManagement, getOnlineOrders);
 
-//this is for PR
+//this is second PR for server
 
 module.exports = router;
