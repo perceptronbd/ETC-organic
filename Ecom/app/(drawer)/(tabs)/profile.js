@@ -161,9 +161,6 @@ const addressInput = [
 ];
 
 export default function Page() {
-  //const [profileImage, setProfileImage] = useState(null);
-  //const [nidImage, setNidImage] = useState(null);
-
   const [data, setData] = useState({
     image: null,
     nationalImage: null,
@@ -180,54 +177,6 @@ export default function Page() {
   );
 
   const { visible, showModal, hideModal, isError, modalMessage } = useModal();
-
-  useEffect(() => {
-    console.log("useEffect running...");
-    console.log(user);
-
-    if (user?.userDetails.image) {
-      const imageURL = user?.userDetails.image.replace("public\\uploads\\", "");
-      setProfileImage(`http://192.168.0.110:5000/uploads/${imageURL}`);
-    }
-  }, [user]);
-
-  const pickNID = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    console.log("pickImage result:", result);
-
-    if (!result.canceled) {
-      const fileInfo = await FileSystem.getInfoAsync(result.assets[0].uri);
-      const fileSizeInBytes = fileInfo.size;
-
-      const maxSizeInBytes = 3 * 1024 * 1024;
-
-      if (fileSizeInBytes <= maxSizeInBytes) {
-        const base64Image = await FileSystem.readAsStringAsync(
-          result.assets[0].uri,
-          {
-            encoding: FileSystem.EncodingType.Base64,
-          },
-        );
-        //setNidImage(base64Image);
-        setData({
-          ...data,
-          nationalImage: {
-            uri: result.assets[0].uri,
-            type: result.assets[0].type,
-            name: "nationalIdImage",
-          },
-        });
-      } else {
-        showModal("Image size must be smaller than 3mb", true);
-      }
-    }
-  };
 
   const pickAndUploadImage = async () => {
     console.log("openImagePickerAsync...");
@@ -248,7 +197,7 @@ export default function Page() {
         AsyncStorage.getItem("user-token").then((token) => {
           FileSystem.uploadAsync(
             "http://192.168.0.110:5000/mobile/update-image",
-            pickerResult.uri,
+            pickerResult.assets[0].uri,
             {
               httpMethod: "POST",
               uploadType: FileSystem.FileSystemUploadType.MULTIPART,
@@ -262,6 +211,48 @@ export default function Page() {
             const imageURL = JSON.parse(body).imagePath;
             console.log("uploadResult:", imageURL);
             setProfileImage(imageURL);
+          });
+        });
+      }
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+
+  const pickAndUploadNID = async () => {
+    console.log("openImagePickerAsync...");
+    try {
+      let permissionResult =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+      if (permissionResult.granted === false) {
+        alert("Permission to access camera roll is required!");
+        return;
+      }
+      let pickerResult = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        aspect: [6, 3],
+        quality: 1,
+      });
+      if (!pickerResult.canceled) {
+        console.log("pickerResult:", pickerResult);
+        AsyncStorage.getItem("user-token").then((token) => {
+          FileSystem.uploadAsync(
+            "http://192.168.0.110:5000/mobile/update-national-image",
+            pickerResult.assets[0].uri,
+            {
+              httpMethod: "POST",
+              uploadType: FileSystem.FileSystemUploadType.MULTIPART,
+              fieldName: "nationalIdImage",
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          ).then((uploadResult) => {
+            const body = uploadResult.body;
+            const imageURL = JSON.parse(body).imagePath;
+            console.log("uploadResult:", imageURL);
+            setNationalIdImage(imageURL);
           });
         });
       }
@@ -338,8 +329,8 @@ export default function Page() {
         />
         <Divider style={tailwind`w-full border border-[${COLOR.neutral}]`} />
         <NIDandAddress
-          pickNID={pickNID}
-          //nidImage={nidImage}
+          pickNID={pickAndUploadNID}
+          nidImage={nationalIdImage}
           setData={setData}
         />
         <StyledButton width={"md"} onPress={handleSubmit}>
@@ -432,7 +423,7 @@ const NIDandAddress = ({ pickNID, setData, nidImage }) => {
         <StyledText variant="bodySmall">জাতীয় পরিচয়পত্রের ছবি</StyledText>
         <Image
           style={tailwind`h-52 w-full rounded-md bg-[${COLOR.neutral}] border bg-opacity-50 border-[${COLOR.neutralDark}]`}
-          source={{ uri: `data:image/jpeg;base64,${nidImage}` }}
+          source={{ uri: nidImage }}
           alt="NID"
         />
         <Button onPress={pickNID}>
