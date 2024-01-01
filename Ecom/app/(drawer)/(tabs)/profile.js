@@ -17,6 +17,7 @@ import {
   StyledText,
 } from "../../../components";
 import COLOR from "../../../constants/COLOR";
+import { useImage } from "../../../hooks";
 import { useAuth } from "../../../hooks/useAuth";
 import { useModal } from "../../../hooks/useModal";
 import { formatNumbers } from "../../../utils/formatNumbers";
@@ -160,8 +161,8 @@ const addressInput = [
 ];
 
 export default function Page() {
-  const [profileImage, setProfileImage] = useState(null);
-  const [nidImage, setNidImage] = useState(null);
+  //const [profileImage, setProfileImage] = useState(null);
+  //const [nidImage, setNidImage] = useState(null);
 
   const [data, setData] = useState({
     image: null,
@@ -171,52 +172,24 @@ export default function Page() {
   });
 
   const { user, loading } = useAuth();
+  const { imageUrl: profileImage, setImage: setProfileImage } = useImage(
+    user?.userDetails.image,
+  );
+  const { imageUrl: nationalIdImage, setImage: setNationalIdImage } = useImage(
+    user?.userDetails.nationalIdImage,
+  );
 
   const { visible, showModal, hideModal, isError, modalMessage } = useModal();
 
   useEffect(() => {
-    if (user?.image) {
-      setProfileImage(user.image);
+    console.log("useEffect running...");
+    console.log(user);
+
+    if (user?.userDetails.image) {
+      const imageURL = user?.userDetails.image.replace("public\\uploads\\", "");
+      setProfileImage(`http://192.168.0.110:5000/uploads/${imageURL}`);
     }
   }, [user]);
-
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 1,
-    });
-
-    console.log("pickImage result:", result);
-
-    if (!result.canceled) {
-      const fileInfo = await FileSystem.getInfoAsync(result.assets[0].uri);
-      const fileSizeInBytes = fileInfo.size;
-
-      const maxSizeInBytes = 3 * 1024 * 1024;
-
-      if (fileSizeInBytes <= maxSizeInBytes) {
-        const base64Image = await FileSystem.readAsStringAsync(
-          result.assets[0].uri,
-          {
-            encoding: FileSystem.EncodingType.Base64,
-          },
-        );
-        setProfileImage(base64Image);
-        setData({
-          ...data,
-          image: {
-            uri: result.assets[0].uri,
-            type: result.assets[0].type,
-            name: "image",
-          },
-        });
-      } else {
-        showModal("Image size must be smaller than 3mb", true);
-      }
-    }
-  };
 
   const pickNID = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -241,7 +214,7 @@ export default function Page() {
             encoding: FileSystem.EncodingType.Base64,
           },
         );
-        setNidImage(base64Image);
+        //setNidImage(base64Image);
         setData({
           ...data,
           nationalImage: {
@@ -285,7 +258,10 @@ export default function Page() {
               },
             },
           ).then((uploadResult) => {
-            console.log("uploadResult:", uploadResult);
+            const body = uploadResult.body;
+            const imageURL = JSON.parse(body).imagePath;
+            console.log("uploadResult:", imageURL);
+            setProfileImage(imageURL);
           });
         });
       }
@@ -363,7 +339,7 @@ export default function Page() {
         <Divider style={tailwind`w-full border border-[${COLOR.neutral}]`} />
         <NIDandAddress
           pickNID={pickNID}
-          nidImage={nidImage}
+          //nidImage={nidImage}
           setData={setData}
         />
         <StyledButton width={"md"} onPress={handleSubmit}>
@@ -396,7 +372,8 @@ const Profile = ({ source, name, phone, refCode, CSB, points, pickImage }) => {
           <Avatar.Image
             size={80}
             style={tailwind`bg-[${COLOR.neutral}]`}
-            source={{ uri: `data:image/jpeg;base64,${source}` }}
+            //source={{ uri: `data:image/jpeg;base64,${source}` }}
+            source={{ uri: source }}
           />
         )}
         <Button onPress={pickImage}>
