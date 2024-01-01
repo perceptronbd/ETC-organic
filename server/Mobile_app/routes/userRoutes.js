@@ -15,15 +15,6 @@ const authenticateUser = require("../middleware/authMiddleware");
 router.post("/register", userController.register);
 router.post("/login", userController.login);
 router.post(
-  "/update-profile",
-  upload.fields([
-    { name: "image", maxCount: 1 },
-    { name: "nationalIdImage", maxCount: 1 },
-  ]),
-  authenticateUser,
-  profileUpdateController.updateProfile
-);
-router.post(
   "/update-image",
   authenticateUser,
   upload.single("image"),
