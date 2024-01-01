@@ -2,25 +2,21 @@ import { Ionicons } from "@expo/vector-icons";
 import { DrawerToggleButton } from "@react-navigation/drawer";
 import { Tabs } from "expo-router";
 import { View } from "native-base";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Text } from "react-native";
 import tailwind from "twrnc";
 import { HeaderComponent } from "../../../components";
 import COLOR from "../../../constants/COLOR";
 import CartContext from "../../../contexts/CartContext";
+import { useImage } from "../../../hooks";
 import { useAuth } from "../../../hooks/useAuth";
 
 const Layout = () => {
-  const [imgUrl, setImgUrl] = useState(null);
+  //const [imgUrl, setImgUrl] = useState(null);
 
   const { products } = useContext(CartContext);
   const { user } = useAuth();
-
-  useEffect(() => {
-    if (user?.image) {
-      setImgUrl(user.image);
-    }
-  }, [user]);
+  const { imageUrl } = useImage(user?.userDetails.image);
 
   return (
     <>
@@ -29,7 +25,7 @@ const Layout = () => {
           tabBarActiveTintColor: COLOR.tertiary,
           tabBarShowLabel: false,
           headerTitle: () => (
-            <HeaderComponent imgURL={imgUrl} points={user?.points} />
+            <HeaderComponent imgURL={imageUrl} points={user?.points} />
           ),
           headerLeft: () => <DrawerToggleButton />,
           tabBarStyle: {
