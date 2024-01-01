@@ -12,5 +12,5 @@ export const useImage = (image) => {
     }
   }, [image]);
 
-  return { imageUrl };
+  return { imageUrl, setImageUrl };
 };
