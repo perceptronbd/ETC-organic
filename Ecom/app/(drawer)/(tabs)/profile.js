@@ -256,6 +256,44 @@ export default function Page() {
     }
   };
 
+  const pickAndUploadImage = async () => {
+    console.log("openImagePickerAsync...");
+    try {
+      let permissionResult =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+      if (permissionResult.granted === false) {
+        alert("Permission to access camera roll is required!");
+        return;
+      }
+      let pickerResult = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1,
+      });
+      if (!pickerResult.canceled) {
+        AsyncStorage.getItem("user-token").then((token) => {
+          FileSystem.uploadAsync(
+            "http://192.168.0.110:5000/mobile/update-image",
+            pickerResult.uri,
+            {
+              httpMethod: "POST",
+              uploadType: FileSystem.FileSystemUploadType.MULTIPART,
+              fieldName: "image",
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          ).then((uploadResult) => {
+            console.log("uploadResult:", uploadResult);
+          });
+        });
+      }
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+
   const handleSubmit = async () => {
     console.log("handleSubmit:", data);
 
@@ -279,9 +317,29 @@ export default function Page() {
 
     try {
       AsyncStorage.getItem("user-token").then((token) => {
-        updateProfile(token, data).then((res) => {
-          console.log("updateProfile res:", res);
-        });
+        try {
+          const formData = new FormData();
+          console.log(formData);
+          formData.append("image", {
+            uri: data.image.uri,
+            type: data.image.type,
+            name: "image",
+          });
+          formData.append("nationalIdImage", {
+            uri: data.nationalImage.uri,
+            type: data.nationalImage.type,
+            name: "nationalIdImage",
+          });
+          formData.append("division", data.division);
+          formData.append("district", data.district);
+          console.log(formData);
+
+          updateProfile(token, formData).then((res) => {
+            console.log("updateProfile res:", res);
+          });
+        } catch (error) {
+          console.log(error);
+        }
       });
     } catch (error) {
       console.log(error);
@@ -300,7 +358,7 @@ export default function Page() {
           refCode={user?.referralCode}
           CSB={user?.CSB}
           points={user?.points}
-          pickImage={pickImage}
+          pickImage={pickAndUploadImage}
         />
         <Divider style={tailwind`w-full border border-[${COLOR.neutral}]`} />
         <NIDandAddress
