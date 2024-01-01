@@ -113,6 +113,8 @@ export default function Page() {
   });
 
   const [disabled, setDisabled] = useState(false);
+  const [isProfileLoading, setIsProfileLoading] = useState(false);
+  const [isNIDLoading, setIsNIDLoading] = useState(false);
 
   const { user, loading } = useAuth();
   const { imageUrl: profileImage, setImage: setProfileImage } = useImage(
@@ -140,6 +142,7 @@ export default function Page() {
         quality: 1,
       });
       if (!pickerResult.canceled) {
+        setIsProfileLoading(true);
         AsyncStorage.getItem("user-token").then((token) => {
           FileSystem.uploadAsync(
             `${HOST}/mobile/update-image`,
@@ -157,6 +160,7 @@ export default function Page() {
             const imageURL = JSON.parse(body).imagePath;
             console.log("uploadResult:", imageURL);
             setProfileImage(imageURL);
+            setIsProfileLoading(false);
           });
         });
       }
@@ -177,10 +181,11 @@ export default function Page() {
       }
       let pickerResult = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
-        aspect: [6, 3],
+        aspect: [4, 3],
         quality: 1,
       });
       if (!pickerResult.canceled) {
+        setIsNIDLoading(true);
         console.log("pickerResult:", pickerResult);
         AsyncStorage.getItem("user-token").then((token) => {
           FileSystem.uploadAsync(
@@ -199,6 +204,7 @@ export default function Page() {
             const imageURL = JSON.parse(body).imagePath;
             console.log("uploadResult:", imageURL);
             setNationalIdImage(imageURL);
+            setIsNIDLoading(false);
           });
         });
       }
@@ -229,10 +235,10 @@ export default function Page() {
           updateProfile(token, address).then((res) => {
             console.log("updateProfile res:", res);
             if (res.status === 200) {
-              showModal("Profile updated successfully", false);
+              showModal("প্রোফাইল সফলভাবে আপডেট করা হয়েছে", false);
               setDisabled(false);
             } else {
-              showModal("Something went wrong", true);
+              showModal("কিছু সমস্যা হয়েছে", true);
               setDisabled(false);
             }
           });
@@ -260,6 +266,7 @@ export default function Page() {
           CSB={user?.CSB}
           points={user?.points}
           pickImage={pickAndUploadImage}
+          isProfileLoading={isProfileLoading}
         />
         <Divider style={tailwind`w-full border border-[${COLOR.neutral}]`} />
         <NIDandAddress
@@ -268,6 +275,7 @@ export default function Page() {
           setData={setAddress}
           div={user?.userDetails.thana}
           dist={user?.userDetails.district}
+          isNIDLoading={isNIDLoading}
         />
         <StyledButton disabled={disabled} width={"md"} onPress={handleSubmit}>
           তথ্য সেভ করুন
@@ -284,7 +292,16 @@ export default function Page() {
   );
 }
 
-const Profile = ({ source, name, phone, refCode, CSB, points, pickImage }) => {
+const Profile = ({
+  source,
+  name,
+  phone,
+  refCode,
+  CSB,
+  points,
+  pickImage,
+  isProfileLoading,
+}) => {
   return (
     <View style={tailwind`w-full flex-row items-start gap-8 py-1`}>
       <View style={tailwind`flex`}>
@@ -303,7 +320,11 @@ const Profile = ({ source, name, phone, refCode, CSB, points, pickImage }) => {
             source={{ uri: source }}
           />
         )}
-        <Button onPress={pickImage}>
+        <Button
+          onPress={pickImage}
+          loading={isProfileLoading}
+          disabled={isProfileLoading}
+        >
           Edit <Feather name="edit" size={15} color={COLOR.primary} />
         </Button>
       </View>
@@ -341,7 +362,14 @@ const Profile = ({ source, name, phone, refCode, CSB, points, pickImage }) => {
   );
 };
 
-const NIDandAddress = ({ pickNID, setData, nidImage, div, dist }) => {
+const NIDandAddress = ({
+  pickNID,
+  setData,
+  nidImage,
+  div,
+  dist,
+  isNIDLoading,
+}) => {
   const [division, setDivision] = useState("");
   const [district, setDistrict] = useState("");
 
@@ -362,7 +390,11 @@ const NIDandAddress = ({ pickNID, setData, nidImage, div, dist }) => {
           source={{ uri: nidImage }}
           alt="NID"
         />
-        <Button onPress={pickNID}>
+        <Button
+          onPress={pickNID}
+          loading={isNIDLoading}
+          disabled={isNIDLoading}
+        >
           Upload NID <Feather name="edit" size={15} color={COLOR.primary} />
         </Button>
       </View>
