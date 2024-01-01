@@ -133,7 +133,10 @@ exports.handleImage = asyncHandler(async (req, res) => {
     }
   }
 
-  res.status(200).json({ message: "Image updated successfully" });
+  res.status(200).json({
+    message: "Image updated successfully",
+    imagePath: image,
+  });
 });
 
 exports.handleNationalImage = asyncHandler(async (req, res) => {
