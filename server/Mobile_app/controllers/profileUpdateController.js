@@ -61,9 +61,12 @@ exports.handleNationalImage = asyncHandler(async (req, res) => {
   // Initialize variable for nationalIdImage path
   let nationalIdImage;
 
+  console.log("req.file", req.file);
+
   // Check if the file was uploaded and set the path accordingly
   if (req.file) {
-    nationalIdImage = req.files.path;
+    nationalIdImage = req.file.path;
+    console.log("nationalIdImage", nationalIdImage);
   }
 
   const missingFields = [];
@@ -103,12 +106,10 @@ exports.handleNationalImage = asyncHandler(async (req, res) => {
     }
   }
 
-  res
-    .status(200)
-    .json({
-      message: "National ID Image updated successfully",
-      imagePath: nationalIdImage,
-    });
+  res.status(200).json({
+    message: "National ID Image updated successfully",
+    imagePath: nationalIdImage,
+  });
 });
 
 exports.handleDistrictAndDivision = asyncHandler(async (req, res) => {
