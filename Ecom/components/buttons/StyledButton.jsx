@@ -87,6 +87,7 @@ export const StyledButton = ({
 
   return (
     <Button
+      loading={disabled}
       disabled={disabled}
       style={tw.style(
         `mt-2 items-center justify-center rounded-${rounded} `,
