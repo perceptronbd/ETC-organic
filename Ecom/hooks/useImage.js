@@ -8,7 +8,8 @@ export const useImage = (image) => {
   useEffect(() => {
     console.log("useImage hook:", HOST);
     if (image) {
-      const imageURL = image.replace("public\\uploads\\", "");
+      const imageURL = image.replace(/public\\uploads\\/g, "");
+      console.log("useImage imageURL:", imageURL);
       setImageUrl(`${HOST}/uploads/${imageURL}`);
     }
   }, [image]);
