@@ -6,6 +6,7 @@ import React, { useEffect } from "react";
 import { Text, View } from "react-native";
 import { Avatar } from "react-native-paper";
 import COLOR from "../../constants/COLOR";
+import { useImage } from "../../hooks";
 import { useAuth } from "../../hooks/useAuth";
 import { StyledText } from "../texts/StyledText";
 import { drawerContents } from "./drawerContents";
@@ -14,15 +15,8 @@ import { renderIcon } from "./renderIcon";
 export const CustomDrawerContent = (props) => {
   const pathName = usePathname();
 
-  const [imgUrl, setImgUrl] = React.useState(null);
-
-  useEffect(() => {
-    if (user?.image) {
-      setImgUrl(user.image);
-    }
-  }, [user]);
-
   const { user } = useAuth();
+  const { imageUrl: profileImage } = useImage(user?.userDetails.image);
 
   useEffect(() => {
     console.log(pathName);
@@ -44,11 +38,11 @@ export const CustomDrawerContent = (props) => {
           borderRadius: 10,
         }}
       >
-        {imgUrl ? (
+        {profileImage ? (
           <Avatar.Image
             size={50}
             style={{ backgroundColor: "none ", marginRight: 10 }}
-            source={{ uri: imgUrl }}
+            source={{ uri: profileImage }}
           />
         ) : (
           <Avatar.Icon
