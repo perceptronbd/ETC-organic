@@ -2,6 +2,7 @@ import { HOST } from "@env";
 import { useEffect, useState } from "react";
 
 export const useImage = (image) => {
+  console.log("useImage hook:", image);
   const [imageUrl, setImageUrl] = useState(null);
 
   useEffect(() => {
@@ -12,5 +13,12 @@ export const useImage = (image) => {
     }
   }, [image]);
 
-  return { imageUrl, setImageUrl };
+  //set image url function
+
+  const setImage = (img) => {
+    const imageURL = img.replace("public\\uploads\\", "");
+    setImageUrl(`${HOST}/uploads/${imageURL}`);
+  };
+
+  return { imageUrl, setImage };
 };
