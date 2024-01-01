@@ -1,3 +1,4 @@
+import { HOST } from "@env";
 import { Feather } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as FileSystem from "expo-file-system";
@@ -29,14 +30,14 @@ const addressInput = [
     placeholder: "বিভাগ সিলেক্ট করুন",
     type: "select",
     items: [
-      { key: "DHK", value: "ঢাকা" },
-      { key: "CTG", value: "চট্টগ্রাম" },
-      { key: "RAJ", value: "রাজশাহী" },
-      { key: "KHL", value: "খুলনা" },
-      { key: "BRS", value: "বরিশাল" },
-      { key: "RGP", value: "রংপুর" },
-      { key: "SLT", value: "সিলেট" },
-      { key: "MYM", value: "ময়মনসিংহ" },
+      { key: "ঢাকা", value: "ঢাকা" },
+      { key: "চট্টগ্রাম", value: "চট্টগ্রাম" },
+      { key: "রাজশাহী", value: "রাজশাহী" },
+      { key: "খুলনা", value: "খুলনা" },
+      { key: "বরিশাল", value: "বরিশাল" },
+      { key: "রংপুর", value: "রংপুর" },
+      { key: "সিলেট", value: "সিলেট" },
+      { key: "ময়মনসিংহ", value: "ময়মনসিংহ" },
     ],
   },
   {
@@ -45,128 +46,73 @@ const addressInput = [
     placeholder: "জেলা সিলেক্ট করুন",
     type: "sub-select",
     items: {
-      DHK: [
-        { key: "DHA", value: "ঢাকা" },
-        { key: "GZP", value: "গাজীপুর" },
-        { key: "KRB", value: "কিশোরগঞ্জ" },
-        { key: "MUN", value: "মুন্সিগঞ্জ" },
-        { key: "NRS", value: "নারায়ণগঞ্জ" },
-        { key: "NRY", value: "নরসিংদী" },
-        { key: "FRI", value: "ফরিদপুর" },
-        { key: "TNG", value: "টাঙ্গাইল" },
-        { key: "MYP", value: "মানিকগঞ্জ" },
-        { key: "RJB", value: "রাজবাড়ি" },
-        { key: "GZP", value: "গাজীপুর" },
-        { key: "NRS", value: "নারায়ণগঞ্জ" },
-        { key: "NRY", value: "নরসিংদী" },
-        { key: "FRI", value: "ফরিদপুর" },
-        { key: "TNG", value: "টাঙ্গাইল" },
-        { key: "MYP", value: "মানিকগঞ্জ" },
-        { key: "RJB", value: "রাজবাড়ি" },
+      ঢাকা: [
+        { key: "ঢাকা", value: "ঢাকা" },
+        { key: "গাজীপুর", value: "গাজীপুর" },
+        { key: "কিশোরগঞ্জ", value: "কিশোরগঞ্জ" },
+        { key: "মুন্সিগঞ্জ", value: "মুন্সিগঞ্জ" },
+        { key: "নারায়ণগঞ্জ", value: "নারায়ণগঞ্জ" },
+        { key: "নরসিংদী", value: "নরসিংদী" },
+        { key: "ফরিদপুর", value: "ফরিদপুর" },
+        { key: "টাঙ্গাইল", value: "টাঙ্গাইল" },
+        { key: "মানিকগঞ্জ", value: "মানিকগঞ্জ" },
+        { key: "রাজবাড়ি", value: "রাজবাড়ি" },
       ],
-      CTG: [
-        { key: "CTG", value: "চট্টগ্রাম" },
-        { key: "BND", value: "বান্দরবান" },
-        { key: "BRA", value: "ব্রাহ্মণবাড়িয়া" },
-        { key: "CTG", value: "চট্টগ্রাম" },
-        { key: "BND", value: "বান্দরবান" },
-        { key: "BRA", value: "ব্রাহ্মণবাড়িয়া" },
+      চট্টগ্রাম: [
+        { key: "চট্টগ্রাম", value: "চট্টগ্রাম" },
+        { key: "বান্দরবান", value: "বান্দরবান" },
+        { key: "ব্রাহ্মণবাড়িয়া", value: "ব্রাহ্মণবাড়িয়া" },
+        { key: "চট্টগ্রাম", value: "চট্টগ্রাম" },
+        { key: "বান্দরবান", value: "বান্দরবান" },
+        { key: "ব্রাহ্মণবাড়িয়া", value: "ব্রাহ্মণবাড়িয়া" },
       ],
-      RAJ: [
-        { key: "RJS", value: "রাজশাহী" },
-        { key: "BGR", value: "বগুড়া" },
-        { key: "JSP", value: "যশোর" },
-        { key: "NAT", value: "নাটোর" },
-        { key: "PBN", value: "পাবনা" },
-        { key: "SIR", value: "সিরাজগঞ্জ" },
-        { key: "RJS", value: "রাজশাহী" },
-        { key: "BGR", value: "বগুড়া" },
-        { key: "JSP", value: "যশোর" },
-        { key: "NAT", value: "নাটোর" },
-        { key: "PBN", value: "পাবনা" },
-        { key: "SIR", value: "সিরাজগঞ্জ" },
+      রাজশাহী: [
+        { key: "রাজশাহী", value: "রাজশাহী" },
+        { key: "বগুড়া", value: "বগুড়া" },
+        { key: "যশোর", value: "যশোর" },
+        { key: "নাটোর", value: "নাটোর" },
+        { key: "পাবনা", value: "পাবনা" },
+        { key: "সিরাজগঞ্জ", value: "সিরাজগঞ্জ" },
       ],
-      KHL: [
-        { key: "KHL", value: "খুলনা" },
-        { key: "BGR", value: "বগুড়া" },
-        { key: "JSP", value: "যশোর" },
-        { key: "NAT", value: "নাটোর" },
-        { key: "PBN", value: "পাবনা" },
-        { key: "SIR", value: "সিরাজগঞ্জ" },
-        { key: "KHL", value: "খুলনা" },
-        { key: "BGR", value: "বগুড়া" },
-        { key: "JSP", value: "যশোর" },
-        { key: "NAT", value: "নাটোর" },
-        { key: "PBN", value: "পাবনা" },
-        { key: "SIR", value: "সিরাজগঞ্জ" },
+      খুলনা: [
+        { key: "খুলনা", value: "খুলনা" },
+        { key: "বগুড়া", value: "বগুড়া" },
+        { key: "যশোর", value: "যশোর" },
+        { key: "নাটোর", value: "নাটোর" },
+        { key: "পাবনা", value: "পাবনা" },
+        { key: "সিরাজগঞ্জ", value: "সিরাজগঞ্জ" },
       ],
-      BRS: [
-        { key: "BRS", value: "বরিশাল" },
-        { key: "BGR", value: "বগুড়া" },
-        { key: "JSP", value: "যশোর" },
-        { key: "NAT", value: "নাটোর" },
-        { key: "PBN", value: "পাবনা" },
-        { key: "SIR", value: "সিরাজগঞ্জ" },
-        { key: "BRS", value: "বরিশাল" },
-        { key: "BGR", value: "বগুড়া" },
-        { key: "JSP", value: "যশোর" },
-        { key: "NAT", value: "নাটোর" },
-        { key: "PBN", value: "পাবনা" },
-        { key: "SIR", value: "সিরাজগঞ্জ" },
+      বরিশাল: [
+        { key: "বরিশাল", value: "বরিশাল" },
+        { key: "বগুড়া", value: "বগুড়া" },
+        { key: "যশোর", value: "যশোর" },
       ],
-      RGP: [
-        { key: "RGP", value: "রংপুর" },
-        { key: "BGR", value: "বগুড়া" },
-        { key: "JSP", value: "যশোর" },
-        { key: "NAT", value: "নাটোর" },
-        { key: "PBN", value: "পাবনা" },
-        { key: "SIR", value: "সিরাজগঞ্জ" },
-        { key: "RGP", value: "রংপুর" },
-        { key: "BGR", value: "বগুড়া" },
-        { key: "JSP", value: "যশোর" },
-        { key: "NAT", value: "নাটোর" },
-        { key: "PBN", value: "পাবনা" },
-        { key: "SIR", value: "সিরাজগঞ্জ" },
+      রংপুর: [
+        { key: "রংপুর", value: "রংপুর" },
+        { key: "বগুড়া", value: "বগুড়া" },
+        { key: "যশোর", value: "যশোর" },
       ],
-      SLT: [
-        { key: "SLT", value: "সিলেট" },
-        { key: "BGR", value: "বগুড়া" },
-        { key: "JSP", value: "যশোর" },
-        { key: "NAT", value: "নাটোর" },
-        { key: "PBN", value: "পাবনা" },
-        { key: "SIR", value: "সিরাজগঞ্জ" },
-        { key: "SLT", value: "সিলেট" },
-        { key: "BGR", value: "বগুড়া" },
-        { key: "JSP", value: "যশোর" },
-        { key: "NAT", value: "নাটোর" },
-        { key: "PBN", value: "পাবনা" },
-        { key: "SIR", value: "সিরাজগঞ্জ" },
+      সিলেট: [
+        { key: "সিলেট", value: "সিলেট" },
+        { key: "বগুড়া", value: "বগুড়া" },
+        { key: "যশোর", value: "যশোর" },
       ],
-      MYM: [
-        { key: "MYM", value: "ময়মনসিংহ" },
-        { key: "BGR", value: "বগুড়া" },
-        { key: "JSP", value: "যশোর" },
-        { key: "NAT", value: "নাটোর" },
-        { key: "PBN", value: "পাবনা" },
-        { key: "SIR", value: "সিরাজগঞ্জ" },
-        { key: "MYM", value: "ময়মনসিংহ" },
-        { key: "BGR", value: "বগুড়া" },
-        { key: "JSP", value: "যশোর" },
-        { key: "NAT", value: "নাটোর" },
-        { key: "PBN", value: "পাবনা" },
-        { key: "SIR", value: "সিরাজগঞ্জ" },
+      ময়মনসিংহ: [
+        { key: "ময়মনসিংহ", value: "ময়মনসিংহ" },
+        { key: "বগুড়া", value: "বগুড়া" },
+        { key: "যশোর", value: "যশোর" },
       ],
     },
   },
 ];
 
 export default function Page() {
-  const [data, setData] = useState({
-    image: null,
-    nationalImage: null,
+  const [address, setAddress] = useState({
     division: "",
     district: "",
   });
+
+  const [disabled, setDisabled] = useState(false);
 
   const { user, loading } = useAuth();
   const { imageUrl: profileImage, setImage: setProfileImage } = useImage(
@@ -196,7 +142,7 @@ export default function Page() {
       if (!pickerResult.canceled) {
         AsyncStorage.getItem("user-token").then((token) => {
           FileSystem.uploadAsync(
-            "http://192.168.0.110:5000/mobile/update-image",
+            `${HOST}/mobile/update-image`,
             pickerResult.assets[0].uri,
             {
               httpMethod: "POST",
@@ -238,7 +184,7 @@ export default function Page() {
         console.log("pickerResult:", pickerResult);
         AsyncStorage.getItem("user-token").then((token) => {
           FileSystem.uploadAsync(
-            "http://192.168.0.110:5000/mobile/update-national-image",
+            `${HOST}/mobile/update-national-image`,
             pickerResult.assets[0].uri,
             {
               httpMethod: "POST",
@@ -262,53 +208,41 @@ export default function Page() {
   };
 
   const handleSubmit = async () => {
-    console.log("handleSubmit:", data);
+    setDisabled(true);
+    console.log("handleSubmit:", address);
 
     //validate checks before submitting the form
-    if (data.image === null) {
-      showModal("Please select profile image ", true);
-      return;
-    }
-    if (data.nationalImage === null) {
-      showModal("Please select NID ", true);
-      return;
-    }
-    if (data.division === "") {
+    if (address.division === "") {
       showModal("Please select a division", true);
+      setDisabled(false);
       return;
     }
-    if (data.district === "") {
+    if (address.district === "") {
       showModal("Please select a district", true);
+      setDisabled(false);
       return;
     }
 
     try {
       AsyncStorage.getItem("user-token").then((token) => {
         try {
-          const formData = new FormData();
-          console.log(formData);
-          formData.append("image", {
-            uri: data.image.uri,
-            type: data.image.type,
-            name: "image",
-          });
-          formData.append("nationalIdImage", {
-            uri: data.nationalImage.uri,
-            type: data.nationalImage.type,
-            name: "nationalIdImage",
-          });
-          formData.append("division", data.division);
-          formData.append("district", data.district);
-          console.log(formData);
-
-          updateProfile(token, formData).then((res) => {
+          updateProfile(token, address).then((res) => {
             console.log("updateProfile res:", res);
+            if (res.status === 200) {
+              showModal("Profile updated successfully", false);
+              setDisabled(false);
+            } else {
+              showModal("Something went wrong", true);
+              setDisabled(false);
+            }
           });
         } catch (error) {
+          setDisabled(false);
           console.log(error);
         }
       });
     } catch (error) {
+      setDisabled(false);
       console.log(error);
     }
   };
@@ -331,9 +265,11 @@ export default function Page() {
         <NIDandAddress
           pickNID={pickAndUploadNID}
           nidImage={nationalIdImage}
-          setData={setData}
+          setData={setAddress}
+          div={user?.userDetails.thana}
+          dist={user?.userDetails.district}
         />
-        <StyledButton width={"md"} onPress={handleSubmit}>
+        <StyledButton disabled={disabled} width={"md"} onPress={handleSubmit}>
           তথ্য সেভ করুন
         </StyledButton>
       </View>
@@ -405,7 +341,7 @@ const Profile = ({ source, name, phone, refCode, CSB, points, pickImage }) => {
   );
 };
 
-const NIDandAddress = ({ pickNID, setData, nidImage }) => {
+const NIDandAddress = ({ pickNID, setData, nidImage, div, dist }) => {
   const [division, setDivision] = useState("");
   const [district, setDistrict] = useState("");
 
@@ -435,7 +371,7 @@ const NIDandAddress = ({ pickNID, setData, nidImage }) => {
           return input.type === "select" ? (
             <SelectList
               key={input.id}
-              placeholder={input.placeholder}
+              placeholder={div || input.placeholder}
               setSelected={(val) => setDivision(val)}
               data={input.items}
               save={division}
@@ -450,7 +386,7 @@ const NIDandAddress = ({ pickNID, setData, nidImage }) => {
           ) : input.type === "sub-select" ? (
             <SelectList
               key={input.id}
-              placeholder={input.placeholder}
+              placeholder={dist || input.placeholder}
               setSelected={(val) => setDistrict(val)}
               data={input.items[division] || ["বিভাগ সিলেক্ট করুন"]}
               save={district}
