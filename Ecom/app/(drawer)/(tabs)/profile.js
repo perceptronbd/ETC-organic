@@ -235,7 +235,7 @@ export default function Page() {
           updateProfile(token, address).then((res) => {
             console.log("updateProfile res:", res);
             if (res.status === 200) {
-              showModal("প্রোফাইল সফলভাবে আপডেট করা হয়েছে", false);
+              showModal("প্রোফাইল সফল ভাবে আপডেট করা হয়েছে", false);
               setDisabled(false);
             } else {
               showModal("কিছু সমস্যা হয়েছে", true);
