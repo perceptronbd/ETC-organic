@@ -23,9 +23,9 @@ const userSchema = mongoose.Schema(
       minLength: [6, "Password must be up to 6 characters"],
       //   maxLength: [23, "Password must not be more than 23 characters"],
     },
-    
+
     phone: {
-      type: String
+      type: String,
     },
     designation: {
       type: String,
@@ -36,16 +36,16 @@ const userSchema = mongoose.Schema(
       required: [true, "Please add a designation"],
     },
 
-    permissions: 
-      {productManagement: {
+    permissions: {
+      productManagement: {
         type: Boolean,
-        required: true
+        required: true,
       },
-      inputSales:{
+      inputSales: {
         type: Boolean,
-        required: true
-      }
-    }
+        required: true,
+      },
+    },
   },
   {
     timestamps: true,

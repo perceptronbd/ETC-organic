@@ -1,0 +1,53 @@
+diff --git a/node_modules/native-base/src/core/NativeBaseProvider.tsx b/node_modules/native-base/src/core/NativeBaseProvider.tsx
+index 43b4bd1..8d04d65 100644
+--- a/node_modules/native-base/src/core/NativeBaseProvider.tsx
++++ b/node_modules/native-base/src/core/NativeBaseProvider.tsx
+@@ -1,27 +1,25 @@
++import { OverlayProvider } from '@react-native-aria/overlays';
+ import React from 'react';
++import { Platform, useWindowDimensions } from 'react-native';
+ import {
+-  SafeAreaProvider,
+   Metrics,
++  SafeAreaProvider,
+   initialWindowMetrics as defaultInitialWindowMetrics,
+ } from 'react-native-safe-area-context';
+-import { SSRProvider } from '@react-native-aria/utils';
+-import { theme as defaultTheme, ITheme } from './../theme';
+-import type { IColorModeProviderProps } from './color-mode';
+-import HybridProvider from './hybrid-overlay/HybridProvider';
+-import { OverlayProvider } from '@react-native-aria/overlays';
+-import { ToastProvider, ToastRef } from '../components/composites/Toast';
+-import {
+-  defaultConfig,
+-  INativebaseConfig,
+-  NativeBaseConfigProvider,
+-} from './NativeBaseContext';
+-import { useToast } from '../components/composites/Toast';
+-import { Platform, useWindowDimensions } from 'react-native';
++import { ToastProvider, ToastRef, useToast } from '../components/composites/Toast';
+ import {
+   getClosestBreakpoint,
+   platformSpecificSpaceUnits,
+ } from '../theme/tools/utils';
+ import { ResponsiveQueryProvider } from '../utils/useResponsiveQuery';
++import { ITheme, theme as defaultTheme } from './../theme';
++import {
++  INativebaseConfig,
++  NativeBaseConfigProvider,
++  defaultConfig,
++} from './NativeBaseContext';
++import type { IColorModeProviderProps } from './color-mode';
++import HybridProvider from './hybrid-overlay/HybridProvider';
+ 
+ // For SSR to work, we need to pass initial insets as 0 values on web.
+ 
+@@ -94,7 +92,7 @@ const NativeBaseProvider = (props: NativeBaseProviderProps) => {
+             <OverlayProvider isSSR>
+               <ToastProvider>
+                 <InitializeToastRef />
+-                <SSRProvider>{children}</SSRProvider>
++                {children}
+               </ToastProvider>
+             </OverlayProvider>
+           </HybridProvider>
