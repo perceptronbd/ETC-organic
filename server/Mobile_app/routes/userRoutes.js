@@ -6,6 +6,7 @@ const cartController = require("../controllers/cartController");
 const orderController = require("../controllers/orderController");
 const redeemCSB = require("../controllers/redeemCSBtotaka");
 const bankController = require("../controllers/bankController");
+const commonColtroller = require("../../CommonControllers/getProducts");
 const withdrawController = require("../controllers/withdrawController");
 const walletHistoryController = require("../controllers/walletHistoryController");
 const upload = require("../middleware/imageMiddleware");
@@ -92,5 +93,9 @@ router.get(
 router.post("/addBank", authenticateUser, bankController.createBank);
 router.get("/getBank", authenticateUser, bankController.fetchBanksByUser);
 router.delete("/deleteBank", authenticateUser, bankController.deleteBank);
+
+//common
+router.get("/get-products",authenticateUser ,commonColtroller.getAllProducts);
+
 
 module.exports = router;

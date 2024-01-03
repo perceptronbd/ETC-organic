@@ -13,6 +13,7 @@ const purchaseRoute = require("./ERP/routes/purchaseRoutes");
 const salesRoute = require("./ERP/routes/salesRouter");
 const ordersRoute = require("./ERP/routes/orderRouter");
 const withdrawRoute = require("./ERP/routes/widrawRoutes");
+const walletHistoryRoute = require("./ERP/routes/walletRouter");
 
 //Mobile Routes
 const mobileUserRoute = require("./Mobile_app/routes/userRoutes");
@@ -37,13 +38,13 @@ app.use("/api", purchaseRoute);
 app.use("/api", salesRoute);
 app.use("/api", ordersRoute);
 app.use("/api", withdrawRoute);
+app.use("/api", walletHistoryRoute);
 
 //Mobile Routes
 app.use("/mobile", mobileUserRoute);
 app.use(mobileErrorHandler);
 
 const PORT = process.env.PORT || 5000;
-const HOST = "192.168.0.110";
 
 app.get("/", (req, res) => {
   // This line has been corrected to use the `json()` method
@@ -57,7 +58,7 @@ app.use(express.static("public"));
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(PORT, HOST, () => {
+    app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
   })
