@@ -10,7 +10,7 @@ export function Category({ categoryTitle = "Category 1", products }) {
       <StyledText type="b" variant="titleMedium" style={tw`my-2`}>
         {categoryTitle}
       </StyledText>
-      <ScrollView horizontal>
+      <ScrollView horizontal contentContainerStyle={{ gap: 8 }}>
         {products.map((item) => (
           <ProductCard key={item.id} productData={item} />
         ))}
