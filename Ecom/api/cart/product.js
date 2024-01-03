@@ -1,9 +1,9 @@
 import { authURL } from "../instances/authURL";
 
-export const fetchProducts = async () => {
+export const fetchProducts = async (token) => {
   console.log("fetchProducts...");
   try {
-    const res = await authURL.get("/get-products");
+    const res = await authURL(token).get("/get-products");
     console.log("response:", res);
     return res;
   } catch (error) {
