@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   Dimensions,
-  FlatList,
   Image,
   StyleSheet,
   TouchableOpacity,
   View,
 } from "react-native";
+import tailwind from "twrnc";
+import COLOR from "../../constants/COLOR";
+import { StyledText } from "../texts/StyledText";
+
 const { width } = Dimensions.get("window");
 const carouselItem = require("./carousel.json");
 const viewConfigRef = { viewAreaCoveragePercentThreshold: 95 };
@@ -44,7 +47,20 @@ export function Carousel() {
 
   return (
     <View style={styles.container}>
-      <FlatList
+      <View
+        style={tailwind`flex h-full w-full items-center justify-center rounded-xl bg-neutral-200`}
+      >
+        <StyledText
+          variant="titleLarge"
+          type="b"
+          style={{
+            color: COLOR.neutralDark,
+          }}
+        >
+          কোন অফার চলছে না
+        </StyledText>
+      </View>
+      {/* <FlatList
         data={carouselItem}
         renderItem={renderItems}
         keyExtractor={(item, index) => index.toString()}
@@ -56,9 +72,9 @@ export function Carousel() {
         }}
         style={styles.carousel}
         viewabilityConfig={viewConfigRef}
-      />
+      /> */}
 
-      <View style={styles.dotView}>
+      {/* <View style={styles.dotView}>
         {carouselItem.map((_, index) => {
           return (
             <TouchableOpacity
@@ -74,7 +90,7 @@ export function Carousel() {
             />
           );
         })}
-      </View>
+      </View> */}
     </View>
   );
 }
