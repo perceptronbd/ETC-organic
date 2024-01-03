@@ -13,6 +13,7 @@ const purchaseRoute = require("./ERP/routes/purchaseRoutes");
 const salesRoute = require("./ERP/routes/salesRouter");
 const ordersRoute = require("./ERP/routes/orderRouter");
 const withdrawRoute = require("./ERP/routes/widrawRoutes");
+const walletHistoryRoute = require("./ERP/routes/walletRouter");
 
 //Mobile Routes
 const mobileUserRoute = require("./Mobile_app/routes/userRoutes");
@@ -37,6 +38,7 @@ app.use("/api", purchaseRoute);
 app.use("/api", salesRoute);
 app.use("/api", ordersRoute);
 app.use("/api", withdrawRoute);
+app.use("/api", walletHistoryRoute);
 
 //Mobile Routes
 app.use("/mobile", mobileUserRoute);
