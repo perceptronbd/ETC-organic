@@ -52,10 +52,10 @@ export default function Page() {
         >
           {products.map((item) => (
             <CartCard
-              key={item.id}
-              name={item.name}
-              image={item.img}
-              price={item.price}
+              key={item._id}
+              name={item.productName}
+              image={item.image}
+              price={item.salesPrice}
               quantity={item.quantity}
               setQuantity={(newQuantity) =>
                 handleQuantityChange(item.id, newQuantity)
