@@ -5,11 +5,14 @@ import React, { useState } from "react";
 import { Pressable, View } from "react-native";
 import tailwind, { default as tw } from "twrnc";
 import COLOR from "../../constants/COLOR";
+import { useImage } from "../../hooks";
 import { formatNumbers } from "../../utils/formatNumbers";
 import { StyledText } from "../texts/StyledText";
 
 export function ProductCard({ productData }) {
-  const [isFavorite, setIsFavorite] = useState(productData.favorite);
+  const [isFavorite, setIsFavorite] = useState(productData?.favorite);
+
+  const { imageUrl: productImageUrl } = useImage(productData?.image);
 
   const handleNavigation = () => {
     router.push({ pathname: "productDetails", params: productData });
@@ -38,25 +41,32 @@ export function ProductCard({ productData }) {
           size={20}
           color={isFavorite ? "red" : "black"}
           onPress={handleFavorite}
+          disabled={true}
         />
       </View>
       {/* Product Image */}
       <Pressable
         onPress={handleNavigation}
-        style={tw`flex w-32 items-center justify-center`}
+        style={tw`flex h-24 w-32 items-center justify-center`}
       >
-        <Image size={"md"} source={productData.img} alt={productData.name} />
+        {
+          <Image
+            size={"md"}
+            source={{ uri: productImageUrl }}
+            alt={productData.productName}
+          />
+        }
       </Pressable>
       <View style={tailwind`flex h-20 justify-between px-2`}>
         {/* Product Name */}
         <StyledText type="b" variant="bodySmall" style={tw`mb-1`}>
-          {productData.name}
+          {productData.productName}
         </StyledText>
         {/* Product Price and point*/}
         <View style={tw.style(`flex-row items-center justify-between`)}>
           <View>
-            <StyledText variant="titleMedium" type="b">
-              ৳ {formatNumbers(productData.price)}
+            <StyledText variant="titleSmall" type="sb">
+              ৳ {formatNumbers(productData.salesPrice)}
             </StyledText>
             <StyledText
               variant="bodySmall"
