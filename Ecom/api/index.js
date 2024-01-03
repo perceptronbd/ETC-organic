@@ -1,3 +1,4 @@
+export { fetchProducts } from "./cart/product";
 export {
   getUserDetails,
   loginUser,
