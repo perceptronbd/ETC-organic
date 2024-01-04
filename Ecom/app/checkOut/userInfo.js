@@ -1,25 +1,31 @@
 import { router } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { SelectList } from "react-native-dropdown-select-list";
 import tailwind from "twrnc";
-import { StyledButton, StyledInput, StyledText } from "../../components";
+import {
+  MessageModal,
+  StyledButton,
+  StyledInput,
+  StyledText,
+} from "../../components";
 import COLOR from "../../constants/COLOR";
+import { useModal } from "../../hooks";
 
 const userInfoInputFields = [
   {
-    id: 1,
+    id: "name",
     label: "নাম*",
     placeholder: "আপনার নাম",
   },
   {
-    id: 2,
+    id: "phone",
     label: "ফোন নাম্বার*",
     placeholder: "আপনার ফোন নাম্বার",
   },
   {
-    id: 3,
+    id: "division",
     label: "বিভাগ*",
     placeholder: "বিভাগ সিলেক্ট করুন",
     type: "select",
@@ -35,7 +41,7 @@ const userInfoInputFields = [
     ],
   },
   {
-    id: 4,
+    id: "district",
     label: "জেলা*",
     placeholder: "জেলা সিলেক্ট করুন",
     type: "sub-select",
@@ -99,7 +105,7 @@ const userInfoInputFields = [
     },
   },
   {
-    id: 5,
+    id: "address",
     label: "বিস্তারিত ঠিকানা*",
     placeholder: "আপনার বিস্তারিত ঠিকানা",
   },
@@ -111,13 +117,105 @@ const userInfoInputFields = [
 ];
 
 const userInfo = () => {
-  const [division, setDivision] = useState("");
-  const [district, setDistrict] = useState("");
-  const [isSelected, setSelection] = useState(false);
+  const [data, setData] = useState({
+    name: "",
+    phone: "",
+    division: "",
+    district: "",
+    address: "",
+  });
+
+  const [errorMessages, setErrorMessages] = useState({});
+  const [error, setError] = useState(false);
+
+  const {
+    visible: isMessage,
+    hideModal: hideMessage,
+    showModal: showMessage,
+    isError: messageError,
+    modalMessage,
+  } = useModal();
+
+  useEffect(() => {
+    const validateForm = () => {
+      const validationErrors = {};
+
+      if (!data.phone.trim()) {
+        validationErrors.phone = "Mobile Number is required";
+        setError(true);
+      } else if (data.phone.length !== 11) {
+        validationErrors.phone = "Mobile Number must be 11 digits";
+        setError(true);
+      } else if (data.phone[0] !== "0" || data.phone[1] !== "1") {
+        validationErrors.phone = "Invalid Mobile Number";
+        setError(true);
+      } else {
+        validationErrors.phone = null;
+        setError(false);
+      }
+
+      if (!data.name.trim()) {
+        validationErrors.name = "Name is required";
+        setError(true);
+      } else if (data.name.length < 3) {
+        validationErrors.name = "Name must be at least 3 characters";
+        setError(true);
+      } else {
+        validationErrors.name = null;
+        setError(false);
+      }
+
+      if (!data.division.trim()) {
+        validationErrors.newPassword = "Division is required";
+        setError(true);
+      } else {
+        validationErrors.newPassword = null;
+        setError(false);
+      }
+
+      if (!data.district.trim()) {
+        validationErrors.confirmPassword = "District is required";
+        setError(true);
+      } else {
+        validationErrors.confirmPassword = null;
+        setError(false);
+      }
+
+      if (!data.address.trim()) {
+        validationErrors.address = "Address is required";
+        setError(true);
+      } else {
+        validationErrors.address = null;
+        setError(false);
+      }
+
+      setErrorMessages((prev) => ({
+        ...prev,
+        ...validationErrors,
+      }));
+    };
+    validateForm();
+  }, [data]);
+
+  const handleChange = (id, text) => {
+    setData((prev) => ({
+      ...prev,
+      [id]: text,
+    }));
+  };
 
   const handleSaveAndContinue = () => {
-    console.log("Save and continue");
-    router.push("/checkOut/confirmOrder");
+    console.log("... userInfo Save and continue...");
+
+    console.log("...userInfo data", data);
+
+    if (error) {
+      console.log(errorMessages);
+      showMessage(errorMessages, error);
+      return;
+    }
+
+    router.push({ pathname: "/checkOut/confirmOrder", params: data });
   };
 
   return (
@@ -137,9 +235,9 @@ const userInfo = () => {
               <SelectList
                 key={input.id}
                 placeholder={input.placeholder}
-                setSelected={(val) => setDivision(val)}
+                setSelected={(val) => setData({ ...data, division: val })}
                 data={input.items}
-                save={division}
+                save={data.division}
                 boxStyles={{
                   marginTop: 8,
                   backgroundColor: "#fff",
@@ -152,9 +250,9 @@ const userInfo = () => {
               <SelectList
                 key={input.id}
                 placeholder={input.placeholder}
-                setSelected={(val) => setDistrict(val)}
-                data={input.items[division] || ["বিভাগ সিলেক্ট করুন"]}
-                save={district}
+                setSelected={(val) => setData({ ...data, district: val })}
+                data={input.items[data.division] || ["বিভাগ সিলেক্ট করুন"]}
+                save={data.district}
                 boxStyles={{
                   marginTop: 8,
                   backgroundColor: "#fff",
@@ -179,13 +277,13 @@ const userInfo = () => {
                 innerIconStyle={{
                   borderWidth: 2,
                   borderRadius: 5,
-                  borderColor: isSelected ? COLOR.tertiary : COLOR.neutral,
+                  // borderColor: isSelected ? COLOR.tertiary : COLOR.neutral,
                 }}
                 textStyle={{
                   textDecorationLine: "none",
                 }}
                 onPress={(isChecked) => {
-                  setSelection(isChecked);
+                  //  setSelection(isChecked);
                 }}
               />
             ) : (
@@ -197,6 +295,7 @@ const userInfo = () => {
                 style={{
                   width: "100%",
                 }}
+                onChangeText={(text) => handleChange(input.id, text)}
               />
             );
           })}
@@ -205,6 +304,12 @@ const userInfo = () => {
           পরের ধাপ
         </StyledButton>
       </View>
+      <MessageModal
+        visible={isMessage}
+        hideModal={hideMessage}
+        isError={messageError}
+        modalMessag={modalMessage}
+      />
     </View>
   );
 };

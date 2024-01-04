@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 import {
@@ -17,6 +17,10 @@ const confirmOrder = () => {
   const [value, setValue] = React.useState("delivery");
 
   const [visible, setVisible] = React.useState(false);
+
+  const data = useLocalSearchParams();
+
+  console.log("...confirmOrder data", data);
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
