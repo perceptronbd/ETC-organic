@@ -10,6 +10,7 @@ import { SelectList } from "react-native-dropdown-select-list";
 import { ScrollView } from "react-native-gesture-handler";
 import { Avatar, Button, DataTable, Divider } from "react-native-paper";
 import tailwind from "twrnc";
+import { getOrderDetails } from "../../../api";
 import { updateProfile } from "../../../api/user/authUser";
 import {
   Loading,
@@ -22,6 +23,7 @@ import { useImage } from "../../../hooks";
 import { useAuth } from "../../../hooks/useAuth";
 import { useModal } from "../../../hooks/useModal";
 import { formatNumbers } from "../../../utils/formatNumbers";
+import { groupByOrder } from "../../../utils/groupByOrder";
 
 const addressInput = [
   {
@@ -438,6 +440,33 @@ const NIDandAddress = ({
 };
 
 const Orders = () => {
+  //declare state for orders
+  const [orders, setOrders] = useState({});
+
+  useEffect(() => {
+    getOrderDetails().then((res) => {
+      console.log("...profile order details:", res);
+      const { data } = res;
+      const groupedData = groupByOrder(data);
+      console.log("...groupedData:", groupedData);
+      setOrders(groupedData);
+    });
+  }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      getOrderDetails().then((res) => {
+        console.log("...profile order details:", res);
+        const { data } = res;
+        const groupedData = groupByOrder(data);
+        console.log("...groupedData:", groupedData);
+        setOrders(groupedData);
+      });
+    }, 10000); // 5000 ms = 5 s
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <View>
       <StyledText
@@ -458,46 +487,60 @@ const Orders = () => {
           rowGap: 20,
         }}
       >
-        <StyledText
-          variant="bodySmall"
-          style={{
-            marginBottom: -10,
-          }}
-        >
-          পেন্ডিং অর্ডার
-        </StyledText>
-        <ScrollView
-          contentContainerStyle={{
-            rowGap: 10,
-          }}
-        >
-          <OrderCard />
-          <OrderCard />
-          <OrderCard />
-        </ScrollView>
-        <StyledText
-          variant="bodySmall"
-          style={{
-            marginBottom: -10,
-          }}
-        >
-          কমপ্লিটেড অর্ডার
-        </StyledText>
-        <ScrollView
-          contentContainerStyle={{
-            rowGap: 10,
-          }}
-        >
-          <OrderCard />
-          <OrderCard />
-          <OrderCard />
-        </ScrollView>
+        {orders.Pending && (
+          <>
+            <StyledText
+              variant="bodySmall"
+              style={{
+                marginBottom: -10,
+              }}
+            >
+              পেন্ডিং অর্ডার
+            </StyledText>
+            <ScrollView
+              contentContainerStyle={{
+                rowGap: 10,
+              }}
+            >
+              {orders?.Pending?.map((item) => (
+                <OrderCard
+                  key={item._id}
+                  products={item.cart.products}
+                  subTotal={item.cart.totalPrice}
+                />
+              ))}
+            </ScrollView>
+          </>
+        )}
+
+        {orders.Completed && (
+          <>
+            <StyledText
+              variant="bodySmall"
+              style={{
+                marginBottom: -10,
+              }}
+            >
+              কমপ্লিটেড অর্ডার
+            </StyledText>
+            <ScrollView
+              contentContainerStyle={{
+                rowGap: 10,
+              }}
+            >
+              {orders.Completed?.map((item) => (
+                <OrderCard key={item._id} />
+              ))}
+            </ScrollView>
+          </>
+        )}
       </View>
     </View>
   );
 };
 
-const OrderCard = () => {
+const OrderCard = ({ products, subTotal }) => {
+  console.log("...OrderCard products:", products);
   return (
     <View style={tailwind`rounded-md bg-white`}>
       <DataTable>
@@ -507,24 +550,28 @@ const OrderCard = () => {
           <DataTable.Title numeric>Price</DataTable.Title>
           <DataTable.Title numeric>T. Price</DataTable.Title>
         </DataTable.Header>
-        <DataTable.Row>
-          <DataTable.Cell style={{ flex: 2 }}>তুলশী বীজ জুস</DataTable.Cell>
-          <DataTable.Cell numeric>{formatNumbers(2)}</DataTable.Cell>
-          <DataTable.Cell numeric>৳ {formatNumbers(420)}</DataTable.Cell>
-          <DataTable.Cell numeric>৳ {formatNumbers(840)}</DataTable.Cell>
-        </DataTable.Row>
-        <DataTable.Row>
-          <DataTable.Cell style={{ flex: 2 }}>তুলশী বীজ জুস</DataTable.Cell>
-          <DataTable.Cell numeric>{formatNumbers(2)}</DataTable.Cell>
-          <DataTable.Cell numeric>৳ {formatNumbers(420)}</DataTable.Cell>
-          <DataTable.Cell numeric>৳ {formatNumbers(840)}</DataTable.Cell>
-        </DataTable.Row>
+        {products.map((item) => (
+          <DataTable.Row key={item.product_id}>
+            <DataTable.Cell style={{ flex: 2 }}>
+              {item.product.productName}
+            </DataTable.Cell>
+            <DataTable.Cell numeric>
+              {formatNumbers(item.quantity)}
+            </DataTable.Cell>
+            <DataTable.Cell numeric>
+              ৳ {formatNumbers(item.product.salesPrice)}
+            </DataTable.Cell>
+            <DataTable.Cell numeric>
+              ৳ {formatNumbers(item.product.salesPrice * item.quantity)}
+            </DataTable.Cell>
+          </DataTable.Row>
+        ))}
       </DataTable>
       <Divider />
       <View style={tailwind`p-4`}>
         <View style={tailwind`mb-4 flex-row justify-between`}>
           <StyledText>Sub Total</StyledText>
-          <StyledText type="b">৳ {formatNumbers(1840)}</StyledText>
+          <StyledText type="b">৳ {formatNumbers(subTotal)}</StyledText>
         </View>
         <View style={tailwind`flex-row justify-between`}>
           <StyledText>+Delivery Charge</StyledText>
@@ -538,7 +585,7 @@ const OrderCard = () => {
             Grand Total
           </StyledText>
           <StyledText variant="titleMedium" type="b">
-            ৳ {formatNumbers(1840)}
+            ৳ {formatNumbers(subTotal + 60)}
           </StyledText>
         </View>
       </View>
