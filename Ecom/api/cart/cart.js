@@ -31,3 +31,35 @@ export const getCartDetails = async () => {
     return errorResponse;
   }
 };
+
+export const increaseQuantity = async (productId) => {
+  console.log("=======increaseQuantity API=======");
+  try {
+    const token = await AsyncStorage.getItem("user-token");
+    const res = await authURL(token).post("/increase-quantity", {
+      productId,
+    });
+    console.log("...increaseQuantity api response:", res);
+    return res;
+  } catch (error) {
+    console.log("...increaseQuantity api error:", error);
+    const errorResponse = error.response;
+    return errorResponse;
+  }
+};
+
+export const decreaseQuantity = async (productId) => {
+  console.log("=======decreaseQuantity API=======");
+  try {
+    const token = await AsyncStorage.getItem("user-token");
+    const res = await authURL(token).post("/decrease-quantity", {
+      productId,
+    });
+    console.log("...decreaseQuantity api response:", res);
+    return res;
+  } catch (error) {
+    console.log("...decreaseQuantity api error:", error);
+    const errorResponse = error.response;
+    return errorResponse;
+  }
+};

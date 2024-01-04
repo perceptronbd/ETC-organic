@@ -1,4 +1,9 @@
-export { addToCart, getCartDetails } from "./cart/cart";
+export {
+  addToCart,
+  decreaseQuantity,
+  getCartDetails,
+  increaseQuantity,
+} from "./cart/cart";
 export { fetchProducts } from "./cart/product";
 export {
   getUserDetails,
