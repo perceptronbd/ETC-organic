@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from "expo-router";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { View } from "react-native";
 import {
   DataTable,
@@ -9,8 +9,10 @@ import {
   RadioButton,
 } from "react-native-paper";
 import tailwind from "twrnc";
+import { placeOrder } from "../../api";
 import { StyledButton, StyledText } from "../../components";
 import COLOR from "../../constants/COLOR";
+import CartContext from "../../contexts/CartContext";
 import { formatNumbers } from "../../utils/formatNumbers";
 
 const confirmOrder = () => {
@@ -20,12 +22,38 @@ const confirmOrder = () => {
 
   const data = useLocalSearchParams();
 
-  console.log("...confirmOrder data", data);
+  const { cart } = useContext(CartContext);
+
+  useEffect(() => {
+    console.log("...confirmOrder useEffect start...");
+    cart.products?.map((item) => {
+      console.log(item.product);
+      console.log(item.product.productName);
+      console.log(item.quantity);
+      console.log(item.product.salesPrice);
+      console.log(item.product.salesPrice * item.quantity);
+    });
+    console.log("...confirmOrder useEffect end...");
+  }, []);
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
 
-  const onConfirm = () => {
+  const onConfirm = async () => {
+    try {
+      placeOrder(data).then((res) => {
+        console.log("...confirmOrder onConfirm res:", res);
+        const { status } = res;
+        if (status === 201) {
+          console.log("...confirmOrder onConfirm status:", status);
+          showModal();
+        } else {
+          console.log("...confirmOrder onConfirm status:", status);
+        }
+      });
+    } catch (error) {
+      console.log("...confirmOrder onConfirm error:", error);
+    }
     showModal();
   };
 
@@ -39,30 +67,39 @@ const confirmOrder = () => {
       <View style={tailwind`gap-4`}>
         <View style={tailwind`rounded-md bg-white`}>
           <DataTable>
-            <DataTable.Header style={{}}>
+            <DataTable.Header>
               <DataTable.Title style={{ flex: 2 }}>Item Name</DataTable.Title>
               <DataTable.Title numeric>QTY</DataTable.Title>
               <DataTable.Title numeric>Price</DataTable.Title>
               <DataTable.Title numeric>T. Price</DataTable.Title>
             </DataTable.Header>
-            <DataTable.Row>
-              <DataTable.Cell style={{ flex: 2 }}>তুলশী বীজ জুস</DataTable.Cell>
-              <DataTable.Cell numeric>{formatNumbers(2)}</DataTable.Cell>
-              <DataTable.Cell numeric>৳ {formatNumbers(420)}</DataTable.Cell>
-              <DataTable.Cell numeric>৳ {formatNumbers(840)}</DataTable.Cell>
-            </DataTable.Row>
-            <DataTable.Row>
-              <DataTable.Cell style={{ flex: 2 }}>তুলশী বীজ জুস</DataTable.Cell>
-              <DataTable.Cell numeric>{formatNumbers(2)}</DataTable.Cell>
-              <DataTable.Cell numeric>৳ {formatNumbers(420)}</DataTable.Cell>
-              <DataTable.Cell numeric>৳ {formatNumbers(840)}</DataTable.Cell>
-            </DataTable.Row>
+            {cart.products?.map((item) => {
+              return (
+                <DataTable.Row key={item._id}>
+                  <DataTable.Cell style={{ flex: 2 }}>
+                    {item.product.productName}
+                  </DataTable.Cell>
+                  <DataTable.Cell numeric>
+                    {formatNumbers(item.quantity)}
+                  </DataTable.Cell>
+                  <DataTable.Cell numeric>
+                    ৳ {formatNumbers(item.product.salesPrice)}
+                  </DataTable.Cell>
+                  <DataTable.Cell numeric>
+                    ৳ {formatNumbers(item.product.salesPrice * item.quantity)}
+                  </DataTable.Cell>
+                </DataTable.Row>
+              );
+            })}
           </DataTable>
           <Divider />
+          {/* Total Price */}
           <View style={tailwind`p-4`}>
             <View style={tailwind`mb-4 flex-row justify-between`}>
               <StyledText>Sub Total</StyledText>
-              <StyledText type="b">৳ {formatNumbers(1840)}</StyledText>
+              <StyledText type="b">
+                ৳ {formatNumbers(cart.totalPrice)}
+              </StyledText>
             </View>
             <View style={tailwind`flex-row justify-between`}>
               <StyledText>+Delivery Charge</StyledText>
@@ -70,15 +107,17 @@ const confirmOrder = () => {
             </View>
           </View>
           <Divider />
+          {/* Grand Total */}
           <View style={tailwind`p-4`}>
             <View style={tailwind`flex-row justify-between`}>
               <StyledText variant="titleMedium">Grand Total</StyledText>
               <StyledText variant="titleLarge" type="b">
-                ৳ {formatNumbers(1840)}
+                ৳ {formatNumbers(cart.totalPrice + 60)}
               </StyledText>
             </View>
           </View>
         </View>
+        {/* Payment type */}
         <View style={tailwind`rounded-md bg-white p-4`}>
           <StyledText type="b">পেমেন্ট-এর মাধ্যম: ক্যাশ অন ডেলিভারি</StyledText>
           <RadioButton.Group
@@ -96,6 +135,7 @@ const confirmOrder = () => {
           </RadioButton.Group>
         </View>
       </View>
+      {/* Confirm Order */}
       <StyledButton onPress={onConfirm}>কনফার্ম অর্ডার</StyledButton>
       <ConfirmationModel
         visible={visible}

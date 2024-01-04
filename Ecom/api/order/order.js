@@ -5,7 +5,7 @@ export const placeOrder = async (data) => {
   console.log("=======placeOrder API=======");
   try {
     const token = await AsyncStorage.getItem("user-token");
-    const res = await authURL(token).post("//place-order", data);
+    const res = await authURL(token).post("/place-order", data);
     console.log("...placeOrder api response:", res);
     return res;
   } catch (error) {
