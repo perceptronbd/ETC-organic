@@ -4,10 +4,10 @@ import React, { useContext, useState } from "react";
 import { Image, ScrollView, View } from "react-native";
 import { Modal, Portal } from "react-native-paper";
 import tailwind from "twrnc";
-import { Counter, StyledButton, StyledText } from "../components";
+import { Counter, Loading, StyledButton, StyledText } from "../components";
 import COLOR from "../constants/COLOR";
 import CartContext from "../contexts/CartContext";
-import { useCustomToast } from "../hooks";
+import { useCustomToast, useImage } from "../hooks";
 import { formatNumbers } from "../utils/formatNumbers";
 
 const productDetails = () => {
@@ -16,9 +16,12 @@ const productDetails = () => {
 
   const [quantity, setQuantity] = useState(0);
 
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigation();
 
   const item = useLocalSearchParams();
+  console.log("...productDetails item:", item);
 
   // useEffect(() => {
   //   console.log("item", item);
@@ -29,7 +32,12 @@ const productDetails = () => {
   // }, []);
 
   const onAddToCart = () => {
+    console.log("===onAddToCart===");
+
+    setLoading(true);
+
     if (quantity === 0) {
+      setLoading(false);
       showToast({
         description: "Please select quantity",
         variant: "warning",
@@ -37,29 +45,33 @@ const productDetails = () => {
       });
       return;
     }
-    showToast({
-      description: "Added to cart",
-      variant: "success",
+    updateProductDetails({ ...item, quantity }).then(() => {
+      setLoading(false);
+      console.log("...productDetails onAddToCart ");
+      showToast({
+        description: "Added to cart",
+        variant: "success",
+      });
+      navigate.goBack();
     });
-    updateProductDetails({ ...item, quantity });
 
     // updateProductDetails({
     //   id: item.id,
     //   quantity,
     // });
-
-    navigate.goBack();
   };
 
-  return (
+  return loading ? (
+    <Loading isLoading={loading} />
+  ) : (
     <View style={tailwind`flex-1 items-center justify-between p-4`}>
-      <View>
-        <ProductImage image={item.img} name={item.name} />
+      <View style={tailwind`w-full`}>
+        <ProductImage image={item.image} name={item.productName} />
         <Points points={item.points} />
         <ProductDetails
-          title={item.name}
-          price={item.price}
-          details={item.details}
+          title={item.productName}
+          price={item.salesPrice}
+          details={item.description}
           csb={item.csb}
         />
       </View>
@@ -82,11 +94,13 @@ const productDetails = () => {
 };
 
 const ProductImage = ({ image, name }) => {
+  const { imageUrl } = useImage(image);
+
   return (
     <View
       style={tailwind`bg-[${COLOR.foreground}] mb-4 h-56 items-center justify-center rounded-md p-2`}
     >
-      <Image source={image} alt={name} />
+      <Image source={{ uri: imageUrl }} alt={name} />
     </View>
   );
 };
@@ -122,7 +136,7 @@ const ProductDetails = ({ title, price, details, csb }) => {
     <>
       <View style={tailwind` mb-4 flex-row items-end justify-between`}>
         {/* Name */}
-        <StyledText variant="titleLarge" type="b">
+        <StyledText variant="titleMedium" type="b">
           {title}
         </StyledText>
         <View style={tailwind``}>
@@ -134,6 +148,7 @@ const ProductDetails = ({ title, price, details, csb }) => {
       <ScrollView
         style={tailwind.style(``, {
           maxHeight: 100,
+          height: 100,
         })}
       >
         <StyledText variant="bodySmall" type="b">

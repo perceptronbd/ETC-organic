@@ -1,12 +1,19 @@
 import React from "react";
 import { Dimensions, Image, View } from "react-native";
+import { IconButton, Text } from "react-native-paper";
 import tailwind from "twrnc";
 import COLOR from "../../constants/COLOR";
 import { formatNumbers } from "../../utils/formatNumbers";
-import { Counter } from "../buttons/Counter";
 import { StyledText } from "../texts/StyledText";
 
-export const CartCard = ({ name, price, image, quantity, setQuantity }) => {
+export const CartCard = ({
+  name,
+  price,
+  image,
+  quantity,
+  increment,
+  decrement,
+}) => {
   const { width } = Dimensions.get("window");
 
   return (
@@ -74,7 +81,25 @@ export const CartCard = ({ name, price, image, quantity, setQuantity }) => {
         </View>
       </View>
 
-      <Counter value={quantity} setValue={setQuantity} />
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <IconButton
+          icon={"minus"}
+          iconColor="white"
+          size={15}
+          style={tailwind`bg-[${COLOR.tertiary}]`}
+          onPress={decrement}
+        />
+        <Text variant="titleLarge" style={{ marginHorizontal: 10 }}>
+          {formatNumbers(quantity)}
+        </Text>
+        <IconButton
+          icon={"plus"}
+          iconColor="white"
+          size={15}
+          style={tailwind`bg-[${COLOR.tertiary}]`}
+          onPress={increment}
+        />
+      </View>
     </View>
   );
 };

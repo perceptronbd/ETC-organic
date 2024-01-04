@@ -12,6 +12,7 @@ export const StyledButton = ({
   rounded = "xl",
   children,
   disabled,
+  loading,
   ...props
 }) => {
   const textColor =
@@ -87,7 +88,7 @@ export const StyledButton = ({
 
   return (
     <Button
-      loading={disabled}
+      loading={loading}
       disabled={disabled}
       style={tw.style(
         `mt-2 items-center justify-center rounded-${rounded} `,

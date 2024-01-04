@@ -7,7 +7,6 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log("useAuth loading....");
     setLoading(true);
 
     const getData = async () => {
@@ -15,7 +14,6 @@ export const useAuth = () => {
         //get user token form the local storage
         AsyncStorage.getItem("user-token").then((token) => {
           if (token) {
-            console.log("useAuth fetching....");
             getUserDetails(token).then((res) => {
               //fetch user details from the server
               const { data, status } = res;
@@ -24,7 +22,7 @@ export const useAuth = () => {
                 AsyncStorage.getItem("user-data").then((value) => {
                   if (value) {
                     setUser(JSON.parse(value));
-                    console.log("useAuth end....");
+
                     setLoading(false);
                   }
                 });
@@ -34,7 +32,7 @@ export const useAuth = () => {
                   AsyncStorage.getItem("user-data").then((value) => {
                     if (value) {
                       setUser(JSON.parse(value));
-                      console.log("useAuth end....");
+
                       setLoading(false);
                     }
                   }),
