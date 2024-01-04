@@ -1,29 +1,35 @@
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { View } from "native-base";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Pressable, ScrollView } from "react-native";
 import tailwind from "twrnc";
-import { CartCard, StyledButton, StyledText } from "../../../components";
+import {
+  CartCard,
+  Loading,
+  StyledButton,
+  StyledText,
+} from "../../../components";
 import COLOR from "../../../constants/COLOR";
 import CartContext from "../../../contexts/CartContext";
 import { formatNumbers } from "../../../utils/formatNumbers";
 
 export default function Page() {
-  const { products, updateProductDetails } = useContext(CartContext);
+  const { loading, products, incQty, decQty } = useContext(CartContext);
 
   console.log("===cart page===", products);
-
-  useEffect(() => {
-    console.log("...cart page useEffect", products);
-  }, [products]);
 
   const onCheckout = () => {
     router.push("/checkOut");
   };
 
-  const handleQuantityChange = async (product, newQuantity) => {
-    console.log("...cart page handleQuantityChange", product._id, newQuantity);
+  const handleIncreaseQuantity = async (product) => {
+    console.log("...cart page handleIncreaseQuantity", product._id);
+    incQty(product._id);
+  };
+  const handleDecreaseQuantity = async (product) => {
+    console.log("...cart page handleDecreaseQuantity", product._id);
+    decQty(product._id);
   };
 
   const totalPrice = products.reduce(
@@ -32,54 +38,56 @@ export default function Page() {
   );
 
   return (
-    <View style={tailwind`flex-1`}>
-      <Pressable
-        style={tailwind`my-2 flex-row items-center px-2`}
-        onPress={() => router.replace("/(drawer)/(tabs)/home")}
-      >
-        <Ionicons name="md-chevron-back-sharp" size={24} color="black" />
-        <StyledText type="b">কার্ট</StyledText>
-      </Pressable>
-
-      {products.length > 0 ? (
-        <ScrollView
-          contentContainerStyle={{
-            columnGap: 10,
-            rowGap: 10,
-            alignItems: "center",
-          }}
+    <>
+      <View style={tailwind`flex-1`}>
+        <Pressable
+          style={tailwind`my-2 flex-row items-center px-2`}
+          onPress={() => router.replace("/(drawer)/(tabs)/home")}
         >
-          {products.map(({ product, quantity }) => (
-            <CartCard
-              key={product._id}
-              name={product.productName}
-              image={product.image}
-              price={product.salesPrice}
-              quantity={quantity}
-              setQuantity={(newQuantity) =>
-                handleQuantityChange(product, newQuantity)
-              }
-            />
-          ))}
-        </ScrollView>
-      ) : (
-        <View style={tailwind`flex-1 items-center justify-center`}>
-          <StyledText
-            variant="displaySmall"
-            type="b"
-            style={{
-              lineHeight: 50,
-              color: COLOR.neutral,
+          <Ionicons name="md-chevron-back-sharp" size={24} color="black" />
+          <StyledText type="b">কার্ট</StyledText>
+        </Pressable>
+
+        {products.length > 0 ? (
+          <ScrollView
+            contentContainerStyle={{
+              columnGap: 10,
+              rowGap: 10,
+              alignItems: "center",
             }}
           >
-            কার্টে কোন পণ্য নেই
-          </StyledText>
-        </View>
-      )}
-      {products.length > 0 && (
-        <Checkout totalPrice={totalPrice} onCheckout={onCheckout} />
-      )}
-    </View>
+            {products.map(({ product, quantity }) => (
+              <CartCard
+                key={product._id}
+                name={product.productName}
+                image={product.image}
+                price={product.salesPrice}
+                quantity={quantity}
+                increment={() => handleIncreaseQuantity(product)}
+                decrement={() => handleDecreaseQuantity(product)}
+              />
+            ))}
+          </ScrollView>
+        ) : (
+          <View style={tailwind`flex-1 items-center justify-center`}>
+            <StyledText
+              variant="displaySmall"
+              type="b"
+              style={{
+                lineHeight: 50,
+                color: COLOR.neutral,
+              }}
+            >
+              কার্টে কোন পণ্য নেই
+            </StyledText>
+          </View>
+        )}
+        {products.length > 0 && (
+          <Checkout totalPrice={totalPrice} onCheckout={onCheckout} />
+        )}
+      </View>
+      <Loading isLoading={loading} />
+    </>
   );
 }
 
