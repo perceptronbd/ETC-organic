@@ -4,7 +4,7 @@ import React, { useContext, useState } from "react";
 import { Image, ScrollView, View } from "react-native";
 import { Modal, Portal } from "react-native-paper";
 import tailwind from "twrnc";
-import { Counter, StyledButton, StyledText } from "../components";
+import { Counter, Loading, StyledButton, StyledText } from "../components";
 import COLOR from "../constants/COLOR";
 import CartContext from "../contexts/CartContext";
 import { useCustomToast, useImage } from "../hooks";
@@ -16,9 +16,12 @@ const productDetails = () => {
 
   const [quantity, setQuantity] = useState(0);
 
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigation();
 
   const item = useLocalSearchParams();
+  console.log("...productDetails item:", item);
 
   // useEffect(() => {
   //   console.log("item", item);
@@ -29,7 +32,12 @@ const productDetails = () => {
   // }, []);
 
   const onAddToCart = () => {
+    console.log("===onAddToCart===");
+
+    setLoading(true);
+
     if (quantity === 0) {
+      setLoading(false);
       showToast({
         description: "Please select quantity",
         variant: "warning",
@@ -37,23 +45,25 @@ const productDetails = () => {
       });
       return;
     }
-    showToast({
-      description: "Added to cart",
-      variant: "success",
+    updateProductDetails({ ...item, quantity }).then(() => {
+      setLoading(false);
+      console.log("...productDetails onAddToCart ");
+      showToast({
+        description: "Added to cart",
+        variant: "success",
+      });
+      navigate.goBack();
     });
-    updateProductDetails({ ...item, quantity });
 
     // updateProductDetails({
     //   id: item.id,
     //   quantity,
     // });
-
-    navigate.goBack();
   };
 
-  console.log("productDetails item:", item);
-
-  return (
+  return loading ? (
+    <Loading isLoading={loading} />
+  ) : (
     <View style={tailwind`flex-1 items-center justify-between p-4`}>
       <View style={tailwind`w-full`}>
         <ProductImage image={item.image} name={item.productName} />
@@ -144,10 +154,7 @@ const ProductDetails = ({ title, price, details, csb }) => {
         <StyledText variant="bodySmall" type="b">
           Details:
         </StyledText>
-        <StyledText variant="bodySmall">
-          This is alot of details of a measly product. just tesing out some shit
-          and will delete this line later
-        </StyledText>
+        <StyledText variant="bodySmall">{details}</StyledText>
       </ScrollView>
 
       {/* CSB */}
