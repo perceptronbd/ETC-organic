@@ -86,8 +86,8 @@ const confirmOrder = () => {
               <StyledText>ক্যাশ অন ডেলিভারি</StyledText>
             </View>
             <View style={tailwind`flex-row items-center`}>
-              <RadioButton value="advance" color={COLOR.tertiary} />
-              <StyledText>অগ্রিম পেমেন্ট</StyledText>
+              <RadioButton value="advance" color={COLOR.neutral} disabled />
+              <StyledText color={COLOR.neutralDark}>অগ্রিম পেমেন্ট</StyledText>
             </View>
           </RadioButton.Group>
         </View>
