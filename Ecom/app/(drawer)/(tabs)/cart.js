@@ -12,23 +12,22 @@ import { formatNumbers } from "../../../utils/formatNumbers";
 export default function Page() {
   const { products, updateProductDetails } = useContext(CartContext);
 
-  console.log("cart page", products);
+  console.log("===cart page===", products);
 
   useEffect(() => {
-    console.log("cart page useEffect", products);
+    console.log("...cart page useEffect", products);
   }, [products]);
 
   const onCheckout = () => {
     router.push("/checkOut");
   };
 
-  const handleQuantityChange = (productId, newQuantity) => {
-    updateProductDetails({ id: productId, quantity: newQuantity });
-    // Other logic as needed
+  const handleQuantityChange = async (product, newQuantity) => {
+    console.log("...cart page handleQuantityChange", product._id, newQuantity);
   };
 
   const totalPrice = products.reduce(
-    (acc, item) => acc + item.price * item.quantity,
+    (acc, item) => acc + item.product.salesPrice * item.quantity,
     0,
   );
 
@@ -50,15 +49,15 @@ export default function Page() {
             alignItems: "center",
           }}
         >
-          {products.map((item) => (
+          {products.map(({ product, quantity }) => (
             <CartCard
-              key={item._id}
-              name={item.productName}
-              image={item.image}
-              price={item.salesPrice}
-              quantity={item.quantity}
+              key={product._id}
+              name={product.productName}
+              image={product.image}
+              price={product.salesPrice}
+              quantity={quantity}
               setQuantity={(newQuantity) =>
-                handleQuantityChange(item.id, newQuantity)
+                handleQuantityChange(product, newQuantity)
               }
             />
           ))}
