@@ -63,15 +63,25 @@ export default function Page() {
           rowGap: 8,
         }}
       >
-        {earnedCSB.map((item) => (
-          <ReferredEarnCard
-            key={item.id}
-            date={item.date}
-            time={item.time}
-            csb={item.csb}
-            percentage={item.percentage}
-          />
-        ))}
+        {!earnedCSB ? (
+          <View
+            style={tailwind`h-96 w-full flex-1 items-center justify-center`}
+          >
+            <StyledText variant="titleLarge" type="b" color={COLOR.neutralDark}>
+              কোন তথ্য নেই
+            </StyledText>
+          </View>
+        ) : (
+          earnedCSB?.map((item) => (
+            <ReferredEarnCard
+              key={item.id}
+              date={item.date}
+              time={item.time}
+              csb={item.csb}
+              percentage={item.percentage}
+            />
+          ))
+        )}
       </ScrollView>
     </View>
   );
