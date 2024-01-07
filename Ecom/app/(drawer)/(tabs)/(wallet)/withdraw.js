@@ -3,9 +3,13 @@ import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Image, Pressable, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { Divider, RadioButton } from "react-native-paper";
+import { ActivityIndicator, Divider, RadioButton } from "react-native-paper";
 import tailwind from "twrnc";
-import { requestWithdraw } from "../../../../api";
+import {
+  addBankAccount,
+  getBankAccounts,
+  requestWithdraw,
+} from "../../../../api";
 import {
   BankInfoCard,
   ContentModal,
@@ -16,12 +20,30 @@ import {
   StyledText,
 } from "../../../../components";
 import COLOR from "../../../../constants/COLOR";
-import { bankInfo as bankData } from "../../../../constants/mockData";
 import { useCustomToast } from "../../../../hooks";
 import { useModal } from "../../../../hooks/useModal";
 
+const bankInputFeilds = [
+  {
+    id: "bankName",
+    label: "Bank Name",
+    mode: "outlined",
+  },
+  {
+    id: "branch",
+    label: "Branch",
+    mode: "outlined",
+  },
+  {
+    id: "accountNumber",
+    label: "Account Number",
+    mode: "outlined",
+  },
+];
+
 const withdraw = () => {
   const [balance, setBalance] = useState(0); //state value for balance fetched from the server for the logged in user
+
   const [withdrawAmount, setWithdrawAmount] = useState(""); //state value for withdraw amount
   const [paymentType, setPaymentType] = useState(""); //state value for payment type selection for withdraw
   const [bankId, setBankId] = useState(""); //state value for group selection of the bank accounts
@@ -133,6 +155,7 @@ const withdraw = () => {
           hideConfirmModal();
           hideBkash();
           hideNagad();
+          AsyncStorage.mergeItem("user-data", JSON.stringify(res.data.user));
           showToast({
             description: "আপনার Withdraw সম্পন্ন হয়েছে​।",
             variant: "success",
@@ -271,8 +294,39 @@ const PaymentWithdraw = ({
   bankId,
   setBankId,
 }) => {
-  const [bankInfo, setBankInfo] = React.useState(bankData); //state value for bank info fetched from the server for the logged in user
+  const [bankData, setBankData] = useState({
+    bankName: "",
+    branch: "",
+    accountNumber: "",
+  });
+  const [bankInfo, setBankInfo] = React.useState([]); //state value for bank info fetched from the server for the logged in user
   const [selectedBank, setSelectedBank] = React.useState(null); //state value for selected bank to withdraw
+
+  const [loading, setLoading] = useState(true); //state value for loading
+
+  const showToast = useCustomToast();
+
+  const {
+    visible: isAddBank,
+    showModal: showAddBank,
+    hideModal: hideAddBank,
+  } = useModal();
+
+  useEffect(() => {
+    setLoading(true);
+    getBankAccounts().then((res) => {
+      console.log("...withdraw getBankAccounts res:", res);
+      console.log("...withdraw getBankAccounts res:", res);
+      const { status } = res;
+      if (status === 200 || status === 201) {
+        setBankInfo(res.data);
+        setLoading(false);
+      } else {
+        console.log("...withdraw getBankAccounts error:", res);
+        setLoading(false);
+      }
+    });
+  }, []);
 
   const onBkash = () => {
     setPaymentType("bkash"); //set the payment type to bkash
@@ -286,7 +340,7 @@ const PaymentWithdraw = ({
 
   const onSelectBank = (id) => {
     //find the bank info from the bankInfo array with the id
-    const selectBank = bankInfo.find((item) => item.id === id);
+    const selectBank = bankInfo?.find((item) => item.id === id);
 
     setBankId(id); //set the value of bank to the id of the selected bank for group selection
 
@@ -295,9 +349,57 @@ const PaymentWithdraw = ({
   };
 
   const deleteBankInfo = (id) => {
-    setBankInfo(bankInfo.filter((item) => item.id !== id));
+    setBankInfo(bankInfo?.filter((item) => item.id !== id));
     if (selectedBank === id) {
       setSelectedBank(null);
+    }
+  };
+
+  const openBankModal = () => {
+    showAddBank();
+  };
+
+  const handleBankData = async (id, text) => {
+    setBankData((prev) => ({
+      ...prev,
+      [id]: text,
+    }));
+  };
+
+  const onAddBank = async () => {
+    console.log("... onAddBank ...", bankData);
+    try {
+      setLoading(true);
+      hideAddBank();
+      addBankAccount(bankData).then((res) => {
+        console.log("...onAddBank res:", res);
+        if (res.status === 200 || res.status === 201) {
+          getBankAccounts().then((res) => {
+            console.log("...withdraw getBankAccounts res:", res);
+            console.log("...withdraw getBankAccounts res:", res);
+            const { status } = res;
+            if (status === 200 || status === 201) {
+              setBankInfo(res.data);
+              setLoading(false);
+            } else {
+              console.log("...withdraw getBankAccounts error:", res);
+              setLoading(false);
+            }
+          });
+          showToast({
+            description: "Bank Account যোগ করা হয়েছে",
+            variant: "success",
+          });
+        } else if (res.status === 500) {
+          setLoading(false);
+          showToast({
+            description: "কিছু সমস্যা হয়েছে",
+            variant: "danger",
+          });
+        }
+      });
+    } catch (error) {
+      console.log("...withdraw onAddBank error:", error);
     }
   };
 
@@ -345,20 +447,50 @@ const PaymentWithdraw = ({
               gap: 10,
             }}
           >
-            {bankInfo.map((item) => (
-              <BankInfoCard
-                key={item.id}
-                id={item.id}
-                bank={item.bank}
-                branch={item.branch}
-                acc={item.acc}
-                deleteBankInfo={deleteBankInfo}
+            {loading ? (
+              <ActivityIndicator
+                animating
+                color={COLOR.secondary}
+                size={"small"}
               />
-            ))}
+            ) : (
+              bankInfo?.map((item) => (
+                <BankInfoCard
+                  key={item.id}
+                  id={item.id}
+                  bank={item.bank}
+                  branch={item.branch}
+                  acc={item.acc}
+                  deleteBankInfo={deleteBankInfo}
+                />
+              ))
+            )}
           </ScrollView>
         </RadioButton.Group>
-        <StyledButton variant={"outline"}>Add New Bank Account</StyledButton>
+        <StyledButton variant={"outline"} onPress={openBankModal}>
+          Add New Bank Account
+        </StyledButton>
       </View>
+      <ContentModal visible={isAddBank} hideModal={hideAddBank}>
+        <View style={tailwind`flex items-center justify-center`}>
+          <StyledText variant="titleLarge" type="b">
+            Bank Information
+          </StyledText>
+          <StyledText>আপনার Bank Account যোগ করুন</StyledText>
+
+          {bankInputFeilds.map((inputFeild, index) => (
+            <StyledInput
+              mode={"outlined"}
+              key={index}
+              {...inputFeild}
+              onChangeText={(text) => handleBankData(inputFeild.id, text)}
+            />
+          ))}
+          <StyledButton width={"md"} onPress={onAddBank}>
+            কনফার্ম
+          </StyledButton>
+        </View>
+      </ContentModal>
     </View>
   );
 };
