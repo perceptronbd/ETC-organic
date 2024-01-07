@@ -24,10 +24,10 @@ export const BankInfoCard = ({ id, bank, branch, acc, deleteBankInfo }) => {
         />
       </View>
       <View style={tailwind`mb-4 flex items-center justify-center`}>
-        <StyledText variant="bodyLarge" type="b">
+        <StyledText variant="bodyMedium" type="m">
           {bank}
         </StyledText>
-        <StyledText variant="bodySmall" type="b" color={COLOR.neutralDark}>
+        <StyledText variant="bodySmall" type="sb" color={COLOR.neutralDark}>
           Branch: {branch}
         </StyledText>
         <StyledText type="b"> {acc}</StyledText>
