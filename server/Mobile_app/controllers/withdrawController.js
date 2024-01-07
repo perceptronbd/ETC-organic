@@ -46,15 +46,19 @@ exports.createWithdraw = asyncHandler(async (req, res) => {
       .json({ message: "Insufficient taka for withdrawal" });
   }
 
-  // Create a new withdraw record
-  const withdraw = new Withdraw({
+  const withdrawData = {
     userId: userId,
-    bankId: bankId,
     withdrawAmount: withdrawAmount,
     paymentType: paymentType,
-    phoneNumber: phoneNumber,
-    status: "pending", // Set the status to pending by default
-  });
+    status: "pending",
+    // Include phoneNumber only if it's provided
+    ...(phoneNumber && { phoneNumber: phoneNumber }),
+    // Include bankId only if paymentType is 'bank' and bankId is provided
+    ...(paymentType === "bank" && bankId && { bankId: bankId }),
+  };
+
+  // Create a new withdraw record
+  const withdraw = new Withdraw(withdrawData);
 
   // Subtract the withdrawal amount from the user's taka
   user.taka -= withdrawAmount;
