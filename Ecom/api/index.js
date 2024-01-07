@@ -17,3 +17,4 @@ export {
 } from "./user/authUser";
 //wallet api
 export { redeemCSB } from "./wallet/redeemCSB";
+export { withdraw } from "./wallet/withdraw";
