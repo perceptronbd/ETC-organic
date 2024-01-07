@@ -35,7 +35,10 @@ export const deleteBankAccount = async (bankId) => {
   console.log("...deleteBankAccount api data:", bankId);
   try {
     const token = await AsyncStorage.getItem("user-token");
-    const res = await authURL(token).post("/getBank", bankId);
+    // Pass the bankId within the `data` property of the config object
+    const res = await authURL(token).delete("/deleteBank", {
+      data: { bankId: bankId },
+    });
     console.log("...deleteBankAccount api response:", res);
     return res;
   } catch (error) {
