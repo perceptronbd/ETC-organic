@@ -5,6 +5,7 @@ import { Image, Pressable, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { Divider, RadioButton } from "react-native-paper";
 import tailwind from "twrnc";
+import { requestWithdraw } from "../../../../api";
 import {
   BankInfoCard,
   ContentModal,
@@ -88,46 +89,76 @@ const withdraw = () => {
     setPhoneNumber(value);
   };
 
-  const goHome = () => {
-    const data = {
-      withdrawAmount,
-      paymentType,
-      phoneNumber,
-      bankId,
-    };
+  const goHome = async () => {
+    console.log("...withdraw goHome...");
 
-    console.log("...withdraw goHome data:", data);
+    try {
+      const data = {
+        withdrawAmount,
+        paymentType,
+        phoneNumber,
+        bankId,
+      };
 
-    if (!withdrawAmount || !paymentType) {
-      showToast({
-        description: "দয়া করে Withdraw Amount প্রদান করুন​।",
-        variant: "warning",
-      });
-      return;
-    }
-    if (withdrawAmount <= 0) {
-      showToast({
-        description: "Withdraw Amount অবশ্যই 0 এর চেয়ে বড় হতে হবে​।",
-        variant: "warning",
-      });
-      return;
-    }
-    if (
-      (paymentType === "bkash" && !phoneNumber) ||
-      (paymentType === "nagad" && !phoneNumber)
-    ) {
-      showToast({
-        description: "দয়া করে সব Phone Number প্রদান করুন​।",
-        variant: "warning",
-      });
-      return;
-    }
+      if (!withdrawAmount || !paymentType) {
+        showToast({
+          description: "দয়া করে Withdraw Amount প্রদান করুন​।",
+          variant: "warning",
+        });
+        return;
+      }
+      if (withdrawAmount <= 0) {
+        showToast({
+          description: "Withdraw Amount অবশ্যই 0 এর চেয়ে বড় হতে হবে​।",
+          variant: "warning",
+        });
+        return;
+      }
+      if (
+        (paymentType === "bkash" && !phoneNumber) ||
+        (paymentType === "nagad" && !phoneNumber)
+      ) {
+        showToast({
+          description: "দয়া করে সব Phone Number প্রদান করুন​।",
+          variant: "warning",
+        });
+        return;
+      }
 
-    console.log("...withdraw openConfirmModal data:", data);
-    router.replace("/(drawer)/(tabs)/home");
-    hideConfirmModal();
-    hideBkash();
-    hideNagad();
+      requestWithdraw(data).then((res) => {
+        console.log("...withdraw res:", res);
+        const { status } = res;
+        if (status === 200 || status === 201) {
+          router.replace("/(drawer)/(tabs)/home");
+          hideConfirmModal();
+          hideBkash();
+          hideNagad();
+          showToast({
+            description: "আপনার Withdraw সম্পন্ন হয়েছে​।",
+            variant: "success",
+          });
+        } else if (status === 400) {
+          const { message } = res.data;
+          hideConfirmModal();
+          hideBkash();
+          hideNagad();
+          showToast({
+            description: message,
+            variant: "warning",
+          });
+        } else {
+          hideConfirmModal();
+          hideBkash();
+          hideNagad();
+          showToast({
+            description: "দুঃখিত, আপনার Withdraw সম্পন্ন হয়নি​।",
+            variant: "danger",
+          });
+        }
+      });
+    } catch (error) {
+      console.log("...withdraw goHome error:", error);
+    }
   };
 
   return (
