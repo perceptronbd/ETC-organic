@@ -20,7 +20,7 @@ export const getBankAccounts = async () => {
   console.log("=======getBankAccounts API=======");
   try {
     const token = await AsyncStorage.getItem("user-token");
-    const res = await authURL(token).post("/getBank");
+    const res = await authURL(token).get("/getBank");
     console.log("...getBankAccounts api response:", res);
     return res;
   } catch (error) {
