@@ -16,5 +16,10 @@ export {
   updateProfile,
 } from "./user/authUser";
 //wallet api
+export {
+  addBankAccount,
+  deleteBankAccount,
+  getBankAccounts,
+} from "./wallet/bank";
 export { redeemCSB } from "./wallet/redeemCSB";
 export { requestWithdraw } from "./wallet/withdraw";
