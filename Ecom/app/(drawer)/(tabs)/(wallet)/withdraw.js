@@ -7,6 +7,7 @@ import { ActivityIndicator, Divider, RadioButton } from "react-native-paper";
 import tailwind from "twrnc";
 import {
   addBankAccount,
+  deleteBankAccount,
   getBankAccounts,
   requestWithdraw,
 } from "../../../../api";
@@ -348,10 +349,38 @@ const PaymentWithdraw = ({
     setPaymentType("bank"); //set the payment type to bank
   };
 
-  const deleteBankInfo = (id) => {
-    setBankInfo(bankInfo?.filter((item) => item.id !== id));
-    if (selectedBank === id) {
-      setSelectedBank(null);
+  const deleteBankInfo = async (id) => {
+    try {
+      setLoading(true);
+      deleteBankAccount(id).then((res) => {
+        try {
+          console.log("...withdraw deleteBankInfo res:", res);
+          if (res.status === 201 || res.status === 200) {
+            setBankInfo(bankInfo?.filter((item) => item._id !== id));
+            if (selectedBank === id) {
+              setSelectedBank(null);
+            }
+
+            setLoading(false);
+            showToast({
+              description: "Bank Info সফলভাবে Delete হয়েছে",
+              variant: "success",
+            });
+          } else {
+            setLoading(false);
+            showToast({
+              description: "কিছু সমস্যা হয়েছে",
+              variant: "danger",
+            });
+          }
+        } catch (error) {
+          setLoading(false);
+          console.log("...deleteBankAccount error:", error);
+        }
+      });
+    } catch (error) {
+      setLoading(false);
+      console.log("...withdraw page deleteBankInfo:");
     }
   };
 
@@ -456,11 +485,11 @@ const PaymentWithdraw = ({
             ) : (
               bankInfo?.map((item) => (
                 <BankInfoCard
-                  key={item.id}
-                  id={item.id}
-                  bank={item.bank}
+                  key={item._id}
+                  id={item._id}
+                  bank={item.bankName}
                   branch={item.branch}
-                  acc={item.acc}
+                  acc={item.accountNumber}
                   deleteBankInfo={deleteBankInfo}
                 />
               ))
