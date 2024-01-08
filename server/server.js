@@ -45,6 +45,7 @@ app.use("/mobile", mobileUserRoute);
 app.use(mobileErrorHandler);
 
 const PORT = process.env.PORT || 5000;
+//const HOST = "192.168.0.105";
 
 app.get("/", (req, res) => {
   // This line has been corrected to use the `json()` method
