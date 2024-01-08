@@ -45,7 +45,7 @@ app.use("/mobile", mobileUserRoute);
 app.use(mobileErrorHandler);
 
 const PORT = process.env.PORT || 5000;
-const HOST = "192.168.0.105";
+//const HOST = "192.168.0.105";
 
 app.get("/", (req, res) => {
   // This line has been corrected to use the `json()` method
@@ -59,7 +59,7 @@ app.use(express.static("public"));
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(PORT, HOST, () => {
+    app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
   })
